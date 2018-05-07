@@ -1,0 +1,40 @@
+<?php
+class API extends CI_Controller{
+    function __construct(){
+        parent:: __construct();
+        $this->load->model('m_padmin');
+    }
+
+    function index(){
+        $var = "API GIS";
+        echo json_encode($var) ;
+    }
+
+    function tryLogin(){
+        $username="adds";//strip_tags(str_replace("'", "", $this->input->post('username',TRUE)));
+        $password="123";//strip_tags(str_replace("'", "", $this->input->post('password',TRUE)));
+
+        //$username = $_POST['username'];
+        //$password = $_POST['password'];
+        $cadmin=$this->m_padmin->cekadminlogin($username,$password);
+        if($cadmin->num_rows() > 0){
+            $xcadmin=$cadmin->row_array();
+
+            $newdata['error'] = FALSE;
+            $newdata['user'] = $xcadmin;
+            $newdata['logged_in'] = TRUE;
+
+            echo json_encode($newdata);
+        }else{
+            $newdata['error'] = TRUE;
+            $newdata['logged_in'] = FALSE;
+
+            echo json_encode($newdata);
+        }
+    }
+
+    function fetchData()
+    {
+        
+    }
+}
