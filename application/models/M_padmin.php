@@ -41,8 +41,8 @@ class M_padmin extends CI_Model{
 		$hsl = $max_id +1;
 		return $hsl;
 	}
-	function get_num_pekerja() {
-		$query = $this->db->query("SELECT MAX(pekerja_id) as max_id FROM pekerja"); 
+	function get_num_proyek() {
+		$query = $this->db->query("SELECT MAX(proyek_id) as max_id FROM proyek"); 
 		$row = $query->row_array();
 		$max_id = $row['max_id']; 
 		$hsl = $max_id +1;
@@ -77,8 +77,8 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("UPDATE koordinat set koordinat_nama='$namkor',koordinat_lat='$latitude',koordinat_lng='$longitude',koordinat_alamat='$inputAddress' where koordinat_id='$numkor'");
 		return $hsl;
 	}
-	function save_proyek($proyek_kategori_id,$nikuser,$numpeker,$numkor,$proyek_nama,$proyek_tahun,$proyek_keuangan,$proyek_pagu,$proyek_kontrak,$proyek_sech_awal){
-		$hsl=$this->db->query("INSERT INTO proyek (proyek_kategori_id,proyek_user_nik,proyek_pekerja_id,proyek_koordinat_id,proyek_nama,proyek_tahun,proyek_keuangan,proyek_pagu,proyek_kontrak,proyek_sech_awal) VALUES ('$proyek_kategori_id','$nikuser','$numpeker','$numkor','$proyek_nama','$proyek_tahun','$proyek_keuangan','$proyek_pagu','$proyek_kontrak','$proyek_sech_awal')");
+	function save_proyek($numproyek,$proyek_kategori_id,$nikuser,$numkor,$proyek_nama,$proyek_tahun,$proyek_keuangan,$proyek_pagu,$proyek_kontrak,$proyek_sech_awal){
+		$hsl=$this->db->query("INSERT INTO proyek (proyek_id,proyek_kategori_id,proyek_user_nik,proyek_koordinat_id,proyek_nama,proyek_tahun,proyek_keuangan,proyek_pagu,proyek_kontrak,proyek_sech_awal) VALUES ($numproyek,'$proyek_kategori_id','$nikuser',','$numkor','$proyek_nama','$proyek_tahun','$proyek_keuangan','$proyek_pagu','$proyek_kontrak','$proyek_sech_awal')");
 		return $hsl;
 	}
 
@@ -87,8 +87,8 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 
-	function save_pekerja($numpeker,$xpekerja_nama,$xpekerja_alamat,$xpekerja_telp,$xdirektur_nama,$xdirektur_telp,$xpekerja_jenis){
-		$hsl=$this->db->query("INSERT INTO pekerja (pekerja_id,pekerja_nama,pekerja_alamat,pekerja_telp_kantor,pekerja_direktur,pekerja_telp_direktur,pekerja_jenis) VALUES ('$numpeker','$xpekerja_nama','$xpekerja_alamat','$xpekerja_telp','$xdirektur_nama','$xdirektur_telp','$xpekerja_jenis')");
+	function save_pekerja($xnip,$numproyek,$xnampeke,$xtelpeke,$xpekjenis,$xnamdirek,$xteldirek,$xnamaperus,$xalaperus,$xtelkant){
+		$hsl=$this->db->query("INSERT INTO pekerja (pekerja_nip,proyek_id,pekerja_nama,pekerja_tel,pekerja_jenis,pekerja_nama_direktur,pekerja_tel_direktur,pekerja_nama_perusahaan,pekerja_alamat_perusahaan,pekerja_tel_kantor) VALUES ('$xnip','$numproyek','$xnampeke','$xtelpeke','$xpekjenis','$xnamdirek','$xteldirek','$xnamaperus','$xalaperus','$xtelkant')");
 		return $hsl;
 	}
 	function update_pekerja($numpeker,$xpekerja_nama,$xpekerja_alamat,$xpekerja_telp,$xdirektur_nama,$xdirektur_telp,$xpekerja_jenis){

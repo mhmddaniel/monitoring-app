@@ -78,7 +78,7 @@ class Padmin extends CI_Controller{
 	public function tambah_proyek(){
 		$x['datak']=$this->m_padmin->get_all_kategori();
 		$x['numkor']=$this->m_padmin->get_num_koor();
-		$x['numpeker']=$this->m_padmin->get_num_pekerja();
+		$x['numproyek']=$this->m_padmin->get_num_proyek();
 		$this->load->view('padmin/header');
 		$this->load->view('padmin/sidebar');
 		$this->load->view('padmin/proyek/tambah_proyek',$x);
@@ -130,13 +130,16 @@ class Padmin extends CI_Controller{
 		$latitude=$this->input->post('latitude');
 		$longitude=$this->input->post('longitude');
 		
-		$numpeker=$this->input->post('numpeker');
-		$xpekerja_nama=$this->input->post('xpekerja_nama');
-		$xpekerja_alamat=$this->input->post('xpekerja_alamat');
-		$xpekerja_telp=$this->input->post('xpekerja_telp');
-		$xdirektur_nama=$this->input->post('xdirektur_nama');
-		$xdirektur_telp=$this->input->post('xdirektur_telp');
-		$xpekerja_jenis=$this->input->post('xpekerja_jenis');
+		$xnip=$this->input->post('xnip[0]');
+		$numproyek=$this->input->post('numproyek');
+		$xnampeke=$this->input->post('xnama_pek[0]');
+		$xtelpeke=$this->input->post('xtel_pek[0]');
+		$xpekjenis=$this->input->post('xjenis');
+		$xnamdirek=$this->input->post('xnama_direk[0]');
+		$xteldirek=$this->input->post('xtel_direk[0]');
+		$xnamaperus=$this->input->post('xnama_perus[0]');
+		$xalaperus=$this->input->post('xalamat_perus[0]');
+		$xtelkant=$this->input->post('xtel_kant[0]');
 		
 		$nikuser=$this->input->post('xnikuser');
 		$namauser=$this->input->post('xnamauser');
@@ -144,7 +147,7 @@ class Padmin extends CI_Controller{
 		$telpuser=$this->input->post('xtelpuser');
 		$baguser=$this->input->post('xbaguser');
 
-		$pekerja=$this->m_padmin->save_pekerja($numpeker,$xpekerja_nama,$xpekerja_alamat,$xpekerja_telp,$xdirektur_nama,$xdirektur_telp,$xpekerja_jenis);
+		$pekerja=$this->m_padmin->save_pekerja($xnip,$numproyek,$xnampeke,$xtelpeke,$xpekjenis,$xnamdirek,$xteldirek,$xnamaperus,$xalaperus,$xtelkant);
 		if ($pekerja){
 			$svuser=$this->m_padmin->save_user_proyek($nikuser,$namauser,$emailuser,$telpuser,$baguser);
 			if($svuser){
@@ -158,7 +161,7 @@ class Padmin extends CI_Controller{
 			}
 			if ($svkoor){
 
-				$this->m_padmin->save_proyek($proyek_kategori_id,$nikuser,$numpeker,$numkor,$proyek_nama,$proyek_tahun,$proyek_keuangan,$proyek_pagu,$proyek_kontrak,$proyek_sech_awal);
+				$this->m_padmin->save_proyek($numproyek,$proyek_kategori_id,$nikuser,$numpeker,$numkor,$proyek_nama,$proyek_tahun,$proyek_keuangan,$proyek_pagu,$proyek_kontrak,$proyek_sech_awal);
 				echo $this->session->set_flashdata('msg','success');
 				redirect('padmin/proyek');
 			}

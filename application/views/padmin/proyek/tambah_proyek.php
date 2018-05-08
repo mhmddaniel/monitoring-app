@@ -35,6 +35,7 @@
 						<div class="box-body">
 							<div class="row">
 								<div class="col-md-10">
+									<input type="hidden" name="xproyekid" value="<?php echo $numproyek; ?>">
 									<input type="text" name="xnama" class="form-control" placeholder="Nama Proyek" required/>
 								</div>
 								<div class="col-md-2">
@@ -157,105 +158,149 @@
 
 									</div>
 
-									<div class="box box-success">
-										<div class="box-header with-border">
-											<div class="box-body">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label>NAMA PENANGGUNG JAWAB</label>
-														<input type="hidden" name="numpeker" value="<?php echo $numpeker; ?>">
-														<input type="text" class="form-control"  name="xpekerja_nama" >
-													</div>
-													<div class="form-group">
-														<label>Alamat</label>
-														<textarea  class="form-control"  name="xpekerja_alamat"></textarea>
-													</div>
-													<div class="form-group">
-														<label>Telp. Kantor</label>
-														<input type="tel" class="form-control"  name="xpekerja_telp" >
-													</div>
-													<div class="form-group">
-														<label>Naama Direktur</label>
-														<input type="text" class="form-control"  name="xdirektur_nama" >
-													</div>
-													<div class="form-group">
-														<label>Telp. Direktur</label>
-														<input type="tel" class="form-control"  name="xdirektur_telp" >
-													</div>
-													<div class="form-group">
-														<label>Jenis</label>
-														<select class="form-control"  name="xpekerja_jenis" >
-															<option value="kontraktor">Kontraktor</option>
-															<option value="konsultan">Konsultan</option>
-														</select>
-													</div>
-												</div>
-												<div class="col-md-6">
-													<div class="form-group">
-														<label>NAMA PENANGGUNG JAWAB</label>
-														<input type="hidden" name="numpeker" value="<?php echo $numpeker; ?>">
-														<input type="text" class="form-control"  name="xpekerja_nama" >
-													</div>
-													<div class="form-group">
-														<label>Alamat</label>
-														<textarea  class="form-control"  name="xpekerja_alamat"></textarea>
-													</div>
-													<div class="form-group">
-														<label>Telp. Kantor</label>
-														<input type="tel" class="form-control"  name="xpekerja_telp" >
-													</div>
-													<div class="form-group">
-														<label>Naama Direktur</label>
-														<input type="text" class="form-control"  name="xdirektur_nama" >
-													</div>
-													<div class="form-group">
-														<label>Telp. Direktur</label>
-														<input type="tel" class="form-control"  name="xdirektur_telp" >
-													</div>
-													<div class="form-group">
-														<label>Jenis</label>
-														<select class="form-control"  name="xpekerja_jenis" >
-															<option value="kontraktor">Kontraktor</option>
-															<option value="konsultan">Konsultan</option>
-														</select>
-													</div>
-												</div>
-											</div>
+								</div>
+								<div class="box box-success">
+									<div class="box-header with-border">
+										<div class="box-body">
+											<table  class="table table-bordered table-striped table-responsive">
+												<thead>
+													<tr>
+														<th>NIP</th>
+														<th>NAMA</th>
+														<th>NO TEL</th>
+														<th>POSISI</th>
+														<th>NAMA DIREKTUR</th>
+														<th>TEL DIREKTUR</th>
+														<th>NAMA PERUSAHAAN</th>
+														<th>ALAMAT PERUSAHAAN</th>
+														<th>TELP. KANTOR</th>
+														<th>Hapus</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>
+															<input class="form-control" name="xnip[0]" type="text">
+														</td>
+														<td> 
+															<input class="form-control" name="xnama_pek[0]" type="text">
+														</td>
+														<td> 
+															<input class="form-control" name="xtel_pek[0]" type="text">
+														</td>
+														<td> 
+															<select class="form-control" name="xjenis[0]">
+																<option value="kontraktor">Kontraktor</option>
+																<option value="konsultan">Konsultan</option>
+															</select>
+														</td>
+														<td> 
+															<input class="form-control" name="xnama_direk[0]" type="text">
+														</td>
+														<td> 
+															<input class="form-control" name="xtel_direk[0]" type="text">
+														</td>
+														<td> 
+															<input class="form-control" name="xnama_perus[0]" type="text">
+														</td>
+														<td> 
+															<input class="form-control" name="xalamat_perus[0]" type="text">
+														</td>
+														<td>
+															<input class="form-control" name="xtel_kant[0]" type="text">
+														</td>
+														<td>
+															<button type="button" class="btn btn-danger del">
+																<i class="fa fa-trash"></i>
+															</button>
+														</td>
+													</tr>
+													<tr id="last">
+														<td colspan="10" align="right">
+															<button type="button" class="btn btn-primary" id="addRow">
+																<i class="fa fa-plus"></i>
+															</button>
+														</td>
+													</tr>
+												</tbody>
+											</table>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</form>
+				</div>
 			</div>
 		</section>
-	</div>
+	</form>
+</div>
 
-	<script src="<?php echo base_url() ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
-	<script src="<?php echo base_url() ?>assets/bower_components/ckeditor/ckeditor.js"></script>
+<script src="<?php echo base_url() ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="<?php echo base_url() ?>assets/bower_components/ckeditor/ckeditor.js"></script>
 
-	<script>
-		$(function () {
-			CKEDITOR.replace('ckeditor')
-			$('.textarea').wysihtml5()
+<script src="<?php echo base_url() ?>assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url() ?>assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script>
+	$(function () {
+		CKEDITOR.replace('ckeditor')
+		$('.textarea').wysihtml5()
+	})
+</script>
+<script>
+	$(function () {
+		$('#example1').DataTable()
+		$('#example2').DataTable({
+			'paging'      : true,
+			'lengthChange': false,
+			'searching'   : false,
+			'ordering'    : true,
+			'info'        : true,
+			'autoWidth'   : false
 		})
-	</script>
+	})
+</script>
+
+<script src="<?php echo base_url() ?>assets/map/jquery-1.9.1.min.js"></script>
+<script src="<?php echo base_url() ?>assets/map/jquery.addressPickerByGiro.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAogXD-AHrsmnWinZIyhRORJ84bgLwDPpg&sensor=false&language=id"></script>
+<link href="<?php echo base_url() ?>assets/map/jquery.addressPickerByGiro.css" rel="stylesheet" media="screen">
+<script>
+	$('.inputAddress').addressPickerByGiro({
+		distanceWidget: true,
+		boundElements: {
+			'latitude': '.latitude',
+			'longitude': '.longitude',
+			'formatted_address': '.formatted_address'
+		}
+	});
+</script>
 
 
-	<script src="<?php echo base_url() ?>assets/map/jquery-1.9.1.min.js"></script>
-	<script src="<?php echo base_url() ?>assets/map/jquery.addressPickerByGiro.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAogXD-AHrsmnWinZIyhRORJ84bgLwDPpg&sensor=false&language=id"></script>
-	<link href="<?php echo base_url() ?>assets/map/jquery.addressPickerByGiro.css" rel="stylesheet" media="screen">
-	<script>
-		$('.inputAddress').addressPickerByGiro({
-			distanceWidget: true,
-			boundElements: {
-				'latitude': '.latitude',
-				'longitude': '.longitude',
-				'formatted_address': '.formatted_address'
-			}
+<script src="https://code.jquery.com/jquery-1.6.2.js" type="text/javascript"></script>
+<script type="text/javascript">
+	var i = 1;
+	$(function(){
+		$("#addRow").click(function(){
+			row = '<tr>'+
+			'<td><input type="text" class="form-control" name="xnip['+i+']"/></td>'+
+			'<td><input type="text" class="form-control" name="xnama_pek['+i+']"/></td>'+
+			'<td><input type="text" class="form-control" name="xtel_pek['+i+']"/></td>'+
+			'<td><input type="text" class="form-control" name="xjenis['+i+']"/></td>'+
+			'<td><input type="text" class="form-control" name="xnama_direk['+i+']"/></td>'+
+			'<td><input type="text" class="form-control" name="xtel_direk['+i+']"/></td>'+
+			'<td><input type="text" class="form-control" name="xnama_perus['+i+']"/></td>'+
+			'<td><input type="text" class="form-control" name="xalamat_perus['+i+']"/></td>'+
+			'<td><input type="text" class="form-control" name="xtel_kant['+i+']"/></td>'+
+			'<td><button type="button" class="btn btn-danger del"><i class="fa fa-trash"></i></button></td>'+
+			'</tr>';
+			$(row).insertBefore("#last");
+			i++;
 		});
-	</script>
+	});
+	$(".del").live('click', function(){
+		$(this).parent().parent().remove();
+	});
+</script>
 </body>
 </html>
