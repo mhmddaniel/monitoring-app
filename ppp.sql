@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 18 Apr 2018 pada 04.51
+-- Waktu pembuatan: 08 Bulan Mei 2018 pada 09.27
 -- Versi server: 10.1.31-MariaDB
 -- Versi PHP: 7.2.3
 
@@ -38,7 +38,8 @@ CREATE TABLE `kategori` (
 --
 
 INSERT INTO `kategori` (`kategori_id`, `kategori_nama`) VALUES
-(1, 'asd');
+(1, 'Kategori 1'),
+(6, 'Kategori 3');
 
 -- --------------------------------------------------------
 
@@ -66,7 +67,12 @@ INSERT INTO `koordinat` (`koordinat_id`, `koordinat_nama`, `koordinat_lat`, `koo
 (4, 'Rantau Rasua', '-1.204803', '104.1711287', '', 70),
 (5, 'Pasar Baru', '-2.0735364', '102.2662472', '', 80),
 (6, 'Gunung Masurai', '-2.4770791', '101.7585909', '', 20),
-(7, 'Limboer', '-2.0499785', '102.4245782', '', 100);
+(7, 'Limboer', '-2.0499785', '102.4245782', '', 100),
+(8, 'TG', '-1.2469685', '104.3859743', 'Unnamed Road, Remau Baku Tuo, Sadu, Kabupaten Tanjung Jabung Timur, Jambi 36773, Indonesia', 0),
+(9, 'Pantai', '-1.2797012', '103.0905024', 'Jl. Trans Sumatra, Kabupaten Tanjung Jabung Barat, Jambi, Indonesia', 0),
+(10, 'Perintis Kemerdekaan', '-1.6101229', '103.6131203', 'Jambi, Kota Jambi, Jambi, Indonesia', 0),
+(11, 'Talang', '-1.7500031', '101.9611475', 'Unnamed Road, Aur Cino, Kec. Bathin III Ulu, Kabupaten Bungo, Jambi 37261, Indonesia', 80),
+(12, '41asd', '-1.6101229', '103.6131203', 'Jambi, Kota Jambi, Jambi, Indonesia', 0);
 
 -- --------------------------------------------------------
 
@@ -75,41 +81,29 @@ INSERT INTO `koordinat` (`koordinat_id`, `koordinat_nama`, `koordinat_lat`, `koo
 --
 
 CREATE TABLE `pekerja` (
-  `pekerja_id` int(11) NOT NULL,
-  `pekerja_nama` varchar(50) NOT NULL,
-  `pekerja_alamat` text NOT NULL,
-  `pekerja_telp_kantor` char(12) NOT NULL,
-  `pekerja_direktur` varchar(50) NOT NULL,
-  `pekerja_telp_direktur` char(12) NOT NULL,
-  `pekerja_jenis` enum('kontraktor','konsultan') NOT NULL
+  `pekerja_nip` varchar(20) NOT NULL,
+  `proyek_id` int(11) NOT NULL,
+  `pekerja_nama` varchar(35) NOT NULL,
+  `pekerja_tel` char(12) NOT NULL,
+  `pekerja_jenis` enum('kontraktor','konsultan') NOT NULL,
+  `pekerja_nama_direktur` varchar(50) NOT NULL,
+  `pekerja_tel_direktur` char(12) NOT NULL,
+  `pekerja_nama_perusahaan` varchar(50) NOT NULL,
+  `pekerja_alamat_perusahaan` text NOT NULL,
+  `pekerja_tel_kantor` char(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `pekerja`
 --
 
-INSERT INTO `pekerja` (`pekerja_id`, `pekerja_nama`, `pekerja_alamat`, `pekerja_telp_kantor`, `pekerja_direktur`, `pekerja_telp_direktur`, `pekerja_jenis`) VALUES
-(1, 'asd', 'asd', '232', 'asds', '2332', 'kontraktor');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `petugas`
---
-
-CREATE TABLE `petugas` (
-  `petugas_nik` varchar(20) NOT NULL,
-  `petugas_nama` varchar(50) NOT NULL,
-  `petugas_tel` char(12) NOT NULL,
-  `petugas_bag` enum('ppk','kasubid','kabid') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `petugas`
---
-
-INSERT INTO `petugas` (`petugas_nik`, `petugas_nama`, `petugas_tel`, `petugas_bag`) VALUES
-('2323', 'asdsd', '2323', 'ppk');
+INSERT INTO `pekerja` (`pekerja_nip`, `proyek_id`, `pekerja_nama`, `pekerja_tel`, `pekerja_jenis`, `pekerja_nama_direktur`, `pekerja_tel_direktur`, `pekerja_nama_perusahaan`, `pekerja_alamat_perusahaan`, `pekerja_tel_kantor`) VALUES
+('1', 0, 'teraa', '0', '', '0', '0', '0', '0', '0'),
+('2', 0, 'Hendra', '0', '', '0', '0', '0', '0', '0'),
+('2222', 0, 'ADSA', '232', '', 'asdsad', '23232', 'asd', 'asd', '232'),
+('3', 0, 'asdsad', '0', '', '0', '0', '0', '0', '0'),
+('4', 0, 'Deden', '0', '', '0', '0', '0', '0', '0'),
+('5151152', 0, 'asd', '2312', '', 'asda', '21312', 'asdasd', 'adasd', '51512');
 
 -- --------------------------------------------------------
 
@@ -119,29 +113,31 @@ INSERT INTO `petugas` (`petugas_nik`, `petugas_nama`, `petugas_tel`, `petugas_ba
 
 CREATE TABLE `proyek` (
   `proyek_id` int(11) NOT NULL,
+  `proyek_kategori_id` int(11) NOT NULL,
+  `proyek_user_nik` int(11) DEFAULT NULL,
+  `proyek_koordinat_id` int(11) NOT NULL,
   `proyek_nama` varchar(50) NOT NULL,
   `proyek_tahun` year(4) NOT NULL,
-  `proyek_kategori_id` int(11) NOT NULL,
   `proyek_keuangan` int(11) NOT NULL,
   `proyek_pagu` int(11) NOT NULL,
-  `proyek_kontrak` int(11) NOT NULL,
-  `proyek_sech_awal` date NOT NULL,
-  `proyek_sech_akhir` date NOT NULL,
-  `proyek_koordinat_id` int(11) NOT NULL
+  `proyek_kontrak` date NOT NULL,
+  `proyek_sech_awal` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `proyek`
 --
 
-INSERT INTO `proyek` (`proyek_id`, `proyek_nama`, `proyek_tahun`, `proyek_kategori_id`, `proyek_keuangan`, `proyek_pagu`, `proyek_kontrak`, `proyek_sech_awal`, `proyek_sech_akhir`, `proyek_koordinat_id`) VALUES
-(13, '123', 2011, 1, 10000, 7, 2, '2018-04-09', '2018-04-19', 1),
-(14, 'asdsdada', 2012, 1, 2000, 6, 3, '2018-04-10', '2018-04-11', 2),
-(15, 'asds', 2013, 1, 3000, 5, 4, '2018-04-10', '2018-04-19', 3),
-(16, 'asds', 2015, 1, 4000, 4, 5, '2018-04-13', '2018-04-11', 4),
-(17, 'a', 2016, 1, 5000, 3, 6, '2018-04-09', '2018-04-19', 5),
-(18, 'asd', 2017, 1, 6000, 2, 7, '2018-04-10', '2018-04-05', 6),
-(19, 'as', 2018, 1, 72000, 1, 8, '2018-04-11', '2018-04-10', 7);
+INSERT INTO `proyek` (`proyek_id`, `proyek_kategori_id`, `proyek_user_nik`, `proyek_koordinat_id`, `proyek_nama`, `proyek_tahun`, `proyek_keuangan`, `proyek_pagu`, `proyek_kontrak`, `proyek_sech_awal`) VALUES
+(2, 1, 145, 10, 'Proyek 8', 2004, 20000, 10000, '2020-06-27', '2019-06-27'),
+(3, 6, 123, 6, 'Proyek 7', 1995, 30000, 50000, '2018-04-02', '2018-04-22'),
+(4, 1, 145, 7, 'Proyek 6', 1995, 30000, 50000, '2018-04-02', '2018-04-22'),
+(5, 1, 145, 5, 'Proyek 5', 2004, 20000, 10000, '2020-06-27', '2019-06-27'),
+(6, 1, 145, 1, 'Proyek 4', 2004, 20000, 10000, '2020-06-27', '2019-06-27'),
+(7, 1, 145, 2, 'Proyek 3', 1995, 30000, 50000, '2018-04-02', '2018-04-22'),
+(8, 6, 123, 3, 'Proyek 2', 1995, 30000, 50000, '2018-04-02', '2018-04-22'),
+(9, 1, 145, 4, 'Proyek 1', 2004, 20000, 10000, '2020-06-27', '2019-06-27'),
+(10, 6, 6060, 11, 'Proyek Lanjutan', 2019, 5000, 35000, '2019-05-28', '2020-05-28');
 
 -- --------------------------------------------------------
 
@@ -150,24 +146,28 @@ INSERT INTO `proyek` (`proyek_id`, `proyek_nama`, `proyek_tahun`, `proyek_katego
 --
 
 CREATE TABLE `user` (
-  `user_id` int(11) NOT NULL,
-  `user_nama` varchar(50) DEFAULT NULL,
-  `user_username` varchar(30) DEFAULT NULL,
+  `user_nik` int(11) NOT NULL,
+  `user_nama` varchar(50) NOT NULL,
+  `user_username` varchar(30) NOT NULL,
   `user_password` varchar(35) NOT NULL,
-  `user_email` varchar(35) DEFAULT NULL,
-  `user_telp` varchar(12) DEFAULT NULL,
-  `user_level` enum('admin','petugas') DEFAULT NULL,
-  `user_photo` varchar(50) DEFAULT NULL
+  `user_email` varchar(35) NOT NULL,
+  `user_telp` char(12) NOT NULL,
+  `user_bagian` enum('ppk','kasubid','kabid') NOT NULL,
+  `user_level` enum('admin','petugas','user') NOT NULL,
+  `user_photo` varchar(50) NOT NULL DEFAULT 'user_blank.png'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`user_id`, `user_nama`, `user_username`, `user_password`, `user_email`, `user_telp`, `user_level`, `user_photo`) VALUES
-(1, 'Administrator', 'adityads', '202cb962ac59075b964b07152d234b70', 'adityads@ymail.com', '082371373347', 'admin', 'user_blank.png'),
-(2, 'asd', 'ads', '202cb962ac59075b964b07152d234b70', '', '123', 'petugas', '7ff19edb966495cd9619cc7688b8be43.jpg'),
-(3, 'asdasdsd', 'asd', 'caf1a3dfb505ffed0d024130f58c5cfa', 'aa@aa.com', '123', 'petugas', '0772948ee86994cc7d1e0705719041bd.jpg');
+INSERT INTO `user` (`user_nik`, `user_nama`, `user_username`, `user_password`, `user_email`, `user_telp`, `user_bagian`, `user_level`, `user_photo`) VALUES
+(1, 'Administrator', 'adityads', '202cb962ac59075b964b07152d234b70', 'adityads@ymail.com', '082371373347', '', 'admin', 'user_blank.png'),
+(123, 'aaaa', '', '', 'aa@aaa.com', '2323', 'ppk', 'admin', 'user_blank.png'),
+(145, 'aaaa', '', '', 'aa@aaa.com', '12312', 'kasubid', 'admin', 'user_blank.png'),
+(6060, 'Deni', '', '', 'dee@aa.com', '0220', 'ppk', 'admin', 'user_blank.png'),
+(313521, 'Deeda', 'deya', '', 'ada@aa.com', '2323', 'ppk', 'user', 'user_blank.png'),
+(51212451, 'asdas', '', '', '231@asda.com', '1312', 'ppk', 'admin', 'user_blank.png');
 
 --
 -- Indexes for dumped tables
@@ -189,25 +189,22 @@ ALTER TABLE `koordinat`
 -- Indeks untuk tabel `pekerja`
 --
 ALTER TABLE `pekerja`
-  ADD PRIMARY KEY (`pekerja_id`);
-
---
--- Indeks untuk tabel `petugas`
---
-ALTER TABLE `petugas`
-  ADD PRIMARY KEY (`petugas_nik`);
+  ADD PRIMARY KEY (`pekerja_nip`);
 
 --
 -- Indeks untuk tabel `proyek`
 --
 ALTER TABLE `proyek`
-  ADD PRIMARY KEY (`proyek_id`);
+  ADD PRIMARY KEY (`proyek_id`),
+  ADD KEY `proyek_kategori_id` (`proyek_kategori_id`),
+  ADD KEY `proyek_koordinat_id` (`proyek_koordinat_id`),
+  ADD KEY `proyek_user_nik` (`proyek_user_nik`);
 
 --
 -- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_nik`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
@@ -217,31 +214,31 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `kategori_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `kategori_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `koordinat`
 --
 ALTER TABLE `koordinat`
-  MODIFY `koordinat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT untuk tabel `pekerja`
---
-ALTER TABLE `pekerja`
-  MODIFY `pekerja_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `koordinat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT untuk tabel `proyek`
 --
 ALTER TABLE `proyek`
-  MODIFY `proyek_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `proyek_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT untuk tabel `user`
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
-ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Ketidakleluasaan untuk tabel `proyek`
+--
+ALTER TABLE `proyek`
+  ADD CONSTRAINT `proyek_ibfk_1` FOREIGN KEY (`proyek_kategori_id`) REFERENCES `kategori` (`kategori_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `proyek_ibfk_2` FOREIGN KEY (`proyek_koordinat_id`) REFERENCES `koordinat` (`koordinat_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `proyek_ibfk_4` FOREIGN KEY (`proyek_user_nik`) REFERENCES `user` (`user_nik`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
