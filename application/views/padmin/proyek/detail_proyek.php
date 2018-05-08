@@ -37,10 +37,6 @@
 </style>
 <div class="content-wrapper">
  <section class="content-header">
-  <h1>
-    Invoice
-    <small>#007612</small>
-  </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
     <li><a href="#">Examples</a></li>
@@ -60,6 +56,27 @@
   </div>
 </div>
 
+
+<div class="row invoice-info">
+<div class="col-sm-6 col-md-offset-3 invoice-col">
+    <div class="box box-primary">
+      <div class="box-body box-profile">
+        <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url().'assets/images/'.$b['user_photo'];?>" alt="User profile picture">
+        <h3 class="profile-username text-center"><?php echo $b['user_nama']; ?></h3>
+        <p class="text-muted text-center"><?php echo $b['user_email']; ?></p>
+        <ul class="list-group list-group-unbordered">
+          <li class="list-group-item">
+            <?php echo $b['user_telp']; ?>
+          </li>
+          <li class="list-group-item">
+            <?php echo strtoupper($b['user_bagian']); ?>
+          </li>
+        </ul>
+        <a href="#" class="btn btn-primary btn-block"><b>Bagian Penanggung Jawab</b></a>
+      </div>
+    </div>
+  </div>
+  </div>
 <div class="row invoice-info">
   <div class="col-sm-4 invoice-col">
     <strong>Proyek</strong>
@@ -70,7 +87,7 @@
           <td><?php echo $b['proyek_tahun']; ?></td>
         </tr>
         <tr>
-          <th>Keuangan</th>
+          <th>Nilai Kontrak</th>
           <td><?php echo $b['proyek_keuangan']; ?></td>
         </tr>
         <tr>
@@ -93,27 +110,10 @@
     </address>
   </div>
 
-  <div class="col-sm-4 invoice-col">
-    <div class="box box-primary">
-      <div class="box-body box-profile">
-        <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url().'assets/images/'.$b['user_photo'];?>" alt="User profile picture">
-        <h3 class="profile-username text-center"><?php echo $b['user_nama']; ?></h3>
-        <p class="text-muted text-center"><?php echo $b['user_email']; ?></p>
-        <ul class="list-group list-group-unbordered">
-          <li class="list-group-item">
-            <?php echo $b['user_telp']; ?>
-          </li>
-          <li class="list-group-item">
-            <?php echo strtoupper($b['user_bagian']); ?>
-          </li>
-        </ul>
-        <a href="#" class="btn btn-primary btn-block"><b>Bagian Penanggung Jawab</b></a>
-      </div>
-    </div>
-  </div>
+  
 
   <div class="col-sm-4 invoice-col">
-    <strong>Pekerja</strong>
+    <strong>Kontraktor</strong>
     <address>
       <table class="table">
         <tr>
@@ -137,13 +137,48 @@
           <td><?php echo $b['pekerja_jenis']; ?></td>
         </tr>
         <tr>
-          <th>Bagian</th>
+          <th>Telepon Direktur</th>
           <td><?php echo $b['pekerja_telp_direktur']; ?></td>
         </tr>
         
       </table>
     </address>
   </div>
+
+   <div class="col-sm-4 invoice-col">
+    <strong>Konsultan</strong>
+    <address>
+      <table class="table">
+        <tr>
+          <th>Nama</th>
+          <td><?php echo $b['pekerja_nama']; ?></td>
+        </tr>
+        <tr>
+          <th>Alamat</th>
+          <td><?php echo $b['pekerja_alamat']; ?></td>
+        </tr>
+        <tr>
+          <th>Direktur</th>
+          <td><?php echo $b['pekerja_telp_kantor']; ?></td>
+        </tr>
+        <tr>
+          <th>Telepon Direktur</th>
+          <td><?php echo $b['pekerja_direktur']; ?></td>
+        </tr>
+        <tr>
+          <th>Bagian</th>
+          <td><?php echo $b['pekerja_jenis']; ?></td>
+        </tr>
+        <tr>
+          <th>Telepon Direktur</th>
+          <td><?php echo $b['pekerja_telp_direktur']; ?></td>
+        </tr>
+        
+      </table>
+    </address>
+  </div>
+
+
 </div>
 
 <div class="row">

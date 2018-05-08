@@ -56,7 +56,7 @@
 						<ul class="nav nav-tabs">
 							<li class="active"><a href="#tab_1" data-toggle="tab">Data Proyek</a></li>
 							<li><a href="#tab_2" data-toggle="tab">Lokasi Proyek</a></li>
-							<li><a href="#tab_3" data-toggle="tab">Pekerja</a></li>
+							<li><a href="#tab_3" data-toggle="tab">Penanggung Jawab</a></li>
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane active" id="tab_1">
@@ -66,7 +66,7 @@
 										<input type="number" class="form-control" name="year">
 									</div>
 									<div class="form-group">
-										<label>Keuangan</label>
+										<label>Nilai Kontrak</label>
 										<input type="number" class="form-control" name="keuangan">
 									</div>
 									<div class="form-group">
@@ -92,7 +92,7 @@
 									</div>
 
 									<div class="form-group">
-										<label>Sech Awal</label>
+										<label>Tanggal Rencana Pelaksanaan</label>
 										<input type="date" class="form-control" name="sech1">
 									</div>
 								</div>
@@ -120,98 +120,142 @@
 								</div>
 							</div>
 							<div class="tab-pane" id="tab_3">
-								<div class="box-body">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>NAMA PEKERJA</label>
-										<input type="hidden" name="numpeker" value="<?php echo $numpeker; ?>">
-											<input type="text" class="form-control"  name="xpekerja_nama" >
+
+								<div class="box box-danger">
+									<div class="box-header with-border">
+										<div class="box-body">
+											<div class="col-md-12">
+
+												<div class="form-group">
+													<label>NIK User</label>
+													<input type="text" class="form-control"  name="xnikuser" >
+												</div>
+												<div class="form-group">
+													<label>Nama User</label>
+													<input type="text" class="form-control"  name="xnamauser" >
+												</div>	
+												<div class="form-group">
+													<label>Email</label>
+													<input type="text" class="form-control"  name="xemailuser" >
+												</div>	
+												<div class="form-group">
+													<label>Telp</label>
+													<input type="text" class="form-control"  name="xtelpuser" >
+												</div>	
+												<div class="form-group">
+													<label>Bagian</label>
+													<select class="form-control"  name="xbaguser" >
+														<option value="ppk">PPK</option>
+														<option value="kasubid">KASUBID</option>
+														<option value="kabid">KABID</option>
+													</select>
+												</div>
+											</div>
+
+
 										</div>
-										<div class="form-group">
-											<label>Alamat</label>
-											<textarea  class="form-control"  name="xpekerja_alamat"></textarea>
-										</div>
-										<div class="form-group">
-											<label>Telp. Kantor</label>
-											<input type="tel" class="form-control"  name="xpekerja_telp" >
-										</div>
-										<div class="form-group">
-											<label>Naama Direktur</label>
-											<input type="text" class="form-control"  name="xdirektur_nama" >
-										</div>
-										<div class="form-group">
-											<label>Telp. Direktur</label>
-											<input type="tel" class="form-control"  name="xdirektur_telp" >
-										</div>
-										<div class="form-group">
-											<label>Jenis</label>
-											<select class="form-control"  name="xpekerja_jenis" >
-												<option value="kontraktor">Kontraktor</option>
-												<option value="konsultan">Konsultan</option>
-											</select>
-										</div>
+
 									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>NIK User</label>
-											<input type="text" class="form-control"  name="xnikuser" >
-										</div>
-										<div class="form-group">
-											<label>Nama User</label>
-											<input type="text" class="form-control"  name="xnamauser" >
-										</div>	
-										<div class="form-group">
-											<label>Email</label>
-											<input type="text" class="form-control"  name="xemailuser" >
-										</div>	
-										<div class="form-group">
-											<label>Telp</label>
-											<input type="text" class="form-control"  name="xtelpuser" >
-										</div>	
-										<div class="form-group">
-											<label>Bagian</label>
-											<select class="form-control"  name="xbaguser" >
-												<option value="ppk">PPK</option>
-												<option value="kasubid">KASUBID</option>
-												<option value="kabid">KABID</option>
-											</select>
+
+									<div class="box box-success">
+										<div class="box-header with-border">
+											<div class="box-body">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>NAMA PENANGGUNG JAWAB</label>
+														<input type="hidden" name="numpeker" value="<?php echo $numpeker; ?>">
+														<input type="text" class="form-control"  name="xpekerja_nama" >
+													</div>
+													<div class="form-group">
+														<label>Alamat</label>
+														<textarea  class="form-control"  name="xpekerja_alamat"></textarea>
+													</div>
+													<div class="form-group">
+														<label>Telp. Kantor</label>
+														<input type="tel" class="form-control"  name="xpekerja_telp" >
+													</div>
+													<div class="form-group">
+														<label>Naama Direktur</label>
+														<input type="text" class="form-control"  name="xdirektur_nama" >
+													</div>
+													<div class="form-group">
+														<label>Telp. Direktur</label>
+														<input type="tel" class="form-control"  name="xdirektur_telp" >
+													</div>
+													<div class="form-group">
+														<label>Jenis</label>
+														<select class="form-control"  name="xpekerja_jenis" >
+															<option value="kontraktor">Kontraktor</option>
+															<option value="konsultan">Konsultan</option>
+														</select>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>NAMA PENANGGUNG JAWAB</label>
+														<input type="hidden" name="numpeker" value="<?php echo $numpeker; ?>">
+														<input type="text" class="form-control"  name="xpekerja_nama" >
+													</div>
+													<div class="form-group">
+														<label>Alamat</label>
+														<textarea  class="form-control"  name="xpekerja_alamat"></textarea>
+													</div>
+													<div class="form-group">
+														<label>Telp. Kantor</label>
+														<input type="tel" class="form-control"  name="xpekerja_telp" >
+													</div>
+													<div class="form-group">
+														<label>Naama Direktur</label>
+														<input type="text" class="form-control"  name="xdirektur_nama" >
+													</div>
+													<div class="form-group">
+														<label>Telp. Direktur</label>
+														<input type="tel" class="form-control"  name="xdirektur_telp" >
+													</div>
+													<div class="form-group">
+														<label>Jenis</label>
+														<select class="form-control"  name="xpekerja_jenis" >
+															<option value="kontraktor">Kontraktor</option>
+															<option value="konsultan">Konsultan</option>
+														</select>
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</form>
 			</div>
-		</form>
+		</section>
 	</div>
-</section>
-</div>
 
-<script src="<?php echo base_url() ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="<?php echo base_url() ?>assets/bower_components/ckeditor/ckeditor.js"></script>
+	<script src="<?php echo base_url() ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="<?php echo base_url() ?>assets/bower_components/ckeditor/ckeditor.js"></script>
 
-<script>
-	$(function () {
-		CKEDITOR.replace('ckeditor')
-		$('.textarea').wysihtml5()
-	})
-</script>
+	<script>
+		$(function () {
+			CKEDITOR.replace('ckeditor')
+			$('.textarea').wysihtml5()
+		})
+	</script>
 
 
-<script src="<?php echo base_url() ?>assets/map/jquery-1.9.1.min.js"></script>
-<script src="<?php echo base_url() ?>assets/map/jquery.addressPickerByGiro.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAogXD-AHrsmnWinZIyhRORJ84bgLwDPpg&sensor=false&language=id"></script>
-<link href="<?php echo base_url() ?>assets/map/jquery.addressPickerByGiro.css" rel="stylesheet" media="screen">
-<script>
-	$('.inputAddress').addressPickerByGiro({
-		distanceWidget: true,
-		boundElements: {
-			'latitude': '.latitude',
-			'longitude': '.longitude',
-			'formatted_address': '.formatted_address'
-		}
-	});
-</script>
+	<script src="<?php echo base_url() ?>assets/map/jquery-1.9.1.min.js"></script>
+	<script src="<?php echo base_url() ?>assets/map/jquery.addressPickerByGiro.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAogXD-AHrsmnWinZIyhRORJ84bgLwDPpg&sensor=false&language=id"></script>
+	<link href="<?php echo base_url() ?>assets/map/jquery.addressPickerByGiro.css" rel="stylesheet" media="screen">
+	<script>
+		$('.inputAddress').addressPickerByGiro({
+			distanceWidget: true,
+			boundElements: {
+				'latitude': '.latitude',
+				'longitude': '.longitude',
+				'formatted_address': '.formatted_address'
+			}
+		});
+	</script>
 </body>
 </html>

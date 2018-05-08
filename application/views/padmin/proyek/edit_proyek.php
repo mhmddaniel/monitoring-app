@@ -68,7 +68,7 @@
                     <input type="number" class="form-control" name="year" value="<?php echo $b['proyek_tahun']; ?>" >
                   </div>
                   <div class="form-group">
-                    <label>Keuangan</label>
+                    <label>Nilai Kontrak</label>
                     <input type="number" class="form-control" name="keuangan" value="<?php echo $b['proyek_keuangan']; ?>">
                   </div>
                   <div class="form-group">
