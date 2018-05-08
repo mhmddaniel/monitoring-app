@@ -35,7 +35,7 @@
 						<div class="box-body">
 							<div class="row">
 								<div class="col-md-10">
-									<input type="hidden" name="xproyekid" value="<?php echo $numproyek; ?>">
+									<input type="hidden" name="numproyek" value="<?php echo $numproyek; ?>">
 									<input type="text" name="xnama" class="form-control" placeholder="Nama Proyek" required/>
 								</div>
 								<div class="col-md-2">
@@ -57,7 +57,7 @@
 						<ul class="nav nav-tabs">
 							<li class="active"><a href="#tab_1" data-toggle="tab">Data Proyek</a></li>
 							<li><a href="#tab_2" data-toggle="tab">Lokasi Proyek</a></li>
-							<li><a href="#tab_3" data-toggle="tab">Penanggung Jawab</a></li>
+							<li><a href="#tab_3" data-toggle="tab">User Account</a></li>
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane active" id="tab_1">
@@ -93,7 +93,7 @@
 									</div>
 
 									<div class="form-group">
-										<label>Tanggal Rencana Pelaksanaan</label>
+										<label>Sech Awal</label>
 										<input type="date" class="form-control" name="sech1">
 									</div>
 								</div>
@@ -122,108 +122,32 @@
 							</div>
 							<div class="tab-pane" id="tab_3">
 
-								<div class="box box-danger">
-									<div class="box-header with-border">
-										<div class="box-body">
-											<div class="col-md-12">
+								<div class="box-body">
 
-												<div class="form-group">
-													<label>NIK User</label>
-													<input type="text" class="form-control"  name="xnikuser" >
-												</div>
-												<div class="form-group">
-													<label>Nama User</label>
-													<input type="text" class="form-control"  name="xnamauser" >
-												</div>	
-												<div class="form-group">
-													<label>Email</label>
-													<input type="text" class="form-control"  name="xemailuser" >
-												</div>	
-												<div class="form-group">
-													<label>Telp</label>
-													<input type="text" class="form-control"  name="xtelpuser" >
-												</div>	
-												<div class="form-group">
-													<label>Bagian</label>
-													<select class="form-control"  name="xbaguser" >
-														<option value="ppk">PPK</option>
-														<option value="kasubid">KASUBID</option>
-														<option value="kabid">KABID</option>
-													</select>
-												</div>
-											</div>
-
-
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>NIK User</label>
+											<input type="text" class="form-control"  name="xnikuser" >
 										</div>
-
-									</div>
-
-								</div>
-								<div class="box box-success">
-									<div class="box-header with-border">
-										<div class="box-body">
-											<table  class="table table-bordered table-striped table-responsive">
-												<thead>
-													<tr>
-														<th>NIP</th>
-														<th>NAMA</th>
-														<th>NO TEL</th>
-														<th>POSISI</th>
-														<th>NAMA DIREKTUR</th>
-														<th>TEL DIREKTUR</th>
-														<th>NAMA PERUSAHAAN</th>
-														<th>ALAMAT PERUSAHAAN</th>
-														<th>TELP. KANTOR</th>
-														<th>Hapus</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>
-															<input class="form-control" name="xnip[0]" type="text">
-														</td>
-														<td> 
-															<input class="form-control" name="xnama_pek[0]" type="text">
-														</td>
-														<td> 
-															<input class="form-control" name="xtel_pek[0]" type="text">
-														</td>
-														<td> 
-															<select class="form-control" name="xjenis[0]">
-																<option value="kontraktor">Kontraktor</option>
-																<option value="konsultan">Konsultan</option>
-															</select>
-														</td>
-														<td> 
-															<input class="form-control" name="xnama_direk[0]" type="text">
-														</td>
-														<td> 
-															<input class="form-control" name="xtel_direk[0]" type="text">
-														</td>
-														<td> 
-															<input class="form-control" name="xnama_perus[0]" type="text">
-														</td>
-														<td> 
-															<input class="form-control" name="xalamat_perus[0]" type="text">
-														</td>
-														<td>
-															<input class="form-control" name="xtel_kant[0]" type="text">
-														</td>
-														<td>
-															<button type="button" class="btn btn-danger del">
-																<i class="fa fa-trash"></i>
-															</button>
-														</td>
-													</tr>
-													<tr id="last">
-														<td colspan="10" align="right">
-															<button type="button" class="btn btn-primary" id="addRow">
-																<i class="fa fa-plus"></i>
-															</button>
-														</td>
-													</tr>
-												</tbody>
-											</table>
+										<div class="form-group">
+											<label>Nama User</label>
+											<input type="text" class="form-control"  name="xnamauser" >
+										</div>	
+										<div class="form-group">
+											<label>Email</label>
+											<input type="text" class="form-control"  name="xemailuser" >
+										</div>	
+										<div class="form-group">
+											<label>Telp</label>
+											<input type="text" class="form-control"  name="xtelpuser" >
+										</div>	
+										<div class="form-group">
+											<label>Bagian</label>
+											<select class="form-control"  name="xbaguser" >
+												<option value="ppk">PPK</option>
+												<option value="kasubid">KASUBID</option>
+												<option value="kabid">KABID</option>
+											</select>
 										</div>
 									</div>
 								</div>
@@ -232,34 +156,20 @@
 					</div>
 				</div>
 			</div>
-		</section>
-	</form>
-</div>
+		</div>
+	</section>
+</form>
 
 <script src="<?php echo base_url() ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="<?php echo base_url() ?>assets/bower_components/ckeditor/ckeditor.js"></script>
 
-<script src="<?php echo base_url() ?>assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url() ?>assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script>
 	$(function () {
 		CKEDITOR.replace('ckeditor')
 		$('.textarea').wysihtml5()
 	})
 </script>
-<script>
-	$(function () {
-		$('#example1').DataTable()
-		$('#example2').DataTable({
-			'paging'      : true,
-			'lengthChange': false,
-			'searching'   : false,
-			'ordering'    : true,
-			'info'        : true,
-			'autoWidth'   : false
-		})
-	})
-</script>
+
 
 <script src="<?php echo base_url() ?>assets/map/jquery-1.9.1.min.js"></script>
 <script src="<?php echo base_url() ?>assets/map/jquery.addressPickerByGiro.js"></script>
@@ -273,33 +183,6 @@
 			'longitude': '.longitude',
 			'formatted_address': '.formatted_address'
 		}
-	});
-</script>
-
-
-<script src="https://code.jquery.com/jquery-1.6.2.js" type="text/javascript"></script>
-<script type="text/javascript">
-	var i = 1;
-	$(function(){
-		$("#addRow").click(function(){
-			row = '<tr>'+
-			'<td><input type="text" class="form-control" name="xnip['+i+']"/></td>'+
-			'<td><input type="text" class="form-control" name="xnama_pek['+i+']"/></td>'+
-			'<td><input type="text" class="form-control" name="xtel_pek['+i+']"/></td>'+
-			'<td><input type="text" class="form-control" name="xjenis['+i+']"/></td>'+
-			'<td><input type="text" class="form-control" name="xnama_direk['+i+']"/></td>'+
-			'<td><input type="text" class="form-control" name="xtel_direk['+i+']"/></td>'+
-			'<td><input type="text" class="form-control" name="xnama_perus['+i+']"/></td>'+
-			'<td><input type="text" class="form-control" name="xalamat_perus['+i+']"/></td>'+
-			'<td><input type="text" class="form-control" name="xtel_kant['+i+']"/></td>'+
-			'<td><button type="button" class="btn btn-danger del"><i class="fa fa-trash"></i></button></td>'+
-			'</tr>';
-			$(row).insertBefore("#last");
-			i++;
-		});
-	});
-	$(".del").live('click', function(){
-		$(this).parent().parent().remove();
 	});
 </script>
 </body>

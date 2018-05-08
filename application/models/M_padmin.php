@@ -12,10 +12,10 @@ class M_padmin extends CI_Model{
 		$this->db->join('kategori b','a.proyek_kategori_id=b.kategori_id','inner');
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
 		$this->db->join('user d','a.proyek_user_nik=d.user_nik','inner');
-		$this->db->join('pekerja e','a.proyek_pekerja_id=e.pekerja_id','inner');
 		$hsl=$this->db->get();
 		return $hsl;
 	}
+
 	function get_all_dinaspu(){
 		$this->db->select('*');
 		$this->db->from('petugas');
@@ -30,7 +30,8 @@ class M_padmin extends CI_Model{
 	}
 	function get_all_pelaksana(){
 		$this->db->select('*');
-		$this->db->from('pekerja');
+		$this->db->from('pekerja a');
+		$this->db->join('proyek b','a.proyek_id=b.proyek_id','inner');
 		$hsl=$this->db->get();
 		return $hsl;
 	}
@@ -48,7 +49,10 @@ class M_padmin extends CI_Model{
 		$hsl = $max_id +1;
 		return $hsl;
 	}
-
+	function get_proyek(){
+		$hsl=$this->db->query("SELECT * FROM proyek");
+		return $hsl;
+	}
 	function cek_user($username){
 		$hsl=$this->db->query("SELECT * FROM user where user_username='$username'");
 		return $hsl;
@@ -77,8 +81,8 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("UPDATE koordinat set koordinat_nama='$namkor',koordinat_lat='$latitude',koordinat_lng='$longitude',koordinat_alamat='$inputAddress' where koordinat_id='$numkor'");
 		return $hsl;
 	}
-	function save_proyek($numproyek,$proyek_kategori_id,$nikuser,$numkor,$proyek_nama,$proyek_tahun,$proyek_keuangan,$proyek_pagu,$proyek_kontrak,$proyek_sech_awal){
-		$hsl=$this->db->query("INSERT INTO proyek (proyek_id,proyek_kategori_id,proyek_user_nik,proyek_koordinat_id,proyek_nama,proyek_tahun,proyek_keuangan,proyek_pagu,proyek_kontrak,proyek_sech_awal) VALUES ($numproyek,'$proyek_kategori_id','$nikuser',','$numkor','$proyek_nama','$proyek_tahun','$proyek_keuangan','$proyek_pagu','$proyek_kontrak','$proyek_sech_awal')");
+	function save_proyek($proyek_kategori_id,$nikuser,$numkor,$proyek_nama,$proyek_tahun,$proyek_keuangan,$proyek_pagu,$proyek_kontrak,$proyek_sech_awal){
+		$hsl=$this->db->query("INSERT INTO proyek (proyek_kategori_id,proyek_user_nik,proyek_koordinat_id,proyek_nama,proyek_tahun,proyek_keuangan,proyek_pagu,proyek_kontrak,proyek_sech_awal) VALUES ('$proyek_kategori_id','$nikuser','$numkor','$proyek_nama','$proyek_tahun','$proyek_keuangan','$proyek_pagu','$proyek_kontrak','$proyek_sech_awal')");
 		return $hsl;
 	}
 
@@ -87,8 +91,8 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 
-	function save_pekerja($xnip,$numproyek,$xnampeke,$xtelpeke,$xpekjenis,$xnamdirek,$xteldirek,$xnamaperus,$xalaperus,$xtelkant){
-		$hsl=$this->db->query("INSERT INTO pekerja (pekerja_nip,proyek_id,pekerja_nama,pekerja_tel,pekerja_jenis,pekerja_nama_direktur,pekerja_tel_direktur,pekerja_nama_perusahaan,pekerja_alamat_perusahaan,pekerja_tel_kantor) VALUES ('$xnip','$numproyek','$xnampeke','$xtelpeke','$xpekjenis','$xnamdirek','$xteldirek','$xnamaperus','$xalaperus','$xtelkant')");
+	function save_pekerja($proyek_id,$xnip,$xnampeke,$xtelpeke,$xpekjenis,$xnamdirek,$xteldirek,$xnamaperus,$xalaperus,$xtelkant){
+		$hsl=$this->db->query("INSERT INTO pekerja (pekerja_nip,proyek_id,pekerja_nama,pekerja_tel,pekerja_jenis,pekerja_nama_direktur,pekerja_tel_direktur,pekerja_nama_perusahaan,pekerja_alamat_perusahaan,pekerja_tel_kantor) VALUES ('$xnip','$proyek_id','$xnampeke','$xtelpeke','$xpekjenis','$xnamdirek','$xteldirek','$xnamaperus','$xalaperus','$xtelkant')");
 		return $hsl;
 	}
 	function update_pekerja($numpeker,$xpekerja_nama,$xpekerja_alamat,$xpekerja_telp,$xdirektur_nama,$xdirektur_telp,$xpekerja_jenis){
@@ -119,14 +123,20 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("SELECT inbox.*,DATE_FORMAT(inbox_tanggal,'%d/%m/%Y') AS tanggal FROM inbox where inbox_id='$kode'");
 		return $hsl;
 	}
-
+	function get_penannggung_jawab($kode){	
+		$this->db->select('*');
+		$this->db->from('pekerja a');
+		$this->db->join('proyek b','a.proyek_id=b.proyek_id','inner');
+		$this->db->where('a.proyek_id',$kode);
+		$hsl=$this->db->get();
+		return $hsl;
+	}
 	function get_detail_proyek_by_kode($kode){
 		$this->db->select('*');
 		$this->db->from('proyek a');
 		$this->db->join('kategori b','a.proyek_kategori_id=b.kategori_id','inner');
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
 		$this->db->join('user d','a.proyek_user_nik=d.user_nik','inner');
-		$this->db->join('pekerja e','a.proyek_pekerja_id=e.pekerja_id','inner');
 		$this->db->where('proyek_id',$kode);
 		$hsl=$this->db->get();
 		return $hsl;

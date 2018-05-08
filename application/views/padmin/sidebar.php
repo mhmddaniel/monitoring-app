@@ -14,9 +14,9 @@
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
           <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
+            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+            </button>
+          </span>
         </div>
       </form>
       
@@ -32,7 +32,11 @@
           </a>
           <ul class="treeview-menu">
             <li class="active"><a href="<?php echo base_url() ?>padmin/proyek/"><i class="fa fa-circle-o"></i> Proyek</a></li>
+            <li class="active"><a href="<?php echo base_url() ?>padmin/penanggung_jawab/"><i class="fa fa-circle-o"></i> Penanggung Jawab</a></li>
+
+            <?php if($_SESSION['level']=='admin'){ ?>
             <li class="active"><a href="<?php echo base_url() ?>padmin/kategori/"><i class="fa fa-circle-o"></i> Kategori</a></li>
+            <?php } else {} ?>
           </ul>
         </li>
 <!--         <li class="treeview">
@@ -47,10 +51,11 @@
             <li class="active"><a href="<?php echo base_url() ?>padmin/pelaksana"><i class="fa fa-circle-o"></i> Kontraktor / Konsultan</a></li>
           </ul>
         </li> -->
+        <?php if($_SESSION['level']=='admin'){ ?>
         <li><a href="<?php echo base_url() ?>padmin/user/"><i class="fa fa-user"></i> <span>User</span></a></li>
+        <?php } else {} ?>
         <li><a href="<?php echo base_url() ?>padmin/setting/"><i class="fa fa-gear"></i> <span>Setting</span></a></li>
       </ul>
     </section>
   </aside>
 
- 

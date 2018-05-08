@@ -1,4 +1,7 @@
-<?php $b=$data->row_array() ; ?>
+<?php 
+$b=$data->row_array() ; 
+
+?>
 
 <style type="text/css">
 
@@ -58,27 +61,9 @@
 
 
 <div class="row invoice-info">
-<div class="col-sm-6 col-md-offset-3 invoice-col">
-    <div class="box box-primary">
-      <div class="box-body box-profile">
-        <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url().'assets/images/'.$b['user_photo'];?>" alt="User profile picture">
-        <h3 class="profile-username text-center"><?php echo $b['user_nama']; ?></h3>
-        <p class="text-muted text-center"><?php echo $b['user_email']; ?></p>
-        <ul class="list-group list-group-unbordered">
-          <li class="list-group-item">
-            <?php echo $b['user_telp']; ?>
-          </li>
-          <li class="list-group-item">
-            <?php echo strtoupper($b['user_bagian']); ?>
-          </li>
-        </ul>
-        <a href="#" class="btn btn-primary btn-block"><b>Bagian Penanggung Jawab</b></a>
-      </div>
-    </div>
-  </div>
-  </div>
-<div class="row invoice-info">
-  <div class="col-sm-4 invoice-col">
+
+
+  <div class="col-sm-6 invoice-col">
     <strong>Proyek</strong>
     <address>
       <table class="table">
@@ -110,73 +95,75 @@
     </address>
   </div>
 
-  
-
-  <div class="col-sm-4 invoice-col">
-    <strong>Kontraktor</strong>
-    <address>
-      <table class="table">
-        <tr>
-          <th>Nama</th>
-          <td><?php echo $b['pekerja_nama']; ?></td>
-        </tr>
-        <tr>
-          <th>Alamat</th>
-          <td><?php echo $b['pekerja_alamat']; ?></td>
-        </tr>
-        <tr>
-          <th>Direktur</th>
-          <td><?php echo $b['pekerja_telp_kantor']; ?></td>
-        </tr>
-        <tr>
-          <th>Telepon Direktur</th>
-          <td><?php echo $b['pekerja_direktur']; ?></td>
-        </tr>
-        <tr>
-          <th>Bagian</th>
-          <td><?php echo $b['pekerja_jenis']; ?></td>
-        </tr>
-        <tr>
-          <th>Telepon Direktur</th>
-          <td><?php echo $b['pekerja_telp_direktur']; ?></td>
-        </tr>
-        
-      </table>
-    </address>
+  <div class="col-sm-6">
+    <div class="box box-primary">
+      <div class="box-body box-profile">
+        <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url().'assets/images/'.$b['user_photo'];?>" alt="User profile picture">
+        <h3 class="profile-username text-center"><?php echo $b['user_nama']; ?></h3>
+        <p class="text-muted text-center"><?php echo $b['user_email']; ?></p>
+        <ul class="list-group list-group-unbordered">
+          <li class="list-group-item">
+            <?php echo $b['user_telp']; ?>
+          </li>
+          <li class="list-group-item">
+            <?php echo strtoupper($b['user_bagian']); ?>
+          </li>
+        </ul>
+        <a href="#" class="btn btn-primary btn-block"><b>Bagian Penanggung Jawab</b></a>
+      </div>
+    </div>
   </div>
+</div>
+<div class="row invoice-info">
 
-   <div class="col-sm-4 invoice-col">
-    <strong>Konsultan</strong>
-    <address>
-      <table class="table">
-        <tr>
-          <th>Nama</th>
-          <td><?php echo $b['pekerja_nama']; ?></td>
-        </tr>
-        <tr>
-          <th>Alamat</th>
-          <td><?php echo $b['pekerja_alamat']; ?></td>
-        </tr>
-        <tr>
-          <th>Direktur</th>
-          <td><?php echo $b['pekerja_telp_kantor']; ?></td>
-        </tr>
-        <tr>
-          <th>Telepon Direktur</th>
-          <td><?php echo $b['pekerja_direktur']; ?></td>
-        </tr>
-        <tr>
-          <th>Bagian</th>
-          <td><?php echo $b['pekerja_jenis']; ?></td>
-        </tr>
-        <tr>
-          <th>Telepon Direktur</th>
-          <td><?php echo $b['pekerja_telp_direktur']; ?></td>
-        </tr>
-        
-      </table>
-    </address>
-  </div>
+
+  <?php
+  foreach ($bbc->result_array() as $i) :
+    ?>
+    <div class="col-sm-6 invoice-col">
+      <strong><?php if($i['pekerja_jenis']=='kontraktor') {echo "Kontraktor"; } else {echo "Konsultan";} ?></strong>
+      <address>
+        <table class="table">
+          <tr>
+            <th>Nama Penanggung Jawab</th>
+            <td><?php echo $i['pekerja_nama']; ?></td>
+          </tr>
+          <tr>
+            <th>Telepon</th>
+            <td><?php echo $i['pekerja_tel']; ?></td>
+          </tr>
+
+          <tr>
+            <th>Bagian</th>
+            <td><?php echo $i['pekerja_jenis']; ?></td>
+          </tr>
+          <tr>
+            <th>Nama Direktur</th>
+            <td><?php echo $i['pekerja_nama_direktur']; ?></td>
+          </tr>
+          <tr>
+            <th>Telepon Direktur</th>
+            <td><?php echo $i['pekerja_tel_direktur']; ?></td>
+          </tr>
+          <tr>
+            <th>Nama Perusahaan</th>
+            <td><?php echo $i['pekerja_nama_perusahaan']; ?></td>
+          </tr>
+
+          <tr>
+            <th>Alamat Perusahaan</th>
+            <td><?php echo $i['pekerja_alamat_perusahaan']; ?></td>
+          </tr>
+
+          <tr>
+            <th>Telepon Kantor</th>
+            <td><?php echo $i['pekerja_tel_kantor']; ?></td>
+          </tr>
+
+        </table>
+      </address>
+    </div>
+  <?php endforeach;?>
 
 
 </div>

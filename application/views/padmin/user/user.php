@@ -19,67 +19,62 @@
   <section class="content">
     <div class="row">
       <div class="col-xs-12">
-        <div class="box">
 
-          <div class="box">
-            <div class="box-header">
-              <a class="btn btn-success btn-flat " href="<?php echo base_url().'padmin/tambah_user'?>"><span class="fa fa-plus"></span> Tambah user</a>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example1" class="table table-striped" style="font-size:13px;">
-                <thead>
-                  <tr>
-                   <th>NIK</th>
-                   <th>NAMA</th>
-                   <th>USERNAME</th>
-                   <th>PASSWORD</th>
-                   <th>EMAIL</th>
-                   <th>TELEPON</th>
-                   <th>Bagian</th>
-                   <th>LEVEL</th>
-                   <th style="text-align:right;">Aksi</th>
-                 </tr>
-               </thead>
-               <tbody>
-                <?php
-                $no=0;
-                foreach ($data->result_array() as $i) :
-                  $no++;
-                  $user_nik=$i['user_nik'];
-                  $user_nama=$i['user_nama'];
-                  $user_username=$i['user_username'];
-                  $user_password=$i['user_password'];
-                  $user_email=$i['user_email'];
-                  $user_tel=$i['user_telp'];
-                  $user_bagian=$i['user_bagian'];
-                  $user_level=$i['user_level'];
-                  ?>
-                  <tr>
-                    <td><?php echo $user_nik;?></td>
-                    <td><?php echo $user_nama;?></td>
-                    <td><?php echo $user_username;?></td>
-                    <td>*****</td>
-                    <td><?php echo $user_email;?></td>
-                    <td><?php echo $user_tel;?></td>
-                    <td><?php echo $user_bagian;?></td>
-                    <td><?php echo $user_level;?></td>
-                    <td style="text-align:right;">
-                      <a class="btn" href="<?php echo base_url().'padmin/get_edit_user/'.$user_nik;?>"><span class="fa fa-pencil"></span></a>
-                      <a class="btn" data-toggle="modal" data-target="#ModalHapus<?php echo $user_nik;?>"><span class="fa fa-trash"></span></a>
-                    </td>
-                  </tr>
-                <?php endforeach;?>
-              </tbody>
-            </table>
+        <div class="box">
+          <div class="box-header">
+            <a class="btn btn-success btn-flat " href="<?php echo base_url().'padmin/tambah_user'?>"><span class="fa fa-plus"></span> Tambah user</a>
           </div>
-          <!-- /.box-body -->
+          <!-- /.box-header -->
+          <div class="box-body">
+            <table id="example1" class="table table-striped" style="font-size:13px;">
+              <thead>
+                <tr>
+                 <th>NIK</th>
+                 <th>NAMA</th>
+                 <th>USERNAME</th>
+                 <th>EMAIL</th>
+                 <th>TELEPON</th>
+                 <th>Bagian</th>
+                 <th>LEVEL</th>
+                 <th style="text-align:right;">Aksi</th>
+               </tr>
+             </thead>
+             <tbody>
+              <?php
+              $no=0;
+              foreach ($data->result_array() as $i) :
+                $no++;
+                $user_nik=$i['user_nik'];
+                $user_nama=$i['user_nama'];
+                $user_username=$i['user_username'];
+                $user_password=$i['user_password'];
+                $user_email=$i['user_email'];
+                $user_tel=$i['user_telp'];
+                $user_bagian=$i['user_bagian'];
+                $user_level=$i['user_level'];
+                ?>
+                <tr>
+                  <td><?php echo $user_nik;?></td>
+                  <td><?php echo $user_nama;?></td>
+                  <td><?php echo $user_username;?></td>
+                  <td><?php echo $user_email;?></td>
+                  <td><?php echo $user_tel;?></td>
+                  <td><?php echo $user_bagian;?></td>
+                  <td><?php echo $user_level;?></td>
+                  <td style="text-align:right;">
+                    <a class="btn" href="<?php echo base_url().'padmin/get_edit_user/'.$user_nik;?>"><span class="fa fa-pencil"></span></a>
+                    <a class="btn" data-toggle="modal" data-target="#ModalHapus<?php echo $user_nik;?>"><span class="fa fa-trash"></span></a>
+                  </td>
+                </tr>
+              <?php endforeach;?>
+            </tbody>
+          </table>
         </div>
-        <!-- /.box -->
+        <!-- /.box-body -->
       </div>
-      <!-- /.col -->
+      <!-- /.box -->
     </div>
-    <!-- /.row -->
+    <!-- /.col -->
   </section>
   <!-- /.content -->
 </div>

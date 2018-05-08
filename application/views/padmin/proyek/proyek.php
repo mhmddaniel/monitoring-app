@@ -61,7 +61,11 @@
 					<ul class="nav nav-tabs">
 						<li class="active"><a href="#tab_1" data-toggle="tab">Map</a></li>
 						<li><a href="#tab_2" data-toggle="tab">Table</a></li>
+
+						<?php if($_SESSION['level']=='admin'){ ?>
 						<li class="pull-right"><a class="btn btn-success btn-flat bg-olive " href="<?php echo base_url().'padmin/tambah_proyek'?>"><span class="fa fa-plus"></span> Tambah proyek</a></li>
+
+						<?php } else {} ?>
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="tab_1">
@@ -76,7 +80,7 @@
 											<th>Nama Proyek</th>
 											<th>Tahun</th>
 											<th>Kategori</th>
-											<th>Keuangan</th>
+											<th>Rencana Pelaksanaan</th>
 											<th>Pagu</th>
 											<th>Kontrak</th>
 											<th>Jadwal</th>
@@ -120,9 +124,14 @@
 														<ul class="dropdown-menu" role="menu">
 															<li><a href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>"><span class="fa fa-expand"></span>Lihat Detail</a></li>
 															<div class="divider"></div>
+
+															<?php if($_SESSION['level']=='admin'){ ?>
 															<li><a href="<?php echo base_url().'padmin/get_edit_proyek/'.$proyek_id;?>"><span class="fa fa-pencil"></span>Edit</a></li>
 															<li><a data-toggle="modal" data-target="#ModalHapus<?php echo $proyek_id;?>"><span class="fa fa-trash"></span>Hapus</a></li>
+															
+															<?php } else {} ?>
 														</ul>
+
 													</div>
 												</td>
 											</tr>
