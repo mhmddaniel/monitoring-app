@@ -67,7 +67,13 @@ class Padmin extends CI_Controller{
 	}
 
 	public function penanggung_jawab(){
-		$x['data']=$this->m_padmin->get_all_pelaksana();
+		if ($_SESSION['level']=='admin'){
+			$x['data']=$this->m_padmin->get_all_pelaksana();
+		}
+		else {
+			$usernik=$_SESSION['usernik'];
+			$x['data']=$this->m_padmin->get_all_pelaksana_by_user($usernik);	
+		}
 		$this->load->view('padmin/header');
 		$this->load->view('padmin/sidebar');
 		$this->load->view('padmin/proyek/penanggung_jawab',$x);

@@ -17,9 +17,13 @@
 			<div class="col-md-12">
 
 				<div class="box">
+					
+					<?php if($_SESSION['level']=='admin'){ ?>
 					<div class="box-header">
 						<a class="btn btn-success btn-flat " href="<?php echo base_url().'padmin/tambah_penanggung_jawab'?>"><span class="fa fa-plus"></span> Tambah Penanggung Jawab</a>
 					</div>
+
+					<?php } else {} ?>
 					<div class="box-body">
 						<table id="example1" class="table table-striped" style="font-size:13px;">
 							<thead>

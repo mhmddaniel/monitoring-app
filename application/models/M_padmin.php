@@ -15,7 +15,7 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->get();
 		return $hsl;
 	}
-	
+
 	function get_all_proyek_by_user($usernik){
 		$this->db->select('*');
 		$this->db->from('proyek a');
@@ -45,6 +45,17 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->get();
 		return $hsl;
 	}
+
+	function get_all_pelaksana_by_user($usernik){
+		$this->db->select('*');
+		$this->db->from('pekerja a');
+		$this->db->join('proyek b','a.proyek_id=b.proyek_id','inner');
+		$this->db->join('user c','b.proyek_user_nik=c.user_nik','inner');
+		$this->db->where('user_nik',$usernik);
+		$hsl=$this->db->get();
+		return $hsl;
+	}
+
 	function get_num_koor() {
 		$query = $this->db->query("SELECT MAX(koordinat_id) as max_id FROM koordinat"); 
 		$row = $query->row_array();
