@@ -18,7 +18,13 @@ class Padmin extends CI_Controller{
 	}
 
 	public function proyek(){
-		$x['data']=$this->m_padmin->get_all_proyek();
+		if ($_SESSION['level']=='admin'){
+			$x['data']=$this->m_padmin->get_all_proyek();
+		}
+		else {
+			$usernik=$_SESSION['usernik'];
+			$x['data']=$this->m_padmin->get_all_proyek_by_user($usernik);
+		}
 		$g['xc']='cc';
 		$y['title']='DATA PROYEK';
 		$this->load->view('padmin/header',$y);

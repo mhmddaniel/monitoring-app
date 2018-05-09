@@ -14,7 +14,7 @@ class Loginadmin extends CI_Controller{
         if($cadmin->num_rows() > 0){
             $xcadmin=$cadmin->row_array();
             $newdata = array(
-                'idadmin'   => $xcadmin['user_id'],
+                'usernik'   => $xcadmin['user_nik'],
                 'username'  => $xcadmin['user_username'],
                 'nama'      => $xcadmin['user_nama'],
                 'level'     => $xcadmin['user_level'],

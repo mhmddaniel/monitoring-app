@@ -15,7 +15,17 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->get();
 		return $hsl;
 	}
-
+	
+	function get_all_proyek_by_user($usernik){
+		$this->db->select('*');
+		$this->db->from('proyek a');
+		$this->db->join('kategori b','a.proyek_kategori_id=b.kategori_id','inner');
+		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
+		$this->db->join('user d','a.proyek_user_nik=d.user_nik','inner');
+		$this->db->where('user_nik',$usernik);
+		$hsl=$this->db->get();
+		return $hsl;
+	}
 	function get_all_dinaspu(){
 		$this->db->select('*');
 		$this->db->from('petugas');
