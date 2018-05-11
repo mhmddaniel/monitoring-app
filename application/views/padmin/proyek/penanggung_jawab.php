@@ -72,7 +72,7 @@
 													<span class="sr-only">Toggle Dropdown</span>
 												</button>
 												<ul class="dropdown-menu" role="menu">
-													<li><a href="<?php echo base_url().'padmin/get_edit_proyek/'.$pekerja_nip;?>"><span class="fa fa-pencil"></span>Edit</a></li>
+													<li><a href="<?php echo base_url().'padmin/get_edit_pn/'.$pekerja_nip;?>"><span class="fa fa-pencil"></span>Edit</a></li>
 													<li><a data-toggle="modal" data-target="#ModalHapus<?php echo $pekerja_nip;?>"><span class="fa fa-trash"></span>Hapus</a></li>
 												</ul>
 											</div>

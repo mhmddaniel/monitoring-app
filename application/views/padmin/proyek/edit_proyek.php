@@ -58,7 +58,6 @@
             <ul class="nav nav-tabs">
               <li class="active"><a href="#tab_1" data-toggle="tab">Data Proyek</a></li>
               <li><a href="#tab_2" data-toggle="tab">Lokasi Proyek</a></li>
-              <li><a href="#tab_3" data-toggle="tab">Pekerja</a></li>
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="tab_1">
@@ -121,73 +120,13 @@
                   </div>
                 </div>
               </div>
-              <div class="tab-pane" id="tab_3">
-                <div class="box-body">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>NAMA PEKERJA</label>
-                    <input type="hidden" name="numpeker" value="<?php echo $b['pekerja_id']; ?>">
-                      <input type="text" class="form-control"  name="xpekerja_nama" value="<?php echo $b['pekerja_nama']; ?>">
-                    </div>
-                    <div class="form-group">
-                      <label>Alamat</label>
-                      <textarea  class="form-control"  name="xpekerja_alamat"><?php echo $b['pekerja_alamat']; ?></textarea>
-                    </div>
-                    <div class="form-group">
-                      <label>Telp. Kantor</label>
-                      <input type="tel" class="form-control"  name="xpekerja_telp" value="<?php echo $b['pekerja_telp_kantor']; ?>">
-                    </div>
-                    <div class="form-group">
-                      <label>Naama Direktur</label>
-                      <input type="text" class="form-control"  name="xdirektur_nama" value="<?php echo $b['pekerja_direktur']; ?>">
-                    </div>
-                    <div class="form-group">
-                      <label>Telp. Direktur</label>
-                      <input type="tel" class="form-control"  name="xdirektur_telp" value="<?php echo $b['pekerja_telp_direktur']; ?>" >
-                    </div>
-                    <div class="form-group">
-                      <label>Jenis</label>
-                      <select class="form-control"  name="xpekerja_jenis" >
-                        <option value="kontraktor" <?php if($b['pekerja_jenis']=='kontraktor'){ echo "selected"; } else {} ?>>Kontraktor</option>
-                        <option value="konsultan" <?php if($b['pekerja_jenis']=='konsultan'){ echo "selected"; } else {} ?>>Konsultan</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>NIK User</label>
-                      <input type="text" class="form-control"  name="xnikuser" value="<?php echo $b['user_nik']; ?>" readonly>
-                    </div>
-                    <div class="form-group">
-                      <label>Nama User</label>
-                      <input type="text" class="form-control"  name="xnamauser" value="<?php echo $b['user_nama']; ?>">
-                    </div>  
-                    <div class="form-group">
-                      <label>Email</label>
-                      <input type="text" class="form-control"  name="xemailuser" value="<?php echo $b['user_email']; ?>">
-                    </div>  
-                    <div class="form-group">
-                      <label>Telp</label>
-                      <input type="text" class="form-control"  name="xtelpuser" value="<?php echo $b['user_telp']; ?>">
-                    </div>  
-                    <div class="form-group">
-                      <label>Bagian</label>
-                      <select class="form-control"  name="xbaguser" >
-                        <option value="ppk" <?php if($b['user_bagian']=='ppk'){ echo "selected"; } else {} ?>>PPK</option>
-                        <option value="kasubid" <?php if($b['user_bagian']=='kasubid'){ echo "selected"; } else {} ?>>KASUBID</option>
-                        <option value="kabid" <?php if($b['user_bagian']=='kabid'){ echo "selected"; } else {} ?>>KABID</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              
             </div>
           </div>
         </div>
-      </div>
-    </form>
-  </div>
-</section>
+      </form>
+    </div>
+  </section>
 </div>
 
 <script src="<?php echo base_url() ?>assets/bower_components/jquery/dist/jquery.min.js"></script>

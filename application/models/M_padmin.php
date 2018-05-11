@@ -46,6 +46,15 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 
+	function get_all_pn_by_kode($kode){
+		$this->db->select('*');
+		$this->db->from('pekerja a');
+		$this->db->join('proyek b','a.proyek_id=b.proyek_id','inner');
+		$this->db->where('pekerja_nip',$kode);
+		$hsl=$this->db->get();
+		return $hsl;
+	}
+
 	function get_all_pelaksana_by_user($usernik){
 		$this->db->select('*');
 		$this->db->from('pekerja a');
@@ -107,13 +116,19 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 
-	function update_proyek($proyek_id,$proyek_kategori_id,$nikuser,$numpeker,$numkor,$proyek_nama,$proyek_tahun,$proyek_keuangan,$proyek_pagu,$proyek_kontrak,$proyek_sech_awal){
-		$hsl=$this->db->query("UPDATE proyek set proyek_kategori_id='$proyek_kategori_id',proyek_user_nik='$nikuser',proyek_pekerja_id='$numpeker',proyek_koordinat_id='$numkor',proyek_nama='$proyek_nama',proyek_tahun='$proyek_tahun',proyek_keuangan='$proyek_keuangan',proyek_pagu='$proyek_pagu',proyek_kontrak='$proyek_kontrak',proyek_sech_awal='$proyek_sech_awal' where proyek_id='$proyek_id'");
+	function update_proyek($proyek_id,$proyek_kategori_id,$numkor,$proyek_nama,$proyek_tahun,$proyek_keuangan,$proyek_pagu,$proyek_kontrak,$proyek_sech_awal){
+		$hsl=$this->db->query("UPDATE proyek set proyek_kategori_id='$proyek_kategori_id',proyek_koordinat_id='$numkor',proyek_nama='$proyek_nama',proyek_tahun='$proyek_tahun',proyek_keuangan='$proyek_keuangan',proyek_pagu='$proyek_pagu',proyek_kontrak='$proyek_kontrak',proyek_sech_awal='$proyek_sech_awal' where proyek_id='$proyek_id'");
 		return $hsl;
 	}
 
 	function save_pekerja($proyek_id,$xnip,$xnampeke,$xtelpeke,$xpekjenis,$xnamdirek,$xteldirek,$xnamaperus,$xalaperus,$xtelkant){
 		$hsl=$this->db->query("INSERT INTO pekerja (pekerja_nip,proyek_id,pekerja_nama,pekerja_tel,pekerja_jenis,pekerja_nama_direktur,pekerja_tel_direktur,pekerja_nama_perusahaan,pekerja_alamat_perusahaan,pekerja_tel_kantor) VALUES ('$xnip','$proyek_id','$xnampeke','$xtelpeke','$xpekjenis','$xnamdirek','$xteldirek','$xnamaperus','$xalaperus','$xtelkant')");
+		return $hsl;
+	}
+
+
+	function update_pn($proyek_id,$xnip,$xnampeke,$xtelpeke,$xpekjenis,$xnamdirek,$xteldirek,$xnamaperus,$xalaperus,$xtelkant){
+		$hsl=$this->db->query("update pekerja SET proyek_id='$proyek_id',pekerja_nama='$xnampeke',pekerja_tel='$xtelpeke',pekerja_jenis='$xpekjenis',pekerja_nama_direktur='$xnamdirek',pekerja_tel_direktur='$xteldirek',pekerja_nama_perusahaan='$xnamaperus',pekerja_alamat_perusahaan='$xalaperus',pekerja_tel_kantor='$xtelkant' where pekerja_nip='$xnip'");
 		return $hsl;
 	}
 	function update_pekerja($numpeker,$xpekerja_nama,$xpekerja_alamat,$xpekerja_telp,$xdirektur_nama,$xdirektur_telp,$xpekerja_jenis){

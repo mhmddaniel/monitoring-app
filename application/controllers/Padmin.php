@@ -310,6 +310,15 @@ class Padmin extends CI_Controller{
 		$this->load->view('padmin/proyek/edit_proyek',$x);
 		$this->load->view('padmin/footer');
 	}  
+	function get_edit_pn(){
+		$kode=$this->uri->segment(3);
+		$x['data']=$this->m_padmin->get_all_pn_by_kode($kode);
+		$x['datak']=$this->m_padmin->get_all_proyek();
+		$this->load->view('padmin/header');
+		$this->load->view('padmin/sidebar');		
+		$this->load->view('padmin/proyek/edit_pn',$x);
+		$this->load->view('padmin/footer');
+	}  
 
 	function get_edit_user(){
 		$kode=$this->uri->segment(3);
@@ -333,6 +342,7 @@ class Padmin extends CI_Controller{
 	/* start update */
 	function update_proyek(){
 
+		$proyek_id=$this->input->post('xproyek_id');
 		$proyek_nama=$this->input->post('xnama');
 		$proyek_tahun=$this->input->post('year');
 		$proyek_keuangan=$this->input->post('keuangan');
@@ -347,51 +357,39 @@ class Padmin extends CI_Controller{
 		$latitude=$this->input->post('latitude');
 		$longitude=$this->input->post('longitude');
 		
-		$numpeker=$this->input->post('numpeker');
-		$xpekerja_nama=$this->input->post('xpekerja_nama');
-		$xpekerja_alamat=$this->input->post('xpekerja_alamat');
-		$xpekerja_telp=$this->input->post('xpekerja_telp');
-		$xdirektur_nama=$this->input->post('xdirektur_nama');
-		$xdirektur_telp=$this->input->post('xdirektur_telp');
-		$xpekerja_jenis=$this->input->post('xpekerja_jenis');
+
+		$svkoor=$this->m_padmin->update_koordinat($numkor,$namkor,$latitude,$longitude,$inputAddress);
 		
-		$nikuser=$this->input->post('xnikuser');
-		$namauser=$this->input->post('xnamauser');
-		$emailuser=$this->input->post('xemailuser');
-		$telpuser=$this->input->post('xtelpuser');
-		$baguser=$this->input->post('xbaguser');
+		if ($svkoor){
 
-		$pekerja=$this->m_padmin->update_pekerja($numpeker,$xpekerja_nama,$xpekerja_alamat,$xpekerja_telp,$xdirektur_nama,$xdirektur_telp,$xpekerja_jenis);
-		if ($pekerja){
-			$svuser=$this->m_padmin->update_user_proyek($nikuser,$namauser,$emailuser,$telpuser,$baguser);
-			if($svuser){
-
-				$svkoor=$this->m_padmin->update_koordinat($numkor,$namkor,$latitude,$longitude,$inputAddress);
-			}
-			else {
-
-				echo $this->session->set_flashdata('msg','warning');
-				redirect('padmin/tambah_proyek');		
-			}
-			if ($svkoor){
-
-				$this->m_padmin->update_proyek($proyek_id,$proyek_kategori_id,$nikuser,$numpeker,$numkor,$proyek_nama,$proyek_tahun,$proyek_keuangan,$proyek_pagu,$proyek_kontrak,$proyek_sech_awal);
-				echo $this->session->set_flashdata('msg','success');
-				redirect('padmin/proyek');
-			}
-			else {
-
-				echo $this->session->set_flashdata('msg','warning');
-				redirect('padmin/tambah_proyek');
-			}
+			$this->m_padmin->update_proyek($proyek_id,$proyek_kategori_id,$numkor,$proyek_nama,$proyek_tahun,$proyek_keuangan,$proyek_pagu,$proyek_kontrak,$proyek_sech_awal);
+			echo $this->session->set_flashdata('msg','success');
+			redirect('padmin/proyek');
 		}
 		else {
+
 			echo $this->session->set_flashdata('msg','warning');
 			redirect('padmin/tambah_proyek');
 		}
 
 	}
+	function update_pn(){
+		$proyek_id=$this->input->post('proyek');
+		$xnip=$this->input->post('xnip');
+		$xnampeke=$this->input->post('xnama_pek');
+		$xtelpeke=$this->input->post('xtel_pek');
+		$xpekjenis=$this->input->post('xjenis');
+		$xnamdirek=$this->input->post('xnama_direk');
+		$xteldirek=$this->input->post('xtel_direk');
+		$xnamaperus=$this->input->post('xnama_perus');
+		$xalaperus=$this->input->post('xalamat_perus');
+		$xtelkant=$this->input->post('xtel_kant');
+		$pekerja=$this->m_padmin->update_pn($proyek_id,$xnip,$xnampeke,$xtelpeke,$xpekjenis,$xnamdirek,$xteldirek,$xnamaperus,$xalaperus,$xtelkant);
 
+		echo $this->session->set_flashdata('msg','success');
+		redirect('padmin/penanggung_jawab');		
+		
+	}
 	function update_kategori(){
 
 		$kategori_id=$this->input->post('kode');
