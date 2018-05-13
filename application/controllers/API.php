@@ -80,7 +80,7 @@ class API extends CI_Controller{
 
     function fetchProjectData()
     {
-        $project=$this->m_padmin->get_all_proyek();
+        $project=$this->m_padmin->get_all_pelaksana_by_user($usernik);  
         if($preject->num_rows() > 0){
             $xcadmin=$cadmin->row_array();
 
@@ -96,5 +96,10 @@ class API extends CI_Controller{
 
             echo json_encode($newdata);
         }
+    }
+
+    function uploadPhotos()
+    {
+
     }
 }
