@@ -78,17 +78,20 @@ class API extends CI_Controller{
         }
     }
 
-    function fetchProjectData()
-    {
-        if (isset($_POST['usernik'])) {
+    
 
-            $usernik = $_POST['usernik'];
-         $project=$this->m_padmin->get_all_proyek_by_user($usernik)
-         if($preject->num_rows() > 0){
-            $xcadmin=$cadmin->row_array();
+    function fetchProject()
+    {
+        $usernik="313521";
+        // if (isset($_POST['usernik'])) {
+
+            //$usernik = $_POST['usernik'];
+         $project=$this->m_padmin->get_all_proyek_by_user($usernik);
+         if($project->num_rows() > 0){
+            $xcadmin=$project->row_array();
 
             $newdata['error'] = FALSE;
-            $newdata['project'] = $project;
+            $newdata['project'] = $project->result_array();
             $newdata['fetched'] = TRUE;
 
             echo json_encode($newdata);
@@ -99,15 +102,49 @@ class API extends CI_Controller{
 
             echo json_encode($newdata);
         }
-    }
-    else
-    {
-        $newdata['error'] = TRUE;
-        $newdata['error_msg'] = "Gagal menghubungkan ke server";
-        $newdata['fetched'] = FALSE;
+    // }
+    // else
+    // {
+    //     $newdata['error'] = TRUE;
+    //     $newdata['error_msg'] = "Gagal menghubungkan ke server";
+    //     $newdata['fetched'] = FALSE;
 
-        echo json_encode($newdata);
-    }
+    //     echo json_encode($newdata);
+    // }
+
+}
+
+    function fetchProjectData()
+    {
+        $kode="13";
+        // if (isset($_POST['usernik'])) {
+
+            //$usernik = $_POST['usernik'];
+         $project=$this->m_padmin->get_detail_proyek_by_kode($kode);
+         if($project->num_rows() > 0){
+            $xcadmin=$project->row_array();
+
+            $newdata['error'] = FALSE;
+            $newdata['project'] = $project->result_array();
+            $newdata['fetched'] = TRUE;
+
+            echo json_encode($newdata);
+        }else{
+            $newdata['error'] = TRUE;
+            $newdata['error_msg'] = "Tidak ada data untuk proyek ini";
+            $newdata['fetched'] = FALSE;
+
+            echo json_encode($newdata);
+        }
+    // }
+    // else
+    // {
+    //     $newdata['error'] = TRUE;
+    //     $newdata['error_msg'] = "Gagal menghubungkan ke server";
+    //     $newdata['fetched'] = FALSE;
+
+    //     echo json_encode($newdata);
+    // }
 
 }
 
