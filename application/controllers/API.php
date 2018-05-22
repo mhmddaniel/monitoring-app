@@ -82,37 +82,36 @@ class API extends CI_Controller{
 
     function fetchProject()
     {
-        $usernik="313521";
-        // if (isset($_POST['usernik'])) {
+        if (isset($_POST['usernik'])) {
 
-            //$usernik = $_POST['usernik'];
-         $project=$this->m_padmin->get_all_proyek_by_user($usernik);
-         if($project->num_rows() > 0){
-            $xcadmin=$project->row_array();
+            $usernik = $_POST['usernik'];
+            $project=$this->m_padmin->get_all_proyek_by_user($usernik);
+            if($project->num_rows() > 0){
+                $xcadmin=$project->row_array();
 
-            $newdata['error'] = FALSE;
-            $newdata['project'] = $project->result_array();
-            $newdata['fetched'] = TRUE;
+                $newdata['error'] = FALSE;
+                $newdata['project'] = $project->result_array();
+                $newdata['fetched'] = TRUE;
 
-            echo json_encode($newdata);
-        }else{
+                echo json_encode($newdata);
+            }else{
+                $newdata['error'] = TRUE;
+                $newdata['error_msg'] = "Tidak ada data proyek untuk pengguna ini";
+                $newdata['fetched'] = FALSE;
+
+                echo json_encode($newdata);
+            }
+        }
+        else
+        {
             $newdata['error'] = TRUE;
-            $newdata['error_msg'] = "Tidak ada data proyek untuk pengguna ini";
+            $newdata['error_msg'] = "Gagal menghubungkan ke server";
             $newdata['fetched'] = FALSE;
 
             echo json_encode($newdata);
         }
-    // }
-    // else
-    // {
-    //     $newdata['error'] = TRUE;
-    //     $newdata['error_msg'] = "Gagal menghubungkan ke server";
-    //     $newdata['fetched'] = FALSE;
 
-    //     echo json_encode($newdata);
-    // }
-
-}
+    }
 
     function fetchProjectData()
     {
@@ -120,8 +119,8 @@ class API extends CI_Controller{
         // if (isset($_POST['usernik'])) {
 
             //$usernik = $_POST['usernik'];
-         $project=$this->m_padmin->get_detail_proyek_by_kode($kode);
-         if($project->num_rows() > 0){
+        $project=$this->m_padmin->get_detail_proyek_by_kode($kode);
+        if($project->num_rows() > 0){
             $xcadmin=$project->row_array();
 
             $newdata['error'] = FALSE;
@@ -146,10 +145,10 @@ class API extends CI_Controller{
     //     echo json_encode($newdata);
     // }
 
-}
+    }
 
-function uploadPhotos()
-{
+    function uploadPhotos()
+    {
 
-}
+    }
 }
