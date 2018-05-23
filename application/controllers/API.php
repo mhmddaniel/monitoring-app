@@ -55,7 +55,7 @@ class API extends CI_Controller{
     // receiving the post params
         //$username = $_POST['username'];
         //$password = $_POST['password'];
-        $username="adityads";//strip_tags(str_replace("'", "", $this->input->post('username',TRUE)));
+        $username="deya";//strip_tags(str_replace("'", "", $this->input->post('username',TRUE)));
          $password="123";//strip_tags(str_replace("'", "", $this->input->post('password',TRUE)));
 
         //$username = $_POST['username'];
@@ -115,10 +115,9 @@ class API extends CI_Controller{
 
     function fetchProjectData()
     {
-        $kode="13";
-        // if (isset($_POST['usernik'])) {
+        if (isset($_POST['kode'])) {
 
-            //$usernik = $_POST['usernik'];
+            $kode = $_POST['kode'];
         $project=$this->m_padmin->get_detail_proyek_by_kode($kode);
         if($project->num_rows() > 0){
             $xcadmin=$project->row_array();
@@ -135,15 +134,15 @@ class API extends CI_Controller{
 
             echo json_encode($newdata);
         }
-    // }
-    // else
-    // {
-    //     $newdata['error'] = TRUE;
-    //     $newdata['error_msg'] = "Gagal menghubungkan ke server";
-    //     $newdata['fetched'] = FALSE;
+    }
+    else
+    {
+        $newdata['error'] = TRUE;
+        $newdata['error_msg'] = "Gagal menghubungkan ke server";
+        $newdata['fetched'] = FALSE;
 
-    //     echo json_encode($newdata);
-    // }
+        echo json_encode($newdata);
+    }
 
     }
 
