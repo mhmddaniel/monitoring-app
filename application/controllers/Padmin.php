@@ -11,15 +11,20 @@ class Padmin extends CI_Controller{
 
 	/* start view */
 	public function index(){
-		$this->load->view('padmin/header');
+		$y['title']='Dashboard';
+		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');
 		$this->load->view('padmin/index');
 		$this->load->view('padmin/footer');
 	}
 
 	public function proyek(){
-		if ($_SESSION['level']=='admin'){
+		if($_SESSION['level']=='admin'){
 			$x['data']=$this->m_padmin->get_all_proyek();
+		}
+		else if($_SESSION['level']=='bidang'){
+			$bagian=$_SESSION['bagian'];
+			$x['data']=$this->m_padmin->get_all_proyek_by_bagian($bagian);
 		}
 		else {
 			$usernik=$_SESSION['usernik'];
@@ -34,31 +39,29 @@ class Padmin extends CI_Controller{
 	}
 	public function dinaspu(){
 		$x['data']=$this->m_padmin->get_all_dinaspu();
-		$this->load->view('padmin/header');
+		$y['title']='Data User';
+		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');
 		$this->load->view('padmin/petugas/dinaspu',$x);
+		$this->load->view('padmin/footer');
+	}
+	public function get_proyek_bidang(){
+		$y['title']='Data User';
+		$kode=$this->uri->segment(3);
+		$x['data']=$this->m_padmin->get_proyek_bidang_by_kode($kode);
+		$this->load->view('padmin/header',$y);
+		$this->load->view('padmin/sidebar');
+		$this->load->view('padmin/proyek/proyek_bidang',$x);
 		$this->load->view('padmin/footer');
 	}
 
 	public function user(){
 		$x['data']=$this->m_padmin->get_all_user();
-		$this->load->view('padmin/header');
+		$y['title']='Data User';
+		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');
 		if ($_SESSION['level']=='admin'){
 			$this->load->view('padmin/user/user',$x);
-		}
-		else {
-			$this->load->view('padmin/404',$x);
-		}
-		$this->load->view('padmin/footer');
-	}
-
-	public function kategori(){
-		$x['data']=$this->m_padmin->get_all_kategori();
-		$this->load->view('padmin/header');
-		$this->load->view('padmin/sidebar');
-		if ($_SESSION['level']=='admin'){
-			$this->load->view('padmin/kategori/kategori',$x);
 		}
 		else {
 			$this->load->view('padmin/404',$x);
@@ -74,14 +77,16 @@ class Padmin extends CI_Controller{
 			$usernik=$_SESSION['usernik'];
 			$x['data']=$this->m_padmin->get_all_pelaksana_by_user($usernik);	
 		}
-		$this->load->view('padmin/header');
+		$y['title']='Penanggung Jawab';
+		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');
 		$this->load->view('padmin/proyek/penanggung_jawab',$x);
 		$this->load->view('padmin/footer');
 	}
 	public function tambah_penanggung_jawab(){
 		$x['data']=$this->m_padmin->get_proyek();
-		$this->load->view('padmin/header');
+		$y['title']='Tambah Penanggung Jawab';
+		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');
 		$this->load->view('padmin/proyek/tambah_penanggung_jawab',$x);
 		$this->load->view('padmin/footer');
@@ -91,9 +96,16 @@ class Padmin extends CI_Controller{
 	public function detail_proyek(){
 		$g['xc']='cc';
 		$kode=$this->uri->segment(3);
-		$x['data']=$this->m_padmin->get_detail_proyek_by_kode($kode);
+		if ($_SESSION['level']=='bidang'){
+			$x['data']=$this->m_padmin->get_detail_proyek_bag_by_kode($kode);
+		}
+		else {
+			$x['data']=$this->m_padmin->get_detail_proyek_by_kode($kode);
+		}
+
 		$x['bbc']=$this->m_padmin->get_penannggung_jawab($kode);
-		$this->load->view('padmin/header',$x);
+		$y['title']='Detail Proyek';
+		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');		
 		$this->load->view('padmin/proyek/detail_proyek',$x);
 		$this->load->view('padmin/footer',$g);
@@ -109,34 +121,31 @@ class Padmin extends CI_Controller{
 	/* --------------------------------------------------------------- */
 	/* start add */
 	public function tambah_proyek(){
-		$x['datak']=$this->m_padmin->get_all_kategori();
 		$x['numkor']=$this->m_padmin->get_num_koor();
 		$x['numproyek']=$this->m_padmin->get_num_proyek();
-		$this->load->view('padmin/header');
+		$y['title']='Tambah Proyek';
+		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');
 		$this->load->view('padmin/proyek/tambah_proyek',$x);
 		$this->load->view('padmin/footer');
 	}
-	public function tambah_kategori(){
-		$this->load->view('padmin/header');
-		$this->load->view('padmin/sidebar');
-		$this->load->view('padmin/kategori/tambah_kategori');
-		$this->load->view('padmin/footer');
-	}
 	public function tambah_dinaspu(){
-		$this->load->view('padmin/header');
+		$y['title']='Tambah Dinas PU';
+		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');
 		$this->load->view('padmin/petugas/tambah_dinaspu');
 		$this->load->view('padmin/footer');
 	}
 	public function tambah_user(){
-		$this->load->view('padmin/header');
+		$y['title']='Tambah User';
+		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');
 		$this->load->view('padmin/user/tambah_user');
 		$this->load->view('padmin/footer');
 	}
 	public function tambah_pelaksana(){
-		$this->load->view('padmin/header');
+		$y['title']='Tambah User';
+		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');
 		$this->load->view('padmin/petugas/tambah_pelaksana');
 		$this->load->view('padmin/footer');
@@ -166,13 +175,18 @@ class Padmin extends CI_Controller{
 	}
 	function save_proyek(){
 
-		$proyek_nama=$this->input->post('xnama');
-		$proyek_tahun=$this->input->post('year');
-		$proyek_keuangan=$this->input->post('keuangan');
-		$proyek_pagu=$this->input->post('pagu');
-		$proyek_kontrak=$this->input->post('kontrak');
-		$proyek_kategori_id=$this->input->post('xkategori');
-		$proyek_sech_awal=$this->input->post('sech1');
+		$numproyek=$this->input->post('numproyek');
+		$xnama=$this->input->post('xnama');
+		$year=$this->input->post('year');
+		$keuangan=$this->input->post('keuangan');
+		$pagu=$this->input->post('pagu');
+		$sechawal=$this->input->post('sechawal');
+		$awalkontrak=$this->input->post('awalkontrak');
+		$akhirkontrak=$this->input->post('akhirkontrak');
+		$xbidang=$this->input->post('xbidang');
+		$xjenis=$this->input->post('xjenis');
+		$xvolume=$this->input->post('xvolume');
+		$xsatuan=$this->input->post('xsatuan');
 
 		$numkor=$this->input->post('numkor');
 		$inputAddress=$this->input->post('inputAddress');
@@ -183,9 +197,8 @@ class Padmin extends CI_Controller{
 		$namauser=$this->input->post('xnamauser');
 		$emailuser=$this->input->post('xemailuser');
 		$telpuser=$this->input->post('xtelpuser');
-		$baguser=$this->input->post('xbaguser');
 
-		$svuser=$this->m_padmin->save_user_proyek($nikuser,$namauser,$emailuser,$telpuser,$baguser);
+		$svuser=$this->m_padmin->save_user_proyek($nikuser,$namauser,$emailuser,$telpuser);
 		if($svuser){
 
 			$svkoor=$this->m_padmin->save_koordinat($numkor,$namkor,$latitude,$longitude,$inputAddress);
@@ -197,7 +210,8 @@ class Padmin extends CI_Controller{
 		}
 		if ($svkoor){
 
-			$this->m_padmin->save_proyek($proyek_kategori_id,$nikuser,$numkor,$proyek_nama,$proyek_tahun,$proyek_keuangan,$proyek_pagu,$proyek_kontrak,$proyek_sech_awal);
+			$svpro=$this->m_padmin->save_proyek($numproyek,$nikuser,$numkor,$xnama,$year,$keuangan,$pagu,$sechawal,$awalkontrak,$akhirkontrak,$xbidang,$xjenis,$xvolume,$xsatuan);
+			$svpro=$this->m_padmin->save_proyek_bagian($numproyek);
 			echo $this->session->set_flashdata('msg','success');
 			redirect('padmin/proyek');
 		}
@@ -206,12 +220,6 @@ class Padmin extends CI_Controller{
 			echo $this->session->set_flashdata('msg','warning');
 			redirect('padmin/tambah_proyek');
 		}
-	}
-	function save_kategori(){
-		$kategori=$this->input->post('xnama');
-		$this->m_padmin->save_kategori($kategori);
-		echo $this->session->set_flashdata('msg','success');
-		redirect('padmin/kategori');
 	}
 	function save_user(){
 		$config['upload_path'] = './assets/images/';
@@ -304,7 +312,6 @@ class Padmin extends CI_Controller{
 	function get_edit_proyek(){
 		$kode=$this->uri->segment(3);
 		$x['data']=$this->m_padmin->get_detail_proyek_by_kode($kode);
-		$x['datak']=$this->m_padmin->get_all_kategori($kode);
 		$this->load->view('padmin/header');
 		$this->load->view('padmin/sidebar');		
 		$this->load->view('padmin/proyek/edit_proyek',$x);
@@ -342,14 +349,19 @@ class Padmin extends CI_Controller{
 	/* start update */
 	function update_proyek(){
 
+
 		$proyek_id=$this->input->post('xproyek_id');
-		$proyek_nama=$this->input->post('xnama');
-		$proyek_tahun=$this->input->post('year');
-		$proyek_keuangan=$this->input->post('keuangan');
-		$proyek_pagu=$this->input->post('pagu');
-		$proyek_kontrak=$this->input->post('kontrak');
-		$proyek_kategori_id=$this->input->post('xkategori');
-		$proyek_sech_awal=$this->input->post('sech1');
+		$xnama=$this->input->post('xnama');
+		$year=$this->input->post('year');
+		$keuangan=$this->input->post('keuangan');
+		$pagu=$this->input->post('pagu');
+		$sechawal=$this->input->post('sechawal');
+		$awalkontrak=$this->input->post('awalkontrak');
+		$akhirkontrak=$this->input->post('akhirkontrak');
+		$xbidang=$this->input->post('xbidang');
+		$xjenis=$this->input->post('xjenis');
+		$xvolume=$this->input->post('xvolume');
+		$xsatuan=$this->input->post('xsatuan');
 
 		$numkor=$this->input->post('numkor');
 		$inputAddress=$this->input->post('inputAddress');
@@ -362,7 +374,7 @@ class Padmin extends CI_Controller{
 		
 		if ($svkoor){
 
-			$this->m_padmin->update_proyek($proyek_id,$proyek_kategori_id,$numkor,$proyek_nama,$proyek_tahun,$proyek_keuangan,$proyek_pagu,$proyek_kontrak,$proyek_sech_awal);
+			$this->m_padmin->update_proyek($proyek_id,$numkor,$xnama,$year,$keuangan,$pagu,$sechawal,$awalkontrak,$akhirkontrak,$xbidang,$jenis,$volume,$satuan);
 			echo $this->session->set_flashdata('msg','success');
 			redirect('padmin/proyek');
 		}
@@ -389,14 +401,6 @@ class Padmin extends CI_Controller{
 		echo $this->session->set_flashdata('msg','success');
 		redirect('padmin/penanggung_jawab');		
 		
-	}
-	function update_kategori(){
-
-		$kategori_id=$this->input->post('kode');
-		$kategori_nama=$this->input->post('xnama');
-		$this->m_padmin->update_kategori($kategori_id,$kategori_nama);
-		echo $this->session->set_flashdata('msg','info');
-		redirect('padmin/kategori');
 	} 
 
 	function update_user(){
@@ -453,6 +457,61 @@ class Padmin extends CI_Controller{
 		} 
 
 	}
+
+	function update_proyek_bidang(){
+
+		$config['upload_path'] = './assets/images/';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
+		$config['encrypt_name'] = TRUE;
+
+		$this->upload->initialize($config);
+		if(!empty($_FILES['filefoto']['name']))
+		{
+			if ($this->upload->do_upload('filefoto'))
+			{
+				$gbr = $this->upload->data();
+
+				$config['image_library']='gd2';
+				$config['source_image']='./assets/images/'.$gbr['file_name'];
+				$config['create_thumb']= FALSE;
+				$config['maintain_ratio']= FALSE;
+				$config['quality']= '60%';
+				$config['width']= 840;
+				$config['height']= 450;
+				$config['new_image']= './assets/images/'.$gbr['file_name'];
+				$this->load->library('image_lib', $config);
+				$this->image_lib->resize();
+
+				$gambar=$gbr['file_name'];
+				$proyek_id=$this->input->post('proyek_id');
+				$pbtarget=$this->input->post('pbtarget');
+				$pbreal=$this->input->post('pbreal');
+				$pbdevisi=$this->input->post('pbdevisi');
+				$dskontrak=$this->input->post('dskontrak');
+				$dsadmproyek=$this->input->post('dsadmproyek');
+				$totalds=$this->input->post('totalds');
+				$sisaanggran=$this->input->post('sisaanggran');
+				$this->m_padmin->update_proyek_bidang($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran,$gambar);
+				echo $this->session->set_flashdata('msg','info');
+				redirect('padmin/proyek');
+			}else{
+				echo $this->session->set_flashdata('msg','warning');
+				redirect('padmin/proyek');
+			}
+
+		}else{
+			$proyek_id=$this->input->post('proyek_id');
+			$dskontrak=$this->input->post('dskontrak');
+			$dsadmproyek=$this->input->post('dsadmproyek');
+			$totalds=$this->input->post('totalds');
+			$sisaanggran=$this->input->post('sisaanggran');
+			$this->m_padmin->update_proyek_bidang_wo_img($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran);
+			echo $this->session->set_flashdata('msg','info');
+			redirect('padmin/proyek');
+		} 
+
+	}
+
 	function update_password_user(){
 
 		$xhp=$this->input->post('xhp');
@@ -486,7 +545,6 @@ class Padmin extends CI_Controller{
 	function delete_proyek(){
 		$kode=$this->input->post('kode');
 		$gambar=$this->input->post('gambar');
-		$path='./assets/images/'.$gambar;
 		unlink($path);
 		$this->m_padmin->delete_proyek($kode);
 		echo $this->session->set_flashdata('msg','success-hapus');
@@ -498,14 +556,6 @@ class Padmin extends CI_Controller{
 		$this->m_padmin->delete_user($kode);
 		echo $this->session->set_flashdata('msg','success-hapus');
 		redirect('padmin/user');
-	}
-
-	function delete_kategori(){
-		$kode=$this->input->post('kode');
-		unlink($path);
-		$this->m_padmin->delete_kategori($kode);
-		echo $this->session->set_flashdata('msg','success-hapus');
-		redirect('padmin/kategori');
 	}
 
 

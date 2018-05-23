@@ -94,7 +94,7 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
                 <label>Role / Level</label>
                 <select name="xlevel" class="form-control" required>
                   <option value="admin">ADMIN</option>
-                  <option value="petugas">PETUGAS</option>
+                  <option value="bidang">BIDANG</option>
                   <option value="user">USER</option>
                 </select>
               </div>

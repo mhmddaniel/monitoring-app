@@ -59,43 +59,8 @@ $b=$data->row_array() ;
   </div>
 </div>
 
-
 <div class="row invoice-info">
-
-
-  <div class="col-sm-6 invoice-col">
-    <strong>Proyek</strong>
-    <address>
-      <table class="table">
-        <tr>
-          <th>Tahun</th>
-          <td><?php echo $b['proyek_tahun']; ?></td>
-        </tr>
-        <tr>
-          <th>Nilai Kontrak</th>
-          <td><?php echo $b['proyek_keuangan']; ?></td>
-        </tr>
-        <tr>
-          <th>Pagu</th>
-          <td><?php echo $b['proyek_pagu']; ?></td>
-        </tr>
-        <tr>
-          <th>Kontrak</th>
-          <td><?php echo dateformat('d-m-Y',$b['proyek_kontrak']) ?></td>
-        </tr>
-        <tr>
-          <th>Kategori</th>
-          <td><?php echo $b['kategori_nama']; ?></td>
-        </tr>
-        <tr>
-          <th>Proyek Progress</th>
-          <td><?php echo $b['koordinat_value']; ?>%</td>
-        </tr>
-      </table> 
-    </address>
-  </div>
-
-  <div class="col-sm-6">
+  <div class="col-sm-8 col-sm-offset-2">
     <div class="box box-primary">
       <div class="box-body box-profile">
         <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url().'assets/images/'.$b['user_photo'];?>" alt="User profile picture">
@@ -114,9 +79,82 @@ $b=$data->row_array() ;
     </div>
   </div>
 </div>
+
 <div class="row invoice-info">
 
+  <div class="col-sm-6 invoice-col">
+    <strong>Proyek</strong>
+    <address>
+      <table class="table">
+        <tr>
+          <th>Tahun</th>
+          <td><?php echo $b['proyek_tahun']; ?></td>
+        </tr>
+        <tr>
+          <th>Nilai Kontrak</th>
+          <td><?php echo "Rp ".number_format($b['proyek_keuangan']); ?></td>
+        </tr>
+        <tr>
+          <th>Pagu</th>
+          <td><?php echo "Rp ".number_format($b['proyek_pagu']); ?></td>
+        </tr>
+        <tr>
+          <th>Awal Kontrak</th>
+          <td><?php echo dateformat('d-m-Y',$b['proyek_awal_kontrak']) ?></td>
+        </tr>
+        <tr>
+          <th>Akhir Kontrak</th>
+          <td><?php echo dateformat('d-m-Y',$b['proyek_akhir_kontrak']) ?></td>
+        </tr>
+        <tr>
+          <th>Proyek Progress</th>
+          <td><?php echo $b['koordinat_value']; ?>%</td>
+        </tr>
+      </table> 
+    </address>
+  </div>
 
+
+  <div class="col-sm-6 invoice-col">
+    <strong>Bidang</strong>
+    <address>
+      <table class="table table-responsive">
+        <tr>
+          <th>Target</th>
+          <th>Real</th>
+          <th>Dev</th>
+        </tr>
+        <tr>
+          <td><?php echo $b['pb_target']; ?></td>
+          <td><?php echo $b['pb_real']; ?></td>
+          <td><?php echo $b['pb_devisi']; ?></td>
+        </tr>
+      </table>
+
+      <table class="table">
+        <tr>
+          <th>Daya Serap Kontrak</th>
+          <td><?php echo "Rp ".number_format($b['pb_ds_kontrak']); ?></td>
+        </tr>
+        <tr>
+          <th>Daya Serap Administrasi Proyek</th>
+          <td><?php echo "Rp ".number_format($b['pb_ds_ap']); ?></td>
+        </tr>
+        <tr>
+          <th>Total Biaya Serap Keuangan</th>
+          <td><?php echo "Rp ".number_format($b['pb_ds_keuangan']); ?></td>
+        </tr>
+        <tr>
+          <th>Sisa Anggaran</th>
+          <td><?php echo "Rp ".number_format($b['pb_sisa_anggaran']); ?></td>
+        </tr>
+      </table> 
+    </address>
+  </div>
+
+</div>
+
+<div class="row invoice-info">
   <?php
   foreach ($bbc->result_array() as $i) :
     ?>
@@ -178,11 +216,13 @@ $b=$data->row_array() ;
     </p>
   </div>
 </div>
+<!--
 <div class="row no-print">
   <div class="col-xs-12">
     <a href="<?php echo base_url().'padmin/print/'.$b['proyek_id'];?>" target="_blank" class="btn btn-success pull-right"><i class="fa fa-print"></i> Print</a>
   </div>
 </div>
+-->
 </section>
 <div class="clearfix"></div>
 </div>

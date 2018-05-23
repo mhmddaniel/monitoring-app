@@ -57,7 +57,7 @@
 						<ul class="nav nav-tabs">
 							<li class="active"><a href="#tab_1" data-toggle="tab">Data Proyek</a></li>
 							<li><a href="#tab_2" data-toggle="tab">Lokasi Proyek</a></li>
-							<li><a href="#tab_3" data-toggle="tab">User Account</a></li>
+							<li><a href="#tab_3" data-toggle="tab">Penanggung Jawab</a></li>
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane active" id="tab_1">
@@ -75,26 +75,43 @@
 										<input type="number" class="form-control" name="pagu">
 									</div>
 									<div class="form-group">
-										<label>Kontrak</label>
-										<input type="date" class="form-control" name="kontrak">
+										<label>Rencana Awal Kontrak</label>
+										<input type="date" class="form-control" name="sechawal">
 									</div>
 									<div class="form-group">
-										<label>Kategori</label>
-										<select class="form-control select" name="xkategori" required>
-											<option value="">-Pilih-</option>
-											<?php
-											foreach ($datak->result_array() as $i) :
-												$kategori_id=$i['kategori_id'];
-												$kategori_nama=$i['kategori_nama'];
-												?>
-												<option value="<?php echo $kategori_id; ?>"><?php echo $kategori_nama;?></option>
-											<?php endforeach;?>
+										<label>Awal Kontrak</label>
+										<input type="date" class="form-control" name="awalkontrak">
+									</div>
+									<div class="form-group">
+										<label>Akhir Kontrak</label>
+										<input type="date" class="form-control" name="akhirkontrak">
+									</div>
+									<div class="form-group">
+										<label>Bidang</label>
+										<select class="form-control"  name="xbidang" >
+											<option value="ciptakarya">Cipta Karya</option>
 										</select>
 									</div>
 
 									<div class="form-group">
-										<label>Sech Awal</label>
-										<input type="date" class="form-control" name="sech1">
+										<label>Jenis Pengadaan</label>
+										<select class="form-control"  name="xjenis" >
+											<option value="lelang_umum">Lelang Umum</option>
+										</select>
+									</div>
+									<div class="col-md-12">
+										<div class="col-md-6">
+											<label>Volume</label>
+											<div class="form-group">
+												<input type="number" name="xvolume" class="form-control">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<label>Satuan</label>
+											<div class="form-group">
+												<input type="text" name="xsatuan" class="form-control">
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -125,14 +142,15 @@
 								<div class="box-body">
 
 									<div class="col-md-12">
+										
 										<div class="form-group">
-											<label>NIK User</label>
-											<input type="text" class="form-control"  name="xnikuser" >
-										</div>
-										<div class="form-group">
-											<label>Nama User</label>
+											<label>Nama PPK</label>
 											<input type="text" class="form-control"  name="xnamauser" >
 										</div>	
+										<div class="form-group">
+											<label>NIK PPK</label>
+											<input type="text" class="form-control"  name="xnikuser" >
+										</div>
 										<div class="form-group">
 											<label>Email</label>
 											<input type="text" class="form-control"  name="xemailuser" >
@@ -141,14 +159,6 @@
 											<label>Telp</label>
 											<input type="text" class="form-control"  name="xtelpuser" >
 										</div>	
-										<div class="form-group">
-											<label>Bagian</label>
-											<select class="form-control"  name="xbaguser" >
-												<option value="ppk">PPK</option>
-												<option value="kasubid">KASUBID</option>
-												<option value="kabid">KABID</option>
-											</select>
-										</div>
 									</div>
 								</div>
 							</div>

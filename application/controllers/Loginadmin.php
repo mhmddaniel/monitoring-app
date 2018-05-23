@@ -18,6 +18,7 @@ class Loginadmin extends CI_Controller{
                 'username'  => $xcadmin['user_username'],
                 'nama'      => $xcadmin['user_nama'],
                 'level'     => $xcadmin['user_level'],
+                'bagian'     => $xcadmin['user_bagian'],
                 'foto'     => $xcadmin['user_photo'],
                 'logged_in' => TRUE
             );
