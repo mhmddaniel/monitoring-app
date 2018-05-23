@@ -13,7 +13,7 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			proyek ListASD123
+			proyek List
 			<small></small>
 		</h1>
 		<ol class="breadcrumb">
