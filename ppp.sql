@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 09 Bulan Mei 2018 pada 05.48
+-- Waktu pembuatan: 23 Bulan Mei 2018 pada 08.19
 -- Versi server: 10.1.31-MariaDB
 -- Versi PHP: 7.2.3
 
@@ -25,25 +25,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kategori`
---
-
-CREATE TABLE `kategori` (
-  `kategori_id` int(11) NOT NULL,
-  `kategori_nama` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `kategori`
---
-
-INSERT INTO `kategori` (`kategori_id`, `kategori_nama`) VALUES
-(1, 'Kategori 1'),
-(6, 'Kategori 3');
-
--- --------------------------------------------------------
-
---
 -- Struktur dari tabel `koordinat`
 --
 
@@ -61,7 +42,7 @@ CREATE TABLE `koordinat` (
 --
 
 INSERT INTO `koordinat` (`koordinat_id`, `koordinat_nama`, `koordinat_lat`, `koordinat_lng`, `koordinat_alamat`, `koordinat_value`) VALUES
-(1, 'Majelis Taklim', '-1.8743864', '103.2536984', '', 10),
+(1, 'Majelis Taklim', 'latitude', 'longitude', '', 10),
 (2, 'Mushola Al Taqwa', '-1.9172228', '103.2509026', '', 30),
 (3, 'TK Al Quran', '-1.223287', '104.1088266', '', 50),
 (4, 'Rantau Rasua', '-1.204803', '104.1711287', '', 70),
@@ -73,10 +54,15 @@ INSERT INTO `koordinat` (`koordinat_id`, `koordinat_nama`, `koordinat_lat`, `koo
 (10, 'Perintis Kemerdekaan', '-1.6101229', '103.6131203', 'Jambi, Kota Jambi, Jambi, Indonesia', 0),
 (11, 'Talang', '-1.7500031', '101.9611475', 'Unnamed Road, Aur Cino, Kec. Bathin III Ulu, Kabupaten Bungo, Jambi 37261, Indonesia', 80),
 (12, '41asd', '-1.6101229', '103.6131203', 'Jambi, Kota Jambi, Jambi, Indonesia', 0),
-(13, 'adas', '-1.5634976', '102.3507691', 'Unnamed Road, Aburan Batang Tebo, Tebo Tengah, Kabupaten Tebo, Jambi 37571, Indonesia', 0),
+(13, 'adas', '-1.469587', '102.35436', 'Unnamed Road 37571, Sungai Alai, Tebo Tengah, Kabupaten Tebo, Jambi 37571, Indonesia', 0),
 (14, 'asdasd', '-0.789275', '113.921327', 'Indonesia', 25),
 (15, 'asdad', '-1.8331331', '102.3278595', 'Unnamed Road, Dusun Baru, Tabir, Kabupaten Merangin, Jambi 37353, Indonesia', 0),
-(16, 'asdasdasd', '-1.7053183', '102.3276569', 'Jl. Ajipurna, Jambi 37353, Indonesia', 0);
+(16, 'asdasdasd', '-1.7053183', '102.3276569', 'Jl. Ajipurna, Jambi 37353, Indonesia', 0),
+(17, 'KARANG', '-1.4985833', '102.1537242', 'Unnamed Road, Tj. Menanti, Bathin II Babeko, Kabupaten Bungo, Jambi 37211, Indonesia', 0),
+(18, 'Talang Jambe', '-1.7230961', '102.2664198', 'Jalan Kruing, Mulya Jaya, Pelepat, Kabupaten Bungo, Jambi 37262, Indonesia', 0),
+(19, 'Muara Bangau', '-1.6141443', '102.9572261', 'Jalan Lintas Bukit Kemuning, Mersam, Kabupaten Batang Hari, Jambi 36654, Indonesia', 0),
+(20, 'Simpang', '-1.2939356', '104.0801269', 'Unnamed Road, Berbak, Kabupaten Tanjung Jabung Timur, Jambi, Indonesia', 0),
+(21, 'Muara DUO', '-1.6141443', '102.9572261', 'Jalan Lintas Bukit Kemuning, Mersam, Kabupaten Batang Hari, Jambi 36654, Indonesia', 0);
 
 -- --------------------------------------------------------
 
@@ -102,9 +88,8 @@ CREATE TABLE `pekerja` (
 --
 
 INSERT INTO `pekerja` (`pekerja_nip`, `proyek_id`, `pekerja_nama`, `pekerja_tel`, `pekerja_jenis`, `pekerja_nama_direktur`, `pekerja_tel_direktur`, `pekerja_nama_perusahaan`, `pekerja_alamat_perusahaan`, `pekerja_tel_kantor`) VALUES
-('1231232131', 12, 'asdasd', '', 'konsultan', 'asdasd', '23123', 'asdasd', 'asdsad', '124124'),
-('4', 14, 'Deden', '0', 'konsultan', '0', '0', '0', '0', '0'),
-('5151152', 14, 'asd', '2312', 'kontraktor', 'asda', '21312', 'asdasd', 'adasd', '51512');
+('1231232131', 17, 'Terast', '08888', 'kontraktor', 'Renta', '23123', 'asdasd', 'jl.aaa', '08123'),
+('323323', 17, 'Eras', '123', 'konsultan', 'Teras', '123', 'Perusahaan X', 'jl.aaa', '32023');
 
 -- --------------------------------------------------------
 
@@ -114,25 +99,54 @@ INSERT INTO `pekerja` (`pekerja_nip`, `proyek_id`, `pekerja_nama`, `pekerja_tel`
 
 CREATE TABLE `proyek` (
   `proyek_id` int(11) NOT NULL,
-  `proyek_kategori_id` int(11) NOT NULL,
   `proyek_user_nik` int(11) DEFAULT NULL,
   `proyek_koordinat_id` int(11) NOT NULL,
   `proyek_nama` varchar(50) NOT NULL,
   `proyek_tahun` year(4) NOT NULL,
   `proyek_keuangan` int(11) NOT NULL,
   `proyek_pagu` int(11) NOT NULL,
-  `proyek_kontrak` date NOT NULL,
-  `proyek_sech_awal` date NOT NULL
+  `proyek_sech_awal` date NOT NULL,
+  `proyek_awal_kontrak` date NOT NULL,
+  `proyek_akhir_kontrak` date NOT NULL,
+  `proyek_bidang` varchar(50) NOT NULL,
+  `proyek_jenis` varchar(50) NOT NULL,
+  `proyek_volume` int(11) NOT NULL,
+  `proyek_satuan` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `proyek`
 --
 
-INSERT INTO `proyek` (`proyek_id`, `proyek_kategori_id`, `proyek_user_nik`, `proyek_koordinat_id`, `proyek_nama`, `proyek_tahun`, `proyek_keuangan`, `proyek_pagu`, `proyek_kontrak`, `proyek_sech_awal`) VALUES
-(12, 6, 123124264, 13, 'asds', 0000, 123, 312, '2018-05-22', '2018-05-22'),
-(13, 6, 313521, 2, 'asdsds23', 1995, 2000, 23000, '2017-04-07', '2017-03-06'),
-(14, 6, 123124264, 1, 'Kategori 1', 0000, 123, 123, '2018-05-22', '2018-05-29');
+INSERT INTO `proyek` (`proyek_id`, `proyek_user_nik`, `proyek_koordinat_id`, `proyek_nama`, `proyek_tahun`, `proyek_keuangan`, `proyek_pagu`, `proyek_sech_awal`, `proyek_awal_kontrak`, `proyek_akhir_kontrak`, `proyek_bidang`, `proyek_jenis`, `proyek_volume`, `proyek_satuan`) VALUES
+(17, 90313813, 18, 'Proyek Jalan Tol', 2013, 250000, 100000, '2019-06-23', '2020-07-23', '2020-07-24', 'ciptakarya', '', 0, ''),
+(18, 12819, 21, 'Relasi Tol', 2015, 150000, 300000, '2020-06-24', '2020-07-24', '2019-07-24', 'ciptakarya', 'lelang_umum', 0, '');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `proyek_bagian`
+--
+
+CREATE TABLE `proyek_bagian` (
+  `pb_proyek_id` int(11) NOT NULL,
+  `pb_target` int(11) NOT NULL,
+  `pb_real` int(11) NOT NULL,
+  `pb_devisi` int(11) NOT NULL,
+  `pb_ds_kontrak` int(11) NOT NULL,
+  `pb_ds_ap` int(11) NOT NULL,
+  `pb_ds_keuangan` int(11) NOT NULL,
+  `pb_sisa_anggaran` int(11) NOT NULL,
+  `pb_foto` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `proyek_bagian`
+--
+
+INSERT INTO `proyek_bagian` (`pb_proyek_id`, `pb_target`, `pb_real`, `pb_devisi`, `pb_ds_kontrak`, `pb_ds_ap`, `pb_ds_keuangan`, `pb_sisa_anggaran`, `pb_foto`) VALUES
+(17, 0, 0, 0, 25000, 32000, 32000, 43000, '27a81269971bbd3fd4e9bc425aee737f.jpg'),
+(18, 0, 0, 0, 100, 200, 200, 299700, '');
 
 -- --------------------------------------------------------
 
@@ -147,8 +161,8 @@ CREATE TABLE `user` (
   `user_password` varchar(35) NOT NULL,
   `user_email` varchar(35) NOT NULL,
   `user_telp` char(12) NOT NULL,
-  `user_bagian` enum('ppk','kasubid','kabid') NOT NULL,
-  `user_level` enum('admin','petugas','user') NOT NULL,
+  `user_bagian` enum('ppk','kasubid','kabid','ciptakarya') NOT NULL,
+  `user_level` enum('admin','bidang','user') NOT NULL,
   `user_photo` varchar(50) NOT NULL DEFAULT 'user_blank.png'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -158,18 +172,18 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`user_nik`, `user_nama`, `user_username`, `user_password`, `user_email`, `user_telp`, `user_bagian`, `user_level`, `user_photo`) VALUES
 (1, 'Administrator', 'adityads', '202cb962ac59075b964b07152d234b70', 'adityads@ymail.com', '082371373347', '', 'admin', 'user_blank.png'),
+(892, 'Best', '', '', 'best@aa.com', '0129', 'ppk', 'admin', 'user_blank.png'),
+(5023, 'Adent', '', '', 'adent@aa.com', '123', 'ppk', 'admin', 'user_blank.png'),
+(12819, 'Restu', '', '', 'restu@aaa.com', '0812', 'ppk', 'admin', 'user_blank.png'),
+(112233, 'tera', 'tera', '123', 'tera@aaa.com', '082', 'kasubid', 'user', 'user_blank.png'),
+(120201, 'Rendy', '', '', 'rendy@aa.com', '092812', 'ppk', 'admin', 'user_blank.png'),
 (313521, 'Deeda', 'deya', '202cb962ac59075b964b07152d234b70', 'ada@aa.com', '2323', 'ppk', 'user', 'user_blank.png'),
-(123124264, 'asdd', '', '', 'asd@adsa.com', '12323', 'kabid', 'admin', 'user_blank.png');
+(90313813, 'Sera', '', '', 'sera@aaa.com', '0812323', 'ppk', 'admin', 'user_blank.png'),
+(123123123, 'Yessi', 'tesbidang', '202cb962ac59075b964b07152d234b70', 'tesbidang@aa.com', '01234', 'ciptakarya', 'bidang', 'edc18a0c3460cf2aa791171a4101d970.jpg');
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indeks untuk tabel `kategori`
---
-ALTER TABLE `kategori`
-  ADD PRIMARY KEY (`kategori_id`);
 
 --
 -- Indeks untuk tabel `koordinat`
@@ -189,7 +203,6 @@ ALTER TABLE `pekerja`
 --
 ALTER TABLE `proyek`
   ADD PRIMARY KEY (`proyek_id`),
-  ADD KEY `proyek_kategori_id` (`proyek_kategori_id`),
   ADD KEY `proyek_koordinat_id` (`proyek_koordinat_id`),
   ADD KEY `proyek_user_nik` (`proyek_user_nik`);
 
@@ -204,22 +217,16 @@ ALTER TABLE `user`
 --
 
 --
--- AUTO_INCREMENT untuk tabel `kategori`
---
-ALTER TABLE `kategori`
-  MODIFY `kategori_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
 -- AUTO_INCREMENT untuk tabel `koordinat`
 --
 ALTER TABLE `koordinat`
-  MODIFY `koordinat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `koordinat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT untuk tabel `proyek`
 --
 ALTER TABLE `proyek`
-  MODIFY `proyek_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `proyek_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -235,7 +242,6 @@ ALTER TABLE `pekerja`
 -- Ketidakleluasaan untuk tabel `proyek`
 --
 ALTER TABLE `proyek`
-  ADD CONSTRAINT `proyek_ibfk_1` FOREIGN KEY (`proyek_kategori_id`) REFERENCES `kategori` (`kategori_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `proyek_ibfk_2` FOREIGN KEY (`proyek_koordinat_id`) REFERENCES `koordinat` (`koordinat_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `proyek_ibfk_4` FOREIGN KEY (`proyek_user_nik`) REFERENCES `user` (`user_nik`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;

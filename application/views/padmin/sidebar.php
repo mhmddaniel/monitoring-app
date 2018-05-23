@@ -2,7 +2,7 @@
     <section class="sidebar">
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo base_url().'assets/images/'.$_SESSION['foto'];?>" class="img-circle" alt="User Image">
+          <img src="<?php echo base_url().'assets/images/'.$_SESSION['foto'];?>" class="img-circle" style="width:45px;height:45px;" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $_SESSION['nama']; ?></p>
@@ -32,10 +32,9 @@
           </a>
           <ul class="treeview-menu">
             <li class="active"><a href="<?php echo base_url() ?>padmin/proyek/"><i class="fa fa-circle-o"></i> Proyek</a></li>
-            <li class="active"><a href="<?php echo base_url() ?>padmin/penanggung_jawab/"><i class="fa fa-circle-o"></i> Penanggung Jawab</a></li>
 
-            <?php if($_SESSION['level']=='admin'){ ?>
-            <li class="active"><a href="<?php echo base_url() ?>padmin/kategori/"><i class="fa fa-circle-o"></i> Kategori</a></li>
+            <?php if($_SESSION['level']=='admin' || $_SESSION['level']=='user' ){ ?>
+              <li class="active"><a href="<?php echo base_url() ?>padmin/penanggung_jawab/"><i class="fa fa-circle-o"></i> Penanggung Jawab</a></li>
             <?php } else {} ?>
           </ul>
         </li>
@@ -52,7 +51,7 @@
           </ul>
         </li> -->
         <?php if($_SESSION['level']=='admin'){ ?>
-        <li><a href="<?php echo base_url() ?>padmin/user/"><i class="fa fa-user"></i> <span>User</span></a></li>
+          <li><a href="<?php echo base_url() ?>padmin/user/"><i class="fa fa-user"></i> <span>User</span></a></li>
         <?php } else {} ?>
         <li><a href="<?php echo base_url() ?>padmin/setting/"><i class="fa fa-gear"></i> <span>Setting</span></a></li>
       </ul>

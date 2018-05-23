@@ -9,7 +9,6 @@ class M_padmin extends CI_Model{
 	function get_all_proyek(){
 		$this->db->select('*');
 		$this->db->from('proyek a');
-		$this->db->join('kategori b','a.proyek_kategori_id=b.kategori_id','inner');
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
 		$this->db->join('user d','a.proyek_user_nik=d.user_nik','inner');
 		$hsl=$this->db->get();
@@ -19,10 +18,28 @@ class M_padmin extends CI_Model{
 	function get_all_proyek_by_user($usernik){
 		$this->db->select('*');
 		$this->db->from('proyek a');
-		$this->db->join('kategori b','a.proyek_kategori_id=b.kategori_id','inner');
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
 		$this->db->join('user d','a.proyek_user_nik=d.user_nik','inner');
 		$this->db->where('user_nik',$usernik);
+		$hsl=$this->db->get();
+		return $hsl;
+	}
+	function get_all_proyek_by_bagian($bagian){
+		$this->db->select('*');
+		$this->db->from('proyek a');
+		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
+		$this->db->join('user d','a.proyek_user_nik=d.user_nik','inner');
+		$this->db->where('proyek_bidang',$bagian);
+		$hsl=$this->db->get();
+		return $hsl;
+	}
+	function get_proyek_bidang_by_kode($kode){
+		$this->db->select('*');
+		$this->db->from('proyek a');
+		$this->db->join('proyek_bagian b','a.proyek_id=b.pb_proyek_id','inner');
+		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
+		$this->db->join('user d','a.proyek_user_nik=d.user_nik','inner');
+		$this->db->where('proyek_id',$kode);
 		$hsl=$this->db->get();
 		return $hsl;
 	}
@@ -91,18 +108,27 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("INSERT INTO user (user_nik,user_nama,user_username,user_password,user_email,user_telp,user_bagian,user_photo,user_level) VALUES ('$user_nik','$nama','$username',md5('$password'),'$email','$tel','$bagian','$gambar','$level')");
 		return $hsl;
 	}
-	function save_user_proyek($nikuser,$namauser,$emailuser,$telpuser,$baguser){
-		$hsl=$this->db->query("INSERT INTO user (user_nik,user_nama,user_email,user_telp,user_bagian) VALUES ('$nikuser','$namauser','$emailuser','$telpuser','$baguser')");
+	function save_user_proyek($nikuser,$namauser,$emailuser,$telpuser){
+		$hsl=$this->db->query("INSERT INTO user (user_nik,user_nama,user_email,user_telp,user_bagian) VALUES ('$nikuser','$namauser','$emailuser','$telpuser','ppk')");
 		return $hsl;
 	}
 	function update_user_proyek($nikuser,$namauser,$emailuser,$telpuser,$baguser){
 		$hsl=$this->db->query("UPDATE user set user_nama='$namauser',user_email='$emailuser',user_telp='$telpuser',user_bagian='$baguser' where user_nik='$nikuser'");
 		return $hsl;
 	}
-	function save_kategori($kategori){
-		$hsl=$this->db->query("INSERT INTO kategori (kategori_nama) VALUES ('$kategori')");
+
+
+	function update_proyek_bidang($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran,$gambar){
+		$hsl=$this->db->query("UPDATE proyek_bagian set pb_target='$pbtarget',pb_real='$pbreal',pb_devisi='$pbdevisi',pb_ds_kontrak='$dskontrak',pb_ds_ap='$dsadmproyek',pb_ds_keuangan='$dsadmproyek',pb_sisa_anggaran='$sisaanggran',pb_foto='$gambar' where pb_proyek_id='$proyek_id'");
 		return $hsl;
 	}
+
+
+	function update_proyek_bidang_wo_img($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran){
+		$hsl=$this->db->query("UPDATE proyek_bagian set pb_target='$pbtarget',pb_real='$pbreal',pb_devisi='$pbdevisi',pb_ds_kontrak='$dskontrak',pb_ds_ap='$dsadmproyek',pb_ds_keuangan='$dsadmproyek',pb_sisa_anggaran='$sisaanggran',pb_foto='$gambar' where pb_proyek_id='$proyek_id'");
+		return $hsl;
+	}
+
 	function save_koordinat($numkor,$namkor,$latitude,$longitude,$inputAddress){
 		$hsl=$this->db->query("INSERT INTO koordinat (koordinat_id,koordinat_nama,koordinat_lat,koordinat_lng,koordinat_alamat) VALUES ('$numkor','$namkor','$latitude','$longitude','$inputAddress')");
 		return $hsl;
@@ -111,13 +137,13 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("UPDATE koordinat set koordinat_nama='$namkor',koordinat_lat='$latitude',koordinat_lng='$longitude',koordinat_alamat='$inputAddress' where koordinat_id='$numkor'");
 		return $hsl;
 	}
-	function save_proyek($proyek_kategori_id,$nikuser,$numkor,$proyek_nama,$proyek_tahun,$proyek_keuangan,$proyek_pagu,$proyek_kontrak,$proyek_sech_awal){
-		$hsl=$this->db->query("INSERT INTO proyek (proyek_kategori_id,proyek_user_nik,proyek_koordinat_id,proyek_nama,proyek_tahun,proyek_keuangan,proyek_pagu,proyek_kontrak,proyek_sech_awal) VALUES ('$proyek_kategori_id','$nikuser','$numkor','$proyek_nama','$proyek_tahun','$proyek_keuangan','$proyek_pagu','$proyek_kontrak','$proyek_sech_awal')");
+	function save_proyek($numproyek,$nikuser,$numkor,$xnama,$year,$keuangan,$pagu,$sechawal,$awalkontrak,$akhirkontrak,$xbidang,$xjenis,$xvolume,$xsatuan){
+		$hsl=$this->db->query("INSERT INTO proyek (proyek_id,proyek_user_nik,proyek_koordinat_id,proyek_nama,proyek_tahun,proyek_keuangan,proyek_pagu,proyek_sech_awal,proyek_awal_kontrak,proyek_akhir_kontrak,proyek_bidang,proyek_jenis,proyek_volume,proyek_satuan) VALUES ('$numproyek','$nikuser','$numkor','$xnama','$year','$keuangan','$pagu','$sechawal','$awalkontrak','$akhirkontrak','$xbidang','$xjenis','$xvolume','$xsatuan')");
 		return $hsl;
 	}
 
-	function update_proyek($proyek_id,$proyek_kategori_id,$numkor,$proyek_nama,$proyek_tahun,$proyek_keuangan,$proyek_pagu,$proyek_kontrak,$proyek_sech_awal){
-		$hsl=$this->db->query("UPDATE proyek set proyek_kategori_id='$proyek_kategori_id',proyek_koordinat_id='$numkor',proyek_nama='$proyek_nama',proyek_tahun='$proyek_tahun',proyek_keuangan='$proyek_keuangan',proyek_pagu='$proyek_pagu',proyek_kontrak='$proyek_kontrak',proyek_sech_awal='$proyek_sech_awal' where proyek_id='$proyek_id'");
+	function update_proyek($proyek_id,$numkor,$xnama,$year,$keuangan,$pagu,$sechawal,$awalkontrak,$akhirkontrak,$xbidang,$jenis,$volume,$satuan){
+		$hsl=$this->db->query("UPDATE proyek set proyek_koordinat_id='$numkor',proyek_nama='$xnama',proyek_tahun='$year',proyek_keuangan='$keuangan',proyek_pagu='$pagu',proyek_sech_awal='$sechawal',proyek_awal_kontrak='$awalkontrak',proyek_akhir_kontrak='$akhirkontrak',proyek_bidang='$xbidang',proyek_jenis='$jenis',proyek_volume='$volume',proyek_satuan='$satuan' where proyek_id='$proyek_id'");
 		return $hsl;
 	}
 
@@ -155,6 +181,10 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("SELECT proyek.*,DATE_FORMAT(proyek_tanggal,'%d/%m/%Y') AS tanggal FROM proyek ORDER BY proyek_tanggal DESC");
 		return $hsl;
 	}	
+	function save_proyek_bagian($numproyek){
+		$hsl=$this->db->query("INSERT INTO proyek_bagian (pb_proyek_id) values ('$numproyek')");
+		return $hsl;
+	}	
 	function get_all_inbox_by_kode($kode){
 		$hsl=$this->db->query("SELECT inbox.*,DATE_FORMAT(inbox_tanggal,'%d/%m/%Y') AS tanggal FROM inbox where inbox_id='$kode'");
 		return $hsl;
@@ -170,7 +200,18 @@ class M_padmin extends CI_Model{
 	function get_detail_proyek_by_kode($kode){
 		$this->db->select('*');
 		$this->db->from('proyek a');
-		$this->db->join('kategori b','a.proyek_kategori_id=b.kategori_id','inner');
+		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
+		$this->db->join('user d','a.proyek_user_nik=d.user_nik','inner');
+		$this->db->where('proyek_id',$kode);
+		$hsl=$this->db->get();
+		return $hsl;
+	}
+
+
+	function get_detail_proyek_bag_by_kode($kode){
+		$this->db->select('*');
+		$this->db->from('proyek a');
+		$this->db->join('proyek_bagian b','a.proyek_id=b.pb_proyek_id','inner');
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
 		$this->db->join('user d','a.proyek_user_nik=d.user_nik','inner');
 		$this->db->where('proyek_id',$kode);
@@ -194,19 +235,15 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("update user set user_password='$newpass' where user_nik='$userid'");
 		return $hsl;
 	}
-	function update_kategori($kategori_id,$kategori_nama){
-		$hsl=$this->db->query("update kategori set kategori_nama='$kategori_nama' where kategori_id='$kategori_id'");
-		return $hsl;
-	}
 	function delete_user($kode){
 		$hsl=$this->db->query("DELETE from user where user_nik='$kode'");
 		return $hsl;
 	}
-	function delete_kategori($kode){
-		$hsl=$this->db->query("DELETE from kategori where kategori_id='$kode'");
+
+	function delete_proyek($kode){
+		$hsl=$this->db->query("DELETE from proyek where proyek_id='$kode'");
 		return $hsl;
 	}
-
 	function get_all_proyek_by_kode($kode){
 		$this->db->select('*');
 		$this->db->from('proyek');
@@ -217,12 +254,6 @@ class M_padmin extends CI_Model{
 		$this->db->select('*');
 		$this->db->from('user');
 		$this->db->where('user_nik',$kode);
-		$hsl=$this->db->get();
-		return $hsl;
-	}
-	function get_all_kategori(){
-		$this->db->select('*');
-		$this->db->from('kategori');
 		$hsl=$this->db->get();
 		return $hsl;
 	}

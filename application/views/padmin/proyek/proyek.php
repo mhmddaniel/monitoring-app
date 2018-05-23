@@ -63,7 +63,7 @@
 						<li><a href="#tab_2" data-toggle="tab">Table</a></li>
 
 						<?php if($_SESSION['level']=='admin'){ ?>
-						<li class="pull-right"><a class="btn btn-success btn-flat bg-olive " href="<?php echo base_url().'padmin/tambah_proyek'?>"><span class="fa fa-plus"></span> Tambah proyek</a></li>
+							<li class="pull-right"><a class="btn btn-success btn-flat bg-olive " href="<?php echo base_url().'padmin/tambah_proyek'?>"><span class="fa fa-plus"></span> Tambah proyek</a></li>
 
 						<?php } else {} ?>
 					</ul>
@@ -79,11 +79,11 @@
 										<tr>
 											<th>Nama Proyek</th>
 											<th>Tahun</th>
-											<th>Kategori</th>
 											<th>Rencana Pelaksanaan</th>
 											<th>Pagu</th>
-											<th>Kontrak</th>
 											<th>Jadwal</th>
+											<th>Awal Kontrak</th>
+											<th>Akhir Kontrak</th>
 											<th>Progress</th>
 											<th style="text-align:right;">Aksi</th>
 										</tr>
@@ -96,11 +96,11 @@
 											$proyek_id=$i['proyek_id'];
 											$proyek_nama=$i['proyek_nama'];
 											$proyek_tahun=$i['proyek_tahun'];
-											$kategori_nama=$i['kategori_nama'];
 											$proyek_keuangan=$i['proyek_keuangan'];
 											$proyek_pagu=$i['proyek_pagu'];
-											$proyek_kontrak=$i['proyek_kontrak'];
 											$proyek_sech_awal=$i['proyek_sech_awal'];
+											$proyek_awal_kontrak=$i['proyek_awal_kontrak'];
+											$proyek_akhir_kontrak=$i['proyek_akhir_kontrak'];
 											$koordinat_nama=$i['koordinat_nama'];
 											$koordinat_value=$i['koordinat_value'];
 
@@ -108,11 +108,11 @@
 											<tr>
 												<td><?php echo $proyek_nama;?></td>
 												<td><?php echo $proyek_tahun;?></td>
-												<td><?php echo $kategori_nama;?></td>
 												<td><?php echo $proyek_keuangan;?></td>
 												<td><?php echo $proyek_pagu;?></td>
-												<td><?php echo $proyek_kontrak;?></td>
 												<td><?php echo $proyek_sech_awal;?></td>
+												<td><?php echo $proyek_awal_kontrak;?></td>
+												<td><?php echo $proyek_akhir_kontrak;?></td>
 												<td><label class="label bg-red"><?php echo $koordinat_value;?>%</label></td>
 												<td style="text-align:right;">
 													<div class="btn-group">
@@ -126,62 +126,71 @@
 															<div class="divider"></div>
 
 															<?php if($_SESSION['level']=='admin'){ ?>
-															<li><a href="<?php echo base_url().'padmin/get_edit_proyek/'.$proyek_id;?>"><span class="fa fa-pencil"></span>Edit</a></li>
-															<li><a data-toggle="modal" data-target="#ModalHapus<?php echo $proyek_id;?>"><span class="fa fa-trash"></span>Hapus</a></li>
-															
-															<?php } else {} ?>
+																<li><a href="<?php echo base_url().'padmin/get_edit_proyek/'.$proyek_id;?>"><span class="fa fa-pencil"></span>Edit</a></li>
+																<li><a data-toggle="modal" data-target="#ModalHapus<?php echo $proyek_id;?>"><span class="fa fa-trash"></span>Hapus</a></li>
+
+															<?php }
+															else if  ($_SESSION['level']=='bidang'){
+																?>
+																<li><a href="<?php echo base_url().'padmin/get_proyek_bidang/'.$proyek_id;?>"><span class="fa fa-pencil"></span>Edit</a></li>
+																<?php
+															}
+															else {} ?>
 														</ul>
 
-													</div>
-												</td>
-											</tr>
-										<?php endforeach;?>
-									</tbody>
-								</table>
-							</div>
+												</div>
+											</td>
+										</tr>
+									<?php endforeach;?>
+								</tbody>
+							</table>
 						</div>
-						<!-- /.tab-pane -->
 					</div>
-					<!-- /.tab-content -->
+					<!-- /.tab-pane -->
 				</div>
-				<!-- nav-tabs-custom -->
+				<!-- /.tab-content -->
 			</div>
-			<!-- /.col -->
+			<!-- nav-tabs-custom -->
 		</div>
-		<!-- /.row -->
-	</section>
-	<!-- /.content -->
+		<!-- /.col -->
+	</div>
+	<!-- /.row -->
+</section>
+<!-- /.content -->
+
+
+
 </div>
 <!-- /.content-wrapper -->
 
 <?php foreach ($data->result_array() as $i) :
-$proyek_id=$i['proyek_id'];
-$proyek_nama=$i['proyek_nama'];
-$proyek_pagu=$i['proyek_pagu'];
-?>
-<!--Modal Hapus Pengguna-->
-<div class="modal fade" id="ModalHapus<?php echo $proyek_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
-				<h4 class="modal-title" id="myModalLabel">Hapus Berita</h4>
+	$proyek_id=$i['proyek_id'];
+	$proyek_nama=$i['proyek_nama'];
+	$proyek_pagu=$i['proyek_pagu'];
+	?>
+	<!--Modal Hapus Pengguna-->
+	<div class="modal fade" id="ModalHapus<?php echo $proyek_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
+					<h4 class="modal-title" id="myModalLabel">Hapus Proyek</h4>
+				</div>
+				<form class="form-horizontal" action="<?php echo base_url().'padmin/delete_proyek'?>" method="post" enctype="multipart/form-data">
+					<div class="modal-body">       
+						<input type="hidden" name="kode" value="<?php echo $proyek_id;?>"/> 
+						<input type="hidden" value="<?php echo $proyek_pagu;?>" name="gambar">
+						<p>Apakah Anda yakin mau menghapus Posting <b><?php echo $proyek_nama;?></b> ?</p>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary btn-flat" id="simpan">Hapus</button>
+					</div>
+				</form>
 			</div>
-			<form class="form-horizontal" action="<?php echo base_url().'padmin/delete_proyek'?>" method="post" enctype="multipart/form-data">
-				<div class="modal-body">       
-					<input type="hidden" name="kode" value="<?php echo $proyek_id;?>"/> 
-					<input type="hidden" value="<?php echo $proyek_pagu;?>" name="gambar">
-					<p>Apakah Anda yakin mau menghapus Posting <b><?php echo $proyek_nama;?></b> ?</p>
-					
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary btn-flat" id="simpan">Hapus</button>
-				</div>
-			</form>
 		</div>
 	</div>
-</div>
 <?php endforeach;?>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -271,42 +280,42 @@ $proyek_pagu=$i['proyek_pagu'];
 		});
 	</script>
 	
-<?php elseif($this->session->flashdata('msg')=='success'):?>
-	<script type="text/javascript">
-		$.toast({
-			heading: 'Success',
-			text: "Berita Berhasil disimpan ke database.",
-			showHideTransition: 'slide',
-			icon: 'success',
-			hideAfter: false,
-			position: 'bottom-right',
-			bgColor: '#7EC857'
-		});
-	</script>
-<?php elseif($this->session->flashdata('msg')=='info'):?>
-	<script type="text/javascript">
-		$.toast({
-			heading: 'Info',
-			text: "Berita berhasil di update",
-			showHideTransition: 'slide',
-			icon: 'info',
-			hideAfter: false,
-			position: 'bottom-right',
-			bgColor: '#00C9E6'
-		});
-	</script>
-<?php elseif($this->session->flashdata('msg')=='success-hapus'):?>
-	<script type="text/javascript">
-		$.toast({
-			heading: 'Success',
-			text: "Berita Berhasil dihapus.",
-			showHideTransition: 'slide',
-			icon: 'success',
-			hideAfter: false,
-			position: 'bottom-right',
-			bgColor: '#7EC857'
-		});
-	</script>
-<?php else:?>
+	<?php elseif($this->session->flashdata('msg')=='success'):?>
+		<script type="text/javascript">
+			$.toast({
+				heading: 'Success',
+				text: "Berita Berhasil disimpan ke database.",
+				showHideTransition: 'slide',
+				icon: 'success',
+				hideAfter: false,
+				position: 'bottom-right',
+				bgColor: '#7EC857'
+			});
+		</script>
+		<?php elseif($this->session->flashdata('msg')=='info'):?>
+			<script type="text/javascript">
+				$.toast({
+					heading: 'Info',
+					text: "Berita berhasil di update",
+					showHideTransition: 'slide',
+					icon: 'info',
+					hideAfter: false,
+					position: 'bottom-right',
+					bgColor: '#00C9E6'
+				});
+			</script>
+			<?php elseif($this->session->flashdata('msg')=='success-hapus'):?>
+				<script type="text/javascript">
+					$.toast({
+						heading: 'Success',
+						text: "Berita Berhasil dihapus.",
+						showHideTransition: 'slide',
+						icon: 'success',
+						hideAfter: false,
+						position: 'bottom-right',
+						bgColor: '#7EC857'
+					});
+				</script>
+				<?php else:?>
 
-<?php endif;?>
+				<?php endif;?>
