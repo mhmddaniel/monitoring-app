@@ -13,13 +13,13 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			proyek List
+			Tambah Proyek
 			<small></small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?php echo base_url()?>padmin"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="<?php echo base_url() ?>padmin/proyek">proyek</a></li>
-			<li class="active">List</li>
+			<li><a href="<?php echo base_url() ?>padmin/proyek">Proyek</a></li>
+			<li class="active">Tambah Proyek</li>
 		</ol>
 	</section>
 
@@ -62,55 +62,76 @@
 						<div class="tab-content">
 							<div class="tab-pane active" id="tab_1">
 								<div class="box-body">
-									<div class="form-group">
-										<label>Tahun</label>
-										<input type="number" class="form-control" name="year">
-									</div>
-									<div class="form-group">
-										<label>Nilai Kontrak</label>
-										<input type="number" class="form-control" name="keuangan">
-									</div>
-									<div class="form-group">
-										<label>Pagu</label>
-										<input type="number" class="form-control" name="pagu">
-									</div>
-									<div class="form-group">
-										<label>Rencana Awal Kontrak</label>
-										<input type="date" class="form-control" name="sechawal">
-									</div>
-									<div class="form-group">
-										<label>Awal Kontrak</label>
-										<input type="date" class="form-control" name="awalkontrak">
-									</div>
-									<div class="form-group">
-										<label>Akhir Kontrak</label>
-										<input type="date" class="form-control" name="akhirkontrak">
-									</div>
-									<div class="form-group">
-										<label>Bidang</label>
-										<select class="form-control"  name="xbidang" >
-											<option value="ciptakarya">Cipta Karya</option>
-										</select>
-									</div>
-
-									<div class="form-group">
-										<label>Jenis Pengadaan</label>
-										<select class="form-control"  name="xjenis" >
-											<option value="lelang_umum">Lelang Umum</option>
-										</select>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>Tahun</label>
+											<input type="number" class="form-control" name="year">
+										</div>
 									</div>
 									<div class="col-md-12">
-										<div class="col-md-6">
-											<label>Volume</label>
-											<div class="form-group">
-												<input type="number" name="xvolume" class="form-control">
-											</div>
+										<div class="form-group">
+											<label>Nilai Kontrak</label>
+											<input type="number" class="form-control" name="keuangan">
 										</div>
-										<div class="col-md-6">
-											<label>Satuan</label>
-											<div class="form-group">
-												<input type="text" name="xsatuan" class="form-control">
-											</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>Pagu</label>
+											<input type="number" class="form-control" name="pagu">
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>Rencana Awal Kontrak</label>
+											<input type="date" class="form-control" name="sechawal">
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>Awal Kontrak</label>
+											<input type="date" class="form-control" name="awalkontrak">
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>Akhir Kontrak</label>
+											<input type="date" class="form-control" name="akhirkontrak">
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>Bidang</label>
+											<select class="form-control"  name="xbidang" >
+												<option value="sda">Sumber Daya Air</option>
+												<option value="bm">Bina Marga</option>
+												<option value="ciptakarya">Cipta Karya</option>
+												<option value="pr">Perumahan Rakyat</option>
+												<option value="sekretariat">Sekretariat</option>
+												<option value="ttdp">Tata Ruang dan Pertanahan</option>
+												<option value="ubp">UPTD Balai Pengujian</option>
+												<option value="ubpdp">UPTD Balai Peralatan dan Perbekalan</option>
+												<option value="bkdp">Bina Kontruksi dan Pengendalian</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>Jenis Pengadaan</label>
+											<select class="form-control"  name="xjenis" >
+												<option value="lelang_umum">Lelang Umum</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<label>Volume</label>
+										<div class="form-group">
+											<input type="number" name="xvolume" class="form-control">
+										</div>
+									</div>
+									<div class="col-md-1">
+										<label>Satuan</label>
+										<div class="form-group">
+											<input type="text" name="xsatuan" class="form-control">
 										</div>
 									</div>
 								</div>
@@ -142,7 +163,7 @@
 								<div class="box-body">
 
 									<div class="col-md-12">
-										
+
 										<div class="form-group">
 											<label>Nama PPK</label>
 											<input type="text" class="form-control"  name="xnamauser" >

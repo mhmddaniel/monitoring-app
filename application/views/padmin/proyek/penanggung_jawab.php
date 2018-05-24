@@ -2,13 +2,13 @@
 <div class="content-wrapper">
 	<section class="content-header">
 		<h1>
-			Penanggung Jawab
+			Pelaksana
 			<small></small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?php echo base_url()?>padmin"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="<?php echo base_url() ?>padmin/proyek">proyek</a></li>
-			<li class="active">List</li>
+			<li><a href="<?php echo base_url() ?>padmin/proyek">Proyek</a></li>
+			<li class="active">Pelaksana</li>
 		</ol>
 	</section>
 
@@ -20,7 +20,7 @@
 					
 					<?php if($_SESSION['level']=='admin'){ ?>
 					<div class="box-header">
-						<a class="btn btn-success btn-flat " href="<?php echo base_url().'padmin/tambah_penanggung_jawab'?>"><span class="fa fa-plus"></span> Tambah Penanggung Jawab</a>
+						<a class="btn btn-success btn-flat " href="<?php echo base_url().'padmin/tambah_penanggung_jawab'?>"><span class="fa fa-plus"></span> Tambah Pelaksana</a>
 					</div>
 
 					<?php } else {} ?>
@@ -29,7 +29,7 @@
 							<thead>
 								<tr>
 									<th>Proyek</th>
-									<th>Penanggung Jawab</th>
+									<th>Pelaksana</th>
 									<th>Posisi</th>
 									<th>Telepon</th>
 									<th>Nama Direktur</th>
@@ -98,13 +98,13 @@ $pekerja_nama_direktur=$i['pekerja_nama_direktur'];
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
-				<h4 class="modal-title" id="myModalLabel">Hapus Berita</h4>
+				<h4 class="modal-title" id="myModalLabel">Hapus Pelaksana</h4>
 			</div>
 			<form class="form-horizontal" action="<?php echo base_url().'padmin/delete_proyek'?>" method="post" enctype="multipart/form-data">
 				<div class="modal-body">       
 					<input type="hidden" name="kode" value="<?php echo $pekerja_nip;?>"/> 
 					<input type="hidden" value="<?php echo $pekerja_nama_direktur;?>" name="gambar">
-					<p>Apakah Anda yakin mau menghapus Posting <b><?php echo $pekerja_nama;?></b> ?</p>
+					<p>Apakah Anda yakin mau menghapus Pelaksana <b><?php echo $pekerja_nama;?></b> ?</p>
 
 				</div>
 				<div class="modal-footer">

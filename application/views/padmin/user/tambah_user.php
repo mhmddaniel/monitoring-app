@@ -53,69 +53,75 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
               <div class="form-group">  
-                
-              <div class="form-group">  
-                <label>NIK</label>
-                <input type="text" name="xnik" class="form-control" required/>
+
+                <div class="form-group">  
+                  <label>NIK</label>
+                  <input type="text" name="xnik" class="form-control" required/>
+                </div>
+                <div class="form-group">  
+                  <label>NAMA</label>
+                  <input type="text" name="xnama" class="form-control" required/>
+                </div>
+                <div class="form-group"> 
+                  <label>USERNAME</label>
+                  <input type="text" name="xusername" class="form-control" required/>
+                </div>
+                <div class="form-group"> 
+                  <label>PASSWORD</label>
+                  <input type="password" name="xpassword" class="form-control" required/>
+                </div>
+                <div class="form-group"> 
+                  <label>RE-PASSWORD</label>
+                  <input type="password" name="xrepassword" class="form-control" required/>
+                </div>
+                <div class="form-group"> 
+                  <label>EMAIL</label>
+                  <input type="email" name="xemail" class="form-control" required/>
+                </div>
+                <div class="form-group">  
+                  <label>TELEPON</label>
+                  <input type="tel" name="xtel" class="form-control" required/>
+                </div>
+                <div class="form-group">  
+                  <label>Bagian</label>
+                  <select class="form-control"  name="xbagian" >
+                    <option value="sda">Sumber Daya Air</option>
+                    <option value="bm">Bina Marga</option>
+                    <option value="ciptakarya">Cipta Karya</option>
+                    <option value="pr">Perumahan Rakyat</option>
+                    <option value="sekretariat">Sekretariat</option>
+                    <option value="ttdp">Tata Ruang dan Pertanahan</option>
+                    <option value="ubp">UPTD Balai Pengujian</option>
+                    <option value="ubpdp">UPTD Balai Peralatan dan Perbekalan</option>
+                    <option value="bkdp">Bina Kontruksi dan Pengendalian</option>
+                  </select>
+                </div>
+                <div class="form-group">  
+                  <label>Role / Level</label>
+                  <select name="xlevel" class="form-control" required>
+                    <option value="admin">ADMIN</option>
+                    <option value="bidang">BIDANG</option>
+                    <option value="user">USER</option>
+                  </select>
+                </div>
+                <div class="form-group"> 
+                  <label>FOTO</label>
+                  <input type="file" name="filefoto" class="form-control" required/>
+                </div>
+                <div class="form-group pull-right">
+                  <button type="submit" class="btn btn-primary btn-flat pull-right"><span class="fa fa-pencil"></span> Publish</button>
+                  <!-- /.form-group -->
+                </div>
+
               </div>
-              <div class="form-group">  
-                <label>NAMA</label>
-                <input type="text" name="xnama" class="form-control" required/>
-              </div>
-                 <div class="form-group"> 
-              <label>USERNAME</label>
-                <input type="text" name="xusername" class="form-control" required/>
-              </div>
-                 <div class="form-group"> 
-              <label>PASSWORD</label>
-                <input type="password" name="xpassword" class="form-control" required/>
-              </div>
-                 <div class="form-group"> 
-              <label>RE-PASSWORD</label>
-                <input type="password" name="xrepassword" class="form-control" required/>
-              </div>
-                 <div class="form-group"> 
-              <label>EMAIL</label>
-                <input type="email" name="xemail" class="form-control" required/>
-              </div>
-              <div class="form-group">  
-                <label>TELEPON</label>
-                <input type="tel" name="xtel" class="form-control" required/>
-              </div>
-              <div class="form-group">  
-                <label>Bagian</label>
-                <select name="xbagian" class="form-control" required>
-                  <option value="ppk">PPK</option>
-                  <option value="kabid">KABID</option>
-                  <option value="kasubid">KASUBID</option>
-                </select>
-              </div>
-              <div class="form-group">  
-                <label>Role / Level</label>
-                <select name="xlevel" class="form-control" required>
-                  <option value="admin">ADMIN</option>
-                  <option value="bidang">BIDANG</option>
-                  <option value="user">USER</option>
-                </select>
-              </div>
-                 <div class="form-group"> 
-              <label>FOTO</label>
-                <input type="file" name="filefoto" class="form-control" required/>
-              </div>
-              <div class="form-group pull-right">
-                <button type="submit" class="btn btn-primary btn-flat pull-right"><span class="fa fa-pencil"></span> Publish</button>
-                <!-- /.form-group -->
-              </div>
-              
+              <!-- /.col -->
+
+              <!-- /.row -->
             </div>
-            <!-- /.col -->
-            
-            <!-- /.row -->
+            <!-- /.box-body -->
+
           </div>
-          <!-- /.box-body -->
-          
         </div>
-      </div>
       </div>
       <!-- /.box -->
     </form>
