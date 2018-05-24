@@ -82,10 +82,10 @@ class API extends CI_Controller{
 
     function fetchProject()
     {
-        if (isset($_POST['usernik'])) {
+        if (isset($_POST['user_bagian'])) {
 
-            $usernik = $_POST['usernik'];
-            $project=$this->m_padmin->get_all_proyek_by_user($usernik);
+            $bagian = $_POST['user_bagian'];
+            $project=$this->m_padmin->get_all_proyek_by_bagian("ciptakarya");
             if($project->num_rows() > 0){
                 $xcadmin=$project->row_array();
 
