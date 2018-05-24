@@ -500,6 +500,9 @@ class Padmin extends CI_Controller{
 			}
 
 		}else{
+			$pbtarget=$this->input->post('pbtarget');
+			$pbreal=$this->input->post('pbreal');
+			$pbdevisi=$this->input->post('pbdevisi');
 			$proyek_id=$this->input->post('proyek_id');
 			$dskontrak=$this->input->post('dskontrak');
 			$dsadmproyek=$this->input->post('dsadmproyek');

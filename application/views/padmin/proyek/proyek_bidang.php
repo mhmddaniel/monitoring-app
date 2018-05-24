@@ -130,6 +130,10 @@
 			two = document.autoSumForm.dsadmproyek.value;
 			document.autoSumForm.totalds.value = (one*1) + (two*1) ;
 
+			pbtarget = document.autoSumForm.pbtarget.value;
+			pbreal = document.autoSumForm.pbreal.value;
+			document.autoSumForm.pbdevisi.value = (pbreal*1) - (pbtarget*1)  ;
+
 			three = document.autoSumForm.totalds.value;
 			four = document.autoSumForm.pagu.value;
 			document.autoSumForm.sisaanggran.value = (four*1) - (three*1)   ;

@@ -102,7 +102,9 @@
 											$proyek_awal_kontrak=$i['proyek_awal_kontrak'];
 											$proyek_akhir_kontrak=$i['proyek_akhir_kontrak'];
 											$koordinat_nama=$i['koordinat_nama'];
-											$koordinat_value=$i['koordinat_value'];
+											$pb_target=$i['pb_target'];
+											$pb_real=$i['pb_real'];
+											$pb_devisi=$i['pb_devisi'];
 
 											?>
 											<tr>
@@ -113,7 +115,38 @@
 												<td><?php echo $proyek_sech_awal;?></td>
 												<td><?php echo $proyek_awal_kontrak;?></td>
 												<td><?php echo $proyek_akhir_kontrak;?></td>
-												<td><label class="label bg-red"><?php echo $koordinat_value;?>%</label></td>
+												<td>
+													<?php if($pb_target==0 || $pb_target<=070){
+														if($pb_devisi==0 || $pb_devisi<=(-7)){
+															echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>";
+														}
+														else if ($pb_devisi>7 || $pb_devisi<=(-10)){
+															
+															echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";
+														}
+														else {
+															echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+														}
+													}
+													else if ($pb_target==70 || $pb_target<=100){
+														if($pb_devisi==0 || $pb_devisi<=(-4)){
+															echo "wajar";
+														}
+														else if ($pb_devisi>7 || $pb_devisi<=(-10)){
+															
+															echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";													
+														}
+														else {
+															
+															echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+														}	
+													}
+													else {
+														echo "";
+													}
+													?>
+
+												</td>
 												<td style="text-align:right;">
 													<div class="btn-group">
 														<button type="button" class="btn btn-success btn-flat">Action</button>

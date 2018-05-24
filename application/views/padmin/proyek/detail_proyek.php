@@ -108,7 +108,42 @@ $b=$data->row_array() ;
         </tr>
         <tr>
           <th>Proyek Progress</th>
-          <td><?php echo $b['koordinat_value']; ?>%</td>
+          <td>
+            <?php
+
+            $pb_target=$b['pb_target'];
+            $pb_real=$b['pb_real'];
+            $pb_devisi=$b['pb_devisi'];
+            if($pb_target==0 || $pb_target<=070){
+              if($pb_devisi==0 || $pb_devisi<=(-7)){
+                echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>";
+              }
+              else if ($pb_devisi>7 || $pb_devisi<=(-10)){
+
+                echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";
+              }
+              else {
+                echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+              }
+            }
+            else if ($pb_target==70 || $pb_target<=100){
+              if($pb_devisi==0 || $pb_devisi<=(-4)){
+                echo "wajar";
+              }
+              else if ($pb_devisi>7 || $pb_devisi<=(-10)){
+
+                echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";                         
+              }
+              else {
+
+                echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+              } 
+            }
+            else {
+              echo "";
+            }
+            ?>
+          </td>
         </tr>
       </table> 
     </address>

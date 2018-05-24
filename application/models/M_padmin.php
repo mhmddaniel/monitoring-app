@@ -9,6 +9,7 @@ class M_padmin extends CI_Model{
 	function get_all_proyek(){
 		$this->db->select('*');
 		$this->db->from('proyek a');
+		$this->db->join('proyek_bagian b','a.proyek_id=b.pb_proyek_id','inner');
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
 		$this->db->join('user d','a.proyek_user_nik=d.user_nik','inner');
 		$hsl=$this->db->get();
@@ -18,6 +19,7 @@ class M_padmin extends CI_Model{
 	function get_all_proyek_by_user($usernik){
 		$this->db->select('*');
 		$this->db->from('proyek a');
+		$this->db->join('proyek_bagian b','a.proyek_id=b.pb_proyek_id','inner');
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
 		$this->db->join('user d','a.proyek_user_nik=d.user_nik','inner');
 		$this->db->where('user_nik',$usernik);
@@ -27,6 +29,7 @@ class M_padmin extends CI_Model{
 	function get_all_proyek_by_bagian($bagian){
 		$this->db->select('*');
 		$this->db->from('proyek a');
+		$this->db->join('proyek_bagian b','a.proyek_id=b.pb_proyek_id','inner');
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
 		$this->db->join('user d','a.proyek_user_nik=d.user_nik','inner');
 		$this->db->where('proyek_bidang',$bagian);
