@@ -110,17 +110,17 @@
 											<tr>
 												<td><?php echo $proyek_nama;?></td>
 												<td><?php echo $proyek_tahun;?></td>
-												<td><?php echo $proyek_keuangan;?></td>
-												<td><?php echo $proyek_pagu;?></td>
-												<td><?php echo $proyek_sech_awal;?></td>
-												<td><?php echo $proyek_awal_kontrak;?></td>
-												<td><?php echo $proyek_akhir_kontrak;?></td>
+												<td><?php echo number_format($proyek_keuangan);?></td>
+												<td><?php echo number_format($proyek_pagu);?></td>
+												<td><?php echo date('d-m-Y', strtotime($proyek_sech_awal));?></td>
+												<td><?php echo date('d-m-Y', strtotime($proyek_awal_kontrak));;?></td>
+												<td><?php echo date('d-m-Y', strtotime($proyek_akhir_kontrak));;?></td>
 												<td>
-													<?php if($pb_target==0 || $pb_target<=070){
-														if($pb_devisi==0 || $pb_devisi<=(-7)){
+													<?php if($pb_target==0 || $pb_target<=70){
+														if($pb_devisi==0 || $pb_devisi>=(-7)){
 															echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>";
 														}
-														else if ($pb_devisi>7 || $pb_devisi<=(-10)){
+														else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
 															
 															echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";
 														}
@@ -128,12 +128,12 @@
 															echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
 														}
 													}
-													else if ($pb_target==70 || $pb_target<=100){
-														if($pb_devisi==0 || $pb_devisi<=(-4)){
-															echo "wajar";
+													else if ($pb_target>70 && $pb_target<=100){
+														if($pb_devisi==0 || $pb_devisi>=(-4)){
+															echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>"; 
 														}
-														else if ($pb_devisi>7 || $pb_devisi<=(-10)){
-															
+														else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
+
 															echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";													
 														}
 														else {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 23 Bulan Mei 2018 pada 08.19
+-- Waktu pembuatan: 24 Bulan Mei 2018 pada 08.57
 -- Versi server: 10.1.31-MariaDB
 -- Versi PHP: 7.2.3
 
@@ -130,9 +130,9 @@ INSERT INTO `proyek` (`proyek_id`, `proyek_user_nik`, `proyek_koordinat_id`, `pr
 
 CREATE TABLE `proyek_bagian` (
   `pb_proyek_id` int(11) NOT NULL,
-  `pb_target` int(11) NOT NULL,
-  `pb_real` int(11) NOT NULL,
-  `pb_devisi` int(11) NOT NULL,
+  `pb_target` float NOT NULL,
+  `pb_real` float NOT NULL,
+  `pb_devisi` float NOT NULL,
   `pb_ds_kontrak` int(11) NOT NULL,
   `pb_ds_ap` int(11) NOT NULL,
   `pb_ds_keuangan` int(11) NOT NULL,
@@ -145,8 +145,8 @@ CREATE TABLE `proyek_bagian` (
 --
 
 INSERT INTO `proyek_bagian` (`pb_proyek_id`, `pb_target`, `pb_real`, `pb_devisi`, `pb_ds_kontrak`, `pb_ds_ap`, `pb_ds_keuangan`, `pb_sisa_anggaran`, `pb_foto`) VALUES
-(17, 0, 0, 0, 25000, 32000, 32000, 43000, '27a81269971bbd3fd4e9bc425aee737f.jpg'),
-(18, 0, 0, 0, 100, 200, 200, 299700, '');
+(17, 73, 65, -8, 25000, 32000, 32000, 43000, ''),
+(18, 60.53, 53.2, -7.33, 100, 200, 200, 299700, '');
 
 -- --------------------------------------------------------
 
@@ -172,8 +172,6 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`user_nik`, `user_nama`, `user_username`, `user_password`, `user_email`, `user_telp`, `user_bagian`, `user_level`, `user_photo`) VALUES
 (1, 'Administrator', 'adityads', '202cb962ac59075b964b07152d234b70', 'adityads@ymail.com', '082371373347', '', 'admin', 'user_blank.png'),
-(892, 'Best', '', '', 'best@aa.com', '0129', 'ppk', 'admin', 'user_blank.png'),
-(5023, 'Adent', '', '', 'adent@aa.com', '123', 'ppk', 'admin', 'user_blank.png'),
 (12819, 'Restu', '', '', 'restu@aaa.com', '0812', 'ppk', 'admin', 'user_blank.png'),
 (112233, 'tera', 'tera', '123', 'tera@aaa.com', '082', 'kasubid', 'user', 'user_blank.png'),
 (120201, 'Rendy', '', '', 'rendy@aa.com', '092812', 'ppk', 'admin', 'user_blank.png'),

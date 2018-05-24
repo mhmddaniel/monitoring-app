@@ -114,28 +114,28 @@ $b=$data->row_array() ;
             $pb_target=$b['pb_target'];
             $pb_real=$b['pb_real'];
             $pb_devisi=$b['pb_devisi'];
-            if($pb_target==0 || $pb_target<=070){
-              if($pb_devisi==0 || $pb_devisi<=(-7)){
+            if($pb_target==0 || $pb_target<=70){
+              if($pb_devisi==0 || $pb_devisi>=(-7)){
                 echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>";
               }
-              else if ($pb_devisi>7 || $pb_devisi<=(-10)){
-
+              else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
+                
                 echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";
               }
               else {
                 echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
               }
             }
-            else if ($pb_target==70 || $pb_target<=100){
-              if($pb_devisi==0 || $pb_devisi<=(-4)){
-                echo "wajar";
+            else if ($pb_target>70 && $pb_target<=100){
+              if($pb_devisi==0 || $pb_devisi>=(-4)){
+                echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>"; 
               }
-              else if ($pb_devisi>7 || $pb_devisi<=(-10)){
+              else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
 
                 echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";                         
               }
               else {
-
+                
                 echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
               } 
             }
@@ -247,7 +247,40 @@ $b=$data->row_array() ;
     <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
       <span><b><?php echo $b['koordinat_nama']; ?></b></span><br>
       <?php echo $b['koordinat_alamat']; ?><br>
-      Progress proyek saat ini adalah <span class="label <?php if($b['koordinat_value']>50) { echo "bg-green"; } else { echo "bg-red"; } ?>"><?php echo $b['koordinat_value']; ?>%</span>
+      Progress proyek saat ini adalah
+      <?php
+      $pb_target=$b['pb_target'];
+      $pb_real=$b['pb_real'];
+      $pb_devisi=$b['pb_devisi'];
+      if($pb_target==0 || $pb_target<=70){
+        if($pb_devisi==0 || $pb_devisi>=(-7)){
+          echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>";
+        }
+        else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
+          
+          echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";
+        }
+        else {
+          echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+        }
+      }
+      else if ($pb_target>70 && $pb_target<=100){
+        if($pb_devisi==0 || $pb_devisi>=(-4)){
+          echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>"; 
+        }
+        else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
+
+          echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";                         
+        }
+        else {
+          
+          echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+        } 
+      }
+      else {
+        echo "";
+      }
+      ?>
     </p>
   </div>
 </div>
