@@ -122,13 +122,13 @@ class M_padmin extends CI_Model{
 
 
 	function update_proyek_bidang($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran,$gambar){
-		$hsl=$this->db->query("UPDATE proyek_bagian set pb_target='$pbtarget',pb_real='$pbreal',pb_devisi='$pbdevisi',pb_ds_kontrak='$dskontrak',pb_ds_ap='$dsadmproyek',pb_ds_keuangan='$dsadmproyek',pb_sisa_anggaran='$sisaanggran',pb_foto='$gambar' where pb_proyek_id='$proyek_id'");
+		$hsl=$this->db->query("UPDATE proyek_bagian set pb_target='$pbtarget',pb_real='$pbreal',pb_devisi='$pbdevisi',pb_ds_kontrak='$dskontrak',pb_ds_ap='$dsadmproyek',pb_ds_keuangan='$dsadmproyek',pb_sisa_anggaran='$sisaanggran',pb_foto='$gambar',pb_last_update=NOW() where pb_proyek_id='$proyek_id'");
 		return $hsl;
 	}
 
 
 	function update_proyek_bidang_wo_img($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran){
-		$hsl=$this->db->query("UPDATE proyek_bagian set pb_target='$pbtarget',pb_real='$pbreal',pb_devisi='$pbdevisi',pb_ds_kontrak='$dskontrak',pb_ds_ap='$dsadmproyek',pb_ds_keuangan='$dsadmproyek',pb_sisa_anggaran='$sisaanggran',pb_foto='$gambar' where pb_proyek_id='$proyek_id'");
+		$hsl=$this->db->query("UPDATE proyek_bagian set pb_target='$pbtarget',pb_real='$pbreal',pb_devisi='$pbdevisi',pb_ds_kontrak='$dskontrak',pb_ds_ap='$dsadmproyek',pb_ds_keuangan='$dsadmproyek',pb_sisa_anggaran='$sisaanggran',pb_foto='$gambar',pb_last_update=NOW() where pb_proyek_id='$proyek_id'");
 		return $hsl;
 	}
 
@@ -146,7 +146,7 @@ class M_padmin extends CI_Model{
 	}
 
 	function update_proyek($proyek_id,$numkor,$xnama,$year,$keuangan,$pagu,$sechawal,$awalkontrak,$akhirkontrak,$xbidang,$jenis,$volume,$satuan){
-		$hsl=$this->db->query("UPDATE proyek set proyek_koordinat_id='$numkor',proyek_nama='$xnama',proyek_tahun='$year',proyek_keuangan='$keuangan',proyek_pagu='$pagu',proyek_sech_awal='$sechawal',proyek_awal_kontrak='$awalkontrak',proyek_akhir_kontrak='$akhirkontrak',proyek_bidang='$xbidang',proyek_jenis='$jenis',proyek_volume='$volume',proyek_satuan='$satuan' where proyek_id='$proyek_id'");
+		$hsl=$this->db->query("UPDATE proyek set proyek_koordinat_id='$numkor',proyek_nama='$xnama',proyek_tahun='$year',proyek_keuangan='$keuangan',proyek_pagu='$pagu',proyek_sech_awal='$sechawal',proyek_awal_kontrak='$awalkontrak',proyek_akhir_kontrak='$akhirkontrak',proyek_bidang='$xbidang',proyek_jenis='$jenis',proyek_volume='$volume',proyek_satuan='$satuan',last_update=NOW() where proyek_id='$proyek_id'");
 		return $hsl;
 	}
 

@@ -118,7 +118,19 @@
 										<div class="form-group">
 											<label>Jenis Pengadaan</label>
 											<select class="form-control"  name="xjenis" >
-												<option value="lelang_umum">Lelang Umum</option>
+												<option value="#">Semua</option>
+												<option value="leum">Lelang Umum</option>
+												<option value="lena">Lelang Sederhana</option>
+												<option value="letas">Lelang Terbatas</option>
+												<option value="selmum">Seleksi Umum</option>
+												<option value="pmlangsung">Pemilihan Langsung</option>
+												<option value="pnlangsung">Penunjukan Langsung</option>
+												<option value="pglangsung">Pengadaan Langsung</option>
+												<option value="epurchas">E-Purchasing</option>
+												<option value="sayembara">Sayembara</option>
+												<option value="kontes">Kontes</option>
+												<option value="lelce">Lelang Cepat</option>
+												<option value="selsed">Seleksi Sederhana</option>
 											</select>
 										</div>
 									</div>

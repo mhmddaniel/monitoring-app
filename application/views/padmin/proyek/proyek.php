@@ -85,6 +85,7 @@
 											<th>Awal Kontrak</th>
 											<th>Akhir Kontrak</th>
 											<th>Progress</th>
+											<th>Last Update</th>
 											<th style="text-align:right;">Aksi</th>
 										</tr>
 									</thead>
@@ -105,6 +106,8 @@
 											$pb_target=$i['pb_target'];
 											$pb_real=$i['pb_real'];
 											$pb_devisi=$i['pb_devisi'];
+											$up1=date('d-m-Y h:i:s', strtotime($i['last_update']));
+											$up2=date('d-m-Y h:i:s', strtotime($i['pb_last_update']));
 
 											?>
 											<tr>
@@ -147,47 +150,56 @@
 													?>
 
 												</td>
-												<td style="text-align:right;">
-													<div class="btn-group">
-														<button type="button" class="btn btn-success btn-flat">Action</button>
-														<button type="button" class="btn btn-success btn-flat dropdown-toggle" data-toggle="dropdown">
-															<span class="caret"></span>
-															<span class="sr-only">Toggle Dropdown</span>
-														</button>
-														<ul class="dropdown-menu" role="menu">
-															<li><a href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>"><span class="fa fa-expand"></span>Lihat Detail</a></li>
-															<div class="divider"></div>
-
-															<?php if($_SESSION['level']=='admin'){ ?>
-																<li><a href="<?php echo base_url().'padmin/get_edit_proyek/'.$proyek_id;?>"><span class="fa fa-pencil"></span>Edit</a></li>
-																<li><a data-toggle="modal" data-target="#ModalHapus<?php echo $proyek_id;?>"><span class="fa fa-trash"></span>Hapus</a></li>
-
-															<?php }
-															else if  ($_SESSION['level']=='bidang'){
-																?>
-																<li><a href="<?php echo base_url().'padmin/get_proyek_bidang/'.$proyek_id;?>"><span class="fa fa-pencil"></span>Edit</a></li>
-																<?php
-															}
-															else {} ?>
-														</ul>
-
-												</div>
+												<td><?php 
+												if($up1>$up2){
+													echo $up1;
+												}
+												else {
+													echo $up2;
+												}
+												?>
 											</td>
-										</tr>
-									<?php endforeach;?>
-								</tbody>
-							</table>
-						</div>
+											<td style="text-align:right;">
+												<div class="btn-group">
+													<button type="button" class="btn btn-success btn-flat">Action</button>
+													<button type="button" class="btn btn-success btn-flat dropdown-toggle" data-toggle="dropdown">
+														<span class="caret"></span>
+														<span class="sr-only">Toggle Dropdown</span>
+													</button>
+													<ul class="dropdown-menu" role="menu">
+														<li><a href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>"><span class="fa fa-expand"></span>Lihat Detail</a></li>
+														<div class="divider"></div>
+
+														<?php if($_SESSION['level']=='admin'){ ?>
+															<li><a href="<?php echo base_url().'padmin/get_edit_proyek/'.$proyek_id;?>"><span class="fa fa-pencil"></span>Edit</a></li>
+															<li><a data-toggle="modal" data-target="#ModalHapus<?php echo $proyek_id;?>"><span class="fa fa-trash"></span>Hapus</a></li>
+
+														<?php }
+														else if  ($_SESSION['level']=='bidang'){
+															?>
+															<li><a href="<?php echo base_url().'padmin/get_proyek_bidang/'.$proyek_id;?>"><span class="fa fa-pencil"></span>Edit</a></li>
+															<?php
+														}
+														else {} ?>
+													</ul>
+
+											</div>
+										</td>
+									</tr>
+								<?php endforeach;?>
+							</tbody>
+						</table>
 					</div>
-					<!-- /.tab-pane -->
 				</div>
-				<!-- /.tab-content -->
+				<!-- /.tab-pane -->
 			</div>
-			<!-- nav-tabs-custom -->
+			<!-- /.tab-content -->
 		</div>
-		<!-- /.col -->
+		<!-- nav-tabs-custom -->
 	</div>
-	<!-- /.row -->
+	<!-- /.col -->
+</div>
+<!-- /.row -->
 </section>
 <!-- /.content -->
 
