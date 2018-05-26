@@ -242,7 +242,7 @@
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyAogXD-AHrsmnWinZIyhRORJ84bgLwDPpg"></script>
 
 <script type="text/javascript" src="<?php echo base_url() ?>assets/gmaps/assets/js/gmap3.js"></script>
-<script>
+<script type="text/javascript">
 	$(function () {
 		$('#test')
 		.gmap3({
@@ -250,8 +250,18 @@
 			zoom: 8
 		})
 
+		.infowindow({
+			content: ''
+		})
+
+		.then(function (iw) {
+			infowindow = iw;
+		})
+
 		.cluster({
 			size: 200,
+
+
 			markers: [
 			<?php
 			$no=0;
@@ -261,40 +271,143 @@
 				$lat=$i['koordinat_lat'];
 				$lng=$i['koordinat_lng'];
 				$value=$i['koordinat_value'];
+				$proyek_id=$i['proyek_id'];
+				$proyek_nama=$i['proyek_nama'];
+				$proyek_tahun=$i['proyek_tahun'];
+				$proyek_keuangan=$i['proyek_keuangan'];
+				$proyek_pagu=$i['proyek_pagu'];
+				$proyek_sech_awal=$i['proyek_sech_awal'];
+				$proyek_awal_kontrak=$i['proyek_awal_kontrak'];
+				$proyek_akhir_kontrak=$i['proyek_akhir_kontrak'];
+				$koordinat_nama=$i['koordinat_nama'];
+				$pb_target=$i['pb_target'];
+				$pb_real=$i['pb_real'];
+				$pb_devisi=$i['pb_devisi'];
+				$up1=date('d-m-Y h:i:s', strtotime($i['last_update']));
+				$up2=date('d-m-Y h:i:s', strtotime($i['pb_last_update']));
 				?>
 
-				{position: [<?php echo $lat;?>, <?php echo $lng;?>], icon: <?php if ($value>50){echo "'https://png.icons8.com/color/50/000000/green-flag.png'";} else{ echo "'https://png.icons8.com/color/50/000000/filled-flag.png'";}?>},
+				{position: [<?php echo $lat;?>, <?php echo $lng;?>], 
+					info: 
+					'<section class="content">'+
+					'<div class="col-md-12">'+
+					'<div class="row"><b>Proyek<br></b>'+
+					'<table  class="table table-striped" style="font-size:11px;">'+
+					'<thead>'+
+					'<tr>'+
+					'<th>Nama Proyek</th>'+
+					'<th>Tahun</th>'+
+					'<th>Rencana Pelaksanaan</th>'+
+					'<th>Pagu</th>'+
+					'<th>Jadwal</th>'+
+					'<th>Awal Kontrak</th>'+
+					'<th>Akhir Kontrak</th>'+
+					'<th>Last Update</th>'+
+					'</tr>'+
+					'</thead>'+
+					'<tr>'+
+					'<td><?php echo $proyek_nama;?></td>'+
+					'<td><?php echo $proyek_tahun;?></td>'+
+					'<td><?php echo number_format($proyek_keuangan);?></td>'+
+					'<td><?php echo number_format($proyek_pagu);?></td>'+
+					'<td><?php echo date('d-m-Y', strtotime($proyek_sech_awal));?></td>'+
+					'<td><?php echo date('d-m-Y', strtotime($proyek_awal_kontrak));;?></td>'+
+					'<td><?php echo date('d-m-Y', strtotime($proyek_akhir_kontrak));;?></td>'+
+					'<td>'+<?php if($up1>$up2){ echo "'$up1'"; } else { echo "'$up2'"; } ?>+'</td>'+
+					'</tr>'+
+					'</table>'+
+					'</div>'+
+					'<div class="row"><b>Bidang<br></b>'+
+					'<table  class="table table-striped" style="font-size:11px;">'+
+					'<thead>'+
+					'<tr>'+
+					'<th>Target</th>'+
+					'<th>Real</th>'+
+					'<th>Dev</th>'+
+					'</tr>'+
+					'</thead>'+
+					'<tr>'+
+					'<td><?php echo $i['pb_target'];?></td>'+
+					'<td><?php echo $i['pb_real'];?></td>'+
+					'<td><?php echo $i['pb_devisi'];?></td>'+
+					'</tr>'+
+					'</table>'+
+					'</div>'+
+					'<div class="row"><b>Pekerja<br></b>'+
+					'<table  class="table table-striped" style="font-size:11px;">'+
+					'<thead>'+
+					'<tr>'+
+					'<th>Nama</th>'+
+					'<th>Telepon</th>'+
+					'<th>Bagian</th>'+
+					'<th>Direktur</th>'+
+					'<th>Tel. Direktur</th>'+
+					'<th>Perusahaan</th>'+
+					'<th>Alamat Perusahaan</th>'+
+					'<th>Tel. Kantor</th>'+
+					'</tr>'+
+					'</thead>'+
 
-				<?php
-			endforeach;
-			?> 	
-			],
-			cb: function (markers) {
-				if (markers.length > 1) { 
-					if (markers.length < 20) {
+					<?php 
+					$kode=$i['proyek_id'];
+					$cc=$this->m_padmin->get_penannggung_jawab($kode); 
+					foreach ($cc->result_array() as $j) :
+						?>
+						'<tr>'+
+						'<td><?php echo $j['pekerja_nip'];?></td>'+
+						'<td><?php echo $j['pekerja_tel'];?></td>'+
+						'<td><?php echo $j['pekerja_jenis'];?></td>'+
+						'<td><?php echo $j['pekerja_nama_direktur'];?></td>'+
+						'<td><?php echo $j['pekerja_tel_direktur'];?></td>'+
+						'<td><?php echo $j['pekerja_nama_perusahaan'];?></td>'+
+						'<td><?php echo $j['pekerja_alamat_perusahaan'];?></td>'+
+						'<td><?php echo $j['pekerja_tel_kantor'];?></td>'+
+						'</tr>'+
+					<?php endforeach; ?>
+					'</table>'+
+					'</div>'+
+					'</div>'+
+					'</section>', 
+					icon: <?php if ($value>50){echo "'https://png.icons8.com/color/50/000000/green-flag.png'";} else{ echo "'https://png.icons8.com/color/50/000000/filled-flag.png'";}?>},
+					<?php
+				endforeach;
+				?> 	
+				],
+
+
+
+				cb: function (markers) {
+					if (markers.length > 1) { 
+						if (markers.length < 20) {
+							return {
+								content: "<div class='cluster cluster-1'>" + markers.length + "</div>",
+								x: -26,
+								y: -26
+							};
+						}
+						if (markers.length < 50) {
+							return {
+								content: "<div class='cluster cluster-2'>" + markers.length + "</div>",
+								x: -26,
+								y: -26
+							};
+						}
 						return {
-							content: "<div class='cluster cluster-1'>" + markers.length + "</div>",
-							x: -26,
-							y: -26
+							content: "<div class='cluster cluster-3'>" + markers.length + "</div>",
+							x: -33,
+							y: -33
 						};
 					}
-					if (markers.length < 50) {
-						return {
-							content: "<div class='cluster cluster-2'>" + markers.length + "</div>",
-							x: -26,
-							y: -26
-						};
-					}
-					return {
-						content: "<div class='cluster cluster-3'>" + markers.length + "</div>",
-						x: -33,
-						y: -33
-					};
 				}
-			}
-		})
-		;
-	});
+			})  
+.on('click', function (marker, clusterOverlay, cluster, event) {
+	if (marker) {
+		infowindow.setContent(marker.info);
+		infowindow.open(marker.getMap(), marker);
+	}
+})
+;
+});
 </script>
 
 <script type="text/javascript" src="<?php echo base_url().'assets/plugins/toast/jquery.toast.min.js'?>"></script>

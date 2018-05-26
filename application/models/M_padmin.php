@@ -12,6 +12,7 @@ class M_padmin extends CI_Model{
 		$this->db->join('proyek_bagian b','a.proyek_id=b.pb_proyek_id','inner');
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
 		$this->db->join('user d','a.proyek_user_nik=d.user_nik','inner');
+		$this->db->ORDER_BY('a.proyek_id','desc');	
 		$hsl=$this->db->get();
 		return $hsl;
 	}
@@ -197,6 +198,16 @@ class M_padmin extends CI_Model{
 		$this->db->from('pekerja a');
 		$this->db->join('proyek b','a.proyek_id=b.proyek_id','inner');
 		$this->db->where('a.proyek_id',$kode);
+		$hsl=$this->db->get();
+		return $hsl;
+	}
+
+
+	function get_pj(){	
+		$this->db->select('*');
+		$this->db->from('pekerja a');
+		$this->db->join('proyek b','a.proyek_id=b.proyek_id','inner');
+		$this->db->ORDER_BY('b.proyek_id','desc');
 		$hsl=$this->db->get();
 		return $hsl;
 	}
