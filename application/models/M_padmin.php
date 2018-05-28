@@ -16,6 +16,54 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->get();
 		return $hsl;
 	}
+	function sum_sisa(){
+		$hsl=$this->db->query("SELECT sum(pb_sisa_anggaran) AS sumsisa FROM proyek_bagian");
+		return $hsl;
+	}
+	function sum_sisa_by_kode($bagian){
+		$hsl=$this->db->query("SELECT distinct sum(pb_sisa_anggaran) AS sumsisa,proyek_bidang FROM proyek_bagian,proyek where proyek.proyek_bidang='$bagian' && proyek_bagian.pb_proyek_id=proyek.proyek_id ");
+		return $hsl;
+	}
+	function sum_proyek(){
+		$hsl=$this->db->query("SELECT COUNT(proyek_id) AS jumproyek FROM proyek");
+		return $hsl;
+	}
+	function sum_pagu(){
+		$hsl=$this->db->query("SELECT sum(proyek_pagu) AS sumpagu FROM proyek");
+		return $hsl;
+	}
+
+	function sum_pagu_by_kode($bagian){
+		$hsl=$this->db->query("SELECT sum(proyek_pagu) AS sumpagu from proyek where proyek_bidang='$bagian' ");
+		return $hsl;
+	}
+
+	function sum_keluar_by_kode($bagian){
+		$hsl=$this->db->query("SELECT sum(pb_ds_kontrak) as suma, sum(pb_ds_ap) as sumb FROM proyek_bagian,proyek where proyek.proyek_bidang='$bagian' && proyek_bagian.pb_proyek_id=proyek.proyek_id ");
+				return $hsl;
+	}
+	function sum_keluar(){
+		$hsl=$this->db->query("SELECT sum(pb_ds_kontrak) as suma, sum(pb_ds_ap) as sumb from proyek_bagian");
+		return $hsl;
+	}
+	function sum_prog(){
+		$hsl=$this->db->query("SELECT pb_stat_proyek,count(pb_stat_proyek) as sumprog from proyek_bagian group by pb_stat_proyek");
+		return $hsl;
+	}
+
+	function sum_proyek_by_kode($bagian){
+		$hsl=$this->db->query("SELECT COUNT(proyek_id) AS jumproyek,proyek_bidang FROM proyek where proyek_bidang='$bagian' ");
+		return $hsl;
+	}
+	function sum_prog_by_kode($bagian){
+		$hsl=$this->db->query("SELECT proyek_bagian.pb_proyek_id, proyek_bagian.pb_stat_proyek,
+			COUNT(proyek_bagian.pb_stat_proyek) as sumprog
+			FROM proyek_bagian
+			inner JOIN proyek ON proyek_bagian.pb_proyek_id = proyek.proyek_id 
+			inner JOIN user ON proyek.proyek_user_nik = user.user_nik where proyek.proyek_bidang='$bagian'
+			GROUP BY proyek_bagian.pb_stat_proyek");
+		return $hsl;
+	}
 
 	function get_all_proyek_by_user($usernik){
 		$this->db->select('*');
@@ -122,14 +170,14 @@ class M_padmin extends CI_Model{
 	}
 
 
-	function update_proyek_bidang($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran,$gambar){
-		$hsl=$this->db->query("UPDATE proyek_bagian set pb_target='$pbtarget',pb_real='$pbreal',pb_devisi='$pbdevisi',pb_ds_kontrak='$dskontrak',pb_ds_ap='$dsadmproyek',pb_ds_keuangan='$dsadmproyek',pb_sisa_anggaran='$sisaanggran',pb_foto='$gambar',pb_last_update=NOW() where pb_proyek_id='$proyek_id'");
+	function update_proyek_bidang($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran,$gambar,$statproyek){
+		$hsl=$this->db->query("UPDATE proyek_bagian set pb_target='$pbtarget',pb_real='$pbreal',pb_devisi='$pbdevisi',pb_ds_kontrak='$dskontrak',pb_ds_ap='$dsadmproyek',pb_ds_keuangan='$dsadmproyek',pb_sisa_anggaran='$sisaanggran',pb_foto='$gambar',pb_last_update=NOW(),pb_stat_proyek='$statproyek' where pb_proyek_id='$proyek_id'");
 		return $hsl;
 	}
 
 
-	function update_proyek_bidang_wo_img($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran){
-		$hsl=$this->db->query("UPDATE proyek_bagian set pb_target='$pbtarget',pb_real='$pbreal',pb_devisi='$pbdevisi',pb_ds_kontrak='$dskontrak',pb_ds_ap='$dsadmproyek',pb_ds_keuangan='$dsadmproyek',pb_sisa_anggaran='$sisaanggran',pb_foto='$gambar',pb_last_update=NOW() where pb_proyek_id='$proyek_id'");
+	function update_proyek_bidang_wo_img($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran,$statproyek){
+		$hsl=$this->db->query("UPDATE proyek_bagian set pb_target='$pbtarget',pb_real='$pbreal',pb_devisi='$pbdevisi',pb_ds_kontrak='$dskontrak',pb_ds_ap='$dsadmproyek',pb_ds_keuangan='$dsadmproyek',pb_sisa_anggaran='$sisaanggran',pb_foto='$gambar',pb_last_update=NOW(),pb_stat_proyek='$statproyek' where pb_proyek_id='$proyek_id'");
 		return $hsl;
 	}
 

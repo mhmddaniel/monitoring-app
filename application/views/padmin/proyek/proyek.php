@@ -59,8 +59,8 @@
 				<!-- Custom Tabs -->
 				<div class="nav-tabs-custom">
 					<ul class="nav nav-tabs">
-						<li class="active"><a href="#tab_1" data-toggle="tab">Map</a></li>
-						<li><a href="#tab_2" data-toggle="tab">Table</a></li>
+						<li class="active"><a href="#tab_1" data-toggle="tab">Table</a></li>
+						<li><a href="#tab_2" data-toggle="tab">Map</a></li>
 
 						<?php if($_SESSION['level']=='admin'){ ?>
 							<li class="pull-right"><a class="btn btn-success btn-flat bg-olive " href="<?php echo base_url().'padmin/tambah_proyek'?>"><span class="fa fa-plus"></span> Tambah proyek</a></li>
@@ -69,10 +69,6 @@
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="tab_1">
-							<div id="test" class="gmap3"></div>
-						</div>
-						<!-- /.tab-pane -->
-						<div class="tab-pane" id="tab_2">
 							<div class="box-body">
 								<table id="example1" class="table table-striped" style="font-size:13px;">
 									<thead>
@@ -190,6 +186,11 @@
 							</tbody>
 						</table>
 					</div>
+				</div>
+				<!-- /.tab-pane -->
+				<div class="tab-pane" id="tab_2">
+					<div id="test" class="gmap3" ></div>
+
 				</div>
 				<!-- /.tab-pane -->
 			</div>
@@ -365,6 +366,16 @@
 						'</tr>'+
 					<?php endforeach; ?>
 					'</table>'+
+					'</div>'+
+
+					'<div class="row">'+
+					'<div class="post">'+
+					'<div class="row margin-bottom">'+
+					'<div class="col-sm-12 text-muted well well-sm no-shadow">'+
+					'<a href="<?php echo base_url().'assets/images/'.$i['pb_foto'];?>" target="_blank"><img class="img-responsive" src="<?php echo base_url().'assets/images/'.$i['pb_foto'];?>" width="150px" height="150px" alt="Photo"></a>'+
+					'</div>'+
+					'</div>'+
+					'</div>'+
 					'</div>'+
 					'</div>'+
 					'</section>', 

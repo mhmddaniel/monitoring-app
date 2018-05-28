@@ -1,6 +1,5 @@
 <?php 
 $b=$data->row_array() ; 
-
 ?>
 
 <style type="text/css">
@@ -119,7 +118,7 @@ $b=$data->row_array() ;
                 echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>";
               }
               else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
-                
+
                 echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";
               }
               else {
@@ -135,7 +134,7 @@ $b=$data->row_array() ;
                 echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";                         
               }
               else {
-                
+
                 echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
               } 
             }
@@ -257,7 +256,7 @@ $b=$data->row_array() ;
           echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>";
         }
         else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
-          
+
           echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";
         }
         else {
@@ -273,7 +272,7 @@ $b=$data->row_array() ;
           echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";                         
         }
         else {
-          
+
           echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
         } 
       }
@@ -282,6 +281,19 @@ $b=$data->row_array() ;
       }
       ?>
     </p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 table-responsive">
+    <div class="post">
+      <div class="row margin-bottom">
+        <div class="col-sm-6 col-sm-offset-3  text-muted well well-sm no-shadow">
+          <img class="img-responsive" src="<?php echo base_url().'assets/images/'.$b['pb_foto'];?>" alt="Photo">
+        </div>
+
+      </div>
+    </div>
   </div>
 </div>
 <!--

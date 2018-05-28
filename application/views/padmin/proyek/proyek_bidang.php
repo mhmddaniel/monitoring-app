@@ -52,6 +52,9 @@
 									</div>
 								</div>
 							</div>
+							<?php 
+							?>
+
 
 
 							<div class="form-group">

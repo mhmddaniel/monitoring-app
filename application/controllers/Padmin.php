@@ -12,9 +12,28 @@ class Padmin extends CI_Controller{
 	/* start view */
 	public function index(){
 		$y['title']='Dashboard';
+		if($_SESSION['level']=='admin'){
+			$x['sumprog']=$this->m_padmin->sum_prog();
+			$x['sum_sisa']=$this->m_padmin->sum_sisa();
+			$x['countproyek']=$this->m_padmin->sum_proyek();
+			$x['sumpagu']=$this->m_padmin->sum_pagu();
+			$x['sumkeluar']=$this->m_padmin->sum_keluar();
+		}
+		else if($_SESSION['level']=='bidang'){
+			$bagian=$_SESSION['bagian'];
+			$x['countproyek']=$this->m_padmin->sum_proyek_by_kode($bagian);
+			$x['sumprog']=$this->m_padmin->sum_prog_by_kode($bagian);
+			$x['sum_sisa']=$this->m_padmin->sum_sisa_by_kode($bagian);
+			$x['sumpagu']=$this->m_padmin->sum_pagu_by_kode($bagian);
+			$x['sumkeluar']=$this->m_padmin->sum_keluar_by_kode($bagian);
+		}
+		else {
+			$usernik=$_SESSION['usernik'];
+			$x['data']=$this->m_padmin->get_all_proyek_by_user($usernik);
+		}
 		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');
-		$this->load->view('padmin/index');
+		$this->load->view('padmin/index',$x);
 		$this->load->view('padmin/footer');
 	}
 
@@ -460,6 +479,36 @@ class Padmin extends CI_Controller{
 
 	function update_proyek_bidang(){
 
+		$pbtarget=$this->input->post('pbtarget');
+		$pbreal=$this->input->post('pbreal');
+		$pbdevisi=$this->input->post('pbdevisi');
+		if($pbtarget==0 || $pbtarget<=70){
+			if($pbdevisi==0 || $pbdevisi>=(-7)){
+				$statproyek='wajar';
+			}
+			else if ($pbdevisi<(-7) && $pbdevisi>=(-10)){
+				$statproyek='terlambat';
+			}
+			else {
+				$statproyek='kritis';
+			}
+		}
+		else if ($pbtarget>70 && $pbtarget<=100){
+			if($pbdevisi==0 || $pbdevisi>=(-4)){
+				$statproyek='wajar';
+			}
+			else if ($pbdevisi<(-4) && $pbdevisi>=(-5)){
+				$statproyek='terlambat';                     
+			}
+			else {
+				$statproyek='kritis';
+			} 
+		}
+		else {
+			$statproyek='baik';
+		} 
+
+
 		$config['upload_path'] = './assets/images/';
 		$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
 		$config['encrypt_name'] = TRUE;
@@ -491,7 +540,7 @@ class Padmin extends CI_Controller{
 				$dsadmproyek=$this->input->post('dsadmproyek');
 				$totalds=$this->input->post('totalds');
 				$sisaanggran=$this->input->post('sisaanggran');
-				$this->m_padmin->update_proyek_bidang($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran,$gambar);
+				$this->m_padmin->update_proyek_bidang($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran,$gambar,$statproyek);
 				echo $this->session->set_flashdata('msg','info');
 				redirect('padmin/proyek');
 			}else{
@@ -508,7 +557,7 @@ class Padmin extends CI_Controller{
 			$dsadmproyek=$this->input->post('dsadmproyek');
 			$totalds=$this->input->post('totalds');
 			$sisaanggran=$this->input->post('sisaanggran');
-			$this->m_padmin->update_proyek_bidang_wo_img($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran);
+			$this->m_padmin->update_proyek_bidang_wo_img($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran,$statproyek);
 			echo $this->session->set_flashdata('msg','info');
 			redirect('padmin/proyek');
 		} 
