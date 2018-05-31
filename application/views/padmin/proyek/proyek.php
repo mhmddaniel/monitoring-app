@@ -91,6 +91,7 @@
 										foreach ($data->result_array() as $i) :
 											$no++;
 											$proyek_id=$i['proyek_id'];
+											$pb_id=$i['pb_id'];
 											$proyek_nama=$i['proyek_nama'];
 											$proyek_tahun=$i['proyek_tahun'];
 											$proyek_keuangan=$i['proyek_keuangan'];
@@ -173,7 +174,8 @@
 														<?php }
 														else if  ($_SESSION['level']=='bidang'){
 															?>
-															<li><a href="<?php echo base_url().'padmin/get_proyek_bidang/'.$proyek_id;?>"><span class="fa fa-pencil"></span>Edit</a></li>
+															<li><a href="<?php echo base_url().'padmin/get_proyek_bidang/'.$pb_id;?>"><span class="fa fa-pencil"></span>Edit</a></li>
+															<li><a href="<?php echo base_url().'padmin/uplampiran/'.$pb_id;?>"><span class="fa fa-plus"></span>Upload</a></li>
 															<?php
 														}
 														else {} ?>

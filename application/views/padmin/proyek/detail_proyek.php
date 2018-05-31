@@ -285,27 +285,91 @@ $b=$data->row_array() ;
 </div>
 
 <div class="row">
-  <div class="col-xs-12 table-responsive">
+  <div class="col-xs-12 table-responsive" >
     <div class="post">
       <div class="row margin-bottom">
-        <div class="col-sm-6 col-sm-offset-3  text-muted well well-sm no-shadow">
-          <img class="img-responsive" src="<?php echo base_url().'assets/images/'.$b['pb_foto'];?>" alt="Photo">
-        </div>
-
+        <?php foreach ($data->result_array() as $i) : ?>
+          <div class="col-sm-3 well no-shadow">
+            <a class="btn" data-toggle="modal" data-target="#ModalView<?php echo $i['pb_id'];?>"><img class="img-responsive" src="<?php echo base_url().'assets/images/'.$i['pb_foto'];?>" alt="Photo"></a>
+          </div>
+        <?php endforeach; ?>
       </div>
     </div>
   </div>
 </div>
-<!--
-<div class="row no-print">
-  <div class="col-xs-12">
-    <a href="<?php echo base_url().'padmin/print/'.$b['proyek_id'];?>" target="_blank" class="btn btn-success pull-right"><i class="fa fa-print"></i> Print</a>
+
+
+<div class="row">
+  <div class="col-xs-12" >
+    <div class="post">
+      <div class="row margin-bottom">
+        <div class="col-md-12">
+          <table class="table table-responsive table-hovered">
+            <tr>
+              <th>No</th>
+              <th>File</th>
+              <th>Aksi</th>
+            </tr>
+            <?php 
+            $no=0;
+            foreach ($file->result_array() as $i) : 
+              $no++;
+              ?>
+              <tr>
+                <td><?php echo $no; ?></td>
+                <td><?php echo $i['file_data']; ?></td>
+                <td><a  href="<?php echo base_url()?>padmin/download/<?php echo $i['file_id'];?>"><?php echo $i['file_data'];?></a></td>
+              </tr>
+            <?php endforeach;
+
+            ?>
+
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
--->
+
+<div class="row">
+  <div class="col-xs-12 table-responsive" >
+    <div class="col-md-12">
+      <div class="row margin-bottom">
+        <div id="realtarget" style="height: 500px"></div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="row margin-bottom">
+        <div id="curve_chart" style="height: 500px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </section>
 <div class="clearfix"></div>
 </div>
+
+
+
+
+<?php foreach ($data->result_array() as $i) : ?>
+  <!--Modal Hapus Pengguna-->
+  <div class="modal fade" id="ModalView<?php echo $i['pb_id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="col-md-12">  
+        <div class="modal-content">
+          <div class="modal-body">     
+            <img class="img-responsive" src="<?php echo base_url().'assets/images/'.$i['pb_foto'];?>" alt="Photo">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<?php endforeach;?>
+
+
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyAogXD-AHrsmnWinZIyhRORJ84bgLwDPpg"></script>
 
@@ -349,4 +413,75 @@ $b=$data->row_array() ;
     })
     ;
   });
+</script>
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Tanggal', 'Real', 'Target'],
+      [null, 0, 0],
+      <?php foreach ($chartrt->result_array() as $i) : ?>
+        ['<?php echo $i['tanggal']; ?>',  <?php echo $i['pb_real']; ?>, <?php echo $i['pb_target']?>],
+      <?php endforeach; ?>
+      ]);
+
+    var options = {
+      title: 'Real Target',
+      curveType: 'curve',
+      legend: { position: 'bottom' },
+      hAxis: {
+        title: 'Tanggal',
+      },
+      vAxis: { 
+        title: 'Progress (%)',
+        ticks: [0, 10, 20, 30, 40 ,50 ,60 ,70 ,80 ,90 ,100]
+      } ,
+      pointSize: 4,
+    };
+
+    var chart = new google.visualization.LineChart(document.getElementById('realtarget'));
+
+    chart.draw(data, options);
+  }
+
+
+
+</script>
+
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Tanggal', 'TDK'],
+      <?php foreach ($charttdk->result_array() as $i) : ?>
+        ['<?php echo $i['tanggal']; ?>',  <?php echo $i['pb_ds_keuangan'];?>],
+      <?php endforeach; ?>
+      ]);
+
+    var options = {
+      title: 'Real Target',
+      curveType: 'function',
+      legend: { position: 'bottom' },
+      hAxis: {
+        title: 'Tanggal',
+      },
+      vAxis: { 
+        title: 'Pagu (Rp.)',
+      } ,
+      pointSize: 4,
+    };
+
+    var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+    chart.draw(data, options);
+  }
+
+  
 </script>

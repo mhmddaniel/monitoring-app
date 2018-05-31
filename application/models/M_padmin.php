@@ -16,6 +16,14 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->get();
 		return $hsl;
 	}
+	function get_chart_rt($kode){
+		$hsl=$this->db->query("SELECT proyek_bagian.*,DATE_FORMAT(pb_last_update,'%d %M %Y') AS tanggal FROM proyek_bagian where pb_proyek_id='$kode' ORDER BY tanggal asc");
+		return $hsl;
+	}
+	function get_chart_tdk($kode){
+		$hsl=$this->db->query("SELECT DISTINCT proyek_bagian.*,DATE_FORMAT(pb_last_update,'%d %M %Y') AS tanggal FROM proyek_bagian,proyek where pb_proyek_id='$kode' ORDER BY tanggal asc");
+		return $hsl;
+	}
 	function sum_sisa(){
 		$hsl=$this->db->query("SELECT sum(pb_sisa_anggaran) AS sumsisa FROM proyek_bagian");
 		return $hsl;
@@ -32,7 +40,10 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("SELECT sum(proyek_pagu) AS sumpagu FROM proyek");
 		return $hsl;
 	}
-
+	function tambah_lampiran_file($proyek_id,$nfile){
+		$hsl=$this->db->query("INSERT INTO file (proyek_id,file_data) values ('$proyek_id','$nfile')");
+		return $hsl;
+	}
 	function sum_pagu_by_kode($bagian){
 		$hsl=$this->db->query("SELECT sum(proyek_pagu) AS sumpagu from proyek where proyek_bidang='$bagian' ");
 		return $hsl;
@@ -40,7 +51,7 @@ class M_padmin extends CI_Model{
 
 	function sum_keluar_by_kode($bagian){
 		$hsl=$this->db->query("SELECT sum(pb_ds_kontrak) as suma, sum(pb_ds_ap) as sumb FROM proyek_bagian,proyek where proyek.proyek_bidang='$bagian' && proyek_bagian.pb_proyek_id=proyek.proyek_id ");
-				return $hsl;
+		return $hsl;
 	}
 	function sum_keluar(){
 		$hsl=$this->db->query("SELECT sum(pb_ds_kontrak) as suma, sum(pb_ds_ap) as sumb from proyek_bagian");
@@ -65,6 +76,15 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 
+	function save_lampiran_foto($proyek_id,$gambar,$jenis){
+		$hsl=$this->db->query("INSERT into file (proyek_id,file_data,file_jenis) VALUES ('$proyek_id','$gambar','$jenis')");
+		return $hsl;
+	}
+	function save_lampiran_file($proyek_id,$gambar,$jenis){
+		$hsl=$this->db->query("INSERT into file (proyek_id,file_data,file_jenis) VALUES ('$proyek_id','$gambar','$jenis')");
+		return $hsl;
+	}
+
 	function get_all_proyek_by_user($usernik){
 		$this->db->select('*');
 		$this->db->from('proyek a');
@@ -75,6 +95,7 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->get();
 		return $hsl;
 	}
+	/*
 	function get_all_proyek_by_bagian($bagian){
 		$this->db->select('*');
 		$this->db->from('proyek a');
@@ -82,7 +103,14 @@ class M_padmin extends CI_Model{
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
 		$this->db->join('user d','a.proyek_user_nik=d.user_nik','inner');
 		$this->db->where('proyek_bidang',$bagian);
+		$this->db->ORDER_BY('pb_proyek_id','asc');
 		$hsl=$this->db->get();
+		return $hsl;
+	}*/
+
+
+	function get_all_proyek_by_bagian($bagian){
+		$hsl=$this->db->query("SELECT * FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id inner join koordinat on proyek.proyek_koordinat_id=koordinat.koordinat_id inner join user on proyek.proyek_user_nik=user.user_nik where proyek.proyek_bidang='$bagian' AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
 		return $hsl;
 	}
 	function get_proyek_bidang_by_kode($kode){
@@ -91,7 +119,7 @@ class M_padmin extends CI_Model{
 		$this->db->join('proyek_bagian b','a.proyek_id=b.pb_proyek_id','inner');
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
 		$this->db->join('user d','a.proyek_user_nik=d.user_nik','inner');
-		$this->db->where('proyek_id',$kode);
+		$this->db->where('pb_id',$kode);
 		$hsl=$this->db->get();
 		return $hsl;
 	}
@@ -169,7 +197,11 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 
-
+	function tambah_proyek_bidang($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran,$gambar,$statproyek){
+		$hsl=$this->db->query("INSERT INTO proyek_bagian (pb_proyek_id,pb_target,pb_real,pb_devisi,pb_ds_kontrak,pb_ds_ap,pb_ds_keuangan,pb_sisa_anggaran,pb_foto,pb_last_update,pb_stat_proyek) VALUES ('$proyek_id','$pbtarget','$pbreal','$pbdevisi','$dskontrak','$dsadmproyek','$totalds','$sisaanggran','$gambar',NOW(),'$statproyek')");
+		return $hsl;
+	}
+	/*
 	function update_proyek_bidang($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran,$gambar,$statproyek){
 		$hsl=$this->db->query("UPDATE proyek_bagian set pb_target='$pbtarget',pb_real='$pbreal',pb_devisi='$pbdevisi',pb_ds_kontrak='$dskontrak',pb_ds_ap='$dsadmproyek',pb_ds_keuangan='$dsadmproyek',pb_sisa_anggaran='$sisaanggran',pb_foto='$gambar',pb_last_update=NOW(),pb_stat_proyek='$statproyek' where pb_proyek_id='$proyek_id'");
 		return $hsl;
@@ -180,6 +212,8 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("UPDATE proyek_bagian set pb_target='$pbtarget',pb_real='$pbreal',pb_devisi='$pbdevisi',pb_ds_kontrak='$dskontrak',pb_ds_ap='$dsadmproyek',pb_ds_keuangan='$dsadmproyek',pb_sisa_anggaran='$sisaanggran',pb_foto='$gambar',pb_last_update=NOW(),pb_stat_proyek='$statproyek' where pb_proyek_id='$proyek_id'");
 		return $hsl;
 	}
+*/
+
 
 	function save_koordinat($numkor,$namkor,$latitude,$longitude,$inputAddress){
 		$hsl=$this->db->query("INSERT INTO koordinat (koordinat_id,koordinat_nama,koordinat_lat,koordinat_lng,koordinat_alamat) VALUES ('$numkor','$namkor','$latitude','$longitude','$inputAddress')");
@@ -270,6 +304,28 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 
+	function getDown($kode)
+	{
+		$this->load->helper('download');
+		$this->db->select('*');
+		$this->db->where('file_id',$kode);
+		$query =  $this->db->get('file');
+		foreach ($query->result() as $row)
+		{
+			$nfile = file_get_contents(base_url()."assets/filedata/".$row->file_data);
+			$file_name = $row->file_data;
+		}
+		force_download($file_name, $nfile);
+	}
+
+
+	function get_data_file($kode){
+		$this->db->select('*');
+		$this->db->from('file');
+		$this->db->where('proyek_id',$kode);
+		$hsl=$this->db->get();
+		return $hsl;
+	}
 
 	function get_detail_proyek_bag_by_kode($kode){
 		$this->db->select('*');

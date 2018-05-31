@@ -26,73 +26,40 @@
 
 		<div class="row">
 			<div class="col-md-12">
-				<form name='autoSumForm'  action="<?php echo base_url()?>padmin/save_proyek_bidang" method="POST" enctype="multipart/form-data" >
-					<div class="box box-warning">
-						<div class="box-header with-border">
-							<h3 class="box-title">Data Bagian</h3>
+
+				<div class="box box-warning">
+					<div class="box-header with-border">
+						<h3 class="box-title">Data Bagian</h3>
+					</div>
+					<div class="box-body">
+						<div class="row">
+							<div class="form-group col-md-6">
+								<form action="<?php echo base_url()?>padmin/save_lampiran_foto" method="POST" enctype="multipart/form-data" >
+									<label>Foto</label>
+									<input type="hidden" name="proyek_id" value="<?php echo $b['proyek_id']; ?>">
+									<input type="file"  name="filefoto" class="form-control btn-success">
+									<input type="hidden"  name="jenis" value="foto" class="form-control">	
+									<div class="form-group pull-right">
+										<button type="submit" class="btn btn-primary btn-flat pull-right"><span class="fa fa-pencil"></span> Publish</button>
+									</div>
+								</form>
+							</div>
 						</div>
-						<div class="box-body">
-							<div class="row">
-								<div class="col-md-4">
-									<div class="form-group">
-										<label>Target</label>
-										<input type='text' name='pbtarget' class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_target']; ?>" onBlur="stopCalc();" />
-									</div>
+						<div class="row">
+							<form action="<?php echo base_url()?>padmin/save_lampiran_file" method="POST" enctype="multipart/form-data" >
+								<div class="form-group col-md-6">
+									<label>LAMPIRAN</label>
+									<input type="hidden" name="proyek_id" value="<?php echo $b['proyek_id']; ?>">
+									<input type="file"  name="fileat" class="form-control btn-success">
+									<input type="hidden"  name="jenis" value="file" class="form-control">
+									<div class="form-group pull-right">
+										<button type="submit" class="btn btn-primary btn-flat pull-right"><span class="fa fa-pencil"></span> Publish</button>
+									</div>	
 								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<label>Real</label>
-										<input type='text' name='pbreal' class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_real']; ?>" onBlur="stopCalc();" />
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<label>Devisi</label>
-										<input type='text' name='pbdevisi' class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_devisi']; ?>" onBlur="stopCalc();" />
-									</div>
-								</div>
-							</div>
-							<?php 
-							?>
-
-
-
-							<div class="form-group">
-								<label>Daya Serap Kontrak</label>
-								<input type="hidden" name="proyek_id" value="<?php echo $b['proyek_id']; ?>">
-								<input type='text' name='dskontrak' class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_ds_kontrak']; ?>" onBlur="stopCalc();" />
-							</div>
-							<div class="form-group">
-								<label>	Daya Serap Administrasi Proyek</label>
-								<input type='text' name='dsadmproyek' class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_ds_ap']; ?>" onBlur="stopCalc();" />
-							</div>
-							<div class="form-group">
-								<label>Total Daya Serap Keuangan</label>
-								<input type='text' name="totalds" class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_ds_keuangan']; ?>" onBlur="stopCalc();"  />
-							</div>
-
-							<div class="form-group">
-								<label>Pagu</label>
-								<input type="text"  name="pagu" class="form-control" value="<?php echo $b['proyek_pagu']; ?>"  readonly>
-							</div>
-							<div class="form-group">
-								<label>Sisa Anggaran</label>
-								<input type="text" value="<?php echo $b['pb_sisa_anggaran']; ?>" name="sisaanggran" class="form-control"  readonly>
-							</div>
-							<div class="form-group col-md-6">
-								<label>Foto</label>
-								<input type="file"  name="filefoto" class="form-control btn-success">
-							</div>
-							<div class="form-group col-md-6">
-								<label>LAMPIRAN</label>
-								<input type="file"  name="fileat" class="form-control btn-success">
-							</div>
-							<div class="form-group pull-right">
-								<button type="submit" class="btn btn-primary btn-flat pull-right"><span class="fa fa-pencil"></span> Publish</button>
-							</div>
+							</form>
 						</div>
 					</div>
-				</form>
+				</div>
 			</div>
 		</div>
 	</section>
