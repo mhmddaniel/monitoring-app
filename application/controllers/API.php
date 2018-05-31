@@ -118,36 +118,51 @@ class API extends CI_Controller{
         if (isset($_POST['kode'])) {
 
             $kode = $_POST['kode'];
-        $project=$this->m_padmin->get_detail_proyek_by_kode($kode);
-        if($project->num_rows() > 0){
-            $xcadmin=$project->row_array();
+            $project=$this->m_padmin->get_detail_proyek_by_kode($kode);
+            if($project->num_rows() > 0){
+                $xcadmin=$project->row_array();
 
-            $newdata['error'] = FALSE;
-            $newdata['project'] = $project->result_array();
-            $newdata['fetched'] = TRUE;
+                $newdata['error'] = FALSE;
+                $newdata['project'] = $project->result_array();
+                $newdata['fetched'] = TRUE;
 
-            echo json_encode($newdata);
-        }else{
+                echo json_encode($newdata);
+            }else{
+                $newdata['error'] = TRUE;
+                $newdata['error_msg'] = "Tidak ada data untuk proyek ini";
+                $newdata['fetched'] = FALSE;
+
+                echo json_encode($newdata);
+            }
+        }
+        else
+        {
             $newdata['error'] = TRUE;
-            $newdata['error_msg'] = "Tidak ada data untuk proyek ini";
+            $newdata['error_msg'] = "Gagal menghubungkan ke server";
             $newdata['fetched'] = FALSE;
 
             echo json_encode($newdata);
         }
     }
-    else
+    function doUpload()
     {
-        $newdata['error'] = TRUE;
-        $newdata['error_msg'] = "Gagal menghubungkan ke server";
-        $newdata['fetched'] = FALSE;
+        $config['upload_path']          = './images/uploads';
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['max_size']             = 100;
+        $config['max_width']            = 1024;
+        $config['max_height']           = 768;
 
-        echo json_encode($newdata);
-    }
+        $this->load->library('upload', $config);
 
-    }
-
-    function uploadPhotos()
-    {
-
+        if ( ! $this->upload->do_upload('userfile'))
+        {
+            $error = array('error' => $this->upload->display_errors());
+            echo json_encode($error);
+        }
+        else
+        {
+            $data = array('upload_data' => $this->upload->data());
+            echo json_encode($data);
+        }
     }
 }
