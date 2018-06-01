@@ -68,7 +68,7 @@ class M_padmin extends CI_Model{
 	}
 	function sum_prog_by_kode($bagian){
 		$hsl=$this->db->query("SELECT proyek_bagian.pb_proyek_id, proyek_bagian.pb_stat_proyek,
-			COUNT(proyek_bagian.pb_stat_proyek) as sumprog
+			COUNT(distinct proyek_bagian.pb_stat_proyek) as sumprog
 			FROM proyek_bagian
 			inner JOIN proyek ON proyek_bagian.pb_proyek_id = proyek.proyek_id 
 			inner JOIN user ON proyek.proyek_user_nik = user.user_nik where proyek.proyek_bidang='$bagian'
@@ -197,8 +197,13 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 
-	function tambah_proyek_bidang($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran,$gambar,$statproyek){
-		$hsl=$this->db->query("INSERT INTO proyek_bagian (pb_proyek_id,pb_target,pb_real,pb_devisi,pb_ds_kontrak,pb_ds_ap,pb_ds_keuangan,pb_sisa_anggaran,pb_foto,pb_last_update,pb_stat_proyek) VALUES ('$proyek_id','$pbtarget','$pbreal','$pbdevisi','$dskontrak','$dsadmproyek','$totalds','$sisaanggran','$gambar',NOW(),'$statproyek')");
+	function update_lampiran_file($file_id,$gambar){
+		$hsl=$this->db->query("UPDATE file set file_data='$gambar' where file_id='$file_id'");
+		return $hsl;
+	}
+
+	function tambah_proyek_bidang($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran,$statproyek){
+		$hsl=$this->db->query("INSERT INTO proyek_bagian (pb_proyek_id,pb_target,pb_real,pb_devisi,pb_ds_kontrak,pb_ds_ap,pb_ds_keuangan,pb_sisa_anggaran,pb_last_update,pb_stat_proyek) VALUES ('$proyek_id','$pbtarget','$pbreal','$pbdevisi','$dskontrak','$dsadmproyek','$totalds','$sisaanggran',NOW(),'$statproyek')");
 		return $hsl;
 	}
 	/*
@@ -318,12 +323,13 @@ class M_padmin extends CI_Model{
 		force_download($file_name, $nfile);
 	}
 
+	function get_data_foto($kode){
+		$hsl=$this->db->query("SELECT * from file where proyek_id='$kode' && file_jenis='foto'");
+		return $hsl;
+	}
 
 	function get_data_file($kode){
-		$this->db->select('*');
-		$this->db->from('file');
-		$this->db->where('proyek_id',$kode);
-		$hsl=$this->db->get();
+		$hsl=$this->db->query("SELECT * from file where proyek_id='$kode' && file_jenis='file'");
 		return $hsl;
 	}
 

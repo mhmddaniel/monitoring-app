@@ -13,7 +13,7 @@
 <div class="content-wrapper">
 	<section class="content-header">
 		<h1>
-			Proyek
+			Data Bagian
 			<small></small>
 		</h1>
 		<ol class="breadcrumb">
@@ -25,41 +25,57 @@
 	<section class="content">
 
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-6 col-md-offset-3">
 
 				<div class="box box-warning">
 					<div class="box-header with-border">
-						<h3 class="box-title">Data Bagian</h3>
+						<h3 class="box-title">Foto Proyek</h3>
 					</div>
 					<div class="box-body">
 						<div class="row">
-							<div class="form-group col-md-6">
-								<form action="<?php echo base_url()?>padmin/save_lampiran_foto" method="POST" enctype="multipart/form-data" >
+							<form action="<?php echo base_url()?>padmin/save_lampiran_foto" method="POST" enctype="multipart/form-data" >
+								<div class="form-group col-md-12">
 									<label>Foto</label>
 									<input type="hidden" name="proyek_id" value="<?php echo $b['proyek_id']; ?>">
 									<input type="file"  name="filefoto" class="form-control btn-success">
-									<input type="hidden"  name="jenis" value="foto" class="form-control">	
+									<input type="hidden"  name="jenis" value="foto" class="form-control">		
+								</div>
+								<div class="form-group col-md-12">
 									<div class="form-group pull-right">
 										<button type="submit" class="btn btn-primary btn-flat pull-right"><span class="fa fa-pencil"></span> Publish</button>
 									</div>
-								</form>
-							</div>
-						</div>
-						<div class="row">
-							<form action="<?php echo base_url()?>padmin/save_lampiran_file" method="POST" enctype="multipart/form-data" >
-								<div class="form-group col-md-6">
-									<label>LAMPIRAN</label>
-									<input type="hidden" name="proyek_id" value="<?php echo $b['proyek_id']; ?>">
-									<input type="file"  name="fileat" class="form-control btn-success">
-									<input type="hidden"  name="jenis" value="file" class="form-control">
-									<div class="form-group pull-right">
-										<button type="submit" class="btn btn-primary btn-flat pull-right"><span class="fa fa-pencil"></span> Publish</button>
-									</div>	
 								</div>
 							</form>
 						</div>
 					</div>
 				</div>
+
+
+
+				<div class="box box-warning">
+					<div class="box-header with-border">
+						<h3 class="box-title">Lampiran Proyek</h3>
+					</div>
+					<div class="box-body">
+						<div class="row">
+							<form action="<?php echo base_url()?>padmin/save_lampiran_file" method="POST" enctype="multipart/form-data" >
+								<div class="form-group col-md-12">
+									<label>LAMPIRAN</label>
+									<input type="hidden" name="proyek_id" value="<?php echo $b['proyek_id']; ?>">
+									<input type="file"  name="fileat" class="form-control btn-success">
+									<input type="hidden"  name="jenis" value="file" class="form-control">
+								</div>
+
+								<div class="form-group col-md-12">
+									<div class="form-group pull-right">
+										<button type="submit" class="btn btn-primary btn-flat pull-right"><span class="fa fa-pencil"></span> Publish</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
 			</div>
 		</div>
 	</section>

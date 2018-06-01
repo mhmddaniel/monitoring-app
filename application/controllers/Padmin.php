@@ -349,6 +349,14 @@ class Padmin extends CI_Controller{
 		$this->load->view('padmin/proyek/edit_proyek',$x);
 		$this->load->view('padmin/footer');
 	}  
+	function get_edit_file(){
+		$kode=$this->uri->segment(3);
+		$x['data']=$this->m_padmin->get_edit_file_by_kode($kode);
+		$this->load->view('padmin/header');
+		$this->load->view('padmin/sidebar');		
+		$this->load->view('padmin/proyek/edit_file',$x);
+		$this->load->view('padmin/footer');
+	}  
 	function get_edit_pn(){
 		$kode=$this->uri->segment(3);
 		$x['data']=$this->m_padmin->get_all_pn_by_kode($kode);
@@ -487,97 +495,6 @@ class Padmin extends CI_Controller{
 
 	}
 
-	function update_proyek_bidang(){
-
-		$pbtarget=$this->input->post('pbtarget');
-		$pbreal=$this->input->post('pbreal');
-		$pbdevisi=$this->input->post('pbdevisi');
-		if($pbtarget==0 || $pbtarget<=70){
-			if($pbdevisi==0 || $pbdevisi>=(-7)){
-				$statproyek='wajar';
-			}
-			else if ($pbdevisi<(-7) && $pbdevisi>=(-10)){
-				$statproyek='terlambat';
-			}
-			else {
-				$statproyek='kritis';
-			}
-		}
-		else if ($pbtarget>70 && $pbtarget<=100){
-			if($pbdevisi==0 || $pbdevisi>=(-4)){
-				$statproyek='wajar';
-			}
-			else if ($pbdevisi<(-4) && $pbdevisi>=(-5)){
-				$statproyek='terlambat';                     
-			}
-			else {
-				$statproyek='kritis';
-			} 
-		}
-		else {
-			$statproyek='baik';
-		} 
-
-
-		$config['upload_path'] = './assets/images/';
-		$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
-		$config['encrypt_name'] = TRUE;
-
-		$this->upload->initialize($config);
-		if(!empty($_FILES['filefoto']['name']))
-		{
-			if ($this->upload->do_upload('filefoto'))
-			{
-				$gbr = $this->upload->data();
-
-				$config['image_library']='gd2';
-				$config['source_image']='./assets/images/'.$gbr['file_name'];
-				$config['create_thumb']= FALSE;
-				$config['maintain_ratio']= FALSE;
-				$config['quality']= '60%';
-				$config['width']= 840;
-				$config['height']= 450;
-				$config['new_image']= './assets/images/'.$gbr['file_name'];
-				$this->load->library('image_lib', $config);
-				$this->image_lib->resize();
-
-				$gambar=$gbr['file_name'];
-				$proyek_id=$this->input->post('proyek_id');
-				$pbtarget=$this->input->post('pbtarget');
-				$pbreal=$this->input->post('pbreal');
-				$pbdevisi=$this->input->post('pbdevisi');
-				$dskontrak=$this->input->post('dskontrak');
-				$dsadmproyek=$this->input->post('dsadmproyek');
-				$totalds=$this->input->post('totalds');
-				$sisaanggran=$this->input->post('sisaanggran');
-				$this->m_padmin->update_proyek_bidang($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran,$gambar,$statproyek);
-				echo $this->session->set_flashdata('msg','info');
-				redirect('padmin/proyek');
-			}
-			else{
-				echo $this->session->set_flashdata('msg','warning');
-				redirect('padmin/proyek');
-			}
-
-		}
-		else{
-			$pbtarget=$this->input->post('pbtarget');
-			$pbreal=$this->input->post('pbreal');
-			$pbdevisi=$this->input->post('pbdevisi');
-			$proyek_id=$this->input->post('proyek_id');
-			$dskontrak=$this->input->post('dskontrak');
-			$dsadmproyek=$this->input->post('dsadmproyek');
-			$totalds=$this->input->post('totalds');
-			$sisaanggran=$this->input->post('sisaanggran');
-			$this->m_padmin->update_proyek_bidang_wo_img($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran,$statproyek);
-			echo $this->session->set_flashdata('msg','info');
-			redirect('padmin/proyek');
-		} 
-
-	}
-
-
-
 
 	function save_proyek_bidang(){
 
@@ -585,76 +502,54 @@ class Padmin extends CI_Controller{
 		$pbreal=$this->input->post('pbreal');
 		$pbdevisi=$this->input->post('pbdevisi');
 		if($pbtarget==0 || $pbtarget<=70){
-			if($pbdevisi==0 || $pbdevisi>=(-7)){
-				$statproyek='wajar';
-			}
-			else if ($pbdevisi<(-7) && $pbdevisi>=(-10)){
-				$statproyek='terlambat';
+			if($pbdevisi>0){
+				$statproyek='baik';
 			}
 			else {
-				$statproyek='kritis';
+				if($pbdevisi==0 || $pbdevisi>=(-7)){
+					$statproyek='wajar';
+				}
+				else if ($pbdevisi<(-7) && $pbdevisi>=(-10)){
+					$statproyek='terlambat';
+				}
+				else {
+					$statproyek='kritis';
+				}
 			}
 		}
 		else if ($pbtarget>70 && $pbtarget<=100){
-			if($pbdevisi==0 || $pbdevisi>=(-4)){
-				$statproyek='wajar';
-			}
-			else if ($pbdevisi<(-4) && $pbdevisi>=(-5)){
-				$statproyek='terlambat';                     
+			if($pbdevisi>0){
+				$statproyek='baik';
 			}
 			else {
-				$statproyek='kritis';
-			} 
+				if($pbdevisi==0 || $pbdevisi>=(-4)){
+					$statproyek='wajar';
+				}
+				else if ($pbdevisi<(-4) && $pbdevisi>=(-5)){
+					$statproyek='terlambat';                     
+				}
+				else {
+					$statproyek='kritis';
+				} 
+			}
 		}
 		else {
 			$statproyek='baik';
 		} 
 
 
-		$config['upload_path'] = './assets/images/';
-		$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp|doc|docx|pdf|xls|xlsx|ppt|ppt|zip|rar';
-		$config['encrypt_name'] = TRUE;
+		$proyek_id=$this->input->post('proyek_id');
+		$pbtarget=$this->input->post('pbtarget');
+		$pbreal=$this->input->post('pbreal');
+		$pbdevisi=$this->input->post('pbdevisi');
+		$dskontrak=$this->input->post('dskontrak');
+		$dsadmproyek=$this->input->post('dsadmproyek');
+		$totalds=$this->input->post('totalds');
+		$sisaanggran=$this->input->post('sisaanggran');
+		$ggc=$this->m_padmin->tambah_proyek_bidang($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran,$statproyek);
+		echo $this->session->set_flashdata('msg','info');
+		redirect('padmin/proyek');
 
-		$this->upload->initialize($config);
-		if(!empty($_FILES['filefoto']['name']))
-		{
-			if ($this->upload->do_upload('filefoto'))
-			{
-				$gbr = $this->upload->data();
-
-				$config['image_library']='gd2';
-				$config['source_image']='./assets/images/'.$gbr['file_name'];
-				$config['create_thumb']= FALSE;
-				$config['maintain_ratio']= FALSE;
-				$config['quality']= '60%';
-				$config['width']= 840;
-				$config['height']= 450;
-				$config['new_image']= './assets/images/'.$gbr['file_name'];
-				$this->load->library('image_lib', $config);
-				$this->image_lib->resize();
-
-				$gambar=$gbr['file_name'];
-				$proyek_id=$this->input->post('proyek_id');
-				$pbtarget=$this->input->post('pbtarget');
-				$pbreal=$this->input->post('pbreal');
-				$pbdevisi=$this->input->post('pbdevisi');
-				$dskontrak=$this->input->post('dskontrak');
-				$dsadmproyek=$this->input->post('dsadmproyek');
-				$totalds=$this->input->post('totalds');
-				$sisaanggran=$this->input->post('sisaanggran');
-				$ggc=$this->m_padmin->tambah_proyek_bidang($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran,$gambar,$statproyek);
-				echo $this->session->set_flashdata('msg','info');
-				redirect('padmin/proyek');
-			} 
-			else{
-				echo $this->session->set_flashdata('msg','warning');
-				redirect('padmin/proyek');
-			} 
-		}	
-		else{
-			echo $this->session->set_flashdata('msg','warning');
-			redirect('padmin/proyek');
-		}
 
 	}
 
@@ -744,7 +639,47 @@ class Padmin extends CI_Controller{
 
 	}
 
+	function update_lampiran_file(){
 
+		$config['upload_path'] = './assets/filedata/';
+		$config['allowed_types'] = 'doc|docx|pdf|xls|xlsx|ppt|ppt|zip|rar';
+		$config['encrypt_name'] = TRUE;
+
+		$this->upload->initialize($config);
+		if(!empty($_FILES['fileat']['name']))
+		{
+			if ($this->upload->do_upload('fileat'))
+			{
+				$gbr = $this->upload->data();
+
+				$config['image_library']='gd2';
+				$config['source_image']='./assets/filedata/'.$gbr['file_name'];
+				$config['create_thumb']= FALSE;
+				$config['maintain_ratio']= FALSE;
+				$config['quality']= '60%';
+				$config['width']= 840;
+				$config['height']= 450;
+				$config['new_image']= './assets/filedata/'.$gbr['file_name'];
+				$this->load->library('image_lib', $config);
+				$this->image_lib->resize();
+
+				$gambar=$gbr['file_name'];
+				$file_id=$this->input->post('file_id');
+				$ggc=$this->m_padmin->update_lampiran_file($file_id,$gambar);
+				echo $this->session->set_flashdata('msg','info');
+				redirect('padmin/proyek');
+			} 
+			else{
+				echo $this->session->set_flashdata('msg','warning');
+				redirect('padmin/proyek');
+			} 
+		}	
+		else{
+			echo $this->session->set_flashdata('msg','warning');
+			redirect('padmin/proyek');
+		}
+
+	}
 
 	function update_password_user(){
 

@@ -117,28 +117,41 @@
 												<td><?php echo date('d-m-Y', strtotime($proyek_akhir_kontrak));;?></td>
 												<td>
 													<?php if($pb_target==0 || $pb_target<=70){
-														if($pb_devisi==0 || $pb_devisi>=(-7)){
-															echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>";
-														}
-														else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
-															
-															echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";
+
+														if($pb_devisi>0){
+															echo "<label class='label bg-red'>".$pb_real."% (Baik)</label>";
 														}
 														else {
-															echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+															if($pb_devisi==0 || $pb_devisi>=(-7)){
+																echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>";
+															}
+															else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
+
+																echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";
+															}
+															else {
+																echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+															}
+
 														}
 													}
 													else if ($pb_target>70 && $pb_target<=100){
-														if($pb_devisi==0 || $pb_devisi>=(-4)){
-															echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>"; 
-														}
-														else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
 
-															echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";													
+														if($pb_devisi>0){
+															echo "<label class='label bg-red'>".$pb_real."% (Baik)</label>";
 														}
 														else {
-															
-															echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+															if($pb_devisi==0 || $pb_devisi>=(-4)){
+																echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>"; 
+															}
+															else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
+
+																echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";													
+															}
+															else {
+
+																echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+															}	
 														}	
 													}
 													else {
@@ -227,7 +240,6 @@
 				<form class="form-horizontal" action="<?php echo base_url().'padmin/delete_proyek'?>" method="post" enctype="multipart/form-data">
 					<div class="modal-body">       
 						<input type="hidden" name="kode" value="<?php echo $proyek_id;?>"/> 
-						<input type="hidden" value="<?php echo $proyek_pagu;?>" name="gambar">
 						<p>Apakah Anda yakin mau menghapus Posting <b><?php echo $proyek_nama;?></b> ?</p>
 
 					</div>
@@ -374,7 +386,13 @@
 					'<div class="post">'+
 					'<div class="row margin-bottom">'+
 					'<div class="col-sm-12 text-muted well well-sm no-shadow">'+
-					'<a href="<?php echo base_url().'assets/images/'.$i['pb_foto'];?>" target="_blank"><img class="img-responsive" src="<?php echo base_url().'assets/images/'.$i['pb_foto'];?>" width="150px" height="150px" alt="Photo"></a>'+
+					<?php 
+					$kode=$proyek_id;
+					$cc=$this->m_padmin->get_data_foto($kode); 
+					foreach ($cc->result_array() as $f) :
+						?>
+						'<div class="col-md-3"><a href="<?php echo base_url().'assets/images/'.$f['file_data'];?>" target="_blank"><img class="img img-responsive" src="<?php echo base_url().'assets/images/'.$f['file_data'];?>" width="150px" height="150px" alt="Photo"></a></div>'+
+					<?php endforeach; ?>
 					'</div>'+
 					'</div>'+
 					'</div>'+
