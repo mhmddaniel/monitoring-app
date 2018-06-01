@@ -113,29 +113,30 @@ $b=$data->row_array() ;
             $pb_target=$b['pb_target'];
             $pb_real=$b['pb_real'];
             $pb_devisi=$b['pb_devisi'];
+            $pb_stat_proyek=$b['pb_stat_proyek'];
             if($pb_target==0 || $pb_target<=70){
               if($pb_devisi==0 || $pb_devisi>=(-7)){
-                echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>";
+                echo "<label class='label bg-red'>".$pb_real."% (".$pb_stat_proyek.")</label>";
               }
               else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
 
-                echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";
+                echo "<label class='label bg-red'>".$pb_real."% (".$pb_stat_proyek.")</label>";
               }
               else {
-                echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+                echo "<label class='label bg-red'>".$pb_real."% (".$pb_stat_proyek.")</label>";
               }
             }
             else if ($pb_target>70 && $pb_target<=100){
               if($pb_devisi==0 || $pb_devisi>=(-4)){
-                echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>"; 
+                echo "<label class='label bg-red'>".$pb_real."% (".$pb_stat_proyek.")</label>"; 
               }
               else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
 
-                echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";                         
+                echo "<label class='label bg-red'>".$pb_real."% (".$pb_stat_proyek.")</label>";                         
               }
               else {
 
-                echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+                echo "<label class='label bg-red'>".$pb_real."% (".$pb_stat_proyek.")</label>";
               } 
             }
             else {
@@ -288,9 +289,9 @@ $b=$data->row_array() ;
   <div class="col-xs-12 table-responsive" >
     <div class="post">
       <div class="row margin-bottom">
-        <?php foreach ($data->result_array() as $i) : ?>
+        <?php foreach ($foto->result_array() as $i) : ?>
           <div class="col-sm-3 well no-shadow">
-            <a class="btn" data-toggle="modal" data-target="#ModalView<?php echo $i['pb_id'];?>"><img class="img-responsive" src="<?php echo base_url().'assets/images/'.$i['pb_foto'];?>" alt="Photo"></a>
+            <a class="btn" data-toggle="modal" data-target="#ModalView<?php echo $i['proyek_id'];?>"><img class="img-responsive" src="<?php echo base_url().'assets/images/'.$i['file_data'];?>" alt="Photo"></a>
           </div>
         <?php endforeach; ?>
       </div>
@@ -318,7 +319,13 @@ $b=$data->row_array() ;
               <tr>
                 <td><?php echo $no; ?></td>
                 <td><?php echo $i['file_data']; ?></td>
-                <td><a  href="<?php echo base_url()?>padmin/download/<?php echo $i['file_id'];?>"><?php echo $i['file_data'];?></a></td>
+                <td>
+                  <a href="<?php echo base_url()?>padmin/download/<?php echo $i['file_id'];?>">
+                    <i class="fa fa-download"></i>
+                  </a>
+                  &nbsp;&nbsp;
+                  <a class="btn" data-toggle="modal" data-target="#EditFile<?php echo $i['file_id'];?>"><i class="fa fa-edit"></i></a>
+                </td>
               </tr>
             <?php endforeach;
 
@@ -353,14 +360,14 @@ $b=$data->row_array() ;
 
 
 
-<?php foreach ($data->result_array() as $i) : ?>
+<?php foreach ($foto->result_array() as $i) : ?>
   <!--Modal Hapus Pengguna-->
-  <div class="modal fade" id="ModalView<?php echo $i['pb_id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal fade" id="ModalView<?php echo $i['proyek_id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg" role="document">
       <div class="col-md-12">  
         <div class="modal-content">
           <div class="modal-body">     
-            <img class="img-responsive" src="<?php echo base_url().'assets/images/'.$i['pb_foto'];?>" alt="Photo">
+            <img class="img-responsive" src="<?php echo base_url().'assets/images/'.$i['file_data'];?>" alt="Photo">
           </div>
         </div>
       </div>
@@ -368,6 +375,42 @@ $b=$data->row_array() ;
   </div>
 <?php endforeach;?>
 
+
+<?php foreach ($file->result_array() as $i) : ?>
+  <!--Modal Hapus Pengguna-->
+  <div class="modal fade" id="EditFile<?php echo $i['file_id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="col-md-12">  
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="box box-warning">
+              <div class="box-header with-border">
+                <h3 class="box-title">Lampiran Proyek</h3>
+              </div>
+              <div class="box-body">
+                <div class="row">
+                  <form action="<?php echo base_url()?>padmin/update_lampiran_file" method="POST" enctype="multipart/form-data" >
+                    <div class="form-group col-md-12">
+                      <label>LAMPIRAN</label>
+                      <input type="hidden" name="file_id" value="<?php echo $i['file_id']; ?>">
+                      <input type="file"  name="fileat" class="form-control btn-success">
+                    </div>
+
+                    <div class="form-group col-md-12">
+                      <div class="form-group pull-right">
+                        <button type="submit" class="btn btn-primary btn-flat pull-right"><span class="fa fa-pencil"></span> Publish</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<?php endforeach;?>
 
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>

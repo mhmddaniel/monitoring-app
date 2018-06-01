@@ -79,14 +79,6 @@
 								<label>Sisa Anggaran</label>
 								<input type="text" value="<?php echo $b['pb_sisa_anggaran']; ?>" name="sisaanggran" class="form-control"  readonly>
 							</div>
-							<div class="form-group col-md-6">
-								<label>Foto</label>
-								<input type="file"  name="filefoto" class="form-control btn-success">
-							</div>
-							<div class="form-group col-md-6">
-								<label>LAMPIRAN</label>
-								<input type="file"  name="fileat" class="form-control btn-success">
-							</div>
 							<div class="form-group pull-right">
 								<button type="submit" class="btn btn-primary btn-flat pull-right"><span class="fa fa-pencil"></span> Publish</button>
 							</div>
