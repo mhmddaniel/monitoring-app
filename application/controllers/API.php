@@ -146,7 +146,7 @@ class API extends CI_Controller{
     }
     function doUpload()
     {
-        $config['upload_path']          = './images/uploads';
+        $config['upload_path']          = './ppp/images/uploads/';
         $config['allowed_types']        = 'gif|jpg|png';
         $config['max_size']             = 100;
         $config['max_width']            = 1024;
