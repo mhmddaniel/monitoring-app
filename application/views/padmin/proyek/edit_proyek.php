@@ -88,18 +88,6 @@
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label>Awal Kontrak</label>
-                      <input type="date" class="form-control" name="awalkontrak" value="<?php echo $b['proyek_awal_kontrak']; ?>">
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label>Akhir Kontrak</label>
-                      <input type="date" class="form-control" name="akhirkontrak" value="<?php echo $b['proyek_akhir_kontrak']; ?>">
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
                       <label>Bidang</label>
                       <select class="form-control"  name="xbidang" >
                         <option value="sda" <?php if($b['proyek_bidang']=='sda') {echo "selected"; } else {}?>>Sumber Daya Air</option>
@@ -119,10 +107,10 @@
                       <label>Jenis Pengadaan</label>
                       <select class="form-control"  name="xjenis" >
                         <option value="#">Semua</option>
-                        <option value="leum" <?php if($b['proyek_bidang']=='sda') {echo "selected"; } else {}?>>Lelang Umum</option>
-                        <option value="lena" <?php if($b['proyek_bidang']=='sda') {echo "selected"; } else {}?>>Lelang Sederhana</option>
-                        <option value="letas" <?php if($b['proyek_bidang']=='sda') {echo "selected"; } else {}?>>Lelang Terbatas</option>
-                        <option value="selmum" <?php if($b['proyek_bidang']=='sda') {echo "selected"; } else {}?>>Seleksi Umum</option>
+                        <option value="leum" <?php if($b['proyek_bidang']=='leum') {echo "selected"; } else {}?>>Lelang Umum</option>
+                        <option value="lena" <?php if($b['proyek_bidang']=='lena') {echo "selected"; } else {}?>>Lelang Sederhana</option>
+                        <option value="letas" <?php if($b['proyek_bidang']=='letas') {echo "selected"; } else {}?>>Lelang Terbatas</option>
+                        <option value="selmum" <?php if($b['proyek_bidang']=='selmum') {echo "selected"; } else {}?>>Seleksi Umum</option>
                         <option value="pmlangsung" <?php if($b['proyek_bidang']=='pmlangsung') {echo "selected"; } else {}?>>Pemilihan Langsung</option>
                         <option value="pnlangsung" <?php if($b['proyek_bidang']=='pnlangsung') {echo "selected"; } else {}?>>Penunjukan Langsung</option>
                         <option value="pglangsung" <?php if($b['proyek_bidang']=='pglangsung') {echo "selected"; } else {}?>>Pengadaan Langsung</option>
@@ -137,13 +125,13 @@
                   <div class="col-md-6">
                     <label>Volume</label>
                     <div class="form-group">
-                      <input type="number" name="xvolume" class="form-control">
+                      <input type="number" name="xvolume" value="<?php echo $b['proyek_volume']; ?>" class="form-control">
                     </div>
                   </div>
                   <div class="col-md-1">
                     <label>Satuan</label>
                     <div class="form-group">
-                      <input type="text" name="xsatuan" class="form-control">
+                      <input type="text" name="xsatuan" value="<?php echo $b['proyek_satuan']; ?>" class="form-control">
                     </div>
                   </div>
                 </div>

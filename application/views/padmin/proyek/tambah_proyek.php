@@ -88,18 +88,6 @@
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<label>Awal Kontrak</label>
-											<input type="date" class="form-control" name="awalkontrak">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<label>Akhir Kontrak</label>
-											<input type="date" class="form-control" name="akhirkontrak">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
 											<label>Bidang</label>
 											<select class="form-control"  name="xbidang" >
 												<option value="sda">Sumber Daya Air</option>

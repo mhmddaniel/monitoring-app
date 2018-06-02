@@ -17,6 +17,7 @@ class Padmin extends CI_Controller{
 			$x['countproyek']=$this->m_padmin->sum_proyek();
 			$x['sumpagu']=$this->m_padmin->sum_pagu();
 			$x['sumkeluar']=$this->m_padmin->sum_keluar();
+			$x['countjum']=$this->m_padmin->countjum();
 		}
 		else if($_SESSION['level']=='bidang'){
 			$bagian=$_SESSION['bagian'];
@@ -30,6 +31,7 @@ class Padmin extends CI_Controller{
 			$usernik=$_SESSION['usernik'];
 			$x['data']=$this->m_padmin->get_all_proyek_by_user($usernik);
 		}
+
 		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');
 		$this->load->view('padmin/index',$x);
@@ -346,10 +348,19 @@ class Padmin extends CI_Controller{
 		$kode=$this->uri->segment(3);
 		$x['data']=$this->m_padmin->get_detail_proyek_by_kode($kode);
 		$this->load->view('padmin/header');
-		$this->load->view('padmin/sidebar');		
+		$this->load->view('padmin/sidebar');
 		$this->load->view('padmin/proyek/edit_proyek',$x);
 		$this->load->view('padmin/footer');
 	}  
+	function edit_proyek_jadwal(){
+		$kode=$this->uri->segment(3);
+		$x['data']=$this->m_padmin->get_detail_proyek_by_kode($kode);
+		$this->load->view('padmin/header');
+		$this->load->view('padmin/sidebar');
+		$this->load->view('padmin/proyek/edit_proyek_jadwal',$x);
+		$this->load->view('padmin/footer');
+	}  
+
 	function get_edit_file(){
 		$kode=$this->uri->segment(3);
 		$x['data']=$this->m_padmin->get_edit_file_by_kode($kode);
@@ -421,6 +432,18 @@ class Padmin extends CI_Controller{
 			echo $this->session->set_flashdata('msg','warning');
 			redirect('padmin/tambah_proyek');
 		}
+
+	}
+
+
+
+	function update_proyek_jadwal(){
+		$proyek_id=$this->input->post('xproyek_id');
+		$awalkontrak=$this->input->post('awalkontrak');
+		$akhirkontrak=$this->input->post('akhirkontrak');
+		$svkoor=$this->m_padmin->update_proyek_jadwal($proyek_id,$awalkontrak,$akhirkontrak);
+		echo $this->session->set_flashdata('msg','success');
+		redirect('padmin/proyek');
 
 	}
 	function update_pn(){

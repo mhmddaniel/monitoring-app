@@ -98,6 +98,10 @@ $b=$data->row_array() ;
           <td><?php echo "Rp ".number_format($b['proyek_pagu']); ?></td>
         </tr>
         <tr>
+          <th>Rencana Kontrak</th>
+          <td><?php $b['proyek_sech_awal']; ?></td>
+        </tr>
+        <tr>
           <th>Awal Kontrak</th>
           <td><?php echo dateformat('d-m-Y',$b['proyek_awal_kontrak']) ?></td>
         </tr>

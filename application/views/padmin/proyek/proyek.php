@@ -55,7 +55,7 @@
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-12 col-xs-12">
 				<!-- Custom Tabs -->
 				<div class="nav-tabs-custom">
 					<ul class="nav nav-tabs">
@@ -70,14 +70,14 @@
 					<div class="tab-content">
 						<div class="tab-pane active" id="tab_1">
 							<div class="box-body">
-								<table id="example1" class="table table-striped" style="font-size:13px;">
+								<table id="example1" class="table table-striped table-responsive">
 									<thead>
 										<tr>
 											<th>Nama Proyek</th>
 											<th>Tahun</th>
 											<th>Rencana Pelaksanaan</th>
 											<th>Pagu</th>
-											<th>Jadwal</th>
+											<th>Rencana Awal Kontrak</th>
 											<th>Awal Kontrak</th>
 											<th>Akhir Kontrak</th>
 											<th>Progress</th>
@@ -169,7 +169,7 @@
 												}
 												?>
 											</td>
-											<td style="text-align:right;">
+											<td >
 												<div class="btn-group">
 													<button type="button" class="btn btn-success btn-flat">Action</button>
 													<button type="button" class="btn btn-success btn-flat dropdown-toggle" data-toggle="dropdown">
@@ -187,7 +187,8 @@
 														<?php }
 														else if  ($_SESSION['level']=='bidang'){
 															?>
-															<li><a href="<?php echo base_url().'padmin/get_proyek_bidang/'.$pb_id;?>"><span class="fa fa-pencil"></span>Edit</a></li>
+															<li><a href="<?php echo base_url().'padmin/edit_proyek_jadwal/'.$proyek_id;?>"><span class="fa fa-pencil"></span>Edit Jadwal</a></li>
+															<li><a href="<?php echo base_url().'padmin/get_proyek_bidang/'.$pb_id;?>"><span class="fa fa-edit"></span>Progress</a></li>
 															<li><a href="<?php echo base_url().'padmin/uplampiran/'.$pb_id;?>"><span class="fa fa-plus"></span>Upload</a></li>
 															<?php
 														}
@@ -263,7 +264,7 @@
 		.gmap3({
 			center: [-1.7333385,102.7458134],
 			zoom: 8,
-    mapTypeId: 'hybrid',
+			mapTypeId: 'hybrid',
 		})
 
 		.infowindow({
@@ -315,7 +316,7 @@
 					'<th>Tahun</th>'+
 					'<th>Rencana Pelaksanaan</th>'+
 					'<th>Pagu</th>'+
-					'<th>Jadwal</th>'+
+					'<th>Rencana Aawal Kontrak</th>'+
 					'<th>Awal Kontrak</th>'+
 					'<th>Akhir Kontrak</th>'+
 					'<th>Last Update</th>'+

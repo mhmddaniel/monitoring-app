@@ -52,10 +52,6 @@
 									</div>
 								</div>
 							</div>
-							<?php 
-							?>
-
-
 
 							<div class="form-group">
 								<label>Daya Serap Kontrak</label>

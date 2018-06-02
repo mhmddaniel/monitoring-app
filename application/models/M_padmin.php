@@ -33,6 +33,10 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("SELECT sum(pb_sisa_anggaran) AS sumsisa FROM proyek_bagian");
 		return $hsl;
 	}
+	function countjum(){
+		$hsl=$this->db->query("SELECT DATE_FORMAT(proyek_sech_awal, '%M') as bulan,count(DATE_FORMAT(proyek_sech_awal, '%M')) as hitung_jadwal, count(DATE_FORMAT(proyek_awal_kontrak, '%M')) AS hitung_awal  FROM proyek GROUP BY proyek_sech_awal");
+		return $hsl;
+	}
 	function sum_sisa_by_kode($bagian){
 		$hsl=$this->db->query("SELECT distinct sum(pb_sisa_anggaran) AS sumsisa,proyek_bidang FROM proyek_bagian,proyek where proyek.proyek_bidang='$bagian' && proyek_bagian.pb_proyek_id=proyek.proyek_id ");
 		return $hsl;
@@ -230,16 +234,20 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("UPDATE koordinat set koordinat_nama='$namkor',koordinat_lat='$latitude',koordinat_lng='$longitude',koordinat_alamat='$inputAddress' where koordinat_id='$numkor'");
 		return $hsl;
 	}
-	function save_proyek($numproyek,$nikuser,$numkor,$xnama,$year,$keuangan,$pagu,$sechawal,$awalkontrak,$akhirkontrak,$xbidang,$xjenis,$xvolume,$xsatuan){
-		$hsl=$this->db->query("INSERT INTO proyek (proyek_id,proyek_user_nik,proyek_koordinat_id,proyek_nama,proyek_tahun,proyek_keuangan,proyek_pagu,proyek_sech_awal,proyek_awal_kontrak,proyek_akhir_kontrak,proyek_bidang,proyek_jenis,proyek_volume,proyek_satuan) VALUES ('$numproyek','$nikuser','$numkor','$xnama','$year','$keuangan','$pagu','$sechawal','$awalkontrak','$akhirkontrak','$xbidang','$xjenis','$xvolume','$xsatuan')");
+	function save_proyek($numproyek,$nikuser,$numkor,$xnama,$year,$keuangan,$pagu,$sechawal,$xbidang,$xjenis,$xvolume,$xsatuan){
+		$hsl=$this->db->query("INSERT INTO proyek (proyek_id,proyek_user_nik,proyek_koordinat_id,proyek_nama,proyek_tahun,proyek_keuangan,proyek_pagu,proyek_sech_awal,proyek_bidang,proyek_jenis,proyek_volume,proyek_satuan) VALUES ('$numproyek','$nikuser','$numkor','$xnama','$year','$keuangan','$pagu','$sechawal','$xbidang','$xjenis','$xvolume','$xsatuan')");
 		return $hsl;
 	}
 
-	function update_proyek($proyek_id,$numkor,$xnama,$year,$keuangan,$pagu,$sechawal,$awalkontrak,$akhirkontrak,$xbidang,$jenis,$volume,$satuan){
-		$hsl=$this->db->query("UPDATE proyek set proyek_koordinat_id='$numkor',proyek_nama='$xnama',proyek_tahun='$year',proyek_keuangan='$keuangan',proyek_pagu='$pagu',proyek_sech_awal='$sechawal',proyek_awal_kontrak='$awalkontrak',proyek_akhir_kontrak='$akhirkontrak',proyek_bidang='$xbidang',proyek_jenis='$jenis',proyek_volume='$volume',proyek_satuan='$satuan',last_update=NOW() where proyek_id='$proyek_id'");
+	function update_proyek($proyek_id,$numkor,$xnama,$year,$keuangan,$pagu,$sechawal,$xbidang,$jenis,$volume,$satuan){
+		$hsl=$this->db->query("UPDATE proyek set proyek_koordinat_id='$numkor',proyek_nama='$xnama',proyek_tahun='$year',proyek_keuangan='$keuangan',proyek_pagu='$pagu',proyek_sech_awal='$sechawal',proyek_bidang='$xbidang',proyek_jenis='$jenis',proyek_volume='$volume',proyek_satuan='$satuan',last_update=NOW() where proyek_id='$proyek_id'");
 		return $hsl;
 	}
 
+	function update_proyek_jadwal($proyek_id,$awalkontrak,$akhirkontrak){
+		$hsl=$this->db->query("UPDATE proyek set proyek_awal_kontrak='$awalkontrak',proyek_akhir_kontrak='$akhirkontrak',last_update=NOW() where proyek_id='$proyek_id'");
+		return $hsl;
+	}
 	function save_pekerja($proyek_id,$xnip,$xnampeke,$xtelpeke,$xpekjenis,$xnamdirek,$xteldirek,$xnamaperus,$xalaperus,$xtelkant){
 		$hsl=$this->db->query("INSERT INTO pekerja (pekerja_nip,proyek_id,pekerja_nama,pekerja_tel,pekerja_jenis,pekerja_nama_direktur,pekerja_tel_direktur,pekerja_nama_perusahaan,pekerja_alamat_perusahaan,pekerja_tel_kantor) VALUES ('$xnip','$proyek_id','$xnampeke','$xtelpeke','$xpekjenis','$xnamdirek','$xteldirek','$xnamaperus','$xalaperus','$xtelkant')");
 		return $hsl;

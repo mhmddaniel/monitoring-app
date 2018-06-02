@@ -86,7 +86,7 @@
     </div>
 
 
-      <div class="col-md-12">
+    <div class="col-md-12">
       <div class="col-md-7">
         <div class="box box-widget widget-user-2">
           <div class="widget-user-header bg-yellow">
@@ -110,27 +110,64 @@
           </div>
         </div>
       </div>
-    <div class="col-md-5">
-      <div class="col-md-12">
-        <div class="box box-solid ">
-          <div class="box-header bg-green">
-            <i class="fa fa-calendar"></i>
-            <h3 class="box-title">Kalender</h3>
+      <div class="col-md-5">
+        <div class="col-md-12">
+          <div class="box box-solid ">
+            <div class="box-header bg-green">
+              <i class="fa fa-calendar"></i>
+              <h3 class="box-title">Kalender</h3>
+            </div>
+            <div class="box-body no-padding">
+              <div id="calendar" style="width: 100%"></div>
+            </div>
           </div>
-          <div class="box-body no-padding">
-            <div id="calendar" style="width: 100%"></div>
-          </div>
+
         </div>
-
       </div>
-    </div>
 
     </div>
-
-
   </div>
 
 
+  <div class="row">    
+    <div class="col-md-12">
+      <div class="box box-solid2">
+        <div class="box-header bg-green">
+          <i class="fa fa-calendar"></i>
+          <h3 class="box-title">Grafik</h3>
+        </div>
+        <div class="box-body">
+          <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+          <script type="text/javascript">
+            google.charts.load('current', {'packages':['bar']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+              var data = google.visualization.arrayToDataTable([
+                ['Year', 'Rencana Awal Kontrak', 'Awal Kontrak'],
+                <?php foreach ($countjum->result_array() as $i) : ?>
+                  ['<?php echo $i['bulan']; ?>', <?php echo $i['hitung_jadwal']; ?>, <?php echo $i['hitung_awal']; ?>],
+
+                <?php endforeach; ?>
+                ]);
+
+              var options = {
+                chart: {
+                  title: 'Kontrak',
+                  subtitle: 'Jumlah Kontrak Proyek',
+                }
+              };
+
+              var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+              chart.draw(data, google.charts.Bar.convertOptions(options));
+            }
+          </script>
+          <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 </div>
 
