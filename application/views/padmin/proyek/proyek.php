@@ -262,7 +262,8 @@
 		$('#test')
 		.gmap3({
 			center: [-1.7333385,102.7458134],
-			zoom: 8
+			zoom: 8,
+    mapTypeId: 'hybrid',
 		})
 
 		.infowindow({

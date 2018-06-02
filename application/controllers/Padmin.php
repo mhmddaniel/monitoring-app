@@ -142,6 +142,7 @@ class Padmin extends CI_Controller{
 			$x['data']=$this->m_padmin->get_detail_proyek_by_kode($kode);
 		}
 		$x['file']=$this->m_padmin->get_data_file($kode);
+		$x['foto']=$this->m_padmin->get_data_foto($kode);
 		$x['chartrt']=$this->m_padmin->get_chart_rt($kode);
 		$x['charttdk']=$this->m_padmin->get_chart_tdk($kode);
 		$x['bbc']=$this->m_padmin->get_penannggung_jawab($kode);

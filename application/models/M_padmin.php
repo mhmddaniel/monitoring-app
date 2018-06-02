@@ -13,7 +13,12 @@ class M_padmin extends CI_Model{
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
 		$this->db->join('user d','a.proyek_user_nik=d.user_nik','inner');
 		$this->db->ORDER_BY('a.proyek_id','desc');	
+		$this->db->GROUP_BY ('proyek_id');
 		$hsl=$this->db->get();
+		return $hsl;
+	}
+	function get_all_proyek_by_bagian($bagian){
+		$hsl=$this->db->query("SELECT * FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id inner join koordinat on proyek.proyek_koordinat_id=koordinat.koordinat_id inner join user on proyek.proyek_user_nik=user.user_nik where proyek.proyek_bidang='$bagian' AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
 		return $hsl;
 	}
 	function get_chart_rt($kode){
@@ -109,10 +114,7 @@ class M_padmin extends CI_Model{
 	}*/
 
 
-	function get_all_proyek_by_bagian($bagian){
-		$hsl=$this->db->query("SELECT * FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id inner join koordinat on proyek.proyek_koordinat_id=koordinat.koordinat_id inner join user on proyek.proyek_user_nik=user.user_nik where proyek.proyek_bidang='$bagian' AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
-		return $hsl;
-	}
+
 	function get_proyek_bidang_by_kode($kode){
 		$this->db->select('*');
 		$this->db->from('proyek a');
