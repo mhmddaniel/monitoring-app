@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 24 Bulan Mei 2018 pada 08.57
--- Versi server: 10.1.31-MariaDB
--- Versi PHP: 7.2.3
+-- Host: localhost:3306
+-- Generation Time: Jun 04, 2018 at 07:31 AM
+-- Server version: 10.2.15-MariaDB
+-- PHP Version: 7.1.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,46 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ppp`
+-- Database: `u164602079_ppp`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `koordinat`
+-- Table structure for table `file`
+--
+
+CREATE TABLE `file` (
+  `file_id` int(11) NOT NULL,
+  `proyek_id` int(11) NOT NULL,
+  `file_data` text NOT NULL,
+  `file_jenis` enum('file','foto') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `images`
+--
+
+CREATE TABLE `images` (
+  `image_id` int(11) NOT NULL,
+  `image_name` varchar(255) NOT NULL,
+  `project_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `images`
+--
+
+INSERT INTO `images` (`image_id`, `image_name`, `project_id`) VALUES
+(1, 'IMG_20180601_112250.jpg', 17),
+(2, 'IMG_20180601_140317.jpg', 17);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `koordinat`
 --
 
 CREATE TABLE `koordinat` (
@@ -34,11 +67,11 @@ CREATE TABLE `koordinat` (
   `koordinat_lat` varchar(50) DEFAULT NULL,
   `koordinat_lng` varchar(50) DEFAULT NULL,
   `koordinat_alamat` text NOT NULL,
-  `koordinat_value` int(11) NOT NULL DEFAULT '0'
+  `koordinat_value` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `koordinat`
+-- Dumping data for table `koordinat`
 --
 
 INSERT INTO `koordinat` (`koordinat_id`, `koordinat_nama`, `koordinat_lat`, `koordinat_lng`, `koordinat_alamat`, `koordinat_value`) VALUES
@@ -67,7 +100,7 @@ INSERT INTO `koordinat` (`koordinat_id`, `koordinat_nama`, `koordinat_lat`, `koo
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pekerja`
+-- Table structure for table `pekerja`
 --
 
 CREATE TABLE `pekerja` (
@@ -84,7 +117,7 @@ CREATE TABLE `pekerja` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `pekerja`
+-- Dumping data for table `pekerja`
 --
 
 INSERT INTO `pekerja` (`pekerja_nip`, `proyek_id`, `pekerja_nama`, `pekerja_tel`, `pekerja_jenis`, `pekerja_nama_direktur`, `pekerja_tel_direktur`, `pekerja_nama_perusahaan`, `pekerja_alamat_perusahaan`, `pekerja_tel_kantor`) VALUES
@@ -94,7 +127,7 @@ INSERT INTO `pekerja` (`pekerja_nip`, `proyek_id`, `pekerja_nama`, `pekerja_tel`
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `proyek`
+-- Table structure for table `proyek`
 --
 
 CREATE TABLE `proyek` (
@@ -111,24 +144,26 @@ CREATE TABLE `proyek` (
   `proyek_bidang` varchar(50) NOT NULL,
   `proyek_jenis` varchar(50) NOT NULL,
   `proyek_volume` int(11) NOT NULL,
-  `proyek_satuan` varchar(15) NOT NULL
+  `proyek_satuan` varchar(15) NOT NULL,
+  `last_update` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `proyek`
+-- Dumping data for table `proyek`
 --
 
-INSERT INTO `proyek` (`proyek_id`, `proyek_user_nik`, `proyek_koordinat_id`, `proyek_nama`, `proyek_tahun`, `proyek_keuangan`, `proyek_pagu`, `proyek_sech_awal`, `proyek_awal_kontrak`, `proyek_akhir_kontrak`, `proyek_bidang`, `proyek_jenis`, `proyek_volume`, `proyek_satuan`) VALUES
-(17, 90313813, 18, 'Proyek Jalan Tol', 2013, 250000, 100000, '2019-06-23', '2020-07-23', '2020-07-24', 'ciptakarya', '', 0, ''),
-(18, 12819, 21, 'Relasi Tol', 2015, 150000, 300000, '2020-06-24', '2020-07-24', '2019-07-24', 'ciptakarya', 'lelang_umum', 0, '');
+INSERT INTO `proyek` (`proyek_id`, `proyek_user_nik`, `proyek_koordinat_id`, `proyek_nama`, `proyek_tahun`, `proyek_keuangan`, `proyek_pagu`, `proyek_sech_awal`, `proyek_awal_kontrak`, `proyek_akhir_kontrak`, `proyek_bidang`, `proyek_jenis`, `proyek_volume`, `proyek_satuan`, `last_update`) VALUES
+(17, 90313813, 18, 'Proyek Jalan Tol', 2013, 250000, 100000, '2019-06-23', '2020-07-23', '2020-07-25', 'ciptakarya', '', 0, '', '2018-05-24 07:31:33'),
+(18, 12819, 21, 'Relasi Tol', 2015, 150000, 300000, '2020-06-24', '2020-07-24', '2019-07-24', 'ciptakarya', 'lelang_umum', 0, '', '2018-05-24 07:31:33');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `proyek_bagian`
+-- Table structure for table `proyek_bagian`
 --
 
 CREATE TABLE `proyek_bagian` (
+  `pb_id` int(11) NOT NULL,
   `pb_proyek_id` int(11) NOT NULL,
   `pb_target` float NOT NULL,
   `pb_real` float NOT NULL,
@@ -137,21 +172,23 @@ CREATE TABLE `proyek_bagian` (
   `pb_ds_ap` int(11) NOT NULL,
   `pb_ds_keuangan` int(11) NOT NULL,
   `pb_sisa_anggaran` int(11) NOT NULL,
-  `pb_foto` text NOT NULL
+  `pb_foto` text NOT NULL,
+  `pb_last_update` timestamp NOT NULL DEFAULT current_timestamp(),
+  `pb_stat_proyek` enum('wajar','terlambat','kritis','baik') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `proyek_bagian`
+-- Dumping data for table `proyek_bagian`
 --
 
-INSERT INTO `proyek_bagian` (`pb_proyek_id`, `pb_target`, `pb_real`, `pb_devisi`, `pb_ds_kontrak`, `pb_ds_ap`, `pb_ds_keuangan`, `pb_sisa_anggaran`, `pb_foto`) VALUES
-(17, 73, 65, -8, 25000, 32000, 32000, 43000, ''),
-(18, 60.53, 53.2, -7.33, 100, 200, 200, 299700, '');
+INSERT INTO `proyek_bagian` (`pb_id`, `pb_proyek_id`, `pb_target`, `pb_real`, `pb_devisi`, `pb_ds_kontrak`, `pb_ds_ap`, `pb_ds_keuangan`, `pb_sisa_anggaran`, `pb_foto`, `pb_last_update`, `pb_stat_proyek`) VALUES
+(1, 17, 70, 64, -6, 25000, 32000, 32000, 43000, '3ae8af985a6e9fbbbaa1aa7be4cd1b9a.jpg', '2018-05-29 06:06:53', 'wajar'),
+(2, 18, 100, 95, -5, 100, 200, 200, 299700, '', '2018-05-24 07:39:46', 'wajar');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -167,11 +204,13 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`user_nik`, `user_nama`, `user_username`, `user_password`, `user_email`, `user_telp`, `user_bagian`, `user_level`, `user_photo`) VALUES
 (1, 'Administrator', 'adityads', '202cb962ac59075b964b07152d234b70', 'adityads@ymail.com', '082371373347', '', 'admin', 'user_blank.png'),
+(892, 'Best', '', '', 'best@aa.com', '0129', 'ppk', 'admin', 'user_blank.png'),
+(5023, 'Adent', '', '', 'adent@aa.com', '123', 'ppk', 'admin', 'user_blank.png'),
 (12819, 'Restu', '', '', 'restu@aaa.com', '0812', 'ppk', 'admin', 'user_blank.png'),
 (112233, 'tera', 'tera', '123', 'tera@aaa.com', '082', 'kasubid', 'user', 'user_blank.png'),
 (120201, 'Rendy', '', '', 'rendy@aa.com', '092812', 'ppk', 'admin', 'user_blank.png'),
@@ -184,64 +223,115 @@ INSERT INTO `user` (`user_nik`, `user_nama`, `user_username`, `user_password`, `
 --
 
 --
--- Indeks untuk tabel `koordinat`
+-- Indexes for table `file`
+--
+ALTER TABLE `file`
+  ADD PRIMARY KEY (`file_id`),
+  ADD KEY `proyek_id` (`proyek_id`);
+
+--
+-- Indexes for table `images`
+--
+ALTER TABLE `images`
+  ADD PRIMARY KEY (`image_id`);
+
+--
+-- Indexes for table `koordinat`
 --
 ALTER TABLE `koordinat`
   ADD PRIMARY KEY (`koordinat_id`);
 
 --
--- Indeks untuk tabel `pekerja`
+-- Indexes for table `pekerja`
 --
 ALTER TABLE `pekerja`
   ADD PRIMARY KEY (`pekerja_nip`),
   ADD KEY `proyek_id` (`proyek_id`);
 
 --
--- Indeks untuk tabel `proyek`
+-- Indexes for table `proyek`
 --
 ALTER TABLE `proyek`
   ADD PRIMARY KEY (`proyek_id`),
+  ADD UNIQUE KEY `proyek_user_nik_2` (`proyek_user_nik`,`proyek_koordinat_id`),
   ADD KEY `proyek_koordinat_id` (`proyek_koordinat_id`),
   ADD KEY `proyek_user_nik` (`proyek_user_nik`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `proyek_bagian`
+--
+ALTER TABLE `proyek_bagian`
+  ADD PRIMARY KEY (`pb_id`),
+  ADD KEY `pb_proyek_id` (`pb_proyek_id`);
+
+--
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_nik`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `koordinat`
+-- AUTO_INCREMENT for table `file`
+--
+ALTER TABLE `file`
+  MODIFY `file_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `images`
+--
+ALTER TABLE `images`
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `koordinat`
 --
 ALTER TABLE `koordinat`
   MODIFY `koordinat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT untuk tabel `proyek`
+-- AUTO_INCREMENT for table `proyek`
 --
 ALTER TABLE `proyek`
   MODIFY `proyek_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- AUTO_INCREMENT for table `proyek_bagian`
+--
+ALTER TABLE `proyek_bagian`
+  MODIFY `pb_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `pekerja`
+-- Constraints for table `file`
+--
+ALTER TABLE `file`
+  ADD CONSTRAINT `file_ibfk_1` FOREIGN KEY (`proyek_id`) REFERENCES `proyek` (`proyek_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `pekerja`
 --
 ALTER TABLE `pekerja`
   ADD CONSTRAINT `pekerja_ibfk_1` FOREIGN KEY (`proyek_id`) REFERENCES `proyek` (`proyek_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `proyek`
+-- Constraints for table `proyek`
 --
 ALTER TABLE `proyek`
   ADD CONSTRAINT `proyek_ibfk_2` FOREIGN KEY (`proyek_koordinat_id`) REFERENCES `koordinat` (`koordinat_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `proyek_ibfk_4` FOREIGN KEY (`proyek_user_nik`) REFERENCES `user` (`user_nik`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `proyek_bagian`
+--
+ALTER TABLE `proyek_bagian`
+  ADD CONSTRAINT `proyek_bagian_ibfk_1` FOREIGN KEY (`pb_proyek_id`) REFERENCES `proyek` (`proyek_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
