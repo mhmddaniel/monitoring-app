@@ -146,21 +146,29 @@ class API extends CI_Controller{
     }
     function doUpload()
     {
-        $config['upload_path']          = './ppp/images/uploads/';
+        $config['upload_path']         = './images/uploads/';
         $config['allowed_types']        = 'gif|jpg|png';
-        $config['max_size']             = 100;
-        $config['max_width']            = 1024;
-        $config['max_height']           = 768;
+        $config['max_size']             = 0;
+        $config['max_width']            = 0;
+        $config['max_height']           = 0;
+
+        $
 
         $this->load->library('upload', $config);
+        $this->upload->initialize($config);
 
         if ( ! $this->upload->do_upload('userfile'))
         {
             $error = array('error' => $this->upload->display_errors());
+            $error['upload_path'] = $config['upload_path'];
             echo json_encode($error);
         }
         else
         {
+            $upload_data = $this->upload->data(); //Returns array of containing all of the data related to the file you uploaded.
+            $insert['project_id'] = $_POST['project_id'];
+            $insert['image_name'] = $upload_data['file_name'];
+            $this->m_padmin->insert_image($insert);
             $data = array('upload_data' => $this->upload->data());
             echo json_encode($data);
         }

@@ -392,4 +392,8 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->get();
 		return $hsl;
 	}
+	function insert_image($data)
+	{
+		$this->db->insert('images', $data);
+	}
 }
