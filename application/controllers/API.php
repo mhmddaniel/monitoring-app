@@ -165,7 +165,7 @@ class API extends CI_Controller{
         {
             $upload_data = $this->upload->data(); //Returns array of containing all of the data related to the file you uploaded.
             $insert['proyek_id'] = $_POST['project_id'];
-            $insert['file_data'] = "http://ppp.kebkel.com/images/uploads/"+$upload_data['file_name'];
+            $insert['file_data'] = $upload_data['file_name'];
             $insert['file_jenis'] = "foto";
             $this->m_padmin->insert_image($insert);
             $data = array('upload_data' => $this->upload->data());
