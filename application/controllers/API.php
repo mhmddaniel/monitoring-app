@@ -176,10 +176,8 @@ class API extends CI_Controller{
 
         $images = $this->m_padmin->get_all_images_by_kode("17");
             if($images->num_rows() > 0){
-                $xcadmin=$project->row_array();
-
                 $newdata['error'] = FALSE;
-                $newdata['images'] = $project->result_array();
+                $newdata['images'] = $images->result_array();
                 $newdata['fetched'] = TRUE;
 
                 echo json_encode($newdata);
