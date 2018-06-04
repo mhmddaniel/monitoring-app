@@ -308,6 +308,17 @@ $b=$data->row_array() ;
   <div class="col-xs-12" >
     <div class="post">
       <div class="row margin-bottom">
+        <div class="col-sm-6">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <?php  foreach ($images->result_array() as $image) { ?>
+                          <img class="img-responsive" src="<?php echo base_url()?>images/uploads/<?php echo($image['image_name']) ?>" alt="Photo">
+                        <?php } ?>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+                    </div>
         <div class="col-md-12">
           <table class="table table-responsive table-hovered">
             <tr>

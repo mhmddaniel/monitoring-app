@@ -148,6 +148,7 @@ class Padmin extends CI_Controller{
 		$x['chartrt']=$this->m_padmin->get_chart_rt($kode);
 		$x['charttdk']=$this->m_padmin->get_chart_tdk($kode);
 		$x['bbc']=$this->m_padmin->get_penannggung_jawab($kode);
+		$x['images']=$this->m_padmin->get_all_images_by_kode($kode);
 		$y['title']='Detail Proyek';
 		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');		
