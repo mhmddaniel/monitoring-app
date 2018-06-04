@@ -177,11 +177,23 @@ class API extends CI_Controller{
 
         $images = $this->m_padmin->get_all_images_by_kode("17");
             if($images->num_rows() > 0){
-                $newdata['error'] = FALSE;
-                $newdata['images'] = $images->result_array();
-                $newdata['fetched'] = TRUE;
+                $datas = $images->result_array();
+                $results = array();
 
-                echo json_encode($newdata);
+                foreach ($datas as $data) {
+                    $name=$data['file_data'];
+                    $url['small'] = "http://ppp.kebkel.com/assets/images/" . $data['file_data'];
+                    $url['medium'] = "http://ppp.kebkel.com/assets/images/" . $data['file_data'];
+                    $url['large'] = "http://ppp.kebkel.com/assets/images/" . $data['file_data'];
+                    $timestamp = date("D M d, Y G:i");
+
+                    $result['name']=$name;
+                    $result['url']=$url;
+                    $result['timestamp']=$timestamp;
+                }
+                array_push($results, $result);
+
+                echo json_encode($results);
             }else{
                 $newdata['error'] = TRUE;
                 $newdata['error_msg'] = "Tidak ada gambar untuk proyek ini";
