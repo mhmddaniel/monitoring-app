@@ -152,8 +152,6 @@ class API extends CI_Controller{
         $config['max_width']            = 0;
         $config['max_height']           = 0;
 
-        $
-
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
 
@@ -172,5 +170,25 @@ class API extends CI_Controller{
             $data = array('upload_data' => $this->upload->data());
             echo json_encode($data);
         }
+    }
+    function getAllImagesForProject()
+    {
+
+        $images = $this->m_padmin->get_all_images_by_kode("17");
+            if($images->num_rows() > 0){
+                $xcadmin=$project->row_array();
+
+                $newdata['error'] = FALSE;
+                $newdata['images'] = $project->result_array();
+                $newdata['fetched'] = TRUE;
+
+                echo json_encode($newdata);
+            }else{
+                $newdata['error'] = TRUE;
+                $newdata['error_msg'] = "Tidak ada gambar untuk proyek ini";
+                $newdata['fetched'] = FALSE;
+
+                echo json_encode($newdata);
+            }
     }
 }

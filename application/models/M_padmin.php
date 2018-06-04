@@ -396,4 +396,11 @@ class M_padmin extends CI_Model{
 	{
 		$this->db->insert('images', $data);
 	}
+	function get_all_images_by_kode($kode){
+		$this->db->select('*');
+		$this->db->from('images');
+		$this->db->where('project_id',$kode);
+		$hsl=$this->db->get();
+		return $hsl;
+	}
 }
