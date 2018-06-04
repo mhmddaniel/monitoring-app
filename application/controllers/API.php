@@ -182,16 +182,17 @@ class API extends CI_Controller{
 
                 foreach ($datas as $data) {
                     $name=$data['file_data'];
-                    $url['small'] = "http://ppp.kebkel.com/assets/images/" . $data['file_data'];
-                    $url['medium'] = "http://ppp.kebkel.com/assets/images/" . $data['file_data'];
-                    $url['large'] = "http://ppp.kebkel.com/assets/images/" . $data['file_data'];
+                    $url['small'] = 'http://ppp.kebkel.com/assets/images/' . $data['file_data'];
+                    $url['medium'] = 'http://ppp.kebkel.com/assets/images/' . $data['file_data'];
+                    $url['large'] = 'http://ppp.kebkel.com/assets/images/' . $data['file_data'];
                     $timestamp = date("D M d, Y G:i");
 
                     $result['name']=$name;
                     $result['url']=$url;
                     $result['timestamp']=$timestamp;
-                }
+                    
                 array_push($results, $result);
+                }
 
                 echo json_encode($results);
             }else{
