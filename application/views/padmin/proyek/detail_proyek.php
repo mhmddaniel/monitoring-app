@@ -295,14 +295,13 @@ $b=$data->row_array() ;
       <div class="row margin-bottom">
         <?php foreach ($foto->result_array() as $i) : ?>
           <div class="col-sm-3 well no-shadow">
-            <a class="btn" data-toggle="modal" data-target="#ModalView<?php echo $i['proyek_id'];?>"><img class="img-responsive" src="<?php echo base_url().'images/uploads/'.$i['file_data'];?>" alt="Photo"></a>
+            <a class="btn" data-toggle="modal" data-target="#ModalView<?php echo $i['proyek_id'];?>"><img class="img-responsive" src="<?php echo base_url().'assets/images/'.$i['file_data'];?>" alt="Photo"></a>
           </div>
         <?php endforeach; ?>
       </div>
     </div>
   </div>
 </div>
-
 
 <div class="row">
   <div class="col-xs-12" >
