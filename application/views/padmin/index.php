@@ -146,8 +146,8 @@
               var data = google.visualization.arrayToDataTable([
                 ['Year', 'Rencana Awal Kontrak', 'Awal Kontrak'],
                 <?php foreach ($countjum->result_array() as $i) : ?>
-                  ['<?php echo $i['bulan']; ?>', <?php echo $i['hitung_jadwal']; ?>, <?php echo $i['hitung_awal']; ?>],
-
+                  ['<?php echo $i['proyek_bulan']; ?>', <?php echo $i['countsech']; ?>, <?php echo $i['countawal']; ?>],
+ 
                 <?php endforeach; ?>
                 ]);
 

@@ -34,7 +34,7 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 	function countjum(){
-		$hsl=$this->db->query("SELECT DATE_FORMAT(proyek_sech_awal, '%M') as bulan,count(DATE_FORMAT(proyek_sech_awal, '%M')) as hitung_jadwal, count(DATE_FORMAT(proyek_awal_kontrak, '%M')) AS hitung_awal  FROM proyek GROUP BY proyek_sech_awal");
+		$hsl=$this->db->query("select monthname(proyek_bulan) as proyek_bulan, sum(countsech) as countsech , sum(countawal) as countawal from ((select `proyek_sech_awal` as proyek_bulan, 1 as countsech, 0 as countawal from proyek) union all (select `proyek_awal_kontrak`, 0, 1 from proyek ) ) dd group by monthname(proyek_bulan), month(proyek_bulan) order by month(proyek_bulan)");
 		return $hsl;
 	}
 	function sum_sisa_by_kode($bagian){
