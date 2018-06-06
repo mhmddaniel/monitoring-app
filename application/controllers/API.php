@@ -175,16 +175,19 @@ class API extends CI_Controller{
     function getAllImagesForProject()
     {
 
-        $images = $this->m_padmin->get_all_images_by_kode("17");
+        if (isset($_POST['kode'])) {
+
+            $kode = $_POST['kode'];
+            $images = $this->m_padmin->get_all_images_by_kode($kode);
             if($images->num_rows() > 0){
                 $datas = $images->result_array();
                 $results = array();
 
                 foreach ($datas as $data) {
                     $name=$data['file_data'];
-                    $url['small'] = 'http://ppp.kebkel.com/assets/images/' . $data['file_data'];
-                    $url['medium'] = 'http://ppp.kebkel.com/assets/images/' . $data['file_data'];
-                    $url['large'] = 'http://ppp.kebkel.com/assets/images/' . $data['file_data'];
+                    $url['small'] = "http://ppp.kebkel.com/assets/images/" . $data['file_data'];
+                    $url['medium'] = "http://ppp.kebkel.com/assets/images/" . $data['file_data'];
+                    $url['large'] = "http://ppp.kebkel.com/assets/images/" . $data['file_data'];
                     $timestamp = date("D M d, Y G:i");
 
                     $result['name']=$name;
@@ -194,7 +197,9 @@ class API extends CI_Controller{
                 array_push($results, $result);
                 }
 
-                echo json_encode($results);
+                $var["images"] = $results;
+
+                echo json_encode($var);
             }else{
                 $newdata['error'] = TRUE;
                 $newdata['error_msg'] = "Tidak ada gambar untuk proyek ini";
@@ -202,5 +207,14 @@ class API extends CI_Controller{
 
                 echo json_encode($newdata);
             }
+        }
+        else
+        {
+            $newdata['error'] = TRUE;
+            $newdata['error_msg'] = "Gagal menghubungkan ke server";
+            $newdata['fetched'] = FALSE;
+
+            echo json_encode($newdata);
+        }
     }
 }
