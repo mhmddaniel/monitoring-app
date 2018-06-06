@@ -23,6 +23,9 @@
   $c=$sumkeluar->row_array(); 
   $d=$sumprog->row_array(); 
   $e=$sum_sisa->row_array(); 
+  $f=$diffdateplus->row_array(); 
+  $g=$diffdatemin->row_array(); 
+  $h=$countselesai->row_array(); 
   ?>
   <section class="content">
    <div class="row">
@@ -127,7 +130,51 @@
 
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-12">
 
+      <div class="col-md-4">
+        <div class="small-box bg-red">
+          <div class="inner">
+            <h3><?php echo $f['countkerja']; ?></h3>
+            <p>Proyek sedang dikerjakan</p>
+          </div>
+          <div class="icon">
+            <i class="fa fa-shopping-cart"></i>
+          </div>
+          <a href="#" class="small-box-footer">
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="small-box bg-purple">
+          <div class="inner">
+            <h3><?php echo $h['countselesai']; ?></h3>
+            <p>Proyek Selesai</p>
+          </div>
+          <div class="icon">
+            <i class="fa fa-shopping-cart"></i>
+          </div>
+          <a href="#" class="small-box-footer">
+          </a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="small-box bg-aqua">
+          <div class="inner">
+            <h3><?php echo $g['countkerja']; ?></h3>
+            <p>Proyek belum mulai</p>
+          </div>
+          <div class="icon">
+            <i class="fa fa-shopping-cart"></i>
+          </div>
+          <a href="#" class="small-box-footer">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="row">    
     <div class="col-md-12">
@@ -144,10 +191,10 @@
 
             function drawChart() {
               var data = google.visualization.arrayToDataTable([
-                ['Year', 'Rencana Awal Kontrak', 'Awal Kontrak'],
+                ['Month', 'Rencana Awal Kontrak', 'Awal Kontrak'],
                 <?php foreach ($countjum->result_array() as $i) : ?>
                   ['<?php echo $i['proyek_bulan']; ?>', <?php echo $i['countsech']; ?>, <?php echo $i['countawal']; ?>],
- 
+
                 <?php endforeach; ?>
                 ]);
 
@@ -168,9 +215,11 @@
       </div>
     </div>
   </div>
+
+
+
 </section>
 </div>
-
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 

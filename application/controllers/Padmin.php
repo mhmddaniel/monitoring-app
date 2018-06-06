@@ -18,6 +18,9 @@ class Padmin extends CI_Controller{
 			$x['sumpagu']=$this->m_padmin->sum_pagu();
 			$x['sumkeluar']=$this->m_padmin->sum_keluar();
 			$x['countjum']=$this->m_padmin->countjum();
+			$x['diffdateplus']=$this->m_padmin->diffdateplus();
+			$x['diffdatemin']=$this->m_padmin->diffdatemin();
+			$x['countselesai']=$this->m_padmin->countselesai();
 		}
 		else if($_SESSION['level']=='bidang'){
 			$bagian=$_SESSION['bagian'];
@@ -26,6 +29,10 @@ class Padmin extends CI_Controller{
 			$x['sum_sisa']=$this->m_padmin->sum_sisa_by_kode($bagian);
 			$x['sumpagu']=$this->m_padmin->sum_pagu_by_kode($bagian);
 			$x['sumkeluar']=$this->m_padmin->sum_keluar_by_kode($bagian);
+			$x['countjum']=$this->m_padmin->countjum_by_kode($bagian);
+			$x['diffdateplus']=$this->m_padmin->diffdateplus_by_kode($bagian);
+			$x['diffdatemin']=$this->m_padmin->diffdatemin_by_kode($bagian);
+			$x['countselesai']=$this->m_padmin->countselesai_by_kode($bagian);
 		}
 		else {
 			$usernik=$_SESSION['usernik'];

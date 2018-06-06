@@ -282,7 +282,7 @@ $b=$data->row_array() ;
         } 
       }
       else {
-        echo "";
+        echo "a";
       }
       ?>
     </p>

@@ -7,18 +7,11 @@ class M_padmin extends CI_Model{
 	}
 
 	function get_all_proyek(){
-		$this->db->select('*');
-		$this->db->from('proyek a');
-		$this->db->join('proyek_bagian b','a.proyek_id=b.pb_proyek_id','inner');
-		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
-		$this->db->join('user d','a.proyek_user_nik=d.user_nik','inner');
-		$this->db->ORDER_BY('a.proyek_id','desc');	
-		$this->db->GROUP_BY ('proyek_id');
-		$hsl=$this->db->get();
+		$hsl=$this->db->query("SELECT * FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id inner join koordinat on proyek.proyek_koordinat_id=koordinat.koordinat_id where proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
 		return $hsl;
 	}
 	function get_all_proyek_by_bagian($bagian){
-		$hsl=$this->db->query("SELECT * FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id inner join koordinat on proyek.proyek_koordinat_id=koordinat.koordinat_id inner join user on proyek.proyek_user_nik=user.user_nik where proyek.proyek_bidang='$bagian' AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
+				$hsl=$this->db->query("SELECT * FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id inner join koordinat on proyek.proyek_koordinat_id=koordinat.koordinat_id  where proyek.proyek_bidang='$bagian' AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
 		return $hsl;
 	}
 	function get_chart_rt($kode){
@@ -33,8 +26,38 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("SELECT sum(pb_sisa_anggaran) AS sumsisa FROM proyek_bagian");
 		return $hsl;
 	}
+	function countselesai(){
+		$hsl=$this->db->query("SELECT count(*) as countselesai FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id where proyek_bagian.pb_real=100 AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
+		return $hsl;
+	}
+	function diffdateplus(){
+		$hsl=$this->db->query("SELECT count(DISTINCT proyek_awal_kontrak) as countkerja FROM  proyek,proyek_bagian where proyek_awal_kontrak<now() AND pb_real!=100");
+		return $hsl;
+	}
+	function diffdatemin(){
+		$hsl=$this->db->query("SELECT count( DISTINCT proyek_awal_kontrak) as countkerja FROM proyek,proyek_bagian where proyek_awal_kontrak>now() AND pb_real!=100");
+		return $hsl;
+	}
+
+	function countselesai_by_kode($bagian){
+		$hsl=$this->db->query("SELECT count(*) as countselesai FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id where proyek_bagian.pb_real=100 AND proyek.proyek_bidang='$bagian' AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
+		return $hsl;
+	}
+	function diffdateplus_by_kode($bagian){
+		$hsl=$this->db->query("SELECT count(*) as countkerja FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id where proyek_bagian.pb_real!=100 AND proyek.proyek_bidang='$bagian'  AND proyek_awal_kontrak<now()  AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
+		return $hsl;
+	}
+	function diffdatemin_by_kode($bagian){
+		$hsl=$this->db->query("SELECT count(*) as countkerja FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id where proyek_bagian.pb_real!=100 AND proyek.proyek_bidang='$bagian'  AND proyek_awal_kontrak>now()  AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
+		return $hsl;
+	}
+
 	function countjum(){
 		$hsl=$this->db->query("select monthname(proyek_bulan) as proyek_bulan, sum(countsech) as countsech , sum(countawal) as countawal from ((select `proyek_sech_awal` as proyek_bulan, 1 as countsech, 0 as countawal from proyek) union all (select `proyek_awal_kontrak`, 0, 1 from proyek ) ) dd group by monthname(proyek_bulan), month(proyek_bulan) order by month(proyek_bulan)");
+		return $hsl;
+	}
+	function countjum_by_kode($bagian){
+		$hsl=$this->db->query("select monthname(proyek_bulan) as proyek_bulan, sum(countsech) as countsech , sum(countawal) as countawal from ((select `proyek_sech_awal` as proyek_bulan, 1 as countsech, 0 as countawal from proyek) union all (select `proyek_awal_kontrak`, 0, 1 from proyek where proyek_bidang='$bagian' ) ) dd group by monthname(proyek_bulan), month(proyek_bulan)  order by month(proyek_bulan)");
 		return $hsl;
 	}
 	function sum_sisa_by_kode($bagian){
