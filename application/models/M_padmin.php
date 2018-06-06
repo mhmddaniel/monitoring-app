@@ -400,6 +400,7 @@ class M_padmin extends CI_Model{
 		$this->db->select('*');
 		$this->db->from('file');
 		$this->db->where('proyek_id',$kode);
+		$this->db->order_by('proyek_id', 'DESC');
 		$hsl=$this->db->get();
 		return $hsl;
 	}
