@@ -55,18 +55,6 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
                 </select>
               </div>
               <div class="form-group">
-                <label>NIP Penanggung Jawab</label>
-                <input type="text" class="form-control"  name="xnip">
-              </div>
-              <div class="form-group">
-                <label>Nama Penanggung Jawab</label>
-                <input type="text" class="form-control"  name="xnama_pek">
-              </div>
-              <div class="form-group">
-                <label>Telepon Penanggung Jawab</label>
-                <input type="text" class="form-control"  name="xnama_pek">
-              </div>
-              <div class="form-group">
                 <label>Posisi</label>
                 <select class="form-control"  name="xjenis" >
                   <option value="kontraktor">Kontraktor</option>

@@ -29,9 +29,7 @@
 							<thead>
 								<tr>
 									<th>Proyek</th>
-									<th>Pelaksana</th>
 									<th>Posisi</th>
-									<th>Telepon</th>
 									<th>Nama Direktur</th>
 									<th>Telepon Direktur</th>
 									<th>Nama Perusahaan</th>
@@ -44,10 +42,8 @@
 								$no=0;
 								foreach ($data->result_array() as $i) :
 									$no++;
-									$pekerja_nip=$i['pekerja_nip'];
+									$pekerja_id=$i['pekerja_id'];
 									$proyek_nama=$i['proyek_nama'];
-									$pekerja_nama=$i['pekerja_nama'];
-									$pekerja_tel=$i['pekerja_tel'];
 									$pekerja_jenis=$i['pekerja_jenis'];
 									$pekerja_nama_direktur=$i['pekerja_nama_direktur'];
 									$pekerja_tel_direktur=$i['pekerja_tel_direktur'];
@@ -57,9 +53,7 @@
 									?>
 									<tr>
 										<td><?php echo $proyek_nama;?></td>
-										<td><?php echo $pekerja_nama;?></td>
 										<td><?php echo $pekerja_jenis;?></td>
-										<td><?php echo $pekerja_tel;?></td>
 										<td><?php echo $pekerja_nama_direktur;?></td>
 										<td><?php echo $pekerja_tel_direktur;?></td>
 										<td><?php echo $pekerja_nama_perusahaan;?></td>
@@ -72,8 +66,8 @@
 													<span class="sr-only">Toggle Dropdown</span>
 												</button>
 												<ul class="dropdown-menu" role="menu">
-													<li><a href="<?php echo base_url().'padmin/get_edit_pn/'.$pekerja_nip;?>"><span class="fa fa-pencil"></span>Edit</a></li>
-													<li><a data-toggle="modal" data-target="#ModalHapus<?php echo $pekerja_nip;?>"><span class="fa fa-trash"></span>Hapus</a></li>
+													<li><a href="<?php echo base_url().'padmin/get_edit_pn/'.$pekerja_id;?>"><span class="fa fa-pencil"></span>Edit</a></li>
+													<li><a data-toggle="modal" data-target="#ModalHapus<?php echo $pekerja_id;?>"><span class="fa fa-trash"></span>Hapus</a></li>
 												</ul>
 											</div>
 										</td>
@@ -89,22 +83,19 @@
 </div>
 
 <?php foreach ($data->result_array() as $i) :
-$pekerja_nip=$i['pekerja_nip'];
-$pekerja_nama=$i['pekerja_nama'];
-$pekerja_nama_direktur=$i['pekerja_nama_direktur'];
+$pekerja_id=$i['pekerja_id'];
 ?>
-<div class="modal fade" id="ModalHapus<?php echo $pekerja_nip;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="ModalHapus<?php echo $pekerja_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
 				<h4 class="modal-title" id="myModalLabel">Hapus Pelaksana</h4>
 			</div>
-			<form class="form-horizontal" action="<?php echo base_url().'padmin/delete_proyek'?>" method="post" enctype="multipart/form-data">
+			<form class="form-horizontal" action="<?php echo base_url().'padmin/delete_pn'?>" method="post" enctype="multipart/form-data">
 				<div class="modal-body">       
-					<input type="hidden" name="kode" value="<?php echo $pekerja_nip;?>"/> 
-					<input type="hidden" value="<?php echo $pekerja_nama_direktur;?>" name="gambar">
-					<p>Apakah Anda yakin mau menghapus Pelaksana <b><?php echo $pekerja_nama;?></b> ?</p>
+					<input type="hidden" name="kode" value="<?php echo $pekerja_id;?>"/> 
+					<p>Apakah Anda yakin mau menghapus data ini?</p>
 
 				</div>
 				<div class="modal-footer">

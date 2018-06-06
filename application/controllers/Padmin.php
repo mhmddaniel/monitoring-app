@@ -8,7 +8,9 @@ class Padmin extends CI_Controller{
 		};
 		$this->load->model('m_padmin');
 	}
-
+	public function aa(){
+		$this->load->view('padmin/proyek/a');
+	}
 	public function index(){
 		$y['title']='Dashboard';
 		if($_SESSION['level']=='admin'){
@@ -35,8 +37,8 @@ class Padmin extends CI_Controller{
 			$x['countselesai']=$this->m_padmin->countselesai_by_kode($bagian);
 		}
 		else {
-			$usernik=$_SESSION['usernik'];
-			$x['data']=$this->m_padmin->get_all_proyek_by_user($usernik);
+			$user_id=$_SESSION['user_id'];
+			$x['data']=$this->m_padmin->get_all_proyek_by_user($user_id);
 		}
 
 		$this->load->view('padmin/header',$y);
@@ -54,8 +56,8 @@ class Padmin extends CI_Controller{
 			$x['data']=$this->m_padmin->get_all_proyek_by_bagian($bagian);
 		}
 		else {
-			$usernik=$_SESSION['usernik'];
-			$x['data']=$this->m_padmin->get_all_proyek_by_user($usernik);
+			$user_id=$_SESSION['user_id'];
+			$x['data']=$this->m_padmin->get_all_proyek_by_user($user_id);
 		}
 		$g['xc']='cc';
 		$y['title']='DATA PROYEK';
@@ -101,8 +103,8 @@ class Padmin extends CI_Controller{
 			$x['data']=$this->m_padmin->get_all_pelaksana();
 		}
 		else {
-			$usernik=$_SESSION['usernik'];
-			$x['data']=$this->m_padmin->get_all_pelaksana_by_user($usernik);	
+			$user_id=$_SESSION['user_id'];
+			$x['data']=$this->m_padmin->get_all_pelaksana_by_user($user_id);	
 		}
 		$y['title']='Penanggung Jawab';
 		$this->load->view('padmin/header',$y);
@@ -203,16 +205,13 @@ class Padmin extends CI_Controller{
 
 	function save_penanggung_jawab(){
 		$proyek_id=$this->input->post('proyek');
-		$xnip=$this->input->post('xnip');
-		$xnampeke=$this->input->post('xnama_pek');
-		$xtelpeke=$this->input->post('xtel_pek');
 		$xpekjenis=$this->input->post('xjenis');
 		$xnamdirek=$this->input->post('xnama_direk');
 		$xteldirek=$this->input->post('xtel_direk');
 		$xnamaperus=$this->input->post('xnama_perus');
 		$xalaperus=$this->input->post('xalamat_perus');
 		$xtelkant=$this->input->post('xtel_kant');
-		$pekerja=$this->m_padmin->save_pekerja($proyek_id,$xnip,$xnampeke,$xtelpeke,$xpekjenis,$xnamdirek,$xteldirek,$xnamaperus,$xalaperus,$xtelkant);
+		$pekerja=$this->m_padmin->save_pekerja($proyek_id,$xpekjenis,$xnamdirek,$xteldirek,$xnamaperus,$xalaperus,$xtelkant);
 
 		echo $this->session->set_flashdata('msg','success');
 		redirect('padmin/penanggung_jawab');		
@@ -223,8 +222,8 @@ class Padmin extends CI_Controller{
 		$numproyek=$this->input->post('numproyek');
 		$xnama=$this->input->post('xnama');
 		$year=$this->input->post('year');
-		$keuangan=$this->input->post('keuangan');
-		$pagu=$this->input->post('pagu');
+		$keuangan=str_replace(".", "", $this->input->post('keuangan'));
+		$pagu=str_replace(".", "", $this->input->post('pagu'));
 		$sechawal=$this->input->post('sechawal');
 		$awalkontrak=$this->input->post('awalkontrak');
 		$akhirkontrak=$this->input->post('akhirkontrak');
@@ -238,24 +237,12 @@ class Padmin extends CI_Controller{
 		$namkor=$this->input->post('namkor');
 		$latitude=$this->input->post('latitude');
 		$longitude=$this->input->post('longitude');
-		$nikuser=$this->input->post('xnikuser');
-		$namauser=$this->input->post('xnamauser');
-		$emailuser=$this->input->post('xemailuser');
-		$telpuser=$this->input->post('xtelpuser');
-
-		$svuser=$this->m_padmin->save_user_proyek($nikuser,$namauser,$emailuser,$telpuser);
-		if($svuser){
-
-			$svkoor=$this->m_padmin->save_koordinat($numkor,$namkor,$latitude,$longitude,$inputAddress);
-		}
-		else {
-
-			echo $this->session->set_flashdata('msg','warning');
-			redirect('padmin/tambah_proyek');		
-		}
+		
+		$svkoor=$this->m_padmin->save_koordinat($numkor,$namkor,$latitude,$longitude,$inputAddress);
+		
 		if ($svkoor){
 
-			$svpro=$this->m_padmin->save_proyek($numproyek,$nikuser,$numkor,$xnama,$year,$keuangan,$pagu,$sechawal,$awalkontrak,$akhirkontrak,$xbidang,$xjenis,$xvolume,$xsatuan);
+			$svpro=$this->m_padmin->save_proyek($numproyek,$numkor,$xnama,$year,$keuangan,$pagu,$sechawal,$xbidang,$xjenis,$xvolume,$xsatuan);
 			$svpro=$this->m_padmin->save_proyek_bagian($numproyek);
 			echo $this->session->set_flashdata('msg','success');
 			redirect('padmin/proyek');
@@ -290,8 +277,6 @@ class Padmin extends CI_Controller{
 				$this->image_lib->resize();
 
 				$gambar=$gbr['file_name'];
-				$user_nik=$this->input->post('xnik');
-				$nama=$this->input->post('xnama');
 				$username=$this->input->post('xusername');
 				$password=$this->input->post('xpassword');
 				$repassword=$this->input->post('xrepassword');
@@ -306,7 +291,7 @@ class Padmin extends CI_Controller{
 
 				} else {
 					if($password==$repassword){
-						$this->m_padmin->save_user($user_nik,$nama,$username,$password,$tel,$email,$bagian,$gambar,$level);
+						$this->m_padmin->save_user($username,$password,$tel,$email,$bagian,$gambar,$level);
 						echo $this->session->set_flashdata('msg','success');
 						redirect('padmin/user');	
 					}
@@ -328,11 +313,11 @@ class Padmin extends CI_Controller{
 	}
 	function save_dinaspu(){
 
-		$nik=$this->input->post('xnik');
+		$user_id=$this->input->post('xuser_id');
 		$nama=$this->input->post('xnama');
 		$tel=$this->input->post('xtel');
 		$bag=$this->input->post('xbag');
-		$this->m_padmin->save_dinaspu($nik,$nama,$tel,$bag);
+		$this->m_padmin->save_dinaspu($user_id,$nama,$tel,$bag);
 		echo $this->session->set_flashdata('msg','success');
 		redirect('padmin/dinaspu');
 	}
@@ -409,11 +394,9 @@ class Padmin extends CI_Controller{
 		$proyek_id=$this->input->post('xproyek_id');
 		$xnama=$this->input->post('xnama');
 		$year=$this->input->post('year');
-		$keuangan=$this->input->post('keuangan');
-		$pagu=$this->input->post('pagu');
-		$sechawal=$this->input->post('sechawal');
-		$awalkontrak=$this->input->post('awalkontrak');
-		$akhirkontrak=$this->input->post('akhirkontrak');
+		$keuangan=str_replace(".", "", $this->input->post('keuangan'));
+		$pagu=str_replace(".", "", $this->input->post('pagu'));
+		$sech_awal=$this->input->post('sech_awal');
 		$xbidang=$this->input->post('xbidang');
 		$xjenis=$this->input->post('xjenis');
 		$xvolume=$this->input->post('xvolume');
@@ -430,7 +413,7 @@ class Padmin extends CI_Controller{
 		
 		if ($svkoor){
 
-			$this->m_padmin->update_proyek($proyek_id,$numkor,$xnama,$year,$keuangan,$pagu,$sechawal,$awalkontrak,$akhirkontrak,$xbidang,$jenis,$volume,$satuan);
+			$this->m_padmin->update_proyek($proyek_id,$numkor,$xnama,$year,$keuangan,$pagu,$sech_awal,$xbidang,$xjenis,$xvolume,$xsatuan);
 			echo $this->session->set_flashdata('msg','success');
 			redirect('padmin/proyek');
 		}
@@ -456,15 +439,13 @@ class Padmin extends CI_Controller{
 	function update_pn(){
 		$proyek_id=$this->input->post('proyek');
 		$xnip=$this->input->post('xnip');
-		$xnampeke=$this->input->post('xnama_pek');
-		$xtelpeke=$this->input->post('xtel_pek');
 		$xpekjenis=$this->input->post('xjenis');
 		$xnamdirek=$this->input->post('xnama_direk');
 		$xteldirek=$this->input->post('xtel_direk');
 		$xnamaperus=$this->input->post('xnama_perus');
 		$xalaperus=$this->input->post('xalamat_perus');
 		$xtelkant=$this->input->post('xtel_kant');
-		$pekerja=$this->m_padmin->update_pn($proyek_id,$xnip,$xnampeke,$xtelpeke,$xpekjenis,$xnamdirek,$xteldirek,$xnamaperus,$xalaperus,$xtelkant);
+		$pekerja=$this->m_padmin->update_pn($proyek_id,$xnip,$xpekjenis,$xnamdirek,$xteldirek,$xnamaperus,$xalaperus,$xtelkant);
 
 		echo $this->session->set_flashdata('msg','success');
 		redirect('padmin/penanggung_jawab');		
@@ -496,14 +477,13 @@ class Padmin extends CI_Controller{
 				$this->image_lib->resize();
 
 				$gambar=$gbr['file_name'];
-				$user_nik=$this->input->post('xnik');
-				$user_nama=$this->input->post('xnama');
-				$xusername=$this->input->post('xusername');
-				$user_email=$this->input->post('xemail');
-				$user_tel=$this->input->post('xtel');
-				$user_bagian=$this->input->post('xbagian');
-				$user_level=$this->input->post('xlevel');
-				$this->m_padmin->update_user($user_nik,$user_nama,$xusername,$user_email,$user_tel,$user_bagian,$user_level,$gambar);
+				$user_id=$this->input->post('user_id');
+				$user_username=$this->input->post('user_username');
+				$user_email=$this->input->post('user_email');
+				$user_tel=$this->input->post('user_tel');
+				$user_bagian=$this->input->post('user_bagian');
+				$user_level=$this->input->post('user_level');
+				$this->m_padmin->update_user($user_id,$user_username,$user_email,$user_tel,$user_bagian,$user_level,$gambar);
 				echo $this->session->set_flashdata('msg','info');
 				redirect('padmin/user');
 			}else{
@@ -512,14 +492,13 @@ class Padmin extends CI_Controller{
 			}
 
 		}else{
-			$user_nik=$this->input->post('xnik');
-			$user_nama=$this->input->post('xnama');
-			$xusername=$this->input->post('xusername');
-			$user_email=$this->input->post('xemail');
-			$user_tel=$this->input->post('xtel');
-			$user_bagian=$this->input->post('xbagian');
-			$user_level=$this->input->post('xlevel');
-			$this->m_padmin->update_user_wo_img($user_nik,$user_nama,$xusername,$user_email,$user_tel,$user_bagian,$user_level);
+			$user_id=$this->input->post('user_id');
+			$user_username=$this->input->post('user_username');
+			$user_email=$this->input->post('user_email');
+			$user_tel=$this->input->post('user_tel');
+			$user_bagian=$this->input->post('user_bagian');
+			$user_level=$this->input->post('user_level');
+			$this->m_padmin->update_user_wo_img($user_id,$user_username,$user_email,$user_tel,$user_bagian,$user_level);
 			echo $this->session->set_flashdata('msg','info');
 			redirect('padmin/user');
 		} 
@@ -718,12 +697,12 @@ class Padmin extends CI_Controller{
 		$oldpass=md5($this->input->post('xoldpas'));
 		$newpass=md5($this->input->post('xnewpas'));
 		$newrepass=md5($this->input->post('xnewrepas'));
-		$usernik=$this->input->post('usernik');
+		$user_id=$this->input->post('user_id');
 
 		if($xhp==$oldpass)
 		{
 			if($newpass==$newrepass){
-				$this->m_padmin->update_password_user($usernik,$newpass);
+				$this->m_padmin->update_password_user($user_id,$newpass);
 				echo $this->session->set_flashdata('msg','info');
 				redirect('padmin/user');
 			}
@@ -738,6 +717,12 @@ class Padmin extends CI_Controller{
 		}
 	}
 
+	function delete_pn(){
+		$kode=$this->input->post('kode');
+		$this->m_padmin->delete_pn($kode);
+		echo $this->session->set_flashdata('msg','success-hapus');
+		redirect('padmin/proyek');
+	}
 
 	function delete_proyek(){
 		$kode=$this->input->post('kode');

@@ -103,7 +103,7 @@ class M_padmin extends CI_Model{
 			COUNT(distinct proyek_bagian.pb_stat_proyek) as sumprog
 			FROM proyek_bagian
 			inner JOIN proyek ON proyek_bagian.pb_proyek_id = proyek.proyek_id 
-			inner JOIN user ON proyek.proyek_user_nik = user.user_nik where proyek.proyek_bidang='$bagian'
+			inner JOIN user ON proyek.proyek_user_id = user.user_id where proyek.proyek_bidang='$bagian'
 			GROUP BY proyek_bagian.pb_stat_proyek");
 		return $hsl;
 	}
@@ -117,13 +117,13 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 
-	function get_all_proyek_by_user($usernik){
+	function get_all_proyek_by_user($user_id){
 		$this->db->select('*');
 		$this->db->from('proyek a');
 		$this->db->join('proyek_bagian b','a.proyek_id=b.pb_proyek_id','inner');
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
-		$this->db->join('user d','a.proyek_user_nik=d.user_nik','inner');
-		$this->db->where('user_nik',$usernik);
+		$this->db->join('user d','a.proyek_user_id=d.user_id','inner');
+		$this->db->where('user_id',$user_id);
 		$hsl=$this->db->get();
 		return $hsl;
 	}
@@ -133,7 +133,7 @@ class M_padmin extends CI_Model{
 		$this->db->from('proyek a');
 		$this->db->join('proyek_bagian b','a.proyek_id=b.pb_proyek_id','inner');
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
-		$this->db->join('user d','a.proyek_user_nik=d.user_nik','inner');
+		$this->db->join('user d','a.proyek_user_id=d.user_id','inner');
 		$this->db->where('proyek_bidang',$bagian);
 		$this->db->ORDER_BY('pb_proyek_id','asc');
 		$hsl=$this->db->get();
@@ -147,7 +147,7 @@ class M_padmin extends CI_Model{
 		$this->db->from('proyek a');
 		$this->db->join('proyek_bagian b','a.proyek_id=b.pb_proyek_id','inner');
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
-		$this->db->join('user d','a.proyek_user_nik=d.user_nik','inner');
+		$this->db->join('user d','a.proyek_user_id=d.user_id','inner');
 		$this->db->where('pb_id',$kode);
 		$hsl=$this->db->get();
 		return $hsl;
@@ -176,17 +176,17 @@ class M_padmin extends CI_Model{
 		$this->db->select('*');
 		$this->db->from('pekerja a');
 		$this->db->join('proyek b','a.proyek_id=b.proyek_id','inner');
-		$this->db->where('pekerja_nip',$kode);
+		$this->db->where('pekerja_id',$kode);
 		$hsl=$this->db->get();
 		return $hsl;
 	}
 
-	function get_all_pelaksana_by_user($usernik){
+	function get_all_pelaksana_by_user($user_id){
 		$this->db->select('*');
 		$this->db->from('pekerja a');
 		$this->db->join('proyek b','a.proyek_id=b.proyek_id','inner');
-		$this->db->join('user c','b.proyek_user_nik=c.user_nik','inner');
-		$this->db->where('user_nik',$usernik);
+		$this->db->join('user c','b.proyek_user_id=c.user_id','inner');
+		$this->db->where('user_id',$user_id);
 		$hsl=$this->db->get();
 		return $hsl;
 	}
@@ -213,16 +213,16 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("SELECT * FROM user where user_username='$username'");
 		return $hsl;
 	}
-	function save_user($user_nik,$nama,$username,$password,$tel,$email,$bagian,$gambar,$level){
-		$hsl=$this->db->query("INSERT INTO user (user_nik,user_nama,user_username,user_password,user_email,user_telp,user_bagian,user_photo,user_level) VALUES ('$user_nik','$nama','$username',md5('$password'),'$email','$tel','$bagian','$gambar','$level')");
+	function save_user($username,$password,$tel,$email,$bagian,$gambar,$level){
+		$hsl=$this->db->query("INSERT INTO user (user_username,user_password,user_email,user_telp,user_bagian,user_photo,user_level) VALUES ('$username',md5('$password'),'$email','$tel','$bagian','$gambar','$level')");
 		return $hsl;
 	}
-	function save_user_proyek($nikuser,$namauser,$emailuser,$telpuser){
-		$hsl=$this->db->query("INSERT INTO user (user_nik,user_nama,user_email,user_telp,user_bagian) VALUES ('$nikuser','$namauser','$emailuser','$telpuser','ppk')");
+	function save_user_proyek($user_id,$namauser,$emailuser,$telpuser){
+		$hsl=$this->db->query("INSERT INTO user (user_id,user_nama,user_email,user_telp,user_bagian) VALUES ('$user_id','$namauser','$emailuser','$telpuser','ppk')");
 		return $hsl;
 	}
-	function update_user_proyek($nikuser,$namauser,$emailuser,$telpuser,$baguser){
-		$hsl=$this->db->query("UPDATE user set user_nama='$namauser',user_email='$emailuser',user_telp='$telpuser',user_bagian='$baguser' where user_nik='$nikuser'");
+	function update_user_proyek($user_id,$namauser,$emailuser,$telpuser,$baguser){
+		$hsl=$this->db->query("UPDATE user set user_nama='$namauser',user_email='$emailuser',user_telp='$telpuser',user_bagian='$baguser' where user_id='$user_id'");
 		return $hsl;
 	}
 
@@ -257,13 +257,13 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("UPDATE koordinat set koordinat_nama='$namkor',koordinat_lat='$latitude',koordinat_lng='$longitude',koordinat_alamat='$inputAddress' where koordinat_id='$numkor'");
 		return $hsl;
 	}
-	function save_proyek($numproyek,$nikuser,$numkor,$xnama,$year,$keuangan,$pagu,$sechawal,$xbidang,$xjenis,$xvolume,$xsatuan){
-		$hsl=$this->db->query("INSERT INTO proyek (proyek_id,proyek_user_nik,proyek_koordinat_id,proyek_nama,proyek_tahun,proyek_keuangan,proyek_pagu,proyek_sech_awal,proyek_bidang,proyek_jenis,proyek_volume,proyek_satuan) VALUES ('$numproyek','$nikuser','$numkor','$xnama','$year','$keuangan','$pagu','$sechawal','$xbidang','$xjenis','$xvolume','$xsatuan')");
+	function save_proyek($numproyek,$numkor,$xnama,$year,$keuangan,$pagu,$sechawal,$xbidang,$xjenis,$xvolume,$xsatuan){
+		$hsl=$this->db->query("INSERT INTO proyek (proyek_id,proyek_koordinat_id,proyek_nama,proyek_tahun,proyek_keuangan,proyek_pagu,proyek_sech_awal,proyek_bidang,proyek_jenis,proyek_volume,proyek_satuan) VALUES ('$numproyek','$numkor','$xnama','$year','$keuangan','$pagu','$sechawal','$xbidang','$xjenis','$xvolume','$xsatuan')");
 		return $hsl;
 	}
 
-	function update_proyek($proyek_id,$numkor,$xnama,$year,$keuangan,$pagu,$sechawal,$xbidang,$jenis,$volume,$satuan){
-		$hsl=$this->db->query("UPDATE proyek set proyek_koordinat_id='$numkor',proyek_nama='$xnama',proyek_tahun='$year',proyek_keuangan='$keuangan',proyek_pagu='$pagu',proyek_sech_awal='$sechawal',proyek_bidang='$xbidang',proyek_jenis='$jenis',proyek_volume='$volume',proyek_satuan='$satuan',last_update=NOW() where proyek_id='$proyek_id'");
+	function update_proyek($proyek_id,$numkor,$xnama,$year,$keuangan,$pagu,$sech_awal,$xbidang,$xjenis,$xvolume,$xsatuan){
+		$hsl=$this->db->query("UPDATE proyek set proyek_koordinat_id='$numkor',proyek_nama='$xnama',proyek_tahun='$year',proyek_keuangan='$keuangan',proyek_pagu='$pagu',proyek_sech_awal='$sech_awal',proyek_bidang='$xbidang',proyek_jenis='$xjenis',proyek_volume='$xvolume',proyek_satuan='$xsatuan',last_update=NOW() where proyek_id='$proyek_id'");
 		return $hsl;
 	}
 
@@ -271,14 +271,14 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("UPDATE proyek set proyek_awal_kontrak='$awalkontrak',proyek_akhir_kontrak='$akhirkontrak',last_update=NOW() where proyek_id='$proyek_id'");
 		return $hsl;
 	}
-	function save_pekerja($proyek_id,$xnip,$xnampeke,$xtelpeke,$xpekjenis,$xnamdirek,$xteldirek,$xnamaperus,$xalaperus,$xtelkant){
-		$hsl=$this->db->query("INSERT INTO pekerja (pekerja_nip,proyek_id,pekerja_nama,pekerja_tel,pekerja_jenis,pekerja_nama_direktur,pekerja_tel_direktur,pekerja_nama_perusahaan,pekerja_alamat_perusahaan,pekerja_tel_kantor) VALUES ('$xnip','$proyek_id','$xnampeke','$xtelpeke','$xpekjenis','$xnamdirek','$xteldirek','$xnamaperus','$xalaperus','$xtelkant')");
+	function save_pekerja($proyek_id,$xpekjenis,$xnamdirek,$xteldirek,$xnamaperus,$xalaperus,$xtelkant){
+		$hsl=$this->db->query("INSERT INTO pekerja (proyek_id,pekerja_jenis,pekerja_nama_direktur,pekerja_tel_direktur,pekerja_nama_perusahaan,pekerja_alamat_perusahaan,pekerja_tel_kantor) VALUES ('$proyek_id','$xpekjenis','$xnamdirek','$xteldirek','$xnamaperus','$xalaperus','$xtelkant')");
 		return $hsl;
 	}
 
 
-	function update_pn($proyek_id,$xnip,$xnampeke,$xtelpeke,$xpekjenis,$xnamdirek,$xteldirek,$xnamaperus,$xalaperus,$xtelkant){
-		$hsl=$this->db->query("update pekerja SET proyek_id='$proyek_id',pekerja_nama='$xnampeke',pekerja_tel='$xtelpeke',pekerja_jenis='$xpekjenis',pekerja_nama_direktur='$xnamdirek',pekerja_tel_direktur='$xteldirek',pekerja_nama_perusahaan='$xnamaperus',pekerja_alamat_perusahaan='$xalaperus',pekerja_tel_kantor='$xtelkant' where pekerja_nip='$xnip'");
+	function update_pn($proyek_id,$xnip,$xpekjenis,$xnamdirek,$xteldirek,$xnamaperus,$xalaperus,$xtelkant){
+		$hsl=$this->db->query("update pekerja SET proyek_id='$proyek_id',pekerja_jenis='$xpekjenis',pekerja_nama_direktur='$xnamdirek',pekerja_tel_direktur='$xteldirek',pekerja_nama_perusahaan='$xnamaperus',pekerja_alamat_perusahaan='$xalaperus',pekerja_tel_kantor='$xtelkant' where pekerja_id='$xnip'");
 		return $hsl;
 	}
 	function update_pekerja($numpeker,$xpekerja_nama,$xpekerja_alamat,$xpekerja_telp,$xdirektur_nama,$xdirektur_telp,$xpekerja_jenis){
@@ -290,7 +290,7 @@ class M_padmin extends CI_Model{
 	
 
 	function get_proyek_by_slug($slug){
-		$hsl=$this->db->query("select proyek.*,user.*,DATE_FORMAT(proyek_tanggal,'%d %M %Y - %H:%i') AS proyek_tanggal from proyek inner join user on proyek.proyek_user_nik=user.user_nik  where proyek_slug='$slug'");
+		$hsl=$this->db->query("select proyek.*,user.*,DATE_FORMAT(proyek_tanggal,'%d %M %Y - %H:%i') AS proyek_tanggal from proyek inner join user on proyek.proyek_user_id=user.user_id  where proyek_slug='$slug'");
 		return $hsl;
 	}
 	function get_dinaspu_by_kode($kode){
@@ -336,7 +336,6 @@ class M_padmin extends CI_Model{
 		$this->db->from('proyek a');
 		$this->db->join('proyek_bagian b','a.proyek_id=b.pb_proyek_id','inner');
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
-		$this->db->join('user d','a.proyek_user_nik=d.user_nik','inner');
 		$this->db->where('proyek_id',$kode);
 		$hsl=$this->db->get();
 		return $hsl;
@@ -371,7 +370,7 @@ class M_padmin extends CI_Model{
 		$this->db->from('proyek a');
 		$this->db->join('proyek_bagian b','a.proyek_id=b.pb_proyek_id','inner');
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
-		$this->db->join('user d','a.proyek_user_nik=d.user_nik','inner');
+		$this->db->join('user d','a.proyek_user_id=d.user_id','inner');
 		$this->db->where('proyek_id',$kode);
 		$hsl=$this->db->get();
 		return $hsl;
@@ -381,25 +380,29 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 
-	function update_user($user_nik,$user_nama,$xusername,$user_email,$user_tel,$user_bagian,$user_level,$gambar){
-		$hsl=$this->db->query("update user set user_nik,='$user_nik',user_nama='$user_nama',user_username='$xusername',user_email='$user_email',user_telp='$user_tel',user_bagian='$user_bagian',user_level='$user_level',user_photo='$gambar' where user_nik='$user_nik'");
+	function update_user($user_id,$user_username,$user_email,$user_tel,$user_bagian,$user_level,$gambar){
+		$hsl=$this->db->query("update user set user_username='$user_username',user_email='$user_email',user_telp='$user_tel',user_bagian='$user_bagian',user_level='$user_level',user_photo='$gambar' where user_id='$user_id'");
 		return $hsl;
 	}
-	function update_user_wo_img($user_nik,$user_nama,$xusername,$user_email,$user_tel,$user_bagian,$user_level){
-		$hsl=$this->db->query("update user set user_nik='$user_nik',user_nama='$user_nama',user_username='$xusername',user_email='$user_email',user_telp='$user_tel',user_bagian='$user_bagian',user_level='$user_level' where user_nik='$user_nik'");
+	function update_user_wo_img($user_id,$user_username,$user_email,$user_tel,$user_bagian,$user_level){
+		$hsl=$this->db->query("update user set user_username='$user_username',user_email='$user_email',user_telp='$user_tel',user_bagian='$user_bagian',user_level='$user_level' where user_id='$user_id'");
 		return $hsl;
 	}
-	function update_password_user($userid,$newpass){
-		$hsl=$this->db->query("update user set user_password='$newpass' where user_nik='$userid'");
+	function update_password_user($user_id,$newpass){
+		$hsl=$this->db->query("update user set user_password='$newpass' where user_id='$user_id'");
 		return $hsl;
 	}
 	function delete_user($kode){
-		$hsl=$this->db->query("DELETE from user where user_nik='$kode'");
+		$hsl=$this->db->query("DELETE from user where user_id='$kode'");
 		return $hsl;
 	}
 
 	function delete_proyek($kode){
 		$hsl=$this->db->query("DELETE from proyek where proyek_id='$kode'");
+		return $hsl;
+	}
+	function delete_pn($kode){
+		$hsl=$this->db->query("DELETE from pekerja where pekerja_id='$kode'");
 		return $hsl;
 	}
 	function get_all_proyek_by_kode($kode){
@@ -411,7 +414,7 @@ class M_padmin extends CI_Model{
 	}function get_all_user_by_kode($kode){
 		$this->db->select('*');
 		$this->db->from('user');
-		$this->db->where('user_nik',$kode);
+		$this->db->where('user_id',$kode);
 		$hsl=$this->db->get();
 		return $hsl;
 	}

@@ -54,14 +54,6 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
             <div class="col-md-8 col-md-offset-2">
               <div class="form-group">  
 
-                <div class="form-group">  
-                  <label>NIK</label>
-                  <input type="text" name="xnik" class="form-control" required/>
-                </div>
-                <div class="form-group">  
-                  <label>NAMA</label>
-                  <input type="text" name="xnama" class="form-control" required/>
-                </div>
                 <div class="form-group"> 
                   <label>USERNAME</label>
                   <input type="text" name="xusername" class="form-control" required/>
@@ -101,7 +93,6 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
                   <select name="xlevel" class="form-control" required>
                     <option value="admin">ADMIN</option>
                     <option value="bidang">BIDANG</option>
-                    <option value="user">USER</option>
                   </select>
                 </div>
                 <div class="form-group"> 

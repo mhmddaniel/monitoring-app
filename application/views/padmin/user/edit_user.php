@@ -33,41 +33,42 @@
               <h3 class="box-title">Data User</h3>
             </div>
             <div class="box-body">
-              <div class="form-group"> 
-                <label>NIK</label>
-                <input type="text" name="xnik" class="form-control" value="<?php echo $b['user_nik']; ?>" readonly/>
+              <div class="form-group">
+                <input type="hidden" name="user_id" class="form-control" value="<?php echo $b['user_id']; ?>" readonly/>
               </div>
               <div class="form-group"> 
                 <label>USERNAME</label>
-                <input type="text" name="xusername" class="form-control" value="<?php echo $b['user_username']; ?>"/>
-              </div>
-              <div class="form-group">
-                <label>NAMA</label>
-                <input type="text" name="xnama" class="form-control" value="<?php echo $b['user_nama']; ?>"/>
+                <input type="text" name="user_username" class="form-control" value="<?php echo $b['user_username']; ?>"/>
               </div>
               <div class="form-group"> 
                 <label>EMAIL</label>
-                <input type="email" name="xemail" class="form-control" value="<?php echo $b['user_email']; ?>"/>
+                <input type="email" name="user_email" class="form-control" value="<?php echo $b['user_email']; ?>"/>
               </div>
               <div class="form-group">  
                 <label>TELEPON</label>
-                <input type="tel" name="xtel" class="form-control"  value="<?php echo $b['user_telp']; ?>" />
+                <input type="tel" name="user_tel" class="form-control"  value="<?php echo $b['user_telp']; ?>" />
               </div>
 
               <div class="form-group">  
                 <label>Bagian</label>
-                <select name="xbagian" class="form-control" required>
-                  <option value="ppk" <?php if($b['user_bagian']=='ppk'){ echo "selected"; } else {} ?>>PPK</option>
-                  <option value="kabid" <?php if($b['user_bagian']=='kabid'){ echo "selected"; } else {} ?>>KABID</option>
-                  <option value="kasubid" <?php if($b['user_bagian']=='kasubid'){ echo "selected"; } else {} ?>>KASUBID</option>
+                <select name="user_bagian" class="form-control" required>
+                  <option value="" <?php if($b['user_bagian']=='null'){ echo "selected"; } else {} ?>>Pilih Bagian</option>
+                  <option value="sda" <?php if($b['user_bagian']=='sda'){ echo "selected"; } else {} ?>>Sumber Daya Air</option>
+                  <option value="bm" <?php if($b['user_bagian']=='bm'){ echo "selected"; } else {} ?>>Bina Marga</option>
+                  <option value="ciptakarya" <?php if($b['user_bagian']=='ciptakarya'){ echo "selected"; } else {} ?>>Cipta Karya</option>
+                  <option value="pr" <?php if($b['user_bagian']=='pr'){ echo "selected"; } else {} ?>>Perumahan Rakyat</option>
+                  <option value="sekretariat" <?php if($b['user_bagian']=='sekretariat'){ echo "selected"; } else {} ?>>Sekretariat</option>
+                  <option value="ttdp" <?php if($b['user_bagian']=='ttdp'){ echo "selected"; } else {} ?>>Tata Ruang dan Pertanahan</option>
+                  <option value="ubp" <?php if($b['user_bagian']=='ubp'){ echo "selected"; } else {} ?>>UPTD Balai Pengujian</option>
+                  <option value="ubpdp" <?php if($b['user_bagian']=='ubpdp'){ echo "selected"; } else {} ?>>UPTD Balai Peralatan dan Perbekalan</option>
+                  <option value="bkdp" <?php if($b['user_bagian']=='bkdp'){ echo "selected"; } else {} ?>>Bina Kontruksi dan Pengendalian</option>
                 </select>
               </div>
               <div class="form-group">  
                 <label>Role / Level</label>
-                <select name="xlevel" class="form-control" required>
-                  <option value="admin" <?php if($b['user_bagian']=='admin'){ echo "selected"; } else {} ?>>ADMIN</option>
-                  <option value="petugas" <?php if($b['user_bagian']=='petugas'){ echo "selected"; } else {} ?>>PETUGAS</option>
-                  <option value="user" <?php if($b['user_bagian']=='user'){ echo "selected"; } else {} ?>>USER</option>
+                <select name="user_level" class="form-control" required>
+                  <option value="admin" <?php if($b['user_level']=='admin'){ echo "selected"; } else {} ?>>ADMIN</option>
+                  <option value="bidang" <?php if($b['user_level']=='bidang'){ echo "selected"; } else {} ?>>Bidang</option>
                 </select>
               </div>
               <div class="form-group"> 
@@ -92,7 +93,7 @@
           <div class="box-body">
            <div class="form-group">
             <label>Password Lama</label>
-            <input type="hidden" name="userid" value="<?php echo $b['user_nik']; ?>" class="form-control" />
+            <input type="hidden" name="user_id" value="<?php echo $b['user_id']; ?>" class="form-control" />
             <input type="hidden" name="xhp" value="<?php echo $b['user_password']; ?>" class="form-control" />
             <input type="password" name="xoldpas" class="form-control" />
           </div>

@@ -71,19 +71,19 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>Nilai Kontrak</label>
-                      <input type="number" class="form-control" name="keuangan" value="<?php echo $b['proyek_keuangan']; ?>">
+                      <input type="text" class="form-control" name="keuangan" id="keuangan" value="<?php echo number_format($b['proyek_keuangan'],0,",","."); ?>">
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>Pagu</label>
-                      <input type="number" class="form-control" name="pagu" value="<?php echo $b['proyek_pagu']; ?>">
+                      <input type="text" class="form-control" name="pagu" id="pagu" value="<?php echo number_format($b['proyek_pagu'],0,",","."); ?>">
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>Rencana Awal Kontrak</label>
-                      <input type="date" class="form-control" name="sechawal" value="<?php echo $b['proyek_sech_awal']; ?>">
+                      <input type="date" class="form-control" name="sech_awal" value="<?php echo $b['proyek_sech_awal']; ?>">
                     </div>
                   </div>
                   <div class="col-md-12">
@@ -107,18 +107,18 @@
                       <label>Jenis Pengadaan</label>
                       <select class="form-control"  name="xjenis" >
                         <option value="#">Semua</option>
-                        <option value="leum" <?php if($b['proyek_bidang']=='leum') {echo "selected"; } else {}?>>Lelang Umum</option>
-                        <option value="lena" <?php if($b['proyek_bidang']=='lena') {echo "selected"; } else {}?>>Lelang Sederhana</option>
-                        <option value="letas" <?php if($b['proyek_bidang']=='letas') {echo "selected"; } else {}?>>Lelang Terbatas</option>
-                        <option value="selmum" <?php if($b['proyek_bidang']=='selmum') {echo "selected"; } else {}?>>Seleksi Umum</option>
-                        <option value="pmlangsung" <?php if($b['proyek_bidang']=='pmlangsung') {echo "selected"; } else {}?>>Pemilihan Langsung</option>
-                        <option value="pnlangsung" <?php if($b['proyek_bidang']=='pnlangsung') {echo "selected"; } else {}?>>Penunjukan Langsung</option>
-                        <option value="pglangsung" <?php if($b['proyek_bidang']=='pglangsung') {echo "selected"; } else {}?>>Pengadaan Langsung</option>
-                        <option value="epurchas" <?php if($b['proyek_bidang']=='epurchas' ){echo "selected"; } else {}?>>E-Purchasing</option>
-                        <option value="sayembara" <?php if($b['proyek_bidang']=='sayembara' ){echo "selected"; } else {}?>>Sayembara</option>
-                        <option value="kontes" <?php if($b['proyek_bidang']=='kontes') {echo "selected"; } else {}?>>Kontes</option>
-                        <option value="lelce" <?php if($b['proyek_bidang']=='lelce') {echo "selected"; } else {}?>>Lelang Cepat</option>
-                        <option value="selsed" <?php if($b['proyek_bidang']=='selsed' ){echo "selected"; } else {}?>>Seleksi Sederhana</option>
+                        <option value="leum" <?php if($b['proyek_jenis']=='leum') {echo "selected"; } else {}?>>Lelang Umum</option>
+                        <option value="lena" <?php if($b['proyek_jenis']=='lena') {echo "selected"; } else {}?>>Lelang Sederhana</option>
+                        <option value="letas" <?php if($b['proyek_jenis']=='letas') {echo "selected"; } else {}?>>Lelang Terbatas</option>
+                        <option value="selmum" <?php if($b['proyek_jenis']=='selmum') {echo "selected"; } else {}?>>Seleksi Umum</option>
+                        <option value="pmlangsung" <?php if($b['proyek_jenis']=='pmlangsung') {echo "selected"; } else {}?>>Pemilihan Langsung</option>
+                        <option value="pnlangsung" <?php if($b['proyek_jenis']=='pnlangsung') {echo "selected"; } else {}?>>Penunjukan Langsung</option>
+                        <option value="pglangsung" <?php if($b['proyek_jenis']=='pglangsung') {echo "selected"; } else {}?>>Pengadaan Langsung</option>
+                        <option value="epurchas" <?php if($b['proyek_jenis']=='epurchas' ){echo "selected"; } else {}?>>E-Purchasing</option>
+                        <option value="sayembara" <?php if($b['proyek_jenis']=='sayembara' ){echo "selected"; } else {}?>>Sayembara</option>
+                        <option value="kontes" <?php if($b['proyek_jenis']=='kontes') {echo "selected"; } else {}?>>Kontes</option>
+                        <option value="lelce" <?php if($b['proyek_jenis']=='lelce') {echo "selected"; } else {}?>>Lelang Cepat</option>
+                        <option value="selsed" <?php if($b['proyek_jenis']=='selsed' ){echo "selected"; } else {}?>>Seleksi Sederhana</option>
                       </select>
                     </div>
                   </div>
@@ -177,7 +177,7 @@
   })
 </script>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 <script src="<?php echo base_url() ?>assets/map/jquery-1.9.1.min.js"></script>
 <script src="<?php echo base_url() ?>assets/map/jquery.addressPickerByGiro.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAogXD-AHrsmnWinZIyhRORJ84bgLwDPpg&sensor=false&language=id"></script>
@@ -192,5 +192,31 @@
     }
   });
 </script>
-</body>
-</html>
+<script type="text/javascript">
+  var pagu = document.getElementById('pagu');
+  pagu.addEventListener('keyup', function(e)
+  {
+    pagu.value = formatRupiah(this.value);
+  });
+  var keuangan = document.getElementById('keuangan');
+  keuangan.addEventListener('keyup', function(e)
+  {
+    keuangan.value = formatRupiah(this.value);
+  });
+  function formatRupiah(angka, prefix)
+  {
+    var number_string = angka.replace(/[^,\d]/g, '').toString(),
+    split    = number_string.split(','),
+    sisa     = split[0].length % 3,
+    rupiah     = split[0].substr(0, sisa),
+    ribuan     = split[0].substr(sisa).match(/\d{3}/gi);
+
+    if (ribuan) {
+      separator = sisa ? '.' : '';
+      rupiah += separator + ribuan.join('.');
+    }
+
+    rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+    return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+  }
+</script>

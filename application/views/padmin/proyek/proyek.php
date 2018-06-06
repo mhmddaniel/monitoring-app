@@ -113,49 +113,73 @@
 												<td><?php echo number_format($proyek_keuangan);?></td>
 												<td><?php echo number_format($proyek_pagu);?></td>
 												<td><?php echo date('d-m-Y', strtotime($proyek_sech_awal));?></td>
-												<td><?php echo date('d-m-Y', strtotime($proyek_awal_kontrak));;?></td>
-												<td><?php echo date('d-m-Y', strtotime($proyek_akhir_kontrak));;?></td>
 												<td>
-													<?php if($pb_target==0 || $pb_target<=70){
-
-														if($pb_devisi>0){
-															echo "<label class='label bg-red'>".$pb_real."% (Baik)</label>";
-														}
-														else {
-															if($pb_devisi==0 || $pb_devisi>=(-7)){
-																echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>";
-															}
-															else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
-
-																echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";
-															}
-															else {
-																echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
-															}
-
-														}
+													<?php 
+													if($proyek_awal_kontrak==null){
+														echo "Belum Mulai";
 													}
-													else if ($pb_target>70 && $pb_target<=100){
+													else{
+														echo date('d-m-Y', strtotime($proyek_awal_kontrak));
+													}
+													?>
 
-														if($pb_devisi>0){
-															echo "<label class='label bg-red'>".$pb_real."% (Baik)</label>";
-														}
-														else {
-															if($pb_devisi==0 || $pb_devisi>=(-4)){
-																echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>"; 
-															}
-															else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
-
-																echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";													
-															}
-															else {
-
-																echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
-															}	
-														}	
+												</td>
+												<td>
+													<?php 
+													if($proyek_awal_kontrak==null){
+														echo "Belum Mulai";
+													}
+													else{
+														echo date('d-m-Y', strtotime($proyek_akhir_kontrak));
+													}?>
+												</td>
+												<td>
+													<?php 
+													if($pb_real==0){
+														echo "<label class='label bg-red'>Belum Mulai</label>";
 													}
 													else {
-														echo "";
+														if($pb_target==0 || $pb_target<=70){
+
+															if($pb_devisi>0){
+																echo "<label class='label bg-red'>".$pb_real."% (Baik)</label>";
+															}
+															else {
+																if($pb_devisi==0 || $pb_devisi>=(-7)){
+																	echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>";
+																}
+																else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
+
+																	echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";
+																}
+																else {
+																	echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+																}
+
+															}
+														}
+														else if ($pb_target>70 && $pb_target<=100){
+
+															if($pb_devisi>0){
+																echo "<label class='label bg-red'>".$pb_real."% (Baik)</label>";
+															}
+															else {
+																if($pb_devisi==0 || $pb_devisi>=(-4)){
+																	echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>"; 
+																}
+																else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
+
+																	echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";													
+																}
+																else {
+
+																	echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+																}	
+															}	
+														}
+														else {
+															echo "";
+														}
 													}
 													?>
 

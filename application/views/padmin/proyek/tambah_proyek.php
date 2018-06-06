@@ -57,7 +57,6 @@
 						<ul class="nav nav-tabs">
 							<li class="active"><a href="#tab_1" data-toggle="tab">Data Proyek</a></li>
 							<li><a href="#tab_2" data-toggle="tab">Lokasi Proyek</a></li>
-							<li><a href="#tab_3" data-toggle="tab">Penanggung Jawab</a></li>
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane active" id="tab_1">
@@ -71,13 +70,13 @@
 									<div class="col-md-12">
 										<div class="form-group">
 											<label>Nilai Kontrak</label>
-											<input type="number" class="form-control" name="keuangan">
+											<input type="text" class="form-control" id="keuangan" name="keuangan">
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
 											<label>Pagu</label>
-											<input type="number" class="form-control" name="pagu">
+											<input type="text" class="form-control" id="pagu" name="pagu">
 										</div>
 									</div>
 									<div class="col-md-12">
@@ -158,31 +157,6 @@
 									</div>
 								</div>
 							</div>
-							<div class="tab-pane" id="tab_3">
-
-								<div class="box-body">
-
-									<div class="col-md-12">
-
-										<div class="form-group">
-											<label>Nama PPK</label>
-											<input type="text" class="form-control"  name="xnamauser" >
-										</div>	
-										<div class="form-group">
-											<label>NIK PPK</label>
-											<input type="text" class="form-control"  name="xnikuser" >
-										</div>
-										<div class="form-group">
-											<label>Email</label>
-											<input type="text" class="form-control"  name="xemailuser" >
-										</div>	
-										<div class="form-group">
-											<label>Telp</label>
-											<input type="text" class="form-control"  name="xtelpuser" >
-										</div>	
-									</div>
-								</div>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -218,3 +192,31 @@
 </script>
 </body>
 </html>
+<script type="text/javascript">
+	var pagu = document.getElementById('pagu');
+	pagu.addEventListener('keyup', function(e)
+	{
+		pagu.value = formatRupiah(this.value);
+	});
+	var keuangan = document.getElementById('keuangan');
+	keuangan.addEventListener('keyup', function(e)
+	{
+		keuangan.value = formatRupiah(this.value);
+	});
+	function formatRupiah(angka, prefix)
+	{
+		var number_string = angka.replace(/[^,\d]/g, '').toString(),
+		split    = number_string.split(','),
+		sisa     = split[0].length % 3,
+		rupiah     = split[0].substr(0, sisa),
+		ribuan     = split[0].substr(sisa).match(/\d{3}/gi);
+
+		if (ribuan) {
+			separator = sisa ? '.' : '';
+			rupiah += separator + ribuan.join('.');
+		}
+
+		rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+		return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+	}
+</script>

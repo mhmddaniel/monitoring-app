@@ -57,7 +57,7 @@ $b=$data->row_array() ;
     </h2>
   </div>
 </div>
-
+<!--
 <div class="row invoice-info">
   <div class="col-sm-8 col-sm-offset-2">
     <div class="box box-primary">
@@ -78,7 +78,7 @@ $b=$data->row_array() ;
     </div>
   </div>
 </div>
-
+-->
 <div class="row invoice-info">
 
   <div class="col-sm-6 invoice-col">

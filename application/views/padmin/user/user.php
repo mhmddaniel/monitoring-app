@@ -29,8 +29,6 @@
             <table id="example1" class="table table-striped" style="font-size:13px;">
               <thead>
                 <tr>
-                 <th>NIK</th>
-                 <th>NAMA</th>
                  <th>USERNAME</th>
                  <th>EMAIL</th>
                  <th>TELEPON</th>
@@ -44,8 +42,7 @@
               $no=0;
               foreach ($data->result_array() as $i) :
                 $no++;
-                $user_nik=$i['user_nik'];
-                $user_nama=$i['user_nama'];
+                $user_id=$i['user_id'];
                 $user_username=$i['user_username'];
                 $user_password=$i['user_password'];
                 $user_email=$i['user_email'];
@@ -54,16 +51,48 @@
                 $user_level=$i['user_level'];
                 ?>
                 <tr>
-                  <td><?php echo $user_nik;?></td>
-                  <td><?php echo $user_nama;?></td>
                   <td><?php echo $user_username;?></td>
                   <td><?php echo $user_email;?></td>
                   <td><?php echo $user_tel;?></td>
-                  <td><?php echo $user_bagian;?></td>
+                  <td>
+                    <?php 
+                    if($user_bagian=='sda'){ 
+                      echo "Sumber Daya Air";
+                    }
+                    else if($user_bagian=='bm'){
+                      echo "Bina Marga";
+                    }
+                    else if($user_bagian=='ciptakarya'){
+                      echo "Cipta Karya";
+                    }
+                    else if($user_bagian=='pr'){
+                      echo "Perumahan Rakyat";
+                    }
+                    else if($user_bagian=='sekretariat') {
+                      echo "Sekretariat";
+                    }
+                    else if($user_bagian=='ttdp') {
+                      echo "Tata Ruang dan Pertanahan";
+                    }
+                    else if($user_bagian=='ubp') {
+                      echo "UPTD Balai Pengujian";
+                    }
+                    else if($user_bagian=='ubpdp'){
+                      echo "UPTD Balai Peralatan dan Perbekalan";
+                    }
+                    else if ($user_bagian=='bkdp'){
+                      echo "Bina Kontruksi dan Pengendalian";
+                    }
+                    else {
+                      echo "-";
+                    }
+                    ?>
+
+                  </td>
                   <td><?php echo $user_level;?></td>
                   <td style="text-align:right;">
-                    <a class="btn" href="<?php echo base_url().'padmin/get_edit_user/'.$user_nik;?>"><span class="fa fa-pencil"></span></a>
-                    <a class="btn" data-toggle="modal" data-target="#ModalHapus<?php echo $user_nik;?>"><span class="fa fa-trash"></span></a>
+                    <a class="btn" href="<?php echo base_url().'padmin/get_edit_user/'.$user_id;?>"><span class="fa fa-pencil"></span></a>
+                    <a class="btn" data-toggle="modal" data-target="#ModalHapus<?php echo $user_id;?>"><span class="fa fa-trash"></span></a>
                   </td>
                 </tr>
               <?php endforeach;?>
@@ -83,32 +112,31 @@
 
 
 <?php foreach ($data->result_array() as $i) :
-$user_nik=$i['user_nik'];
-$user_username=$i['user_username'];
-$user_nama=$i['user_nama'];
-?>
-<!--Modal Hapus Pengguna-->
-<div class="modal fade" id="ModalHapus<?php echo $user_nik;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
-        <h4 class="modal-title" id="myModalLabel">Hapus User</h4>
-      </div>
-      <form class="form-horizontal" action="<?php echo base_url().'padmin/delete_user'?>" method="post" enctype="multipart/form-data">
-        <div class="modal-body">       
-          <input type="hidden" name="kode" value="<?php echo $user_nik;?>"/> 
-          <p>Apakah Anda yakin mau menghapus user <b><?php echo $user_nama;?></b> ?</p>
+  $user_id=$i['user_id'];
+  $user_username=$i['user_username'];
+  ?>
+  <!--Modal Hapus Pengguna-->
+  <div class="modal fade" id="ModalHapus<?php echo $user_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
+          <h4 class="modal-title" id="myModalLabel">Hapus User</h4>
+        </div>
+        <form class="form-horizontal" action="<?php echo base_url().'padmin/delete_user'?>" method="post" enctype="multipart/form-data">
+          <div class="modal-body">       
+            <input type="hidden" name="kode" value="<?php echo $user_id;?>"/> 
+            <p>Apakah Anda yakin mau menghapus user <b><?php echo $user_username;?></b> ?</p>
 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary btn-flat" id="simpan">Hapus</button>
-        </div>
-      </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary btn-flat" id="simpan">Hapus</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 <?php endforeach;?>
 
 
@@ -145,42 +173,42 @@ $user_nama=$i['user_nama'];
     });
   </script>
 
-<?php elseif($this->session->flashdata('msg')=='success'):?>
-  <script type="text/javascript">
-    $.toast({
-      heading: 'Success',
-      text: "User Berhasil disimpan ke database.",
-      showHideTransition: 'slide',
-      icon: 'success',
-      hideAfter: false,
-      position: 'bottom-right',
-      bgColor: '#7EC857'
-    });
-  </script>
-<?php elseif($this->session->flashdata('msg')=='info'):?>
-  <script type="text/javascript">
-    $.toast({
-      heading: 'Info',
-      text: "User berhasil di update",
-      showHideTransition: 'slide',
-      icon: 'info',
-      hideAfter: false,
-      position: 'bottom-right',
-      bgColor: '#00C9E6'
-    });
-  </script>
-<?php elseif($this->session->flashdata('msg')=='success-hapus'):?>
-  <script type="text/javascript">
-    $.toast({
-      heading: 'Success',
-      text: "User Berhasil dihapus.",
-      showHideTransition: 'slide',
-      icon: 'success',
-      hideAfter: false,
-      position: 'bottom-right',
-      bgColor: '#7EC857'
-    });
-  </script>
-<?php else:?>
+  <?php elseif($this->session->flashdata('msg')=='success'):?>
+    <script type="text/javascript">
+      $.toast({
+        heading: 'Success',
+        text: "User Berhasil disimpan ke database.",
+        showHideTransition: 'slide',
+        icon: 'success',
+        hideAfter: false,
+        position: 'bottom-right',
+        bgColor: '#7EC857'
+      });
+    </script>
+    <?php elseif($this->session->flashdata('msg')=='info'):?>
+      <script type="text/javascript">
+        $.toast({
+          heading: 'Info',
+          text: "User berhasil di update",
+          showHideTransition: 'slide',
+          icon: 'info',
+          hideAfter: false,
+          position: 'bottom-right',
+          bgColor: '#00C9E6'
+        });
+      </script>
+      <?php elseif($this->session->flashdata('msg')=='success-hapus'):?>
+        <script type="text/javascript">
+          $.toast({
+            heading: 'Success',
+            text: "User Berhasil dihapus.",
+            showHideTransition: 'slide',
+            icon: 'success',
+            hideAfter: false,
+            position: 'bottom-right',
+            bgColor: '#7EC857'
+          });
+        </script>
+        <?php else:?>
 
-<?php endif;?>
+        <?php endif;?>

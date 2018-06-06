@@ -55,16 +55,7 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
                 </select>
               </div>
               <div class="form-group">
-                <label>NIP Penanggung Jawab</label>
-                <input type="text" class="form-control" value="<?php echo $b['pekerja_nip']; ?>"  name="xnip" readonly>
-              </div>
-              <div class="form-group">
-                <label>Nama Penanggung Jawab</label>
-                <input type="text" class="form-control" value="<?php echo $b['pekerja_nama']; ?>"  name="xnama_pek">
-              </div>
-              <div class="form-group">
-                <label>Telepon Penanggung Jawab</label>
-                <input type="text" class="form-control" value="<?php echo $b['pekerja_tel']; ?>"  name="xtel_pek">
+                <input type="hidden" class="form-control" value="<?php echo $b['pekerja_id']; ?>"  name="xnip" readonly>
               </div>
               <div class="form-group">
                 <label>Posisi</label>
