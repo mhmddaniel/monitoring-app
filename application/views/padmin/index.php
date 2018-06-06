@@ -105,8 +105,7 @@
                 ?>
                 <li><a href="#"><?php echo $i['pb_stat_proyek']; ?><span class="pull-right badge bg-blue"><?php echo $i['sumprog'];?></span></a></li>
               <?php } else {?>
-
-
+                
               <?php } endforeach; ?>
 
             </ul>

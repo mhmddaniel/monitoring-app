@@ -35,7 +35,7 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 	function diffdatemin(){
-		$hsl=$this->db->query("SELECT count( DISTINCT proyek_awal_kontrak) as countkerja FROM proyek,proyek_bagian where proyek_awal_kontrak>now() AND pb_real!=100");
+		$hsl=$this->db->query("SELECT count( DISTINCT proyek_id) as countkerja FROM proyek,proyek_bagian where proyek.proyek_awal_kontrak>now() AND proyek_bagian.pb_real!=100 OR proyek.proyek_awal_kontrak is null");
 		return $hsl;
 	}
 
@@ -44,11 +44,11 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 	function diffdateplus_by_kode($bagian){
-		$hsl=$this->db->query("SELECT count(*) as countkerja FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id where proyek_bagian.pb_real!=100 AND proyek.proyek_bidang='$bagian'  AND proyek_awal_kontrak<now()  AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
+		$hsl=$this->db->query("SELECT count(*) as countkerja FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id where  proyek_bagian.pb_real!=100 AND proyek.proyek_bidang='$bagian'  AND proyek_awal_kontrak<now()  AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
 		return $hsl;
 	}
 	function diffdatemin_by_kode($bagian){
-		$hsl=$this->db->query("SELECT count(*) as countkerja FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id where proyek_bagian.pb_real!=100 AND proyek.proyek_bidang='$bagian'  AND proyek_awal_kontrak>now()  AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
+		$hsl=$this->db->query("SELECT count(*) as countkerja FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id where proyek.proyek_awal_kontrak is null OR proyek_bagian.pb_real!=100 AND proyek.proyek_bidang='$bagian'  AND proyek_awal_kontrak>now()  AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
 		return $hsl;
 	}
 
@@ -103,7 +103,7 @@ class M_padmin extends CI_Model{
 			COUNT(distinct proyek_bagian.pb_stat_proyek) as sumprog
 			FROM proyek_bagian
 			inner JOIN proyek ON proyek_bagian.pb_proyek_id = proyek.proyek_id 
-			inner JOIN user ON proyek.proyek_user_id = user.user_id where proyek.proyek_bidang='$bagian'
+			where proyek.proyek_bidang='$bagian'
 			GROUP BY proyek_bagian.pb_stat_proyek");
 		return $hsl;
 	}
@@ -147,7 +147,6 @@ class M_padmin extends CI_Model{
 		$this->db->from('proyek a');
 		$this->db->join('proyek_bagian b','a.proyek_id=b.pb_proyek_id','inner');
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
-		$this->db->join('user d','a.proyek_user_id=d.user_id','inner');
 		$this->db->where('pb_id',$kode);
 		$hsl=$this->db->get();
 		return $hsl;
@@ -370,7 +369,6 @@ class M_padmin extends CI_Model{
 		$this->db->from('proyek a');
 		$this->db->join('proyek_bagian b','a.proyek_id=b.pb_proyek_id','inner');
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
-		$this->db->join('user d','a.proyek_user_id=d.user_id','inner');
 		$this->db->where('proyek_id',$kode);
 		$hsl=$this->db->get();
 		return $hsl;
@@ -426,7 +424,6 @@ class M_padmin extends CI_Model{
 		$this->db->select('*');
 		$this->db->from('file');
 		$this->db->where('proyek_id',$kode);
-		$this->db->order_by('file_data', 'DESC');
 		$hsl=$this->db->get();
 		return $hsl;
 	}

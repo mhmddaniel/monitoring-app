@@ -24,7 +24,7 @@ class Padmin extends CI_Controller{
 			$x['diffdatemin']=$this->m_padmin->diffdatemin();
 			$x['countselesai']=$this->m_padmin->countselesai();
 		}
-		else if($_SESSION['level']=='bidang'){
+		else {
 			$bagian=$_SESSION['bagian'];
 			$x['countproyek']=$this->m_padmin->sum_proyek_by_kode($bagian);
 			$x['sumprog']=$this->m_padmin->sum_prog_by_kode($bagian);
@@ -36,11 +36,6 @@ class Padmin extends CI_Controller{
 			$x['diffdatemin']=$this->m_padmin->diffdatemin_by_kode($bagian);
 			$x['countselesai']=$this->m_padmin->countselesai_by_kode($bagian);
 		}
-		else {
-			$user_id=$_SESSION['user_id'];
-			$x['data']=$this->m_padmin->get_all_proyek_by_user($user_id);
-		}
-
 		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');
 		$this->load->view('padmin/index',$x);
@@ -51,14 +46,11 @@ class Padmin extends CI_Controller{
 		if($_SESSION['level']=='admin'){
 			$x['data']=$this->m_padmin->get_all_proyek();
 		}
-		else if($_SESSION['level']=='bidang'){
+		else{
 			$bagian=$_SESSION['bagian'];
 			$x['data']=$this->m_padmin->get_all_proyek_by_bagian($bagian);
 		}
-		else {
-			$user_id=$_SESSION['user_id'];
-			$x['data']=$this->m_padmin->get_all_proyek_by_user($user_id);
-		}
+		
 		$g['xc']='cc';
 		$y['title']='DATA PROYEK';
 		$this->load->view('padmin/header',$y);
