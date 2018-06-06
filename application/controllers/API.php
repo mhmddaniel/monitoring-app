@@ -122,8 +122,11 @@ class API extends CI_Controller{
             if($project->num_rows() > 0){
                 $xcadmin=$project->row_array();
 
+                $detail = $this->m_padmin->get_penannggung_jawab($kode);
+
                 $newdata['error'] = FALSE;
                 $newdata['project'] = $project->result_array();
+                $newdata['detail'] = $detail->result_array();
                 $newdata['fetched'] = TRUE;
 
                 echo json_encode($newdata);
