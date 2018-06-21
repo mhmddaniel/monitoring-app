@@ -33,7 +33,7 @@
           <ul class="treeview-menu">
             <li class="active"><a href="<?php echo base_url() ?>padmin/proyek/"><i class="fa fa-circle-o"></i> Proyek</a></li>
 
-            <?php if($_SESSION['level']=='admin' || $_SESSION['level']=='user' ){ ?>
+            <?php if($_SESSION['level']=='bidang' ){ ?>
               <li class="active"><a href="<?php echo base_url() ?>padmin/penanggung_jawab/"><i class="fa fa-circle-o"></i> Penanggung Jawab</a></li>
             <?php } else {} ?>
           </ul>

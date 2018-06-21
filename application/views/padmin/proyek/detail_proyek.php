@@ -57,20 +57,20 @@ $b=$data->row_array() ;
     </h2>
   </div>
 </div>
-<!--
+
 <div class="row invoice-info">
   <div class="col-sm-8 col-sm-offset-2">
     <div class="box box-primary">
       <div class="box-body box-profile">
-        <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url().'assets/images/'.$b['user_photo'];?>" alt="User profile picture">
-        <h3 class="profile-username text-center"><?php echo $b['user_nama']; ?></h3>
-        <p class="text-muted text-center"><?php echo $b['user_email']; ?></p>
+        <img class="profile-user-img img-responsive img-circle" width="100px" height="100px" src="<?php echo base_url().'assets/images/'.$b['pn_foto'];?>" alt="User profile picture">
+        <h3 class="profile-username text-center"><?php echo $b['pn_nama']; ?></h3>
+        <p class="text-muted text-center"><?php echo $b['pn_email']; ?></p>
         <ul class="list-group list-group-unbordered">
           <li class="list-group-item">
-            <?php echo $b['user_telp']; ?>
+            <?php echo $b['pn_tel']; ?>
           </li>
           <li class="list-group-item">
-            <?php echo strtoupper($b['user_bagian']); ?>
+            <?php echo strtoupper($b['pn_bagian']); ?>
           </li>
         </ul>
         <a href="#" class="btn btn-primary btn-block"><b>Bagian Penanggung Jawab</b></a>
@@ -78,7 +78,7 @@ $b=$data->row_array() ;
     </div>
   </div>
 </div>
--->
+
 <div class="row invoice-info">
 
   <div class="col-sm-6 invoice-col">

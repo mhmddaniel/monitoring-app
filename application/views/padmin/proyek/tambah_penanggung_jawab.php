@@ -25,13 +25,13 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
 <div class="content-wrapper">
   <section class="content-header">
     <h1>
-      User
+      Pelaksana
       <small></small>
     </h1>
     <ol class="breadcrumb">
       <li><a href="<?php echo base_url()?>padmin"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="<?php echo base_url()?>padmin/user">user</a></li>
-      <li class="active">Tambah User</li>
+      <li><a href="<?php echo base_url()?>padmin/user">Pelaksana</a></li>
+      <li class="active">Tambah Pelaksana</li>
     </ol>
   </section>
   <section class="content">
@@ -39,7 +39,7 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
 
       <div class="box box-default ">
         <div class="box-header with-border">
-          <h3 class="box-title">Tambah User</h3>
+          <h3 class="box-title">Tambah Pelaksana</h3>
         </div>
         <div class="box-body ">
           <div class="row">

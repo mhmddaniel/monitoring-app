@@ -11,7 +11,7 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 	function get_all_proyek_by_bagian($bagian){
-				$hsl=$this->db->query("SELECT * FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id inner join koordinat on proyek.proyek_koordinat_id=koordinat.koordinat_id  where proyek.proyek_bidang='$bagian' AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
+		$hsl=$this->db->query("SELECT * FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id inner join koordinat on proyek.proyek_koordinat_id=koordinat.koordinat_id  where proyek.proyek_bidang='$bagian' AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
 		return $hsl;
 	}
 	function get_chart_rt($kode){
@@ -44,11 +44,11 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 	function diffdateplus_by_kode($bagian){
-		$hsl=$this->db->query("SELECT count(*) as countkerja FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id where  proyek_bagian.pb_real!=100 AND proyek.proyek_bidang='$bagian'  AND proyek_awal_kontrak<now()  AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
+		$hsl=$this->db->query("SELECT count(DISTINCT proyek.proyek_id) as countkerja FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id where  proyek_bagian.pb_real!=100 AND proyek.proyek_bidang='$bagian'  AND proyek_awal_kontrak<now()  AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
 		return $hsl;
 	}
 	function diffdatemin_by_kode($bagian){
-		$hsl=$this->db->query("SELECT count(*) as countkerja FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id where proyek.proyek_awal_kontrak is null OR proyek_bagian.pb_real!=100 AND proyek.proyek_bidang='$bagian'  AND proyek_awal_kontrak>now()  AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
+		$hsl=$this->db->query("SELECT count(DISTINCT proyek.proyek_id) as countkerja FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id where proyek.proyek_awal_kontrak is null AND proyek.proyek_bidang='$bagian' OR proyek_bagian.pb_real!=100 AND proyek.proyek_bidang='$bagian'  AND proyek_awal_kontrak>now()  AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
 		return $hsl;
 	}
 
@@ -180,6 +180,15 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 
+	function get_pn_by_bagian($bagian){
+		$this->db->select('*');
+		$this->db->from('proyek a');
+		$this->db->join('pekerja b','a.proyek_id=b.proyek_id','inner');
+		$this->db->join('penanggung_jawab c','a.proyek_id=c.proyek_id','inner');
+		$this->db->where('c.pn_bagian',$bagian);
+		$hsl=$this->db->get();
+		return $hsl;	
+	}
 	function get_all_pelaksana_by_user($user_id){
 		$this->db->select('*');
 		$this->db->from('pekerja a');
@@ -308,6 +317,11 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("INSERT INTO proyek_bagian (pb_proyek_id) values ('$numproyek')");
 		return $hsl;
 	}	
+	function save_pn($numproyek,$pn_nama,$pn_email,$pn_tel,$pn_bagian,$gambar){
+		$hsl=$this->db->query("INSERT INTO penanggung_jawab (proyek_id,pn_nama,pn_email,pn_tel,pn_bagian,pn_foto) VALUES ('$numproyek','$pn_nama','$pn_email','$pn_tel','$pn_bagian','$gambar')");
+		return $hsl;
+	}
+
 	function get_all_inbox_by_kode($kode){
 		$hsl=$this->db->query("SELECT inbox.*,DATE_FORMAT(inbox_tanggal,'%d/%m/%Y') AS tanggal FROM inbox where inbox_id='$kode'");
 		return $hsl;
@@ -335,7 +349,8 @@ class M_padmin extends CI_Model{
 		$this->db->from('proyek a');
 		$this->db->join('proyek_bagian b','a.proyek_id=b.pb_proyek_id','inner');
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
-		$this->db->where('proyek_id',$kode);
+		$this->db->join('penanggung_jawab d','a.proyek_id=d.proyek_id','inner');
+		$this->db->where('a.proyek_id',$kode);
 		$hsl=$this->db->get();
 		return $hsl;
 	}

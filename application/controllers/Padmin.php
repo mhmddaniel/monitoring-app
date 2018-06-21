@@ -91,25 +91,36 @@ class Padmin extends CI_Controller{
 	}
 
 	public function penanggung_jawab(){
-		if ($_SESSION['level']=='admin'){
-			$x['data']=$this->m_padmin->get_all_pelaksana();
+		if ($_SESSION['level']=='bidang'){
+			$bagian=$_SESSION['bagian'];
+			$x['data']=$this->m_padmin->get_pn_by_bagian($bagian);	
 		}
 		else {
-			$user_id=$_SESSION['user_id'];
-			$x['data']=$this->m_padmin->get_all_pelaksana_by_user($user_id);	
+
 		}
 		$y['title']='Penanggung Jawab';
 		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');
-		$this->load->view('padmin/proyek/penanggung_jawab',$x);
+		if ($_SESSION['level']=='bidang'){
+			$this->load->view('padmin/proyek/penanggung_jawab',$x);
+		}
+		else {
+			$this->load->view('padmin/404',$x);
+		}
 		$this->load->view('padmin/footer');
 	}
+
 	public function tambah_penanggung_jawab(){
 		$x['data']=$this->m_padmin->get_proyek();
 		$y['title']='Tambah Penanggung Jawab';
 		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');
-		$this->load->view('padmin/proyek/tambah_penanggung_jawab',$x);
+		if ($_SESSION['level']=='bidang'){
+			$this->load->view('padmin/proyek/tambah_penanggung_jawab',$x);
+		}
+		else {
+			$this->load->view('padmin/404',$x);
+		}
 		$this->load->view('padmin/footer');
 	}
 
@@ -209,42 +220,88 @@ class Padmin extends CI_Controller{
 		redirect('padmin/penanggung_jawab');		
 		
 	}
+
 	function save_proyek(){
+		$config['upload_path'] = './assets/images/';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
+		$config['encrypt_name'] = TRUE;
 
-		$numproyek=$this->input->post('numproyek');
-		$xnama=$this->input->post('xnama');
-		$year=$this->input->post('year');
-		$keuangan=str_replace(".", "", $this->input->post('keuangan'));
-		$pagu=str_replace(".", "", $this->input->post('pagu'));
-		$sechawal=$this->input->post('sechawal');
-		$awalkontrak=$this->input->post('awalkontrak');
-		$akhirkontrak=$this->input->post('akhirkontrak');
-		$xbidang=$this->input->post('xbidang');
-		$xjenis=$this->input->post('xjenis');
-		$xvolume=$this->input->post('xvolume');
-		$xsatuan=$this->input->post('xsatuan');
+		$this->upload->initialize($config);
+		if(!empty($_FILES['filefoto']['name']))
+		{
+			if ($this->upload->do_upload('filefoto'))
+			{
+				$gbr = $this->upload->data();
 
-		$numkor=$this->input->post('numkor');
-		$inputAddress=$this->input->post('inputAddress');
-		$namkor=$this->input->post('namkor');
-		$latitude=$this->input->post('latitude');
-		$longitude=$this->input->post('longitude');
-		
-		$svkoor=$this->m_padmin->save_koordinat($numkor,$namkor,$latitude,$longitude,$inputAddress);
-		
-		if ($svkoor){
+				$config['image_library']='gd2';
+				$config['source_image']='./assets/images/'.$gbr['file_name'];
+				$config['create_thumb']= FALSE;
+				$config['maintain_ratio']= FALSE;
+				$config['quality']= '60%';
+				$config['width']= 840;
+				$config['height']= 450;
+				$config['new_image']= './assets/images/'.$gbr['file_name'];
+				$this->load->library('image_lib', $config);
+				$this->image_lib->resize();
 
-			$svpro=$this->m_padmin->save_proyek($numproyek,$numkor,$xnama,$year,$keuangan,$pagu,$sechawal,$xbidang,$xjenis,$xvolume,$xsatuan);
-			$svpro=$this->m_padmin->save_proyek_bagian($numproyek);
-			echo $this->session->set_flashdata('msg','success');
+				$gambar=$gbr['file_name'];
+				$numproyek=$this->input->post('numproyek');
+				$xnama=$this->input->post('xnama');
+				$year=$this->input->post('year');
+				$keuangan=str_replace(".", "", $this->input->post('keuangan'));
+				$pagu=str_replace(".", "", $this->input->post('pagu'));
+				$sechawal=$this->input->post('sechawal');
+				$awalkontrak=$this->input->post('awalkontrak');
+				$akhirkontrak=$this->input->post('akhirkontrak');
+				$xbidang=$this->input->post('xbidang');
+				$xjenis=$this->input->post('xjenis');
+				$xvolume=$this->input->post('xvolume');
+				$xsatuan=$this->input->post('xsatuan');
+
+				$numkor=$this->input->post('numkor');
+				$inputAddress=$this->input->post('inputAddress');
+				$namkor=$this->input->post('namkor');
+				$latitude=$this->input->post('latitude');
+				$longitude=$this->input->post('longitude');
+
+				$pn_nama=$this->input->post('pn_nama');
+				$pn_email=$this->input->post('pn_email');
+				$pn_tel=$this->input->post('pn_tel');
+				$pn_bagian=$this->input->post('pn_bagian');
+
+				$this->m_padmin->save_pn($numproyek,$pn_nama,$pn_email,$pn_tel,$pn_bagian,$gambar);
+
+				$svkoor=$this->m_padmin->save_koordinat($numkor,$namkor,$latitude,$longitude,$inputAddress);
+
+				if ($svkoor){
+
+					$svpro=$this->m_padmin->save_proyek($numproyek,$numkor,$xnama,$year,$keuangan,$pagu,$sechawal,$xbidang,$xjenis,$xvolume,$xsatuan);
+					$this->m_padmin->save_proyek_bagian($numproyek);
+
+
+
+					echo $this->session->set_flashdata('msg','success');
+					redirect('padmin/proyek');
+				}
+				else {
+
+					echo $this->session->set_flashdata('msg','warning');
+					redirect('padmin/tambah_proyek');
+				}
+
+			}else{
+				echo $this->session->set_flashdata('msg','warning');
+				redirect('padmin/tambah_proyek');
+			}
+
+		}else{
 			redirect('padmin/proyek');
 		}
-		else {
 
-			echo $this->session->set_flashdata('msg','warning');
-			redirect('padmin/tambah_proyek');
-		}
 	}
+
+
+
 	function save_user(){
 		$config['upload_path'] = './assets/images/';
 		$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';

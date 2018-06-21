@@ -18,7 +18,7 @@
 
 				<div class="box">
 					
-					<?php if($_SESSION['level']=='admin'){ ?>
+					<?php if($_SESSION['level']=='bidang'){ ?>
 					<div class="box-header">
 						<a class="btn btn-success btn-flat " href="<?php echo base_url().'padmin/tambah_penanggung_jawab'?>"><span class="fa fa-plus"></span> Tambah Pelaksana</a>
 					</div>

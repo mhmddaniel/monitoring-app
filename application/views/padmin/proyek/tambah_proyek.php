@@ -23,7 +23,7 @@
 		</ol>
 	</section>
 
-	<form action="<?php echo base_url()?>padmin/save_proyek" method="POST">
+	<form action="<?php echo base_url()?>padmin/save_proyek" method="POST" enctype="multipart/form-data" >
 		<section class="content">
 			<div class="row">
 				<div class="col-md-12">
@@ -57,6 +57,7 @@
 						<ul class="nav nav-tabs">
 							<li class="active"><a href="#tab_1" data-toggle="tab">Data Proyek</a></li>
 							<li><a href="#tab_2" data-toggle="tab">Lokasi Proyek</a></li>
+							<li><a href="#tab_3" data-toggle="tab">Penanggung Jawab</a></li>
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane active" id="tab_1">
@@ -154,6 +155,42 @@
 									<div class="form-group">
 										<label>Longitude</label>
 										<input type="text" class="longitude form-control" value="longitude" name="longitude" readonly="readonly">
+									</div>
+								</div>
+							</div>
+
+							<div class="tab-pane" id="tab_3">
+								<div class="box-body">
+									<div class="form-group">
+										<label>Nama</label>
+										<input type="text" class="form-control"  name="pn_nama" >
+									</div>
+									<div class="form-group">
+										<label>Email</label>
+										<input type="text" class="form-control"  name="pn_email" >
+									</div>
+									<div class="form-group">
+										<label>Telepon</label>
+										<input type="text" class="form-control"  name="pn_tel" >
+									</div>
+									<div class="form-group">
+										<label>Bidang</label>
+										<select class="form-control"  name="pn_bagian" >
+											<option value="sda">Sumber Daya Air</option>
+											<option value="bm">Bina Marga</option>
+											<option value="ciptakarya">Cipta Karya</option>
+											<option value="pr">Perumahan Rakyat</option>
+											<option value="sekretariat">Sekretariat</option>
+											<option value="ttdp">Tata Ruang dan Pertanahan</option>
+											<option value="ubp">UPTD Balai Pengujian</option>
+											<option value="ubpdp">UPTD Balai Peralatan dan Perbekalan</option>
+											<option value="bkdp">Bina Kontruksi dan Pengendalian</option>
+										</select>
+									</div>
+
+									<div class="form-group">
+										<label>Foto</label>
+										<input type="file" class="form-control"  name="filefoto" >
 									</div>
 								</div>
 							</div>

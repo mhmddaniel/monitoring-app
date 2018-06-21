@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 06 Jun 2018 pada 17.25
+-- Waktu pembuatan: 21 Jun 2018 pada 11.15
 -- Versi server: 10.1.31-MariaDB
 -- Versi PHP: 7.2.3
 
@@ -94,7 +94,9 @@ INSERT INTO `koordinat` (`koordinat_id`, `koordinat_nama`, `koordinat_lat`, `koo
 (26, 'Alpokat', '-1.4347483', '102.3234848', 'Jl. Apokat, Sarimulya, Rimbo Ilir, Kabupaten Tebo, Jambi 37553, Indonesia', 0),
 (27, 'Merlung', '-1.264215', '102.999265', 'Unnamed Road, Penyabungan, Merlung, Tj. Jabung B, Jambi 36554, Indonesia', 0),
 (28, 'Tebo', '-1.4556422', '102.4034337', 'Unnamed Road, Kabupaten Tebo, Jambi 37573, Indonesia', 0),
-(29, 'Kopera', '-1.4173403', '102.3230605', 'Jl. Kopera, Sarimulya, Rimbo Ilir, Kabupaten Tebo, Jambi 37553, Indonesia', 0);
+(29, 'Kopera', '-1.4173403', '102.3230605', 'Jl. Kopera, Sarimulya, Rimbo Ilir, Kabupaten Tebo, Jambi 37553, Indonesia', 0),
+(30, 'Siantar', '-1.4751263', '103.051842', 'Unnamed Road, Kabupaten Batang Hari, Jambi 36552, Indonesia', 0),
+(31, 'Muara Jambe', '-1.4177919', '102.8395067', 'Unnamed Road, Tapah Sari, Mersam, Kabupaten Batang Hari, Jambi 36655, Indonesia', 0);
 
 -- --------------------------------------------------------
 
@@ -105,8 +107,6 @@ INSERT INTO `koordinat` (`koordinat_id`, `koordinat_nama`, `koordinat_lat`, `koo
 CREATE TABLE `pekerja` (
   `pekerja_id` int(11) NOT NULL,
   `proyek_id` int(11) NOT NULL,
-  `pekerja_nama` varchar(35) NOT NULL,
-  `pekerja_tel` char(12) NOT NULL,
   `pekerja_jenis` enum('kontraktor','konsultan') NOT NULL,
   `pekerja_nama_direktur` varchar(50) NOT NULL,
   `pekerja_tel_direktur` char(12) NOT NULL,
@@ -119,8 +119,33 @@ CREATE TABLE `pekerja` (
 -- Dumping data untuk tabel `pekerja`
 --
 
-INSERT INTO `pekerja` (`pekerja_id`, `proyek_id`, `pekerja_nama`, `pekerja_tel`, `pekerja_jenis`, `pekerja_nama_direktur`, `pekerja_tel_direktur`, `pekerja_nama_perusahaan`, `pekerja_alamat_perusahaan`, `pekerja_tel_kantor`) VALUES
-(2, 2, '', '', 'kontraktor', 'Mahendra wahyu', '08235', 'Ads', 'jl.aaa', '082');
+INSERT INTO `pekerja` (`pekerja_id`, `proyek_id`, `pekerja_jenis`, `pekerja_nama_direktur`, `pekerja_tel_direktur`, `pekerja_nama_perusahaan`, `pekerja_alamat_perusahaan`, `pekerja_tel_kantor`) VALUES
+(2, 2, 'kontraktor', 'Mahendra wahyu', '08235', 'Ads', 'jl.aaa', '082'),
+(3, 6, 'kontraktor', 'Alisa', '0822', 'Asd', 'jl.aaa', '0823141');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `penanggung_jawab`
+--
+
+CREATE TABLE `penanggung_jawab` (
+  `pn_id` int(11) NOT NULL,
+  `proyek_id` int(11) NOT NULL,
+  `pn_nama` varchar(25) NOT NULL,
+  `pn_email` varchar(50) NOT NULL,
+  `pn_tel` char(12) NOT NULL,
+  `pn_bagian` enum('sda','bm','ciptakarya','pr','sekretariat','ttdp','ubp','ubpdp','bkdp') NOT NULL,
+  `pn_foto` varchar(100) NOT NULL DEFAULT 'user_blank.png'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `penanggung_jawab`
+--
+
+INSERT INTO `penanggung_jawab` (`pn_id`, `proyek_id`, `pn_nama`, `pn_email`, `pn_tel`, `pn_bagian`, `pn_foto`) VALUES
+(1, 5, 'Teris', 'teris@aa.com', '082314325', 'ciptakarya', 'user_blank.png'),
+(2, 6, 'Heri', 'herianto@aaa.com', '08231352', 'ciptakarya', '974ce975a0ee242bcf9059cb8b9b4110.jpg');
 
 -- --------------------------------------------------------
 
@@ -152,7 +177,9 @@ CREATE TABLE `proyek` (
 INSERT INTO `proyek` (`proyek_id`, `proyek_koordinat_id`, `proyek_nama`, `proyek_tahun`, `proyek_keuangan`, `proyek_pagu`, `proyek_sech_awal`, `proyek_awal_kontrak`, `proyek_akhir_kontrak`, `proyek_bidang`, `proyek_jenis`, `proyek_volume`, `proyek_satuan`, `last_update`) VALUES
 (2, 27, 'Proyek2', 2013, 3692653, 1352634, '2018-06-05', NULL, NULL, 'ciptakarya', 'kontes', 100, 'CM', '2018-06-06 11:56:47'),
 (3, 28, 'Proyek 3', 2018, 150000, 100000, '2018-12-24', NULL, NULL, 'ciptakarya', 'selsed', 100, 'M', '2018-06-06 11:45:45'),
-(4, 29, 'Proyek4', 2013, 500000, 250000, '2013-02-07', NULL, NULL, 'bm', 'lelce', 300, 'CM', '2018-06-06 14:22:52');
+(4, 29, 'Proyek4', 2013, 500000, 250000, '2013-02-07', NULL, NULL, 'bm', 'lelce', 300, 'CM', '2018-06-06 14:22:52'),
+(5, 30, 'Proyek 10', 1995, 2000000, 2000000, '2018-06-21', NULL, NULL, 'ciptakarya', 'lena', 10, 'M', '2018-06-21 08:32:31'),
+(6, 31, 'Proyek Anti Air', 2015, 230000, 250000, '2018-06-19', NULL, NULL, 'sda', '', 50, 'M3', '2018-06-21 08:49:47');
 
 -- --------------------------------------------------------
 
@@ -181,7 +208,9 @@ CREATE TABLE `proyek_bagian` (
 INSERT INTO `proyek_bagian` (`pb_id`, `pb_proyek_id`, `pb_target`, `pb_real`, `pb_devisi`, `pb_ds_kontrak`, `pb_ds_ap`, `pb_ds_keuangan`, `pb_sisa_anggaran`, `pb_last_update`, `pb_stat_proyek`) VALUES
 (30, 2, 0, 0, 0, 0, 0, 0, 0, '2018-06-06 11:38:09', 'wajar'),
 (31, 3, 0, 0, 0, 0, 0, 0, 0, '2018-06-06 11:45:45', 'wajar'),
-(32, 4, 0, 0, 0, 0, 0, 0, 0, '2018-06-06 14:22:52', 'belummulai');
+(32, 4, 0, 0, 0, 0, 0, 0, 0, '2018-06-06 14:22:52', 'belummulai'),
+(33, 5, 0, 0, 0, 0, 0, 0, 0, '2018-06-21 08:32:31', 'belummulai'),
+(34, 6, 0, 0, 0, 0, 0, 0, 0, '2018-06-21 08:49:47', 'belummulai');
 
 -- --------------------------------------------------------
 
@@ -235,6 +264,12 @@ ALTER TABLE `pekerja`
   ADD KEY `proyek_id` (`proyek_id`);
 
 --
+-- Indeks untuk tabel `penanggung_jawab`
+--
+ALTER TABLE `penanggung_jawab`
+  ADD PRIMARY KEY (`pn_id`);
+
+--
 -- Indeks untuk tabel `proyek`
 --
 ALTER TABLE `proyek`
@@ -268,25 +303,31 @@ ALTER TABLE `file`
 -- AUTO_INCREMENT untuk tabel `koordinat`
 --
 ALTER TABLE `koordinat`
-  MODIFY `koordinat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `koordinat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT untuk tabel `pekerja`
 --
 ALTER TABLE `pekerja`
-  MODIFY `pekerja_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `pekerja_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT untuk tabel `penanggung_jawab`
+--
+ALTER TABLE `penanggung_jawab`
+  MODIFY `pn_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `proyek`
 --
 ALTER TABLE `proyek`
-  MODIFY `proyek_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `proyek_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `proyek_bagian`
 --
 ALTER TABLE `proyek_bagian`
-  MODIFY `pb_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `pb_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
