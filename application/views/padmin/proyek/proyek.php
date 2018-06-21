@@ -395,8 +395,6 @@
 					foreach ($cc->result_array() as $j) :
 						?>
 						'<tr>'+
-						'<td><?php echo $j['pekerja_nip'];?></td>'+
-						'<td><?php echo $j['pekerja_tel'];?></td>'+
 						'<td><?php echo $j['pekerja_jenis'];?></td>'+
 						'<td><?php echo $j['pekerja_nama_direktur'];?></td>'+
 						'<td><?php echo $j['pekerja_tel_direktur'];?></td>'+
