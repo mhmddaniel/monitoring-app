@@ -384,7 +384,8 @@ class M_padmin extends CI_Model{
 		$this->db->from('proyek a');
 		$this->db->join('proyek_bagian b','a.proyek_id=b.pb_proyek_id','inner');
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
-		$this->db->where('proyek_id',$kode);
+		$this->db->join('penanggung_jawab d','a.proyek_id=d.proyek_id','inner');
+		$this->db->where('a.proyek_id',$kode);
 		$hsl=$this->db->get();
 		return $hsl;
 	}

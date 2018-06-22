@@ -201,15 +201,7 @@ $b=$data->row_array() ;
       <strong><?php if($i['pekerja_jenis']=='kontraktor') {echo "Kontraktor"; } else {echo "Konsultan";} ?></strong>
       <address>
         <table class="table">
-          <tr>
-            <th>Nama Penanggung Jawab</th>
-            <td><?php echo $i['pekerja_nama']; ?></td>
-          </tr>
-          <tr>
-            <th>Telepon</th>
-            <td><?php echo $i['pekerja_tel']; ?></td>
-          </tr>
-
+ 
           <tr>
             <th>Bagian</th>
             <td><?php echo $i['pekerja_jenis']; ?></td>
