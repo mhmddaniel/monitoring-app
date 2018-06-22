@@ -497,7 +497,7 @@
 		<script type="text/javascript">
 			$.toast({
 				heading: 'Success',
-				text: "Berita Berhasil disimpan ke database.",
+				text: "Proyek Berhasil disimpan ke database.",
 				showHideTransition: 'slide',
 				icon: 'success',
 				hideAfter: false,
@@ -509,7 +509,7 @@
 			<script type="text/javascript">
 				$.toast({
 					heading: 'Info',
-					text: "Berita berhasil di update",
+					text: "Proyek berhasil di update",
 					showHideTransition: 'slide',
 					icon: 'info',
 					hideAfter: false,
@@ -521,7 +521,7 @@
 				<script type="text/javascript">
 					$.toast({
 						heading: 'Success',
-						text: "Berita Berhasil dihapus.",
+						text: "Proyek Berhasil dihapus.",
 						showHideTransition: 'slide',
 						icon: 'success',
 						hideAfter: false,
