@@ -103,7 +103,7 @@
 
               if($i['sumprog']>0){
                 ?>
-                <li><a href="#"><?php echo $i['pb_stat_proyek']; ?><span class="pull-right badge bg-blue"><?php echo $i['sumprog'];?></span></a></li>
+                <li><a href="#"><?php if($i['pb_stat_proyek'] == 'wajar') { echo "Wajar"; } else if($i['pb_stat_proyek'] == 'belummulai') { echo "Belum Mulai"; } else { echo $i['pb_stat_proyek']; } ?><span class="pull-right badge bg-blue"><?php echo $i['sumprog'];?></span></a></li>
               <?php } else {?>
                 
               <?php } endforeach; ?>

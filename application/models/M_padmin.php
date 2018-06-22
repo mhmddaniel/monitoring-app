@@ -27,7 +27,7 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 	function countselesai(){
-		$hsl=$this->db->query("SELECT count(*) as countselesai FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id where proyek_bagian.pb_real=100 AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
+		$hsl=$this->db->query("SELECT count(*) as countselesai FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id where proyek_bagian.pb_real=100 AND proyek.proyek_awal_kontrak>now() AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
 		return $hsl;
 	}
 	function diffdateplus(){
