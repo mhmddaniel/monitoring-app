@@ -90,6 +90,20 @@
 
 
     <div class="col-md-12">
+      <div class="col-md-5">
+        <div class="col-md-12">
+          <div class="box box-solid bg-blue-gradient">
+            <div class="box-header">
+              <i class="fa fa-calendar"></i>
+              <h3 class="box-title">Kalender</h3>
+            </div>
+            <div class="box-body no-padding">
+              <div id="calendar" style="width: 100%"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
       <div class="col-md-7">
         <div class="box box-widget widget-user-2">
           <div class="widget-user-header bg-yellow">
@@ -103,7 +117,7 @@
 
               if($i['sumprog']>0){
                 ?>
-                <li><a href="#"><?php if($i['pb_stat_proyek'] == 'wajar') { echo "Wajar"; } else if($i['pb_stat_proyek'] == 'belummulai') { echo "Belum Mulai"; } else { echo $i['pb_stat_proyek']; } ?><span class="pull-right badge bg-blue"><?php echo $i['sumprog'];?></span></a></li>
+                <li><a href="#"><?php if($i['pb_stat_proyek'] == 'wajar') { echo "Wajar"; } else if($i['pb_stat_proyek'] == 'belummulai') { echo "Belum Mulai"; } else if($i['pb_stat_proyek'] == 'terlambat') { echo "Terlambat"; } else { echo $i['pb_stat_proyek']; } ?><span class="pull-right badge bg-blue"><?php echo $i['sumprog'];?></span></a></li>
               <?php } else {?>
                 
               <?php } endforeach; ?>
@@ -112,74 +126,47 @@
           </div>
         </div>
       </div>
-      <div class="col-md-5">
-        <div class="col-md-12">
-          <div class="box box-solid ">
-            <div class="box-header bg-green">
-              <i class="fa fa-calendar"></i>
-              <h3 class="box-title">Kalender</h3>
-            </div>
-            <div class="box-body no-padding">
-              <div id="calendar" style="width: 100%"></div>
-            </div>
-          </div>
-
-        </div>
-      </div>
 
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
 
-      <div class="col-md-4">
-        <div class="small-box bg-red">
-          <div class="inner">
-            <h3><?php echo $f['countkerja']; ?></h3>
-            <p>Proyek sedang dikerjakan</p>
+      <div class="col-md-5">
+        <div class="box box-widget widget-user-2 bg-purple-gradient">
+          <div class="box-footer bg-purple-gradient">
+            <ul class="nav nav-stacked">
+                <li>
+              <h4>Total Proyek<span class="pull-right"><?php echo $a['jumproyek']; ?></span></h4></li>
+            </ul>
           </div>
-          <div class="icon">
-            <i class="fa fa-shopping-cart"></i>
+          <div class="box-footer bg-purple-gradient">
+            <ul class="nav nav-stacked">
+                <li>
+              <h4>Proyek Sedang Dikerjakan<span class="pull-right"><?php echo $f['countkerja']; ?></span></h4></li>
+            </ul>
           </div>
-          <a href="#" class="small-box-footer">
-          </a>
+          <div class="box-footer bg-purple-gradient">
+            <ul class="nav nav-stacked">
+                <li>
+              <h4>Proyek Selesai<span class="pull-right"><?php echo $h['countselesai']; ?></span></h4></li>
+            </ul>
+          </div>
+          <div class="box-footer bg-purple-gradient">
+            <ul class="nav nav-stacked">
+                <li>
+              <h4>Proyek Belum Mulai<span class="pull-right"><?php echo $g['countkerja']; ?></span></h4></li>
+            </ul>
+          </div>
         </div>
       </div>
-
-      <div class="col-md-4">
-        <div class="small-box bg-purple">
-          <div class="inner">
-            <h3><?php echo $h['countselesai']; ?></h3>
-            <p>Proyek Selesai</p>
-          </div>
-          <div class="icon">
-            <i class="fa fa-shopping-cart"></i>
-          </div>
-          <a href="#" class="small-box-footer">
-          </a>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="small-box bg-aqua">
-          <div class="inner">
-            <h3><?php echo $g['countkerja']; ?></h3>
-            <p>Proyek belum mulai</p>
-          </div>
-          <div class="icon">
-            <i class="fa fa-shopping-cart"></i>
-          </div>
-          <a href="#" class="small-box-footer">
-          </a>
-        </div>
-      </div>
-    </div>
   </div>
 
   <div class="row">    
     <div class="col-md-12">
       <div class="box box-solid2">
-        <div class="box-header bg-green">
-          <i class="fa fa-calendar"></i>
+        <div class="box-header bg-blue">
+          <i class="fa fa-bar-chart"></i>
           <h3 class="box-title">Grafik</h3>
         </div>
         <div class="box-body">
