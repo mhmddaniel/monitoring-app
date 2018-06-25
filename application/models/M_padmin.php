@@ -1,6 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class M_padmin extends CI_Model{
 
+	function cekadmin($username){
+		$hasil=$this->db->query("SELECT * FROM user WHERE user_username='$username'");
+		return $hasil;
+	}
+
 	function cekadminlogin($username,$password){
 		$hasil=$this->db->query("SELECT * FROM user WHERE user_username='$username' AND user_password=md5('$password')");
 		return $hasil;

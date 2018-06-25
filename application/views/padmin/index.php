@@ -92,7 +92,7 @@
     <div class="col-md-12">
       <div class="col-md-5">
         <div class="col-md-12">
-          <div class="box box-solid bg-blue-gradient">
+          <div class="box box-solid bg-green-gradient">
             <div class="box-header">
               <i class="fa fa-calendar"></i>
               <h3 class="box-title">Kalender</h3>
