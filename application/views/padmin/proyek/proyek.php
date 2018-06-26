@@ -423,7 +423,7 @@
 					'</div>'+
 					'</div>'+
 					'</section>', 
-					icon: <?php if ($value>50){echo "'https://png.icons8.com/color/50/000000/green-flag.png'";} else{ echo "'https://png.icons8.com/color/50/000000/filled-flag.png'";}?>},
+					icon: "<?php if ($value>50){echo base_url('assets/gmaps/images/green.png');} else{ echo base_url('assets/gmaps/images/red.png');}?>"},
 					<?php
 				endforeach;
 				?> 	
