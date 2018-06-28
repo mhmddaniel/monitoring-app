@@ -194,7 +194,7 @@
     .cluster({
       size: 200,
       markers: [
-      {position: [<?php echo $b['koordinat_lat'];?>, <?php echo $b['koordinat_lng'];?>], icon: <?php if ($b['koordinat_value']>50){echo "'https://png.icons8.com/color/50/000000/green-flag.png'";} else{ echo "'https://png.icons8.com/color/50/000000/filled-flag.png'";}?>},
+      {position: [<?php echo $b['koordinat_lat'];?>, <?php echo $b['koordinat_lng'];?>], icon: "<?php if ($b['koordinat_value']>50){echo base_url('assets/gmaps/images/green.png');} else{ echo base_url('assets/gmaps/images/red.png');}?>"},
       ],
       cb: function (markers) {
         if (markers.length > 1) { 

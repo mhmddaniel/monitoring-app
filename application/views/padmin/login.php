@@ -63,6 +63,8 @@
             </label>
           </div>
         </div>
+      </div>
+      <div class="row">
         <div>
          <p><?php echo $this->session->flashdata('msg');?></p>
        </div>

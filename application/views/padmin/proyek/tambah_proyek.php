@@ -40,7 +40,7 @@
 								</div>
 								<div class="col-md-2">
 									<div class="form-group">
-										<button type="submit" class="btn btn-primary btn-flat pull-right"><span class="fa fa-pencil"></span> Publish</button>
+										<button type="submit" class="btn btn-primary btn-block pull-right bg-green-gradient"></span> Konfirmasi</button>
 									</div>
 								</div>
 							</div>
@@ -55,106 +55,121 @@
 					<!-- Custom Tabs -->
 					<div class="nav-tabs-custom">
 						<ul class="nav nav-tabs">
-							<li class="active"><a href="#tab_1" data-toggle="tab">Data Proyek</a></li>
-							<li><a href="#tab_2" data-toggle="tab">Lokasi Proyek</a></li>
-							<li><a href="#tab_3" data-toggle="tab">Penanggung Jawab</a></li>
+							<li class="active"><a href="#tab_1" data-toggle="tab"><h4 style="font-family:Open Sans; font-weight:lighter;">Proyek</h4></a></li>
+							<li><a href="#tab_2" data-toggle="tab"><h4 style="font-family:Open Sans; font-weight:lighter;">Lokasi</h4></a></li>
+							<li><a href="#tab_3" data-toggle="tab"><h4 style="font-family:Open Sans; font-weight:lighter;">Selesai</h4></a></li>
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane active" id="tab_1">
 								<div class="box-body">
-									<div class="col-md-12">
+									<div class="col-md-10">
 										<div class="form-group">
-											<label>Tahun</label>
-											<input type="number" class="form-control" name="year">
+											<label><h5 style="font-family:Open Sans; font-weight:lighter;">NAMA PROYEK</h5></label>
+											<input type="text" class="form-control" name="xnama" style="font-family:Open Sans; font-weight:lighter;">
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="form-group">
+											<label><h5 style="font-family:Open Sans; font-weight:lighter;">TAHUN</h5></label>
+											<input type="number" class="form-control" name="year" value="<?php echo date("Y"); ?>" style="font-family:Open Sans; font-weight:lighter;">
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<label>Nilai Kontrak</label>
-											<input type="text" class="form-control" id="keuangan" name="keuangan">
+											<label><h5 style="font-family:Open Sans; font-weight:lighter;">RENCANA AWAL KONTRAK</h5></label>
+											<input type="date" class="form-control" name="sechawal" value="<?php echo date("d/m/Y"); ?>" style="font-family:Open Sans; font-weight:lighter;">
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<label>Pagu</label>
-											<input type="text" class="form-control" id="pagu" name="pagu">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<label>Rencana Awal Kontrak</label>
-											<input type="date" class="form-control" name="sechawal">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<label>Bidang</label>
-											<select class="form-control"  name="xbidang" >
-												<option value="sda">Sumber Daya Air</option>
-												<option value="bm">Bina Marga</option>
-												<option value="ciptakarya">Cipta Karya</option>
-												<option value="pr">Perumahan Rakyat</option>
-												<option value="sekretariat">Sekretariat</option>
-												<option value="ttdp">Tata Ruang dan Pertanahan</option>
-												<option value="ubp">UPTD Balai Pengujian</option>
-												<option value="ubpdp">UPTD Balai Peralatan dan Perbekalan</option>
-												<option value="bkdp">Bina Kontruksi dan Pengendalian</option>
+											<label><h5 style="font-family:Open Sans; font-weight:lighter;">BIDANG</h5></label>
+											<select class="form-control"  name="xbidang" style="font-family:Open Sans; font-weight:lighter;">
+												<option value="sda" style="font-family:Open Sans; font-weight:lighter;">Sumber Daya Air</option>
+												<option value="bm" style="font-family:Open Sans; font-weight:lighter;">Bina Marga</option>
+												<option value="ciptakarya" style="font-family:Open Sans; font-weight:lighter;">Cipta Karya</option>
+												<option value="pr" style="font-family:Open Sans; font-weight:lighter;">Perumahan Rakyat</option>
+												<option value="sekretariat" style="font-family:Open Sans; font-weight:lighter;">Sekretariat</option>
+												<option value="ttdp" style="font-family:Open Sans; font-weight:lighter;">Tata Ruang dan Pertanahan</option>
+												<option value="ubp" style="font-family:Open Sans; font-weight:lighter;">UPTD Balai Pengujian</option>
+												<option value="ubpdp" style="font-family:Open Sans; font-weight:lighter;">UPTD Balai Peralatan dan Perbekalan</option>
+												<option value="bkdp style="font-family:Open Sans; font-weight:lighter;"">Bina Kontruksi dan Pengendalian</option>
 											</select>
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<label>Jenis Pengadaan</label>
-											<select class="form-control"  name="xjenis" >
-												<option value="#">Semua</option>
-												<option value="leum">Lelang Umum</option>
-												<option value="lena">Lelang Sederhana</option>
-												<option value="letas">Lelang Terbatas</option>
-												<option value="selmum">Seleksi Umum</option>
-												<option value="pmlangsung">Pemilihan Langsung</option>
-												<option value="pnlangsung">Penunjukan Langsung</option>
-												<option value="pglangsung">Pengadaan Langsung</option>
-												<option value="epurchas">E-Purchasing</option>
-												<option value="sayembara">Sayembara</option>
-												<option value="kontes">Kontes</option>
-												<option value="lelce">Lelang Cepat</option>
-												<option value="selsed">Seleksi Sederhana</option>
+											<label><h5 style="font-family:Open Sans; font-weight:lighter;">JENIS PENGADAAN</h5></label>
+											<select class="form-control"  name="xjenis" style="font-family:Open Sans; font-weight:lighter;">
+												<option value="#" style="font-family:Open Sans; font-weight:lighter;">Semua</option>
+												<option value="leum" style="font-family:Open Sans; font-weight:lighter;">Lelang Umum</option>
+												<option value="lena" style="font-family:Open Sans; font-weight:lighter;">Lelang Sederhana</option>
+												<option value="letas" style="font-family:Open Sans; font-weight:lighter;">Lelang Terbatas</option>
+												<option value="selmum" style="font-family:Open Sans; font-weight:lighter;">Seleksi Umum</option>
+												<option value="pmlangsung" style="font-family:Open Sans; font-weight:lighter;">Pemilihan Langsung</option>
+												<option value="pnlangsung" style="font-family:Open Sans; font-weight:lighter;">Penunjukan Langsung</option>
+												<option value="pglangsung" style="font-family:Open Sans; font-weight:lighter;">Pengadaan Langsung</option>
+												<option value="epurchas" style="font-family:Open Sans; font-weight:lighter;">E-Purchasing</option>
+												<option value="sayembara" style="font-family:Open Sans; font-weight:lighter;">Sayembara</option>
+												<option value="kontes" style="font-family:Open Sans; font-weight:lighter;">Kontes</option>
+												<option value="lelce" style="font-family:Open Sans; font-weight:lighter;">Lelang Cepat</option>
+												<option value="selsed" style="font-family:Open Sans; font-weight:lighter;">Seleksi Sederhana</option>
 											</select>
 										</div>
-									</div>
-									<div class="col-md-6">
-										<label>Volume</label>
+									</div><div class="col-md-10">
+										<label><h5 style="font-family:Open Sans; font-weight:lighter;">VOLUME</h5></label>
 										<div class="form-group">
-											<input type="number" name="xvolume" class="form-control">
+											<input type="number" name="xvolume" class="form-control" style="font-family:Open Sans; font-weight:lighter;">
 										</div>
 									</div>
-									<div class="col-md-1">
-										<label>Satuan</label>
+									<div class="col-md-2">
+										<label><h5 style="font-family:Open Sans; font-weight:lighter;">SATUAN</h5></label>
 										<div class="form-group">
-											<input type="text" name="xsatuan" class="form-control">
+											<input type="text" name="xsatuan" class="form-control" style="font-family:Open Sans; font-weight:lighter;">
 										</div>
 									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label><h5 style="font-family:Open Sans; font-weight:lighter;">NILAI KONTRAK</h5></label>
+											<input type="text" class="form-control" id="keuangan" name="keuangan" style="font-family:Open Sans; font-weight:lighter;">
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label><h5 style="font-family:Open Sans; font-weight:lighter;">PAGU</h5></label>
+											<input type="text" class="form-control" id="pagu" name="pagu" style="font-family:Open Sans; font-weight:lighter;">
+										</div>
+									</div>
+									
 								</div>
 							</div>
 							<!-- /.tab-pane -->
 							<div class="tab-pane" id="tab_2">
 								<div class="box-body">
-									<div class="form-group">
-										<label>Nama Lokasi</label>
-										<input type="text" class="form-control"  name="namkor" >
+									<div class="col-md-6">
+										<div class="form-group">
+											<label><h5 style="font-family:Open Sans; font-weight:lighter;">NAMA PROYEK</h5></label>
+											<input type="text" class="form-control" name="xnama" style="font-family:Open Sans; font-weight:lighter;">
+										</div>
 									</div>
-									<div class="form-group">
-										<label>Alamat</label>
-										<input type="hidden" name="numkor" value="<?php echo $numkor; ?>">
-										<input type="text" class="inputAddress input-xxlarge form-control" value="Jambi, Kota Jambi, Jambi, Indonesia" name="inputAddress" autocomplete="off" placeholder="Type in your address">
-									</div>		
-									<div class="form-group">
-										<label>Latitude</label>
-										<input type="text" class="latitude form-control" value="latitude" name="latitude" readonly="readonly">
-									</div>
-									<div class="form-group">
-										<label>Longitude</label>
-										<input type="text" class="longitude form-control" value="longitude" name="longitude" readonly="readonly">
+									<div class="col-md-6">
+										
+										<div class="form-group">
+											<label>Nama Lokasi</label>
+											<input type="text" class="form-control"  name="namkor" >
+										</div>
+										<div class="form-group">
+											<label>Alamat</label>
+											<input type="hidden" name="numkor" value="<?php echo $numkor; ?>">
+											<input type="text" class="inputAddress input-xxlarge form-control" value="Jambi, Kota Jambi, Jambi, Indonesia" name="inputAddress" autocomplete="off" placeholder="Type in your address">
+										</div>		
+										<div class="form-group">
+											<label>Latitude</label>
+											<input type="text" class="latitude form-control" value="latitude" name="latitude" readonly="readonly">
+										</div>
+										<div class="form-group">
+											<label>Longitude</label>
+											<input type="text" class="longitude form-control" value="longitude" name="longitude" readonly="readonly">
+										</div>
 									</div>
 								</div>
 							</div>

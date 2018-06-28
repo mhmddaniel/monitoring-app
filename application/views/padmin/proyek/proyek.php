@@ -59,21 +59,24 @@
 				<!-- Custom Tabs -->
 				<div class="nav-tabs-custom">
 					<ul class="nav nav-tabs">
-						<li class="active"><a href="#tab_1" data-toggle="tab">Table</a></li>
-						<li><a href="#tab_2" data-toggle="tab">Map</a></li>
+						<li class="active"><a href="#tab_1" data-toggle="tab">Proyek</a></li>
+						<li><a href="#tab_2" data-toggle="tab">Lokasi</a></li>
 
 						<?php if($_SESSION['level']=='admin'){ ?>
-							<li class="pull-right"><a class="btn btn-success btn-flat bg-olive " href="<?php echo base_url().'padmin/tambah_proyek'?>"><span class="fa fa-plus"></span> Tambah proyek</a></li>
+							<li class="pull-right"><a class="btn btn-success btn-flat bg-olive" href="<?php echo base_url().'padmin/tambah_proyek'?>"><span class="fa fa-plus"></span> Tambah Proyek Baru</a></li>
 
 						<?php } else {} ?>
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="tab_1">
+							<div class="box-header bg-white">
+                    <h3 class="box-title">Progress Proyek</h3>
+                  </div>
 							<div class="box-body">
 								<table id="example1" class="table table-striped table-responsive">
 									<thead>
 										<tr>
-											<th>Nama Proyek</th>
+											<th>Nama ßProyek</th>
 											<th>Tahun</th>
 											<th>Rencana Pelaksanaan</th>
 											<th>Pagu</th>
@@ -332,33 +335,46 @@
 					info: 
 					'<section class="content">'+
 					'<div class="col-md-12">'+
-					'<div class="row"><b>Proyek<br></b>'+
-					'<table  class="table table-striped" style="font-size:11px;">'+
-					'<thead>'+
+					'<div class="box box-solid box-danger">'+
+					'<div class="box-header with-border"><h3 class="text-center">Detail Proyek</h3></div>'+
+					'<div class="box-body">'+
+					'<table  class="table table-hover" style="font-size:11px;">'+
 					'<tr>'+
-					'<th>Nama Proyek</th>'+
-					'<th>Tahun</th>'+
-					'<th>Rencana Pelaksanaan</th>'+
-					'<th>Pagu</th>'+
-					'<th>Rencana Aawal Kontrak</th>'+
-					'<th>Awal Kontrak</th>'+
-					'<th>Akhir Kontrak</th>'+
-					'<th>Last Update</th>'+
+					'<td><span class="direct-chat-name pull-left"><?php echo $proyek_nama;?></span></td>'+
+					'<td><span class="direct-chat-timestamp pull-right"></span></td>'+
 					'</tr>'+
-					'</thead>'+
 					'<tr>'+
-					'<td><?php echo $proyek_nama;?></td>'+
-					'<td><?php echo $proyek_tahun;?></td>'+
-					'<td><?php echo number_format($proyek_keuangan);?></td>'+
-					'<td><?php echo number_format($proyek_pagu);?></td>'+
-					'<td><?php echo date('d-m-Y', strtotime($proyek_sech_awal));?></td>'+
-					'<td><?php echo date('d-m-Y', strtotime($proyek_awal_kontrak));;?></td>'+
-					'<td><?php echo date('d-m-Y', strtotime($proyek_akhir_kontrak));;?></td>'+
+					'<td><span class="direct-chat-name pull-left">Tahun</span></td>'+
+					'<td><span class="direct-chat-timestamp pull-right"></span><?php echo $proyek_tahun;?></td>'+
+					'</tr>'+
+					'<tr>'+
+					'<td><span class="direct-chat-name pull-left">Nilai Kontrak</span></td>'+
+					'<td><span class="direct-chat-timestamp pull-right"></span><?php echo number_format($proyek_keuangan);?></td>'+
+					'</tr>'+
+					'<tr>'+
+					'<td><span class="direct-chat-name pull-left">Pagu</span></td>'+
+					'<td><span class="direct-chat-timestamp pull-right"></span><?php echo number_format($proyek_pagu);?></td>'+
+					'</tr>'+
+					'<tr>'+
+					'<td><span class="direct-chat-name pull-left">Rencana Kontrak</span></td>'+
+					'<td><span class="direct-chat-timestamp pull-right"></span><?php echo date('d-m-Y', strtotime($proyek_sech_awal));?></td>'+
+					'</tr>'+
+					'<tr>'+
+					'<td><span class="direct-chat-name pull-left">Awal Kontrak</span></td>'+
+					'<td><span class="direct-chat-timestamp pull-right"></span><?php echo date('d-m-Y', strtotime($proyek_awal_kontrak));;?></td>'+      
+					'</tr>'+
+					'<tr>'+
+					'<td><span class="direct-chat-name pull-left">Akhir Kontrak</span></td>'+
+					'<td><span class="direct-chat-timestamp pull-right"></span><?php echo date('d-m-Y', strtotime($proyek_akhir_kontrak));;?></td>'+
+					'</tr>'+
+					'<tr>'+
+					'<td>'+<?php if($up1>$up2){ echo "'$up1'"; } else { echo "'$up2'"; } ?>+'</td>'+
 					'<td>'+<?php if($up1>$up2){ echo "'$up1'"; } else { echo "'$up2'"; } ?>+'</td>'+
 					'</tr>'+
+					'<tr>'+
+					'</tr>'+
 					'</table>'+
-					'</div>'+
-					'<div class="row"><b>Bidang<br></b>'+
+					'<b>Bidang</b>'+
 					'<table  class="table table-striped" style="font-size:11px;">'+
 					'<thead>'+
 					'<tr>'+
@@ -405,7 +421,7 @@
 					<?php endforeach; ?>
 					'</table>'+
 					'</div>'+
-
+					'</div>'+
 					'<div class="row">'+
 					'<div class="post">'+
 					'<div class="row margin-bottom">'+
