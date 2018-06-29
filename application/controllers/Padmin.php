@@ -8,9 +8,6 @@ class Padmin extends CI_Controller{
 		};
 		$this->load->model('m_padmin');
 	}
-	public function aa(){
-		$this->load->view('padmin/proyek/a');
-	}
 	public function index(){
 		$y['title']='Dashboard';
 		if($_SESSION['level']=='admin'){
@@ -41,7 +38,6 @@ class Padmin extends CI_Controller{
 		$this->load->view('padmin/index',$x);
 		$this->load->view('padmin/footer');
 	}
-
 	public function proyek(){
 		if($_SESSION['level']=='admin'){
 			$x['data']=$this->m_padmin->get_all_proyek();
