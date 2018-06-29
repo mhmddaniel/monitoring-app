@@ -487,7 +487,7 @@ $b=$data->row_array() ;
 
     var options = {
       title: 'Real Target',
-      curveType: 'curve',
+      curveType: 'function',
       legend: { position: 'bottom' },
       hAxis: {
         title: 'Tanggal',

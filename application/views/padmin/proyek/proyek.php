@@ -368,31 +368,31 @@
 					'</tr>'+
 					'<tr>'+
 					'<td><span class="direct-chat-name pull-left">Tahun</span></td>'+
-					'<td><span class="direct-chat-timestamp pull-right"></span><?php echo $proyek_tahun;?></td>'+
+					'<td><span class="direct-chat-timestamp pull-right"><?php echo $proyek_tahun;?></span></td>'+
 					'</tr>'+
 					'<tr>'+
 					'<td><span class="direct-chat-name pull-left">Nilai Kontrak</span></td>'+
-					'<td><span class="direct-chat-timestamp pull-right"></span><?php echo number_format($proyek_keuangan);?></td>'+
+					'<td><span class="direct-chat-timestamp pull-right"><?php echo number_format($proyek_keuangan);?></span></td>'+
 					'</tr>'+
 					'<tr>'+
 					'<td><span class="direct-chat-name pull-left">Pagu</span></td>'+
-					'<td><span class="direct-chat-timestamp pull-right"></span><?php echo number_format($proyek_pagu);?></td>'+
+					'<td><span class="direct-chat-timestamp pull-right"><?php echo number_format($proyek_pagu);?></span></td>'+
 					'</tr>'+
 					'<tr>'+
 					'<td><span class="direct-chat-name pull-left">Rencana Kontrak</span></td>'+
-					'<td><span class="direct-chat-timestamp pull-right"></span><?php echo date('d-m-Y', strtotime($proyek_sech_awal));?></td>'+
+					'<td><span class="direct-chat-timestamp pull-right"><?php echo date('d-m-Y', strtotime($proyek_sech_awal));?></span></td>'+
 					'</tr>'+
 					'<tr>'+
 					'<td><span class="direct-chat-name pull-left">Awal Kontrak</span></td>'+
-					'<td><span class="direct-chat-timestamp pull-right"></span><?php echo date('d-m-Y', strtotime($proyek_awal_kontrak));;?></td>'+      
+					'<td><span class="direct-chat-timestamp pull-right"><?php echo date('d-m-Y', strtotime($proyek_awal_kontrak));?></span></td>'+      
 					'</tr>'+
 					'<tr>'+
 					'<td><span class="direct-chat-name pull-left">Akhir Kontrak</span></td>'+
-					'<td><span class="direct-chat-timestamp pull-right"></span><?php echo date('d-m-Y', strtotime($proyek_akhir_kontrak));;?></td>'+
+					'<td><span class="direct-chat-timestamp pull-right"><?php echo date('d-m-Y', strtotime($proyek_akhir_kontrak));?></span></td>'+
 					'</tr>'+
 					'<tr>'+
-					'<td></td>'+
-					'<td>'+
+					'<td><span class="direct-chat-name pull-left">Progress Proyek</span></td>'+
+					'<td span class="direct-chat-timestamp pull-right">'+
 					'<?php 
 					if($pb_real==0){ ?>'+
 					'<label class="label text-navy" style="font-family:Open Sans; font-weight:bold;">Belum Mulai</label>'+
@@ -401,17 +401,17 @@
 					if($pb_target==0 || $pb_target<=70){
 
 					if($pb_devisi>0){ ?>'+
-					'<label class="label text-blue" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Baik)</label>'+
+					'<label class="label text-blue" style="font-family:Open Sans; font-weight:bold;"><?php echo $pb_real ?> % (Baik)</label>'+
 					' <?php }
 					else {
 					if($pb_devisi==0 || $pb_devisi>=(-7)){ ?>'+
-					'<label class="label text-green" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Wajar)</label>'+
+					'<label class="label text-green" style="font-family:Open Sans; font-weight:bold;"><?php echo $pb_real ?> % (Wajar)</label>'+
 					'<?php }
 					else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){ ?>'+
-					'<label class="label text-yellow" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Terlambat)</label>'+
+					'<label class="label text-yellow" style="font-family:Open Sans; font-weight:bold;"><?php echo $pb_real ?> % (Terlambat)</label>'+
 					'<?php }
 					else { ?>'+
-					'<label class="label text-red" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Kritis)</label>'+
+					'<label class="label text-red" style="font-family:Open Sans; font-weight:bold;"><?php echo $pb_real ?> % (Kritis)</label>'+
 					'<?php }
 
 					}
@@ -419,17 +419,17 @@
 					else if ($pb_target>70 && $pb_target<=100){
 
 					if($pb_devisi>0){ ?>'+
-					'<label class="label text-blue" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Baik)</label>'+
+					'<label class="label text-blue" style="font-family:Open Sans; font-weight:bold;"><?php echo $pb_real ?> % (Baik)</label>'+
 					'<?php }
 					else {
 					if($pb_devisi==0 || $pb_devisi>=(-4)){ ?>'+
-					'<label class="label text-green" style="font-family:Open Sans; font-weight:bold;" >".$pb_real."% (Wajar)</label>'+
+					'<label class="label text-green" style="font-family:Open Sans; font-weight:bold;" ><?php echo $pb_real ?> % (Wajar)</label>'+
 					'<?php }
 					else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){ ?>'+
-					'<label class="label text-yellow" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Terlambat)</label>'+
+					'<label class="label text-yellow" style="font-family:Open Sans; font-weight:bold;"><?php echo $pb_real ?> % (Terlambat)</label>'+
 					'<? php }
 					else { ?>'+
-					'<label class="label text-red" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Kritis)</label>'+
+					'<label class="label text-red" style="font-family:Open Sans; font-weight:bold;"><?php echo $pb_real ?> % (Kritis)</label>'+
 					'<?php }	
 					}	
 					}
@@ -453,7 +453,7 @@
 					if($pb_real==0){ ?>'+
 					
 				  '<div class="text-center">'+
-				  '<a class="btn btn-flat bg-gray" href="<?php echo base_url().'padmin/tambah_proyek'?>">Lihat Lebih Lanjut</a>'+
+				  '<a class="btn btn-flat bg-gray" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
 				  '</div>'+
 					'<?php }
 					else {
@@ -461,23 +461,23 @@
 
 					if($pb_devisi>0){ ?>'+
 				  '<div class="text-center">'+
-				  '<a class="btn btn-flat bg-blue" href="<?php echo base_url().'padmin/tambah_proyek'?>">Lihat Lebih Lanjut</a>'+
+				  '<a class="btn btn-flat bg-blue" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
 				  '</div>'+
 					' <?php }
 					else {
 					if($pb_devisi==0 || $pb_devisi>=(-7)){ ?>'+
 					'<div class="text-center">'+
-				  '<a class="btn btn-flat bg-green" href="<?php echo base_url().'padmin/tambah_proyek'?>">Lihat Lebih Lanjut</a>'+
+				  '<a class="btn btn-flat bg-green" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
 				  '</div>'+
 					'<?php }
 					else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){ ?>'+
 					'<div class="text-center">'+
-				  '<a class="btn btn-flat bg-yellow" href="<?php echo base_url().'padmin/tambah_proyek'?>">Lihat Lebih Lanjut</a>'+
+				  '<a class="btn btn-flat bg-yellow" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
 				  '</div>'+
 					'<?php }
 					else { ?>'+
 					'<div class="text-center">'+
-				  '<a class="btn btn-flat bg-red" href="<?php echo base_url().'padmin/tambah_proyek'?>">Lihat Lebih Lanjut</a>'+
+				  '<a class="btn btn-flat bg-red" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
 				  '</div>'+
 					'<?php }
 
@@ -487,23 +487,23 @@
 
 					if($pb_devisi>0){ ?>'+
 					'<div class="text-center">'+
-				  '<a class="btn btn-flat bg-blue" href="<?php echo base_url().'padmin/tambah_proyek'?>">Lihat Lebih Lanjut</a>'+
+				  '<a class="btn btn-flat bg-blue" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
 				  '</div>'+
 					'<?php }
 					else {
 					if($pb_devisi==0 || $pb_devisi>=(-4)){ ?>'+
 					'<div class="text-center">'+
-				  '<a class="btn btn-flat bg-green" href="<?php echo base_url().'padmin/tambah_proyek'?>">Lihat Lebih Lanjut</a>'+
+				  '<a class="btn btn-flat bg-green" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
 				  '</div>'+
 					'<?php }
 					else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){ ?>'+
 					'<div class="text-center">'+
-				  '<a class="btn btn-flat bg-yellow" href="<?php echo base_url().'padmin/tambah_proyek'?>">Lihat Lebih Lanjut</a>'+
+				  '<a class="btn btn-flat bg-yellow" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
 				  '</div>'+
 					'<? php }
 					else { ?>'+
 					'<div class="text-center">'+
-				  '<a class="btn btn-flat bg-red" href="<?php echo base_url().'padmin/tambah_proyek'?>">Lihat Lebih Lanjut</a>'+
+				  '<a class="btn btn-flat bg-red" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
 				  '</div>'+
 					'<?php }	
 					}	
@@ -616,7 +616,7 @@
 
     var options = {
       title: 'Real Target',
-      curveType: 'curve',
+      curveType: 'function',
       legend: { position: 'bottom' },
       hAxis: {
         title: 'Tanggal',
