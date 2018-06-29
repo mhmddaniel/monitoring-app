@@ -76,7 +76,7 @@
 								<table id="example1" class="table table-striped table-responsive">
 									<thead>
 										<tr>
-											<th>Nama ßProyek</th>
+											<th>Nama Proyek</th>
 											<th>Tahun</th>
 											<th>Rencana Pelaksanaan</th>
 											<th>Pagu</th>
@@ -338,7 +338,7 @@
 					'<div class="box box-solid box-danger">'+
 					'<div class="box-header with-border"><h3 class="text-center">Detail Proyek</h3></div>'+
 					'<div class="box-body">'+
-					'<table  class="table table-hover" style="font-size:11px;">'+
+					'<table  class="table table-hover" style="font-size:14px;">'+
 					'<tr>'+
 					'<td><span class="direct-chat-name pull-left"><?php echo $proyek_nama;?></span></td>'+
 					'<td><span class="direct-chat-timestamp pull-right"></span></td>'+
@@ -368,42 +368,64 @@
 					'<td><span class="direct-chat-timestamp pull-right"></span><?php echo date('d-m-Y', strtotime($proyek_akhir_kontrak));;?></td>'+
 					'</tr>'+
 					'<tr>'+
-					'<td>'+<?php if($up1>$up2){ echo "'$up1'"; } else { echo "'$up2'"; } ?>+'</td>'+
-					'<td>'+<?php if($up1>$up2){ echo "'$up1'"; } else { echo "'$up2'"; } ?>+'</td>'+
-					'</tr>'+
-					'<tr>'+
+					'<td></td>'+
+					'<td>'+
+					'<?php 
+					if($pb_real==0){ ?>'+
+					'<label class="label text-navy" style="font-family:Open Sans; font-weight:bold;">Belum Mulai</label>'+
+					'<?php }
+					else {
+					if($pb_target==0 || $pb_target<=70){
+
+					if($pb_devisi>0){ ?>'+
+					'<label class="label text-blue" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Baik)</label>'+
+					' <?php }
+					else {
+					if($pb_devisi==0 || $pb_devisi>=(-7)){ ?>'+
+					'<label class="label text-green" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Wajar)</label>'+
+					'<?php }
+					else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){ ?>'+
+					'<label class="label text-yellow" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Terlambat)</label>'+
+					'<?php }
+					else { ?>'+
+					'<label class="label text-red" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Kritis)</label>'+
+					'<?php }
+
+					}
+					}
+					else if ($pb_target>70 && $pb_target<=100){
+
+					if($pb_devisi>0){ ?>'+
+					'<label class="label text-blue" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Baik)</label>'+
+					'<?php }
+					else {
+					if($pb_devisi==0 || $pb_devisi>=(-4)){ ?>'+
+					'<label class="label text-green" style="font-family:Open Sans; font-weight:bold;" >".$pb_real."% (Wajar)</label>'+
+					'<?php }
+					else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){ ?>'+
+					'<label class="label text-yellow" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Terlambat)</label>'+
+					'<? php }
+					else { ?>'+
+					'<label class="label text-red" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Kritis)</label>'+
+					'<?php }	
+					}	
+					}
+					else { ?>'+
+					''+
+					'<?php }
+					}
+					?>'+
+
+					'</td>'+
 					'</tr>'+
 					'</table>'+
-					'<b>Bidang</b>'+
-					'<table  class="table table-striped" style="font-size:11px;">'+
-					'<thead>'+
-					'<tr>'+
-					'<th>Target</th>'+
-					'<th>Real</th>'+
-					'<th>Dev</th>'+
-					'</tr>'+
-					'</thead>'+
-					'<tr>'+
-					'<td><?php echo $i['pb_target'];?></td>'+
-					'<td><?php echo $i['pb_real'];?></td>'+
-					'<td><?php echo $i['pb_devisi'];?></td>'+
-					'</tr>'+
-					'</table>'+
-					'</div>'+
-					'<div class="row"><b>Pekerja<br></b>'+
-					'<table  class="table table-striped" style="font-size:11px;">'+
-					'<thead>'+
-					'<tr>'+
-					'<th>Nama</th>'+
-					'<th>Telepon</th>'+
-					'<th>Bagian</th>'+
-					'<th>Direktur</th>'+
-					'<th>Tel. Direktur</th>'+
-					'<th>Perusahaan</th>'+
-					'<th>Alamat Perusahaan</th>'+
-					'<th>Tel. Kantor</th>'+
-					'</tr>'+
-					'</thead>'+
+					'<div class="col-md-12 table-responsive" >'+
+				    '<div class="col-md-12">'+
+				    '<div class="row margin-bottom">'+
+				        '<div id="realtarget" style="height: 250px"></div>'+
+				      '</div>'+
+				    '</div>'+
+				  '</div>'+
 
 					<?php 
 					$kode=$i['proyek_id'];
@@ -479,6 +501,43 @@
 })
 ;
 });
+</script>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Tanggal', 'Real', 'Target'],
+      [null, 0, 0],
+      <?php foreach ($data->result_array() as $i) : ?>
+        ['<?php echo $i['tanggal']; ?>',  <?php echo $i['pb_real']; ?>, <?php echo $i['pb_target']?>],
+      <?php endforeach; ?>
+      ]);
+
+    var options = {
+      title: 'Real Target',
+      curveType: 'curve',
+      legend: { position: 'bottom' },
+      hAxis: {
+        title: 'Tanggal',
+      },
+      vAxis: { 
+        title: 'Progress (%)',
+        ticks: [0, 10, 20, 30, 40 ,50 ,60 ,70 ,80 ,90 ,100]
+      } ,
+      pointSize: 4,
+    };
+
+    var chart = new google.visualization.LineChart(document.getElementById('realtarget'));
+
+    chart.draw(data, options);
+  }
+
+
+
 </script>
 
 <script type="text/javascript" src="<?php echo base_url().'assets/plugins/toast/jquery.toast.min.js'?>"></script>
