@@ -266,7 +266,6 @@
 	<script type="text/javascript" src="<?php echo base_url() ?>assets/gmaps/assets/js/gmap3.js"></script>
 	<script type="text/javascript">
 		$(function () {
-
 			$('#test')
 			.gmap3({
 				center: [-1.7333385,102.7458134],
@@ -312,7 +311,6 @@
 					?>
 
 					{position: [<?php echo $lat;?>, <?php echo $lng;?>], 
-<<<<<<< HEAD
 					info: 
 					'<section class="content">'+
 					'<div class="col-md-12">'+
@@ -521,256 +519,48 @@
 					icon: "<?php 
 							if($pb_real==0){
 							echo base_url('assets/gmaps/images/grey.png');
-=======
-						info: 
-						'<section class="content">'+
-						'<div class="col-md-12">'+
-						'<?php 
-						if($pb_real==0){ ?>'+
-							'<div class="box box-solid box-default">'+
-						'<?php }
-						else {
-							if($pb_target==0 || $pb_target<=70){
-
-								if($pb_devisi>0){ ?>'+
-									'<div class="box box-solid box-primary">'+
-								' <?php }
-								else {
-									if($pb_devisi==0 || $pb_devisi>=(-7)){ ?>'+
-										'<div class="box box-solid box-success">'+
-									'<?php }
-									else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){ ?>'+
-										'<div class="box box-solid box-warning">'+
-									'<?php }
-									else { ?>'+
-										'<div class="box box-solid box-danger">'+
-									'<?php }
-
-								}
-							}
-							else if ($pb_target>70 && $pb_target<=100){
-
-								if($pb_devisi>0){ ?>'+
-									'<div class="box box-solid box-primary">'+
-								'<?php }
-								else {
-									if($pb_devisi==0 || $pb_devisi>=(-4)){ ?>'+
-										'<div class="box box-solid box-success">'+
-									'<?php }
-									else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){ ?>'+
-										'<div class="box box-solid box-warning">'+
-									'<? php }
-									else { ?>'+
-										'<div class="box box-solid box-danger">'+
-									'<?php }	
-								}	
->>>>>>> bf9e749573bfd89ffa2d870351cd07c6d97770c3
-							}
-							else { ?>'+
-								''+
-							'<?php }
-						}
-						?>'+
-						'<div class="box-header with-border"><h3 class="text-center">Detail Proyek</h3></div>'+
-						'<div class="box-body">'+
-						'<table  class="table table-hover" style="font-size:14px;">'+
-						'<tr>'+
-						'<td><span class="direct-chat-name pull-left"><?php echo $proyek_nama;?></span></td>'+
-						'<td><span class="direct-chat-timestamp pull-right"></span></td>'+
-						'</tr>'+
-						'<tr>'+
-						'<td><span class="direct-chat-name pull-left">Tahun</span></td>'+
-						'<td><span class="direct-chat-timestamp pull-right"></span><?php echo $proyek_tahun;?></td>'+
-						'</tr>'+
-						'<tr>'+
-						'<td><span class="direct-chat-name pull-left">Nilai Kontrak</span></td>'+
-						'<td><span class="direct-chat-timestamp pull-right"></span><?php echo number_format($proyek_keuangan);?></td>'+
-						'</tr>'+
-						'<tr>'+
-						'<td><span class="direct-chat-name pull-left">Pagu</span></td>'+
-						'<td><span class="direct-chat-timestamp pull-right"></span><?php echo number_format($proyek_pagu);?></td>'+
-						'</tr>'+
-						'<tr>'+
-						'<td><span class="direct-chat-name pull-left">Rencana Kontrak</span></td>'+
-						'<td><span class="direct-chat-timestamp pull-right"></span><?php echo date('d-m-Y', strtotime($proyek_sech_awal));?></td>'+
-						'</tr>'+
-						'<tr>'+
-						'<td><span class="direct-chat-name pull-left">Awal Kontrak</span></td>'+
-						'<td><span class="direct-chat-timestamp pull-right"></span><?php echo date('d-m-Y', strtotime($proyek_awal_kontrak));;?></td>'+      
-						'</tr>'+
-						'<tr>'+
-						'<td><span class="direct-chat-name pull-left">Akhir Kontrak</span></td>'+
-						'<td><span class="direct-chat-timestamp pull-right"></span><?php echo date('d-m-Y', strtotime($proyek_akhir_kontrak));;?></td>'+
-						'</tr>'+
-						'<tr>'+
-						'<td></td>'+
-						'<td>'+
-						'<?php 
-						if($pb_real==0){ ?>'+
-							'<label class="label text-navy" style="font-family:Open Sans; font-weight:bold;">Belum Mulai</label>'+
-						'<?php }
-						else {
-							if($pb_target==0 || $pb_target<=70){
-
-								if($pb_devisi>0){ ?>'+
-									'<label class="label text-blue" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Baik)</label>'+
-								' <?php }
-								else {
-									if($pb_devisi==0 || $pb_devisi>=(-7)){ ?>'+
-										'<label class="label text-green" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Wajar)</label>'+
-									'<?php }
-									else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){ ?>'+
-										'<label class="label text-yellow" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Terlambat)</label>'+
-									'<?php }
-									else { ?>'+
-										'<label class="label text-red" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Kritis)</label>'+
-									'<?php }
-
-								}
-							}
-							else if ($pb_target>70 && $pb_target<=100){
-
-								if($pb_devisi>0){ ?>'+
-									'<label class="label text-blue" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Baik)</label>'+
-								'<?php }
-								else {
-									if($pb_devisi==0 || $pb_devisi>=(-4)){ ?>'+
-										'<label class="label text-green" style="font-family:Open Sans; font-weight:bold;" >".$pb_real."% (Wajar)</label>'+
-									'<?php }
-									else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){ ?>'+
-										'<label class="label text-yellow" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Terlambat)</label>'+
-									'<? php }
-									else { ?>'+
-										'<label class="label text-red" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Kritis)</label>'+
-									'<?php }	
-								}	
-							}
-							else { ?>'+
-								''+
-							'<?php }
-						}
-						?>'+
-
-						'</td>'+
-						'</tr>'+
-						'</table>'+
-						'<div class="col-md-12 table-responsive" >'+
-						'<div class="col-md-12">'+
-						'<div class="row margin-bottom">'+
-						'<div id="realtarget" style="width: 500px"></div>'+
-						'</div>'+
-						'</div>'+
-						'</div>'+
-						'<?php 
-						if($pb_real==0){ ?>'+
-
-							'<div class="text-center">'+
-						'<a class="btn btn-flat bg-gray" href="<?php echo base_url().'padmin/tambah_proyek'?>">Lihat Lebih Lanjut</a>'+
-						'</div>'+
-						'<?php }
-						else {
-							if($pb_target==0 || $pb_target<=70){
-
-								if($pb_devisi>0){ ?>'+
-									'<div class="text-center">'+
-								'<a class="btn btn-flat bg-blue" href="<?php echo base_url().'padmin/tambah_proyek'?>">Lihat Lebih Lanjut</a>'+
-								'</div>'+
-								' <?php }
-								else {
-									if($pb_devisi==0 || $pb_devisi>=(-7)){ ?>'+
-										'<div class="text-center">'+
-									'<a class="btn btn-flat bg-green" href="<?php echo base_url().'padmin/tambah_proyek'?>">Lihat Lebih Lanjut</a>'+
-									'</div>'+
-									'<?php }
-									else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){ ?>'+
-										'<div class="text-center">'+
-									'<a class="btn btn-flat bg-yellow" href="<?php echo base_url().'padmin/tambah_proyek'?>">Lihat Lebih Lanjut</a>'+
-									'</div>'+
-									'<?php }
-									else { ?>'+
-										'<div class="text-center">'+
-									'<a class="btn btn-flat bg-red" href="<?php echo base_url().'padmin/tambah_proyek'?>">Lihat Lebih Lanjut</a>'+
-									'</div>'+
-									'<?php }
-
-								}
-							}
-							else if ($pb_target>70 && $pb_target<=100){
-
-								if($pb_devisi>0){ ?>'+
-									'<div class="text-center">'+
-								'<a class="btn btn-flat bg-blue" href="<?php echo base_url().'padmin/tambah_proyek'?>">Lihat Lebih Lanjut</a>'+
-								'</div>'+
-								'<?php }
-								else {
-									if($pb_devisi==0 || $pb_devisi>=(-4)){ ?>'+
-										'<div class="text-center">'+
-									'<a class="btn btn-flat bg-green" href="<?php echo base_url().'padmin/tambah_proyek'?>">Lihat Lebih Lanjut</a>'+
-									'</div>'+
-									'<?php }
-									else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){ ?>'+
-										'<div class="text-center">'+
-									'<a class="btn btn-flat bg-yellow" href="<?php echo base_url().'padmin/tambah_proyek'?>">Lihat Lebih Lanjut</a>'+
-									'</div>'+
-									'<? php }
-									else { ?>'+
-										'<div class="text-center">'+
-									'<a class="btn btn-flat bg-red" href="<?php echo base_url().'padmin/tambah_proyek'?>">Lihat Lebih Lanjut</a>'+
-									'</div>'+
-									'<?php }	
-								}	
-							}
-							else { ?>'+
-								''+
-							'<?php }
-						}
-						?>'+
-						'</section>', 
-						icon: "<?php 
-						if($pb_real==0){
-							echo base_url('assets/gmaps/images/grey.png');
-						}
-						else {
-							if($pb_target==0 || $pb_target<=70){
-
-								if($pb_devisi>0){
-									echo base_url('assets/gmaps/images/blue.png');
-								}
-								else {
-									if($pb_devisi==0 || $pb_devisi>=(-7)){
-										echo base_url('assets/gmaps/images/green.png');
-									}
-									else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
-										echo base_url('assets/gmaps/images/yellow.png');
-									}
-									else {
-										echo base_url('assets/gmaps/images/red.png');
-									}
-
-								}
-							}
-							else if ($pb_target>70 && $pb_target<=100){
-
-								if($pb_devisi>0){
-									echo base_url('assets/gmaps/images/blue.png');
-								}
-								else {
-									if($pb_devisi==0 || $pb_devisi>=(-4)){
-										echo base_url('assets/gmaps/images/green.png'); 
-									}
-									else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
-										echo base_url('assets/gmaps/images/yellow.png');									
-									}
-									else {
-										echo base_url('assets/gmaps/images/red.png');
-									}	
-								}	
 							}
 							else {
-								echo "";
+							if($pb_target==0 || $pb_target<=70){
+
+							if($pb_devisi>0){
+							echo base_url('assets/gmaps/images/blue.png');
 							}
-						}
-						?>"},
+							else {
+							if($pb_devisi==0 || $pb_devisi>=(-7)){
+							echo base_url('assets/gmaps/images/green.png');
+							}
+							else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
+							echo base_url('assets/gmaps/images/yellow.png');
+							}
+							else {
+							echo base_url('assets/gmaps/images/red.png');
+							}
+
+							}
+							}
+							else if ($pb_target>70 && $pb_target<=100){
+
+							if($pb_devisi>0){
+							echo base_url('assets/gmaps/images/blue.png');
+							}
+							else {
+							if($pb_devisi==0 || $pb_devisi>=(-4)){
+							echo base_url('assets/gmaps/images/green.png'); 
+							}
+							else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
+							echo base_url('assets/gmaps/images/yellow.png');									
+							}
+							else {
+							echo base_url('assets/gmaps/images/red.png');
+							}	
+							}	
+							}
+							else {
+							echo "";
+							}
+							}
+							?>"},
 						<?php
 					endforeach;
 					?> 	
@@ -814,40 +604,6 @@
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-<<<<<<< HEAD
-  google.charts.load('current', {'packages':['corechart']});
-  google.charts.setOnLoadCallback(drawChart);
-
-  function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-      ['Tanggal', 'Real', 'Target'],
-      [null, 0, 0],
-      <?php 
-      $result_array = $data->result_array();
-      foreach ( $result_array[0] as $i) : ?>
-        ['<?php echo $i['tanggal']; ?>',  <?php echo $i['pb_real']; ?>, <?php echo $i['pb_target']?>],
-      <?php endforeach; ?>
-      ]);
-
-    var options = {
-      title: 'Real Target',
-      curveType: 'function',
-      legend: { position: 'bottom' },
-      hAxis: {
-        title: 'Tanggal',
-      },
-      vAxis: { 
-        title: 'Progress (%)',
-        ticks: [0, 10, 20, 30, 40 ,50 ,60 ,70 ,80 ,90 ,100]
-      } ,
-      pointSize: 4,
-    };
-
-    var chart = new google.visualization.LineChart(document.getElementById('realtarget0'));
-
-    chart.draw(data, options);
-  }
-=======
 	google.charts.load('current', {'packages':['corechart']});
 	google.charts.setOnLoadCallback(drawChart);
 
@@ -878,7 +634,6 @@
 
 		chart.draw(data, options);
 	}
->>>>>>> bf9e749573bfd89ffa2d870351cd07c6d97770c3
 
 </script>
 
