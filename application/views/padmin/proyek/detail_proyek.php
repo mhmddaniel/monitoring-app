@@ -92,33 +92,51 @@ $b=$data->row_array() ;
               $pb_real=$b['pb_real'];
               $pb_devisi=$b['pb_devisi'];
               $pb_stat_proyek=$b['pb_stat_proyek'];
-              if($pb_target==0 || $pb_target<=70){
-                if($pb_devisi==0 || $pb_devisi>=(-7)){
-                  echo "<label class='label bg-red'>".$pb_real."% (".$pb_stat_proyek.")</label>";
-                }
-                else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
-
-                  echo "<label class='label bg-red'>".$pb_real."% (".$pb_stat_proyek.")</label>";
-                }
-                else {
-                  echo "<label class='label bg-red'>".$pb_real."% (".$pb_stat_proyek.")</label>";
-                }
-              }
-              else if ($pb_target>70 && $pb_target<=100){
-                if($pb_devisi==0 || $pb_devisi>=(-4)){
-                  echo "<label class='label bg-red'>".$pb_real."% (".$pb_stat_proyek.")</label>"; 
-                }
-                else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
-
-                  echo "<label class='label bg-red'>".$pb_real."% (".$pb_stat_proyek.")</label>";                         
-                }
-                else {
-
-                  echo "<label class='label bg-red'>".$pb_real."% (".$pb_stat_proyek.")</label>";
-                } 
+              if($pb_real==0){
+                echo "<label class='label bg-gray'>Belum Mulai</label>";
               }
               else {
-                echo "";
+                if($pb_target==0 || $pb_target<=70){
+
+                  if($pb_devisi>0){
+                    echo "<label class='label bg-blue'>".$pb_real."% (Baik)</label>";
+                  }
+                  else {
+                    if($pb_devisi==0 || $pb_devisi>=(-7)){
+                      echo "<label class='label bg-green'>".$pb_real."% (Wajar)</label>";
+                    }
+                    else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
+
+                      echo "<label class='label bg-yellow'>".$pb_real."% (Terlambat)</label>";
+                    }
+                    else {
+                      echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+                    }
+
+                  }
+                }
+                else if ($pb_target>70 && $pb_target<=100){
+
+                  if($pb_devisi>0){
+                    echo "<label class='label bg-blue'>".$pb_real."% (Baik)</label>";
+                  }
+                  else {
+                    if($pb_devisi==0 || $pb_devisi>=(-4)){
+                      echo "<label class='label bg-green'>".$pb_real."% (Wajar)</label>"; 
+                    }
+                    else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
+
+                      echo "<label class='label bg-yellow'>".$pb_real."% (Terlambat)</label>";                          
+                    }
+                    else {
+
+                      echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+                    } 
+                  } 
+                }
+                else {
+                  echo "";
+                }
               }
               ?>
             </td>
@@ -314,33 +332,51 @@ $b=$data->row_array() ;
         $pb_target=$b['pb_target'];
         $pb_real=$b['pb_real'];
         $pb_devisi=$b['pb_devisi'];
-        if($pb_target==0 || $pb_target<=70){
-          if($pb_devisi==0 || $pb_devisi>=(-7)){
-            echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>";
-          }
-          else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
-
-            echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";
-          }
-          else {
-            echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
-          }
-        }
-        else if ($pb_target>70 && $pb_target<=100){
-          if($pb_devisi==0 || $pb_devisi>=(-4)){
-            echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>"; 
-          }
-          else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
-
-            echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";                         
-          }
-          else {
-
-            echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
-          } 
+        if($pb_real==0){
+          echo "<label class='label bg-gray'>Belum Mulai</label>";
         }
         else {
-          echo "a";
+          if($pb_target==0 || $pb_target<=70){
+
+            if($pb_devisi>0){
+              echo "<label class='label bg-blue'>".$pb_real."% (Baik)</label>";
+            }
+            else {
+              if($pb_devisi==0 || $pb_devisi>=(-7)){
+                echo "<label class='label bg-green'>".$pb_real."% (Wajar)</label>";
+              }
+              else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
+
+                echo "<label class='label bg-yellow'>".$pb_real."% (Terlambat)</label>";
+              }
+              else {
+                echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+              }
+
+            }
+          }
+          else if ($pb_target>70 && $pb_target<=100){
+
+            if($pb_devisi>0){
+              echo "<label class='label bg-blue'>".$pb_real."% (Baik)</label>";
+            }
+            else {
+              if($pb_devisi==0 || $pb_devisi>=(-4)){
+                echo "<label class='label bg-green'>".$pb_real."% (Wajar)</label>"; 
+              }
+              else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
+
+                echo "<label class='label bg-yellow'>".$pb_real."% (Terlambat)</label>";                          
+              }
+              else {
+
+                echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+              } 
+            } 
+          }
+          else {
+            echo "";
+          }
         }
         ?>
       </p>
@@ -440,7 +476,51 @@ $b=$data->row_array() ;
     .cluster({
       size: 200,
       markers: [
-      {position: [<?php echo $b['koordinat_lat'];?>, <?php echo $b['koordinat_lng'];?>], icon: "<?php if ($b['koordinat_value']>50){echo base_url('assets/gmaps/images/green.png');} else{ echo base_url('assets/gmaps/images/red.png');}?>"},
+      {position: [<?php echo $b['koordinat_lat'];?>, <?php echo $b['koordinat_lng'];?>], icon: "<?php 
+      if($pb_real==0){
+        echo base_url('assets/gmaps/images/grey.png');
+      }
+      else {
+        if($pb_target==0 || $pb_target<=70){
+
+          if($pb_devisi>0){
+            echo base_url('assets/gmaps/images/blue.png');
+          }
+          else {
+            if($pb_devisi==0 || $pb_devisi>=(-7)){
+              echo base_url('assets/gmaps/images/green.png');
+            }
+            else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
+              echo base_url('assets/gmaps/images/yellow.png');
+            }
+            else {
+              echo base_url('assets/gmaps/images/red.png');
+            }
+
+          }
+        }
+        else if ($pb_target>70 && $pb_target<=100){
+
+          if($pb_devisi>0){
+            echo base_url('assets/gmaps/images/blue.png');
+          }
+          else {
+            if($pb_devisi==0 || $pb_devisi>=(-4)){
+              echo base_url('assets/gmaps/images/green.png'); 
+            }
+            else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
+              echo base_url('assets/gmaps/images/yellow.png');                  
+            }
+            else {
+              echo base_url('assets/gmaps/images/red.png');
+            } 
+          } 
+        }
+        else {
+          echo "";
+        }
+      }
+      ?>"},
       ],
       cb: function (markers) {
         if (markers.length > 1) { 
@@ -487,7 +567,7 @@ $b=$data->row_array() ;
 
     var options = {
       title: 'Real Target',
-      curveType: 'curve',
+      curveType: 'function',
       legend: { position: 'bottom' },
       hAxis: {
         title: 'Tanggal',

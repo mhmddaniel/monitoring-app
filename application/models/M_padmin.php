@@ -356,6 +356,7 @@ class M_padmin extends CI_Model{
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
 		$this->db->join('penanggung_jawab d','a.proyek_id=d.proyek_id','inner');
 		$this->db->where('a.proyek_id',$kode);
+		$this->db->order_by('b.pb_last_update', 'DESC');
 		$hsl=$this->db->get();
 		return $hsl;
 	}
@@ -391,6 +392,7 @@ class M_padmin extends CI_Model{
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
 		$this->db->join('penanggung_jawab d','a.proyek_id=d.proyek_id','inner');
 		$this->db->where('a.proyek_id',$kode);
+		$this->db->order_by('b.pb_last_update', 'DESC');
 		$hsl=$this->db->get();
 		return $hsl;
 	}

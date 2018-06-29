@@ -42,6 +42,29 @@
               <h3 class="box-title">Kalender</h3>
             </div>
             <div class="box-body no-padding">
+
+              <script type="text/javascript" src="https://raw.githubusercontent.com/kylestetz/CLNDR/master/clndr.min.js"></script>
+                    <script type="text/javascript">
+                    $('#calendar').clndr({
+                      daysOfTheWeek: ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+                      numberOfRows: 5
+                      days: [
+                        {
+                          day: '1',
+                          classes: 'day today event',
+                          id: 'calendar-day-2013-09-01',
+                          events: [ ],
+                          date: moment('2013-09-01')
+                        },
+                        ...
+                      ]
+                      month: 'September'
+                      year: '2013'
+                      eventsThisMonth: [ ],
+                      extras: { }
+                              
+                    });
+                </script>
               <div id="calendar" style="width: 100%"></div>
             </div>
           </div>
@@ -192,44 +215,6 @@
 
         </section>
       </div>
-
-
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-
-
-      <script>
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'line',
-
-    // The data for our dataset
-    data: {
-      labels: <?php echo json_encode($bulan);?>,
-      datasets: [{
-        label: "Visitor",
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: <?php echo json_encode($value);?>
-      }]
-    },
-
-    // Configuration options go here
-    options: {}
-  });</script>
-  <script>
-    $(function () {
-      $('#example1').DataTable()
-      $('#example2').DataTable({
-        'paging'      : true,
-        'lengthChange': false,
-        'searching'   : false,
-        'ordering'    : true,
-        'info'        : true,
-        'autoWidth'   : false
-      })
-    })
-  </script>
   <!-- Sparkline -->
   <script src="<?php echo base_url().'assets/plugins/sparkline/jquery.sparkline.min.js'?>"></script>
   <!-- jvectormap -->
