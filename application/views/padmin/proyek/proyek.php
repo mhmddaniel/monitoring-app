@@ -148,21 +148,21 @@
 
 																<?php 
 																if($pb_real==0){
-																	echo "<label class='label bg-red'>Belum Mulai</label>";
+																	echo "<label class='label bg-gray'>Belum Mulai</label>";
 																}
 																else {
 																	if($pb_target==0 || $pb_target<=70){
 
 																		if($pb_devisi>0){
-																			echo "<label class='label bg-red'>".$pb_real."% (Baik)</label>";
+																			echo "<label class='label bg-blue'>".$pb_real."% (Baik)</label>";
 																		}
 																		else {
 																			if($pb_devisi==0 || $pb_devisi>=(-7)){
-																				echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>";
+																				echo "<label class='label bg-green'>".$pb_real."% (Wajar)</label>";
 																			}
 																			else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
 
-																				echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";
+																				echo "<label class='label bg-yellow'>".$pb_real."% (Terlambat)</label>";
 																			}
 																			else {
 																				echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
@@ -173,15 +173,15 @@
 																	else if ($pb_target>70 && $pb_target<=100){
 
 																		if($pb_devisi>0){
-																			echo "<label class='label bg-red'>".$pb_real."% (Baik)</label>";
+																			echo "<label class='label bg-blue'>".$pb_real."% (Baik)</label>";
 																		}
 																		else {
 																			if($pb_devisi==0 || $pb_devisi>=(-4)){
-																				echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>"; 
+																				echo "<label class='label bg-green'>".$pb_real."% (Wajar)</label>"; 
 																			}
 																			else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
 
-																				echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";													
+																				echo "<label class='label bg-yellow'>".$pb_real."% (Terlambat)</label>";													
 																			}
 																			else {
 
@@ -266,6 +266,7 @@
 	<script type="text/javascript" src="<?php echo base_url() ?>assets/gmaps/assets/js/gmap3.js"></script>
 	<script type="text/javascript">
 		$(function () {
+
 			$('#test')
 			.gmap3({
 				center: [-1.7333385,102.7458134],
@@ -445,7 +446,9 @@
 					'<div class="col-md-12 table-responsive" >'+
 				    '<div class="col-md-12">'+
 				    '<div class="row margin-bottom">'+
-				        '<div id="realtarget" style="width: 500px"></div>'+
+				        '<div id="realtarget'+
+						'<?php echo ($no-1);?>'+
+				        '" style="width: 500px"></div>'+
 				      '</div>'+
 				    '</div>'+
 				  '</div>'+
@@ -609,7 +612,9 @@
     var data = google.visualization.arrayToDataTable([
       ['Tanggal', 'Real', 'Target'],
       [null, 0, 0],
-      <?php foreach ($data->result_array() as $i) : ?>
+      <?php 
+      $result_array = $data->result_array();
+      foreach ( $result_array[0] as $i) : ?>
         ['<?php echo $i['tanggal']; ?>',  <?php echo $i['pb_real']; ?>, <?php echo $i['pb_target']?>],
       <?php endforeach; ?>
       ]);
@@ -628,7 +633,7 @@
       pointSize: 4,
     };
 
-    var chart = new google.visualization.LineChart(document.getElementById('realtarget'));
+    var chart = new google.visualization.LineChart(document.getElementById('realtarget0'));
 
     chart.draw(data, options);
   }
