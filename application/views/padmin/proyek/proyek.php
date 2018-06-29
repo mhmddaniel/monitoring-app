@@ -57,6 +57,7 @@
 		<div class="row">
 			<div class="col-md-12 col-xs-12">
 				<!-- Custom Tabs -->
+<<<<<<< HEAD
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="#tab_1" data-toggle="tab">Proyek</a></li>
 					<li><a href="#tab_2" data-toggle="tab">Lokasi</a></li>
@@ -150,6 +151,105 @@
 																<?php 
 																if($pb_real==0){
 																	echo "<label class='label bg-red'>Belum Mulai</label>";
+=======
+				<div class="nav-tabs-custom">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#tab_1" data-toggle="tab">Proyek</a></li>
+						<li><a href="#tab_2" data-toggle="tab">Lokasi</a></li>
+
+						<?php if($_SESSION['level']=='admin'){ ?>
+							<li class="pull-right"><a class="btn btn-success btn-flat bg-olive" href="<?php echo base_url().'padmin/tambah_proyek'?>"><span class="fa fa-plus"></span> Tambah Proyek Baru</a></li>
+
+						<?php } else {} ?>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="tab_1">
+							<div class="box-header bg-white">
+                    <h3 class="box-title">Progress Proyek</h3>
+                  </div>
+							<div class="box-body">
+								<table id="example1" class="table table-striped table-responsive">
+									<thead>
+										<tr>
+											<th>Nama Proyek</th>
+											<th>Tahun</th>
+											<th>Rencana Pelaksanaan</th>
+											<th>Pagu</th>
+											<th>Rencana Awal Kontrak</th>
+											<th>Awal Kontrak</th>
+											<th>Akhir Kontrak</th>
+											<th>Progress</th>
+											<th>Last Update</th>
+											<th style="text-align:right;">Aksi</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php
+										$no=0;
+										foreach ($data->result_array() as $i) :
+											$no++;
+											$proyek_id=$i['proyek_id'];
+											$pb_id=$i['pb_id'];
+											$proyek_nama=$i['proyek_nama'];
+											$proyek_tahun=$i['proyek_tahun'];
+											$proyek_keuangan=$i['proyek_keuangan'];
+											$proyek_pagu=$i['proyek_pagu'];
+											$proyek_sech_awal=$i['proyek_sech_awal'];
+											$proyek_awal_kontrak=$i['proyek_awal_kontrak'];
+											$proyek_akhir_kontrak=$i['proyek_akhir_kontrak'];
+											$koordinat_nama=$i['koordinat_nama'];
+											$pb_target=$i['pb_target'];
+											$pb_real=$i['pb_real'];
+											$pb_devisi=$i['pb_devisi'];
+											$up1=date('d-m-Y h:i:s', strtotime($i['last_update']));
+											$up2=date('d-m-Y h:i:s', strtotime($i['pb_last_update']));
+
+											?>
+											<tr>
+												<td><?php echo $proyek_nama;?></td>
+												<td><?php echo $proyek_tahun;?></td>
+												<td><?php echo number_format($proyek_keuangan);?></td>
+												<td><?php echo number_format($proyek_pagu);?></td>
+												<td><?php echo date('d-m-Y', strtotime($proyek_sech_awal));?></td>
+												<td>
+													<?php 
+													if($proyek_awal_kontrak==null){
+														echo "Belum Mulai";
+													}
+													else{
+														echo date('d-m-Y', strtotime($proyek_awal_kontrak));
+													}
+													?>
+
+												</td>
+												<td>
+													<?php 
+													if($proyek_awal_kontrak==null){
+														echo "Belum Mulai";
+													}
+													else{
+														echo date('d-m-Y', strtotime($proyek_akhir_kontrak));
+													}?>
+												</td>
+												<td>
+													<?php 
+													if($pb_real==0){
+														echo "<label class='label bg-red'>Belum Mulai</label>";
+													}
+													else {
+														if($pb_target==0 || $pb_target<=70){
+
+															if($pb_devisi>0){
+																echo "<label class='label bg-red'>".$pb_real."% (Baik)</label>";
+															}
+															else {
+																if($pb_devisi==0 || $pb_devisi>=(-7)){
+																	echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>";
+																}
+																else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
+
+																	echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";
+>>>>>>> 4905c8555ee470c6c9bd47be987f37374702a543
 																}
 																else {
 																	if($pb_target==0 || $pb_target<=70){
@@ -264,6 +364,7 @@
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyAogXD-AHrsmnWinZIyhRORJ84bgLwDPpg"></script>
 
+<<<<<<< HEAD
 	<script type="text/javascript" src="<?php echo base_url() ?>assets/gmaps/assets/js/gmap3.js"></script>
 	<script type="text/javascript">
 		$(function () {
@@ -319,6 +420,156 @@
 						'<div class="box-header with-border"><h3 class="text-center">Detail Proyek</h3></div>'+
 						'<div class="box-body">'+
 						'<table  class="table table-hover" style="font-size:11px;">'+
+=======
+<script type="text/javascript" src="<?php echo base_url() ?>assets/gmaps/assets/js/gmap3.js"></script>
+<script type="text/javascript">
+	$(function () {
+		$('#test')
+		.gmap3({
+			center: [-1.7333385,102.7458134],
+			zoom: 8,
+			mapTypeId: 'hybrid',
+		})
+
+		.infowindow({
+			content: ''
+		})
+
+		.then(function (iw) {
+			infowindow = iw;
+		})
+
+		.cluster({
+			size: 200,
+
+
+			markers: [
+			<?php
+			$no=0;
+			foreach ($data->result_array() as $i) :
+				$no++;
+				$koordinat_id=$i['koordinat_id'];
+				$lat=$i['koordinat_lat'];
+				$lng=$i['koordinat_lng'];
+				$value=$i['koordinat_value'];
+				$proyek_id=$i['proyek_id'];
+				$proyek_nama=$i['proyek_nama'];
+				$proyek_tahun=$i['proyek_tahun'];
+				$proyek_keuangan=$i['proyek_keuangan'];
+				$proyek_pagu=$i['proyek_pagu'];
+				$proyek_sech_awal=$i['proyek_sech_awal'];
+				$proyek_awal_kontrak=$i['proyek_awal_kontrak'];
+				$proyek_akhir_kontrak=$i['proyek_akhir_kontrak'];
+				$koordinat_nama=$i['koordinat_nama'];
+				$pb_target=$i['pb_target'];
+				$pb_real=$i['pb_real'];
+				$pb_devisi=$i['pb_devisi'];
+				$up1=date('d-m-Y h:i:s', strtotime($i['last_update']));
+				$up2=date('d-m-Y h:i:s', strtotime($i['pb_last_update']));
+				?>
+
+				{position: [<?php echo $lat;?>, <?php echo $lng;?>], 
+					info: 
+					'<section class="content">'+
+					'<div class="col-md-12">'+
+					'<div class="box box-solid box-danger">'+
+					'<div class="box-header with-border"><h3 class="text-center">Detail Proyek</h3></div>'+
+					'<div class="box-body">'+
+					'<table  class="table table-hover" style="font-size:14px;">'+
+					'<tr>'+
+					'<td><span class="direct-chat-name pull-left"><?php echo $proyek_nama;?></span></td>'+
+					'<td><span class="direct-chat-timestamp pull-right"></span></td>'+
+					'</tr>'+
+					'<tr>'+
+					'<td><span class="direct-chat-name pull-left">Tahun</span></td>'+
+					'<td><span class="direct-chat-timestamp pull-right"></span><?php echo $proyek_tahun;?></td>'+
+					'</tr>'+
+					'<tr>'+
+					'<td><span class="direct-chat-name pull-left">Nilai Kontrak</span></td>'+
+					'<td><span class="direct-chat-timestamp pull-right"></span><?php echo number_format($proyek_keuangan);?></td>'+
+					'</tr>'+
+					'<tr>'+
+					'<td><span class="direct-chat-name pull-left">Pagu</span></td>'+
+					'<td><span class="direct-chat-timestamp pull-right"></span><?php echo number_format($proyek_pagu);?></td>'+
+					'</tr>'+
+					'<tr>'+
+					'<td><span class="direct-chat-name pull-left">Rencana Kontrak</span></td>'+
+					'<td><span class="direct-chat-timestamp pull-right"></span><?php echo date('d-m-Y', strtotime($proyek_sech_awal));?></td>'+
+					'</tr>'+
+					'<tr>'+
+					'<td><span class="direct-chat-name pull-left">Awal Kontrak</span></td>'+
+					'<td><span class="direct-chat-timestamp pull-right"></span><?php echo date('d-m-Y', strtotime($proyek_awal_kontrak));;?></td>'+      
+					'</tr>'+
+					'<tr>'+
+					'<td><span class="direct-chat-name pull-left">Akhir Kontrak</span></td>'+
+					'<td><span class="direct-chat-timestamp pull-right"></span><?php echo date('d-m-Y', strtotime($proyek_akhir_kontrak));;?></td>'+
+					'</tr>'+
+					'<tr>'+
+					'<td></td>'+
+					'<td>'+
+					'<?php 
+					if($pb_real==0){ ?>'+
+					'<label class="label text-navy" style="font-family:Open Sans; font-weight:bold;">Belum Mulai</label>'+
+					'<?php }
+					else {
+					if($pb_target==0 || $pb_target<=70){
+
+					if($pb_devisi>0){ ?>'+
+					'<label class="label text-blue" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Baik)</label>'+
+					' <?php }
+					else {
+					if($pb_devisi==0 || $pb_devisi>=(-7)){ ?>'+
+					'<label class="label text-green" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Wajar)</label>'+
+					'<?php }
+					else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){ ?>'+
+					'<label class="label text-yellow" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Terlambat)</label>'+
+					'<?php }
+					else { ?>'+
+					'<label class="label text-red" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Kritis)</label>'+
+					'<?php }
+
+					}
+					}
+					else if ($pb_target>70 && $pb_target<=100){
+
+					if($pb_devisi>0){ ?>'+
+					'<label class="label text-blue" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Baik)</label>'+
+					'<?php }
+					else {
+					if($pb_devisi==0 || $pb_devisi>=(-4)){ ?>'+
+					'<label class="label text-green" style="font-family:Open Sans; font-weight:bold;" >".$pb_real."% (Wajar)</label>'+
+					'<?php }
+					else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){ ?>'+
+					'<label class="label text-yellow" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Terlambat)</label>'+
+					'<? php }
+					else { ?>'+
+					'<label class="label text-red" style="font-family:Open Sans; font-weight:bold;">".$pb_real."% (Kritis)</label>'+
+					'<?php }	
+					}	
+					}
+					else { ?>'+
+					''+
+					'<?php }
+					}
+					?>'+
+
+					'</td>'+
+					'</tr>'+
+					'</table>'+
+					'<div class="col-md-12 table-responsive" >'+
+				    '<div class="col-md-12">'+
+				    '<div class="row margin-bottom">'+
+				        '<div id="realtarget" style="height: 250px"></div>'+
+				      '</div>'+
+				    '</div>'+
+				  '</div>'+
+
+					<?php 
+					$kode=$i['proyek_id'];
+					$cc=$this->m_padmin->get_penannggung_jawab($kode); 
+					foreach ($cc->result_array() as $j) :
+						?>
+>>>>>>> 4905c8555ee470c6c9bd47be987f37374702a543
 						'<tr>'+
 						'<td><span class="direct-chat-name pull-left"><?php echo $proyek_nama;?></span></td>'+
 						'<td><span class="direct-chat-timestamp pull-right"></span></td>'+
@@ -459,6 +710,43 @@
 })
 ;
 });
+</script>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Tanggal', 'Real', 'Target'],
+      [null, 0, 0],
+      <?php foreach ($data->result_array() as $i) : ?>
+        ['<?php echo $i['tanggal']; ?>',  <?php echo $i['pb_real']; ?>, <?php echo $i['pb_target']?>],
+      <?php endforeach; ?>
+      ]);
+
+    var options = {
+      title: 'Real Target',
+      curveType: 'curve',
+      legend: { position: 'bottom' },
+      hAxis: {
+        title: 'Tanggal',
+      },
+      vAxis: { 
+        title: 'Progress (%)',
+        ticks: [0, 10, 20, 30, 40 ,50 ,60 ,70 ,80 ,90 ,100]
+      } ,
+      pointSize: 4,
+    };
+
+    var chart = new google.visualization.LineChart(document.getElementById('realtarget'));
+
+    chart.draw(data, options);
+  }
+
+
+
 </script>
 
 <script type="text/javascript" src="<?php echo base_url().'assets/plugins/toast/jquery.toast.min.js'?>"></script>
