@@ -20,6 +20,7 @@ class Padmin extends CI_Controller{
 			$x['diffdateplus']=$this->m_padmin->diffdateplus();
 			$x['diffdatemin']=$this->m_padmin->diffdatemin();
 			$x['countselesai']=$this->m_padmin->countselesai();
+            $x['data']=$this->m_padmin->get_all_proyek();
 		}
 		else {
 			$bagian=$_SESSION['bagian'];
@@ -32,6 +33,7 @@ class Padmin extends CI_Controller{
 			$x['diffdateplus']=$this->m_padmin->diffdateplus_by_kode($bagian);
 			$x['diffdatemin']=$this->m_padmin->diffdatemin_by_kode($bagian);
 			$x['countselesai']=$this->m_padmin->countselesai_by_kode($bagian);
+            $x['data']=$this->m_padmin->get_all_proyek_by_bagian($bagian);
 		}
 		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');

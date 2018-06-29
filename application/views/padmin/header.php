@@ -41,15 +41,15 @@
 <!-- Google Font -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-black-light sidebar-mini">
+<body class="hold-transition skin-blue-light sidebar-collapse sidebar-mini">
   <div class="wrapper">
     <header class="main-header">
       <!-- Logo -->
       <a href="<?php echo base_url() ?>padmin/" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"></span>
+        <span class="logo-mini"><b>PK</b>-IT</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Admin </b></span>
+        <span class="logo-lg"><b>Perdana</b> Karya</span>
       </a>
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar navbar-static-top">

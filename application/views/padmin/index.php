@@ -25,7 +25,8 @@
   $e=$sum_sisa->row_array(); 
   $f=$diffdateplus->row_array(); 
   $g=$diffdatemin->row_array(); 
-  $h=$countselesai->row_array(); 
+  $h=$countselesai->row_array();
+  $q=$data->row_array();
   ?>
   <section class="content">
    <div class="row">
@@ -141,11 +142,11 @@
               <div class="col-md-4">
                 
                 <div class="col-md-12">
-                  <div class="info-box">
-                    <span class="info-box-icon bg-blue"><i class="fa fa-credit-card"></i></span>
+                  <div class="info-box bg-aqua-gradient">
+                    <span class="info-box-icon"><i class="fa fa-credit-card"></i></span>
 
                     <div class="info-box-content">
-                      <span class="info-box-number text-blue"><?php echo "Rp ".number_format($b['sumpagu']); ?></span>
+                      <span class="info-box-number"><?php echo "Rp ".number_format($b['sumpagu']); ?></span>
                       <span class="info-box-text">Total Pagu</span>
                     </div>
                     <!-- /.info-box-content -->
@@ -154,11 +155,11 @@
                 </div>
 
                 <div class="col-md-12">
-                  <div class="info-box">
-                    <span class="info-box-icon bg-red"><i class="fa fa-shopping-cart"></i></span>
+                  <div class="info-box bg-red-gradient">
+                    <span class="info-box-icon"><i class="fa fa-shopping-cart"></i></span>
 
                     <div class="info-box-content">
-                      <span class="info-box-number text-red"><?php echo "Rp ".number_format($c['suma']+$c['sumb']); ?></span>
+                      <span class="info-box-number"><?php echo "Rp ".number_format($c['suma']+$c['sumb']); ?></span>
                       <span class="info-box-text">Total Uang Keluar</span>
                     </div>
                     <!-- /.info-box-content -->
@@ -167,11 +168,11 @@
                 </div>
 
                 <div class="col-md-12">
-                  <div class="info-box">
-                    <span class="info-box-icon bg-green"><i class="fa fa-money"></i></span>
+                  <div class="info-box bg-green-gradient">
+                    <span class="info-box-icon"><i class="fa fa-money"></i></span>
 
                     <div class="info-box-content">
-                      <span class="info-box-number text-green"><?php echo "Rp ".number_format($e['sumsisa']); ?></span>
+                      <span class="info-box-number"><?php echo "Rp ".number_format($e['sumsisa']); ?></span>
                       <span class="info-box-text">Total Uang Masuk</span>
                     </div>
                     <!-- /.info-box-content -->
@@ -180,25 +181,100 @@
                 </div>
 
               </div>
-              <div class="col-md-8">
+              <div class="col-md-8" style="font-family:Open Sans; font-weight:lighter;">
                 <div class="box box-widget widget-user-2">
                   <div class="box-header bg-white">
                     <h3 class="box-title">Progress Proyek</h3>
                   </div>
+                    <div class="box-body">
+                        <table id="example1" class="table table-striped" style="font-size:13px; font-family:Open Sans; font-weight:lighter;">
+                            <thead>
+                            <tr>
+                                <th>PROYEK</th>
+                                <th>TAHUN</th>
+                                <th>PAGU</th>
+                                <th>UPDATE</th>
+                                <th>PROGRESS</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            foreach ($data->result_array() as $i) :
+                            if($i>0){
+                            ?>
+                            <tr>
+                                <td><?php echo $i['proyek_nama']; ?></td>
+                                <td><?php echo $i['proyek_tahun']; ?></td>
+                                <td><?php echo $i['proyek_pagu']; ?></td>
+                                <td><?php
+                                    $up1=date('d-m-Y h:i:s', strtotime($i['last_update']));
+                                    $up2=date('d-m-Y h:i:s', strtotime($i['pb_last_update']));
+                                    if($up1 > $up2)
+                                    {
+                                        echo $up1;
+                                    }
+                                    else{
+                                        echo $up2;
+                                    }
+
+                                    ?></td>
+                                <td>
+                                        <?php
+                                                            if($i['pb_real']==0){
+                                                                echo "<label class='label text-gray'>Belum Mulai</label>";
+                                                            }
+                                                            else {
+                                                                if($i['pb_target']==0 || $i['pb_target']<=70){
+
+                                                                    if($i['pb_devisi']>0){
+                                                                        echo "<label class='label text-blue'>".$i['pb_real']."% (Baik)</label>";
+                                                                    }
+                                                                    else {
+                                                                        if($i['pb_devisi']==0 || $i['pb_devisi']>=(-7)){
+                                                                            echo "<label class='label text-green'>".$i['pb_real']."% (Wajar)</label>";
+                                                                        }
+                                                                        else if ($i['pb_devisi']<(-7) && $i['pb_devisi']>=(-10)){
+
+                                                                            echo "<label class='label text-yellow'>".$i['pb_real']."% (Terlambat)</label>";
+                                                                        }
+                                                                        else {
+                                                                            echo "<label class='label text-red'>".$i['pb_real']."% (Kritis)</label>";
+                                                                        }
+
+                                                                    }
+                                                                }
+                                                                else if ($i['pb_target']>70 && $i['pb_target']<=100){
+
+                                                                    if($i['pb_devisi']>0){
+                                                                        echo "<label class='label text-blue'>".$i['pb_real']."% (Baik)</label>";
+                                                                    }
+                                                                    else {
+                                                                        if($i['pb_devisi']==0 || $i['pb_devisi']>=(-4)){
+                                                                            echo "<label class='label text-green'>".$i['pb_real']."% (Wajar)</label>";
+                                                                        }
+                                                                        else if ($i['pb_devisi']<(-4) && $i['pb_devisi']>=(-5)){
+
+                                                                            echo "<label class='label text-yellow'>".$i['pb_real']."% (Terlambat)</label>";
+                                                                        }
+                                                                        else {
+
+                                                                            echo "<label class='label text-red'>".$i['pb_real']."% (Kritis)</label>";
+                                                                        }
+                                                                    }
+                                                                }
+                                                                else {
+                                                                    echo "";
+                                                                }
+                                                            }
+                                                            ?></td>
+                            </tr>
+                            <?php } else {?>
+
+                            <?php } endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
                   <div class="box-footer no-padding">
-                    <ul class="nav nav-stacked">
-
-                     <?php
-                     foreach ($sumprog->result_array() as $i) :
-
-                      if($i['sumprog']>0){
-                        ?>
-                        <li><a href="#"><?php if($i['pb_stat_proyek'] == 'wajar') { echo "Wajar"; } else if($i['pb_stat_proyek'] == 'belummulai') { echo "Belum Mulai"; } else if($i['pb_stat_proyek'] == 'terlambat') { echo "Terlambat"; } else { echo $i['pb_stat_proyek']; } ?><span class="pull-right badge bg-blue"><?php echo $i['sumprog'];?></span></a></li>
-                      <?php } else {?>
-                        
-                      <?php } endforeach; ?>
-
-                    </ul>
                   </div>
                 </div>
               </div>
