@@ -83,25 +83,7 @@ body {
 
 	<form action="<?php echo base_url()?>padmin/save_proyek" method="POST" enctype="multipart/form-data" >
 		<section class="content">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="box box-default">
-						<div class="box-header with-border">
-							<h3 class="box-title">Nama Proyek</h3>
-						</div>
-
-						<div class="box-body">
-							<div class="row">
-								<div class="col-md-12">
-									<input type="hidden" name="numproyek" value="<?php echo $numproyek; ?>">
-									<input type="text" name="xnama" class="form-control" placeholder="Nama Proyek" required/>
-								</div>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
+			
 
 			<div class="container">
 				<div class="stepwizard">
@@ -130,6 +112,7 @@ body {
 							<div class="col-md-10">
 								<div class="form-group">
 									<label><h5 style="font-family:Open Sans; font-weight:lighter;">NAMA PROYEK</h5></label>
+									<input type="hidden" name="numproyek" value="<?php echo $numproyek; ?>">
 									<input type="text" class="form-control" name="xnama" style="font-family:Open Sans; font-weight:lighter;">
 								</div>
 							</div>
