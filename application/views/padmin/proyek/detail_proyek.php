@@ -46,117 +46,233 @@ $b=$data->row_array() ;
   </ol>
 </section>
 
+<div class="row">
+  <div class="col-md-6">
+
+    <div class="col-md-12">
+      <div class="box box-primary">
+        <div class="box-header">
+         <h4> 
+          <i class="fa fa-chevron-left text-primary"> Proyek Jalan Tol</i>
+        </h4>
+      </div>
+
+      <div class="box-body box-profile">
+        <table class="table">
+          <tr>
+            <th>Tahun</th>
+            <td class="text-right"><?php echo $b['proyek_tahun']; ?></td>
+          </tr>
+          <tr>
+            <th>Nilai Kontrak</th>
+            <td class="text-right"><?php echo "Rp ".number_format($b['proyek_keuangan']); ?></td>
+          </tr>
+          <tr>
+            <th>Pagu</th>
+            <td class="text-right"><?php echo "Rp ".number_format($b['proyek_pagu']); ?></td>
+          </tr>
+          <tr>
+            <th>Rencana Kontrak</th>
+            <td class="text-right"><?php $b['proyek_sech_awal']; ?></td>
+          </tr>
+          <tr>
+            <th>Awal Kontrak</th>
+            <td class="text-right"><?php echo dateformat('d-m-Y',$b['proyek_awal_kontrak']) ?></td>
+          </tr>
+          <tr>
+            <th>Akhir Kontrak</th>
+            <td class="text-right"><?php echo dateformat('d-m-Y',$b['proyek_akhir_kontrak']) ?></td>
+          </tr>
+          <tr>
+            <th>Proyek Progress</th>
+            <td class="text-right">
+              <?php
+
+              $pb_target=$b['pb_target'];
+              $pb_real=$b['pb_real'];
+              $pb_devisi=$b['pb_devisi'];
+              $pb_stat_proyek=$b['pb_stat_proyek'];
+              if($pb_target==0 || $pb_target<=70){
+                if($pb_devisi==0 || $pb_devisi>=(-7)){
+                  echo "<label class='label bg-red'>".$pb_real."% (".$pb_stat_proyek.")</label>";
+                }
+                else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
+
+                  echo "<label class='label bg-red'>".$pb_real."% (".$pb_stat_proyek.")</label>";
+                }
+                else {
+                  echo "<label class='label bg-red'>".$pb_real."% (".$pb_stat_proyek.")</label>";
+                }
+              }
+              else if ($pb_target>70 && $pb_target<=100){
+                if($pb_devisi==0 || $pb_devisi>=(-4)){
+                  echo "<label class='label bg-red'>".$pb_real."% (".$pb_stat_proyek.")</label>"; 
+                }
+                else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
+
+                  echo "<label class='label bg-red'>".$pb_real."% (".$pb_stat_proyek.")</label>";                         
+                }
+                else {
+
+                  echo "<label class='label bg-red'>".$pb_real."% (".$pb_stat_proyek.")</label>";
+                } 
+              }
+              else {
+                echo "";
+              }
+              ?>
+            </td>
+          </tr>
+        </table> 
+      </div>
+    </div>
+  </div>
 
 
-<section class="invoice">
- <div class="row">
-  <div class="col-xs-12">
-    <h2 class="page-header">
-      <i class="fa fa-briefcase"></i> <?php echo $b['proyek_nama']; ?>
-      <small class="pull-right">Jadwal Proyek : <b><?php echo dateFormat('d-m-Y',$b['proyek_sech_awal']) ?></b></small>
-    </h2>
+  <?php
+  foreach ($bbc->result_array() as $i) :
+    ?>
+
+    <div class="col-md-12">
+      <div class="box box-primary">
+       <div class="box-header">
+         <h4> 
+          <p class="text-primary"><?php if($i['pekerja_jenis']=='kontraktor') {echo "Kontraktor"; } else {echo "Konsultan";} ?></p> 
+        </h4>
+      </div>
+
+      <div class="box-body box-profile">
+        <table class="table">
+
+          <tr>
+            <th>Bagian</th>
+            <td class="text-right"><?php echo $i['pekerja_jenis']; ?></td>
+          </tr>
+          <tr>
+            <th>Nama Direktur</th>
+            <td class="text-right"><?php echo $i['pekerja_nama_direktur']; ?></td>
+          </tr>
+          <tr>
+            <th>Telepon Direktur</th>
+            <td class="text-right"><?php echo $i['pekerja_tel_direktur']; ?></td>
+          </tr>
+          <tr>
+            <th>Nama Perusahaan</th>
+            <td class="text-right"><?php echo $i['pekerja_nama_perusahaan']; ?></td>
+          </tr>
+
+          <tr>
+            <th>Alamat Perusahaan</th>
+            <td class="text-right"><?php echo $i['pekerja_alamat_perusahaan']; ?></td>
+          </tr>
+
+          <tr>
+            <th>Telepon Kantor</th>
+            <td class="text-right"><?php echo $i['pekerja_tel_kantor']; ?></td>
+          </tr>
+
+        </table>
+      </div>
+    </div>
+  </div>
+
+<?php endforeach;?>
+
+
+
+<div class="col-md-12">
+  <div class="box box-primary">
+    <div class="box-header">
+     <h4 class="text-primary">Gallery</h4>
+   </div>
+
+   <div class="box-body box-profile">
+     <?php foreach ($foto->result_array() as $i) : ?>
+      <div class="col-sm-4">
+        <a class="btn" data-toggle="modal" data-target="#ModalView<?php echo $i['proyek_id'];?>"><img class="img-responsive" src="<?php echo base_url().'assets/images/'.$i['file_data'];?>" alt="Photo"></a>
+      </div>
+    <?php endforeach; ?>
   </div>
 </div>
+</div>
+<div class="col-md-12">
+  <div class="box box-primary">
+   <div class="box-header">
+    <h4 class="text-primary">Berkas Proyek</h4>
+  </div>
+  <div class="box-body box-profile">
+    <table class="table table-responsive table-hovered">
+      <tr>
+        <th>No</th>
+        <th>File</th>
+        <th>Aksi</th>
+      </tr>
+      <?php 
+      $no=0;
+      foreach ($file->result_array() as $i) : 
+        $no++;
+        ?>
+        <tr>
+          <td><?php echo $no; ?></td>
+          <td><?php echo $i['file_data']; ?></td>
+          <td>
+            <a href="<?php echo base_url()?>padmin/download/<?php echo $i['file_id'];?>">
+              <i class="fa fa-download"></i>
+            </a>
+            &nbsp;&nbsp;
+            <a class="btn" data-toggle="modal" data-target="#EditFile<?php echo $i['file_id'];?>"><i class="fa fa-edit"></i></a>
+          </td>
+        </tr>
+      <?php endforeach;  ?>
+    </table>
+  </div>
+</div>
+</div>
 
-<div class="row invoice-info">
-  <div class="col-sm-8 col-sm-offset-2">
+
+</div>
+
+<div class="col-md-6">
+
+  <div class="col-md-12">
     <div class="box box-primary">
-      <div class="box-body box-profile">
-        <img class="profile-user-img img-responsive img-circle" width="100px" height="100px" src="<?php echo base_url().'assets/images/'.$b['pn_foto'];?>" alt="User profile picture">
-        <h3 class="profile-username text-center"><?php echo $b['pn_nama']; ?></h3>
-        <p class="text-muted text-center"><?php echo $b['pn_email']; ?></p>
-        <ul class="list-group list-group-unbordered">
-          <li class="list-group-item">
-            <?php echo $b['pn_tel']; ?>
-          </li>
-          <li class="list-group-item">
-            <?php echo strtoupper($b['pn_bagian']); ?>
-          </li>
-        </ul>
-        <a href="#" class="btn btn-primary btn-block"><b>Bagian Penanggung Jawab</b></a>
-      </div>
+     <div class="box-header">
+      <h4 class="text-primary"> Penanggung Jawab </h4>
+    </div>
+    <div class="box-body box-profile">
+      <table class="table">
+
+        <tr>
+          <th>Nama Penanggung Jawab</th>
+          <td class="text-right"><?php echo $b['pn_nama'];  ?></td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td class="text-right"><?php echo $b['pn_email']; ?></td>
+        </tr>
+        <tr>
+          <th>Telepon</th>
+          <td class="text-right"><?php echo $b['pn_tel'];  ?></td>
+        </tr>
+        <tr>
+          <th>Nama Perusahaan</th>
+          <td class="text-right"><?php  echo strtoupper($b['pn_bagian']); ?></td>
+        </tr>
+
+
+      </table>
+
+
     </div>
   </div>
 </div>
 
-<div class="row invoice-info">
-
-  <div class="col-sm-6 invoice-col">
-    <strong>Proyek</strong>
-    <address>
-      <table class="table">
-        <tr>
-          <th>Tahun</th>
-          <td><?php echo $b['proyek_tahun']; ?></td>
-        </tr>
-        <tr>
-          <th>Nilai Kontrak</th>
-          <td><?php echo "Rp ".number_format($b['proyek_keuangan']); ?></td>
-        </tr>
-        <tr>
-          <th>Pagu</th>
-          <td><?php echo "Rp ".number_format($b['proyek_pagu']); ?></td>
-        </tr>
-        <tr>
-          <th>Rencana Kontrak</th>
-          <td><?php $b['proyek_sech_awal']; ?></td>
-        </tr>
-        <tr>
-          <th>Awal Kontrak</th>
-          <td><?php echo dateformat('d-m-Y',$b['proyek_awal_kontrak']) ?></td>
-        </tr>
-        <tr>
-          <th>Akhir Kontrak</th>
-          <td><?php echo dateformat('d-m-Y',$b['proyek_akhir_kontrak']) ?></td>
-        </tr>
-        <tr>
-          <th>Proyek Progress</th>
-          <td>
-            <?php
-
-            $pb_target=$b['pb_target'];
-            $pb_real=$b['pb_real'];
-            $pb_devisi=$b['pb_devisi'];
-            $pb_stat_proyek=$b['pb_stat_proyek'];
-            if($pb_target==0 || $pb_target<=70){
-              if($pb_devisi==0 || $pb_devisi>=(-7)){
-                echo "<label class='label bg-red'>".$pb_real."% (".$pb_stat_proyek.")</label>";
-              }
-              else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
-
-                echo "<label class='label bg-red'>".$pb_real."% (".$pb_stat_proyek.")</label>";
-              }
-              else {
-                echo "<label class='label bg-red'>".$pb_real."% (".$pb_stat_proyek.")</label>";
-              }
-            }
-            else if ($pb_target>70 && $pb_target<=100){
-              if($pb_devisi==0 || $pb_devisi>=(-4)){
-                echo "<label class='label bg-red'>".$pb_real."% (".$pb_stat_proyek.")</label>"; 
-              }
-              else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
-
-                echo "<label class='label bg-red'>".$pb_real."% (".$pb_stat_proyek.")</label>";                         
-              }
-              else {
-
-                echo "<label class='label bg-red'>".$pb_real."% (".$pb_stat_proyek.")</label>";
-              } 
-            }
-            else {
-              echo "";
-            }
-            ?>
-          </td>
-        </tr>
-      </table> 
-    </address>
-  </div>
-
-
-  <div class="col-sm-6 invoice-col">
-    <strong>Bidang</strong>
-    <address>
+<div class="col-md-12">
+  <div class="box box-primary">
+    <div class="box-header">
+      <small class="pull-right">Jadwal Proyek : <b><?php echo dateFormat('d-m-Y',$b['proyek_sech_awal']) ?></b></small>
+    </div>
+    <div class="box-body box-profile">
       <table class="table table-responsive">
         <tr>
           <th>Target</th>
@@ -188,170 +304,69 @@ $b=$data->row_array() ;
           <td><?php echo "Rp ".number_format($b['pb_sisa_anggaran']); ?></td>
         </tr>
       </table> 
-    </address>
-  </div>
 
-</div>
+      <div id="test" class="gmap3" style="width:500px;height: 300px;max-width: 500px;"></div>
+      <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+        <span><b><?php echo $b['koordinat_nama']; ?></b></span><br>
+        <?php echo $b['koordinat_alamat']; ?><br>
+        Progress proyek saat ini adalah
+        <?php
+        $pb_target=$b['pb_target'];
+        $pb_real=$b['pb_real'];
+        $pb_devisi=$b['pb_devisi'];
+        if($pb_target==0 || $pb_target<=70){
+          if($pb_devisi==0 || $pb_devisi>=(-7)){
+            echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>";
+          }
+          else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
 
-<div class="row invoice-info">
-  <?php
-  foreach ($bbc->result_array() as $i) :
-    ?>
-    <div class="col-sm-6 invoice-col">
-      <strong><?php if($i['pekerja_jenis']=='kontraktor') {echo "Kontraktor"; } else {echo "Konsultan";} ?></strong>
-      <address>
-        <table class="table">
- 
-          <tr>
-            <th>Bagian</th>
-            <td><?php echo $i['pekerja_jenis']; ?></td>
-          </tr>
-          <tr>
-            <th>Nama Direktur</th>
-            <td><?php echo $i['pekerja_nama_direktur']; ?></td>
-          </tr>
-          <tr>
-            <th>Telepon Direktur</th>
-            <td><?php echo $i['pekerja_tel_direktur']; ?></td>
-          </tr>
-          <tr>
-            <th>Nama Perusahaan</th>
-            <td><?php echo $i['pekerja_nama_perusahaan']; ?></td>
-          </tr>
-
-          <tr>
-            <th>Alamat Perusahaan</th>
-            <td><?php echo $i['pekerja_alamat_perusahaan']; ?></td>
-          </tr>
-
-          <tr>
-            <th>Telepon Kantor</th>
-            <td><?php echo $i['pekerja_tel_kantor']; ?></td>
-          </tr>
-
-        </table>
-      </address>
-    </div>
-  <?php endforeach;?>
-
-
-</div>
-
-<div class="row">
-  <div class="col-xs-12 table-responsive">
-    <div id="test" class="gmap3"></div>
-    <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-      <span><b><?php echo $b['koordinat_nama']; ?></b></span><br>
-      <?php echo $b['koordinat_alamat']; ?><br>
-      Progress proyek saat ini adalah
-      <?php
-      $pb_target=$b['pb_target'];
-      $pb_real=$b['pb_real'];
-      $pb_devisi=$b['pb_devisi'];
-      if($pb_target==0 || $pb_target<=70){
-        if($pb_devisi==0 || $pb_devisi>=(-7)){
-          echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>";
+            echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";
+          }
+          else {
+            echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+          }
         }
-        else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
+        else if ($pb_target>70 && $pb_target<=100){
+          if($pb_devisi==0 || $pb_devisi>=(-4)){
+            echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>"; 
+          }
+          else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
 
-          echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";
+            echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";                         
+          }
+          else {
+
+            echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+          } 
         }
         else {
-          echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+          echo "a";
         }
-      }
-      else if ($pb_target>70 && $pb_target<=100){
-        if($pb_devisi==0 || $pb_devisi>=(-4)){
-          echo "<label class='label bg-red'>".$pb_real."% (Wajar)</label>"; 
-        }
-        else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
-
-          echo "<label class='label bg-red'>".$pb_real."% (Terlambat)</label>";                         
-        }
-        else {
-
-          echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
-        } 
-      }
-      else {
-        echo "a";
-      }
-      ?>
-    </p>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-12 table-responsive" >
-    <div class="post">
-      <div class="row margin-bottom">
-        <?php foreach ($foto->result_array() as $i) : ?>
-          <div class="col-sm-3 well no-shadow">
-            <a class="btn" data-toggle="modal" data-target="#ModalView<?php echo $i['proyek_id'];?>"><img class="img-responsive" src="<?php echo base_url().'assets/images/'.$i['file_data'];?>" alt="Photo"></a>
-          </div>
-        <?php endforeach; ?>
-      </div>
+        ?>
+      </p>
     </div>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-xs-12" >
-    <div class="post">
-      <div class="row margin-bottom">
-
-        <div class="col-md-12">
-          <table class="table table-responsive table-hovered">
-            <tr>
-              <th>No</th>
-              <th>File</th>
-              <th>Aksi</th>
-            </tr>
-            <?php 
-            $no=0;
-            foreach ($file->result_array() as $i) : 
-              $no++;
-              ?>
-              <tr>
-                <td><?php echo $no; ?></td>
-                <td><?php echo $i['file_data']; ?></td>
-                <td>
-                  <a href="<?php echo base_url()?>padmin/download/<?php echo $i['file_id'];?>">
-                    <i class="fa fa-download"></i>
-                  </a>
-                  &nbsp;&nbsp;
-                  <a class="btn" data-toggle="modal" data-target="#EditFile<?php echo $i['file_id'];?>"><i class="fa fa-edit"></i></a>
-                </td>
-              </tr>
-            <?php endforeach;
-
-            ?>
-
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="col-md-12">
+  <div class="box box-primary">
+    <div class="box-body box-profile">
+     <div id="realtarget" style="height: 500px"></div>
+   </div>
+ </div>
 </div>
 
-<div class="row">
-  <div class="col-xs-12 table-responsive" >
-    <div class="col-md-12">
-      <div class="row margin-bottom">
-        <div id="realtarget" style="height: 500px"></div>
-      </div>
-    </div>
-    <div class="col-md-12">
-      <div class="row margin-bottom">
-        <div id="curve_chart" style="height: 500px"></div>
-      </div>
-    </div>
-  </div>
+<div class="col-md-12">
+  <div class="box box-primary">
+    <div class="box-body box-profile">
+     <div id="curve_chart" style="height: 500px"></div>
+   </div>
+ </div>
+</div>
+</div>
 </div>
 
-</section>
-<div class="clearfix"></div>
-</div>
+
 
 
 

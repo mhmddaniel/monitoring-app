@@ -1,111 +1,134 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/plugins/toast/jquery.toast.min.css'?>"/>
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>
-			Pelaksana
-			<small></small>
-		</h1>
-		<ol class="breadcrumb">
-			<li><a href="<?php echo base_url()?>padmin"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="<?php echo base_url() ?>padmin/proyek">Proyek</a></li>
-			<li class="active">Pelaksana</li>
-		</ol>
-	</section>
-
-	<section class="content">
 		<div class="row">
-			<div class="col-md-12">
-
-				<div class="box">
-					
-					<?php if($_SESSION['level']=='bidang'){ ?>
-					<div class="box-header">
-						<a class="btn btn-success btn-flat " href="<?php echo base_url().'padmin/tambah_penanggung_jawab'?>"><span class="fa fa-plus"></span> Tambah Pelaksana</a>
-					</div>
-
-					<?php } else {} ?>
-					<div class="box-body">
-						<table id="example1" class="table table-striped" style="font-size:13px;">
-							<thead>
-								<tr>
-									<th>Proyek</th>
-									<th>Posisi</th>
-									<th>Nama Direktur</th>
-									<th>Telepon Direktur</th>
-									<th>Nama Perusahaan</th>
-									<th>Telepon kantor</th>
-									<th style="text-align:right;">Aksi</th>
-								</tr>
-							</thead>
-							<tbody>
-								<?php
-								$no=0;
-								foreach ($data->result_array() as $i) :
-									$no++;
-									$pekerja_id=$i['pekerja_id'];
-									$proyek_nama=$i['proyek_nama'];
-									$pekerja_jenis=$i['pekerja_jenis'];
-									$pekerja_nama_direktur=$i['pekerja_nama_direktur'];
-									$pekerja_tel_direktur=$i['pekerja_tel_direktur'];
-									$pekerja_nama_perusahaan=$i['pekerja_nama_perusahaan'];
-									$pekerja_tel_kantor=$i['pekerja_tel_kantor'];
-
-									?>
-									<tr>
-										<td><?php echo $proyek_nama;?></td>
-										<td><?php echo $pekerja_jenis;?></td>
-										<td><?php echo $pekerja_nama_direktur;?></td>
-										<td><?php echo $pekerja_tel_direktur;?></td>
-										<td><?php echo $pekerja_nama_perusahaan;?></td>
-										<td><?php echo $pekerja_tel_kantor;?></td>
-										<td style="text-align:right;">
-											<div class="btn-group">
-												<button type="button" class="btn btn-success btn-flat">Action</button>
-												<button type="button" class="btn btn-success btn-flat dropdown-toggle" data-toggle="dropdown">
-													<span class="caret"></span>
-													<span class="sr-only">Toggle Dropdown</span>
-												</button>
-												<ul class="dropdown-menu" role="menu">
-													<li><a href="<?php echo base_url().'padmin/get_edit_pn/'.$pekerja_id;?>"><span class="fa fa-pencil"></span>Edit</a></li>
-													<li><a data-toggle="modal" data-target="#ModalHapus<?php echo $pekerja_id;?>"><span class="fa fa-trash"></span>Hapus</a></li>
-												</ul>
-											</div>
-										</td>
-									</tr>
-								<?php endforeach;?>
-							</tbody>
-						</table>
-					</div>
+			<?php if($_SESSION['level']=='bidang'){ ?>
+				<div class="col-md-12 ">
+					<a class="btn btn-success btn-flat pull-right" href="<?php echo base_url().'padmin/tambah_penanggung_jawab'?>"><span class="fa fa-plus"></span> Tambah Pelaksana</a>
 				</div>
-			</div>
+			<?php } else {} ?>
 		</div>
 	</section>
-</div>
 
-<?php foreach ($data->result_array() as $i) :
-$pekerja_id=$i['pekerja_id'];
-?>
-<div class="modal fade" id="ModalHapus<?php echo $pekerja_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
-				<h4 class="modal-title" id="myModalLabel">Hapus Pelaksana</h4>
-			</div>
-			<form class="form-horizontal" action="<?php echo base_url().'padmin/delete_pn'?>" method="post" enctype="multipart/form-data">
-				<div class="modal-body">       
-					<input type="hidden" name="kode" value="<?php echo $pekerja_id;?>"/> 
-					<p>Apakah Anda yakin mau menghapus data ini?</p>
+	<div class="row" style="margin-top: 50px;">
+		<div class="col-md-12">
 
+
+
+
+
+
+
+			<?php
+			$no=0;
+			foreach ($data->result_array() as $i) :
+				$no++;
+				$pekerja_id=$i['pekerja_id'];
+				$proyek_nama=$i['proyek_nama'];
+				$pekerja_jenis=$i['pekerja_jenis'];
+				$pekerja_nama_direktur=$i['pekerja_nama_direktur'];
+				$pekerja_tel_direktur=$i['pekerja_tel_direktur'];
+				$pekerja_nama_perusahaan=$i['pekerja_nama_perusahaan'];
+				$pekerja_tel_kantor=$i['pekerja_tel_kantor'];
+
+				?>
+
+				<div class="col-md-6">
+					<div class="box">
+
+						<div class="box-body">
+							<div class="row">
+								<div class="col-md-3">
+									<img class="img-responsive" src="<?php echo base_url().'assets/images/'.$i['pn_foto'];?>" alt="Photo" style="border:1px solid; border-radius:90px;height:100px;width:100px;margin:0 auto;">
+								</div>
+								<!-- /.col -->
+								<div class="col-md-9">
+									<div class="col-md-8">
+										<h4><?php echo $pekerja_nama_direktur;?></h4>
+									</div>
+									<div class="col-md-4">
+										<div class="box-tools pull-right">
+
+
+											<a href="<?php echo base_url().'padmin/get_edit_pn/'.$pekerja_id;?>" class="btn btn-box-tool" ><i class="fa fa-pencil text-info"></i>
+											</a>
+											<a data-toggle="modal" data-target="#ModalHapus<?php echo $pekerja_id;?>" class="btn btn-box-tool"><i class="fa fa-times text-danger"></i></a>
+
+
+
+
+										</div>
+									</div>
+									<div class="col-md-12">
+
+										<?php echo $pekerja_jenis;?>
+									</div>
+									<div class="col-md-8">
+
+										<?php echo $pekerja_tel_direktur;?>
+									</div>
+									<div class="col-md-4">
+
+										<div class="box-tools pull-right">
+											<?php echo $proyek_nama;?>
+
+
+										</div>
+									</div>
+								</div>
+
+							</div>
+							<!-- /.row -->
+						</div>
+						<div class="box-footer">
+							<div class="row">
+								<div class="col-md-9 pull-right">
+									<div class="col-md-9">
+										<span class="description-percentage text-green"><?php echo $pekerja_nama_perusahaan;?> - <?php echo $pekerja_tel_kantor;?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary btn-flat" id="simpan">Hapus</button>
-				</div>
-			</form>
+			<?php endforeach;?>
 		</div>
 	</div>
 </div>
+
+<?php foreach ($data->result_array() as $i) :
+	$pekerja_id=$i['pekerja_id'];
+	$pekerja_nama=$i['pekerja_nama_direktur'];
+	?>
+	<div class="modal fade" id="ModalHapus<?php echo $pekerja_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+		<div class="modal-dialog modal-sm"  role="document">
+			<div class="modal-content text-center" >
+
+				<form class="form-horizontal" action="<?php echo base_url().'padmin/delete_pn'?>" method="post" enctype="multipart/form-data">
+					<div class="modal-body container-fluid text-center" >   
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>    
+						<div class="col-md-12">
+							<input type="hidden" name="kode" value="<?php echo $pekerja_id;?>"/> 
+							<h3 class="text-center"><?php echo $pekerja_nama; ?></h3>
+						</div>  
+						<div class="col-md-12">
+							<div class="iconcolor">
+								<i class="fa fa-warning" style="font-size:128px;color:red"></i>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<br>
+							Apakah Anda yakin ingin menghapus data ini ?
+						</div>
+						<div class="col-md-12"><br>
+							<button type="submit" class="btn btn-primary btn-round col-md-12" id="simpan">Hapus</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 <?php endforeach;?>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -137,43 +160,43 @@ $pekerja_id=$i['pekerja_id'];
 			bgColor: '#FF4859'
 		});
 	</script>
-	
-<?php elseif($this->session->flashdata('msg')=='success'):?>
-	<script type="text/javascript">
-		$.toast({
-			heading: 'Success',
-			text: "Berita Berhasil disimpan ke database.",
-			showHideTransition: 'slide',
-			icon: 'success',
-			hideAfter: false,
-			position: 'bottom-right',
-			bgColor: '#7EC857'
-		});
-	</script>
-<?php elseif($this->session->flashdata('msg')=='info'):?>
-	<script type="text/javascript">
-		$.toast({
-			heading: 'Info',
-			text: "Berita berhasil di update",
-			showHideTransition: 'slide',
-			icon: 'info',
-			hideAfter: false,
-			position: 'bottom-right',
-			bgColor: '#00C9E6'
-		});
-	</script>
-<?php elseif($this->session->flashdata('msg')=='success-hapus'):?>
-	<script type="text/javascript">
-		$.toast({
-			heading: 'Success',
-			text: "Berita Berhasil dihapus.",
-			showHideTransition: 'slide',
-			icon: 'success',
-			hideAfter: false,
-			position: 'bottom-right',
-			bgColor: '#7EC857'
-		});
-	</script>
-<?php else:?>
 
-<?php endif;?>
+	<?php elseif($this->session->flashdata('msg')=='success'):?>
+		<script type="text/javascript">
+			$.toast({
+				heading: 'Success',
+				text: "Berita Berhasil disimpan ke database.",
+				showHideTransition: 'slide',
+				icon: 'success',
+				hideAfter: false,
+				position: 'bottom-right',
+				bgColor: '#7EC857'
+			});
+		</script>
+		<?php elseif($this->session->flashdata('msg')=='info'):?>
+			<script type="text/javascript">
+				$.toast({
+					heading: 'Info',
+					text: "Berita berhasil di update",
+					showHideTransition: 'slide',
+					icon: 'info',
+					hideAfter: false,
+					position: 'bottom-right',
+					bgColor: '#00C9E6'
+				});
+			</script>
+			<?php elseif($this->session->flashdata('msg')=='success-hapus'):?>
+				<script type="text/javascript">
+					$.toast({
+						heading: 'Success',
+						text: "Berita Berhasil dihapus.",
+						showHideTransition: 'slide',
+						icon: 'success',
+						hideAfter: false,
+						position: 'bottom-right',
+						bgColor: '#7EC857'
+					});
+				</script>
+				<?php else:?>
+
+				<?php endif;?>

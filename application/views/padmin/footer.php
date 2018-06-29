@@ -1,9 +1,38 @@
- <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Perdana Karya Palembang </b>All rights
-    reserved.
+
+<div class="modal fade" id="ModalHapus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+  <div class="modal-dialog modal-sm"  role="document">
+    <div class="modal-content" >
+
+      <form class="form-horizontal" action="<?php echo base_url().'loginadmin/logout'?>" method="post" enctype="multipart/form-data">
+        <div class="modal-body container-fluid text-center" >   
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>    
+
+          <div class="col-md-12">
+            <div class="iconcolor">
+              <i class="fa fa-power-off " style="font-size:150px"></i>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <br>
+            Apakah Anda yakin ingin Keluar ?
+          </div>
+          <div class="col-md-12"><br>
+            <button type="submit" class="btn btn-danger btn-round col-md-12" id="simpan">Keluar</button>
+          </div>
+        </div>
+      </form>
     </div>
-    <strong>Copyright &copy; 2018 
+  </div>
+</div>
+
+
+<footer class="main-footer">
+  <div class="pull-right hidden-xs">
+    <b>Perdana Karya Palembang </b>All rights
+    reserved.
+  </div>
+  <strong>Copyright &copy; 2018 
   </footer>
 
 
@@ -17,7 +46,7 @@
 -->
 <?php
 if(isset($xc)){  } else { ?>
-<script src="<?php echo base_url()?>assets/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="<?php echo base_url()?>assets/bower_components/jquery/dist/jquery.min.js"></script>
 <?php } ?>
 
 <!-- Bootstrap 3.3.6 -->
@@ -95,21 +124,21 @@ if(isset($xc)){  } else { ?>
     $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
     //Date range as a button
     $('#daterange-btn').daterangepicker(
-      {
-        ranges   : {
-          'Today'       : [moment(), moment()],
-          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        },
-        startDate: moment().subtract(29, 'days'),
-        endDate  : moment()
+    {
+      ranges   : {
+        'Today'       : [moment(), moment()],
+        'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+        'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+        'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
       },
-      function (start, end) {
-        $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-      }
+      startDate: moment().subtract(29, 'days'),
+      endDate  : moment()
+    },
+    function (start, end) {
+      $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+    }
     )
 
     //Date picker
