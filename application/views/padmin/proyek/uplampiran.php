@@ -1,4 +1,124 @@
 <?php $b=$data->row_array(); ?>
+
+<style type="text/css">
+body {
+	font-family: sans-serif;
+	background-color: #eeeeee;
+}
+
+.file-upload {
+	background-color: #ffffff;
+	width: 600px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+.file-upload-btn {
+	width: 100%;
+	margin: 0;
+	color: #fff;
+	background: #1FB264;
+	border: none;
+	padding: 10px;
+	border-radius: 4px;
+	border-bottom: 4px solid #15824B;
+	transition: all .2s ease;
+	outline: none;
+	text-transform: uppercase;
+	font-weight: 700;
+}
+
+.file-upload-btn:hover {
+	background: #1AA059;
+	color: #ffffff;
+	transition: all .2s ease;
+	cursor: pointer;
+}
+
+.file-upload-btn:active {
+	border: 0;
+	transition: all .2s ease;
+}
+
+.file-upload-content {
+	display: none;
+	text-align: center;
+}
+
+.file-upload-input {
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	outline: none;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.image-upload-wrap {
+	margin-top: 10px;
+	border: 4px dashed #1FB264;
+	position: relative;
+	margin-bottom: 50px;
+}
+
+.image-dropping,
+.image-upload-wrap:hover {
+	background-color: #1FB264;
+	border: 4px dashed #ffffff;
+}
+
+.image-title-wrap {
+	padding: 0 15px 15px 15px;
+	color: #222;
+}
+
+.drag-text {
+	text-align: center;
+}
+
+.drag-text h3 {
+	font-weight: 100;
+	text-transform: uppercase;
+	color: #15824B;
+	padding: 60px 0;
+}
+
+.file-upload-image {
+	max-height: 200px;
+	max-width: 200px;
+	margin: auto;
+	padding: 20px;
+}
+
+.remove-image {
+	width: 200px;
+	margin: 0;
+	color: #fff;
+	background: #cd4535;
+	border: none;
+	padding: 10px;
+	border-radius: 4px;
+	border-bottom: 4px solid #b02818;
+	transition: all .2s ease;
+	outline: none;
+	text-transform: uppercase;
+	font-weight: 700;
+}
+
+.remove-image:hover {
+	background: #c13b2a;
+	color: #ffffff;
+	transition: all .2s ease;
+	cursor: pointer;
+}
+
+.remove-image:active {
+	border: 0;
+	transition: all .2s ease;
+}
+</style>
 <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/Ionicons/css/ionicons.min.css">
@@ -25,36 +145,47 @@
 	<section class="content">
 
 		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
+
+			<div class="col-md-12">
 
 				<div class="box box-warning">
 					<div class="box-header with-border">
 						<h3 class="box-title">Foto Proyek</h3>
 					</div>
-					<div class="box-body">
-						<div class="row">
-							<form action="<?php echo base_url()?>padmin/save_lampiran_foto" method="POST" enctype="multipart/form-data" >
-								<div class="form-group col-md-12">
-									<label>Foto</label>
-									<input type="hidden" name="proyek_id" value="<?php echo $b['proyek_id']; ?>">
-									<input type="file"  name="filefoto" class="form-control btn-success">
-									<input type="hidden"  name="jenis" value="foto" class="form-control">		
+					<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+					<div class="file-upload">
+						<form action="<?php echo base_url()?>padmin/save_lampiran_foto" method="POST" enctype="multipart/form-data" >
+
+							<div class="image-upload-wrap">
+								<input type="hidden" name="proyek_id" value="<?php echo $b['proyek_id']; ?>">
+								<input type="hidden"  name="jenis"  value="foto" class="form-control">	
+								<input class="file-upload-input" type='file'  name="filefoto" onchange="readURL(this);" accept="image/*" />
+								<div class="drag-text">
+									<h3>Drag and drop a file or select add Image</h3>
 								</div>
-								<div class="form-group col-md-12">
-									<div class="form-group pull-right">
-										<button type="submit" class="btn btn-primary btn-flat pull-right"><span class="fa fa-pencil"></span> Publish</button>
-									</div>
+							</div>
+
+							<div class="file-upload-content">
+								<img class="file-upload-image" src="#" alt="your image" />
+								<div class="image-title-wrap">
+									<button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
 								</div>
-							</form>
-						</div>
+
+							</div>
+
+							<input type="submit" class="file-upload-btn" value="Simpan">
+
+						</form>
+
 					</div>
-				</div> 
+				</div>
+			</div>
 
 
-
+			<div class="col-md-12">
 				<div class="box box-warning">
 					<div class="box-header with-border">
-						<h3 class="box-title">Lampiran Proyek</h3>
+						<h3 class="box-title">Dokumen Proyek</h3>
 					</div>
 					<div class="box-body">
 						<div class="row">
@@ -62,10 +193,9 @@
 								<div class="form-group col-md-12">
 									<label>LAMPIRAN</label>
 									<input type="hidden" name="proyek_id" value="<?php echo $b['proyek_id']; ?>">
-									<input type="file"  name="fileat" class="form-control btn-success">
 									<input type="hidden"  name="jenis" value="file" class="form-control">
+									<input type="file"  name="fileat" class="form-control btn-success">
 								</div>
-
 								<div class="form-group col-md-12">
 									<div class="form-group pull-right">
 										<button type="submit" class="btn btn-primary btn-flat pull-right"><span class="fa fa-pencil"></span> Publish</button>
@@ -81,54 +211,216 @@
 	</section>
 </div>
 
-<script src="<?php echo base_url() ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="<?php echo base_url() ?>assets/bower_components/ckeditor/ckeditor.js"></script>
 
-<script>
-	$(function () {
-		CKEDITOR.replace('ckeditor')
-		$('.textarea').wysihtml5()
-	})
-</script>
-
-
-<script src="<?php echo base_url() ?>assets/map/jquery-1.9.1.min.js"></script>
-<script src="<?php echo base_url() ?>assets/map/jquery.addressPickerByGiro.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAogXD-AHrsmnWinZIyhRORJ84bgLwDPpg&sensor=false&language=id"></script>
-<link href="<?php echo base_url() ?>assets/map/jquery.addressPickerByGiro.css" rel="stylesheet" media="screen">
-<script>
-	$('.inputAddress').addressPickerByGiro({
-		distanceWidget: true,
-		boundElements: {
-			'latitude': '.latitude',
-			'longitude': '.longitude',
-			'formatted_address': '.formatted_address'
-		}
-	});
-</script>
 </body>
 </html>
 
+<script type="text/javascript">
+	function readURL(input) {
+		if (input.files && input.files[0]) {
 
+			var reader = new FileReader();
 
-<script><!--
+			reader.onload = function(e) {
+				$('.image-upload-wrap').hide();
 
-	function startCalc(){
-		interval = setInterval("calc()",1);}
-		function calc(){
-			one = document.autoSumForm.dskontrak.value;
-			two = document.autoSumForm.dsadmproyek.value;
-			document.autoSumForm.totalds.value = (one*1) + (two*1) ;
+				$('.file-upload-image').attr('src', e.target.result);
+				$('.file-upload-content').show();
 
-			pbtarget = document.autoSumForm.pbtarget.value;
-			pbreal = document.autoSumForm.pbreal.value;
-			document.autoSumForm.pbdevisi.value = (pbreal*1) - (pbtarget*1)  ;
+				$('.image-title').html(input.files[0].name);
+			};
 
-			three = document.autoSumForm.totalds.value;
-			four = document.autoSumForm.pagu.value;
-			document.autoSumForm.sisaanggran.value = (four*1) - (three*1)   ;
+			reader.readAsDataURL(input.files[0]);
 
+		} else {
+			removeUpload();
 		}
-		function stopCalc(){
-			clearInterval(interval);}
-		</script>
+	}
+
+	function removeUpload() {
+		$('.file-upload-input').replaceWith($('.file-upload-input').clone());
+		$('.file-upload-content').hide();
+		$('.image-upload-wrap').show();
+	}
+	$('.image-upload-wrap').bind('dragover', function () {
+		$('.image-upload-wrap').addClass('image-dropping');
+	});
+	$('.image-upload-wrap').bind('dragleave', function () {
+		$('.image-upload-wrap').removeClass('image-dropping');
+	});
+
+</script>
+
+
+
+
+
+
+
+<!--
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+				<link href="<?php echo base_url()?>assets/uploadcss/file/dist/css/jquery.dm-uploader.min.css" rel="stylesheet">
+				<link href="<?php echo base_url()?>assets/uploadcss/file/demo/styles.css" rel="stylesheet">
+
+
+
+				<main role="main" class="container">
+
+
+					<div class="row">
+						<div class="col-md-6 col-sm-12">
+
+							 Our markup, the important part here! 
+							<div id="drag-and-drop-zone" class="dm-uploader p-5">
+								<h3 class="mb-5 mt-5 text-muted">Drag &amp; drop files here</h3>
+
+								<div class="btn btn-primary btn-block mb-5">
+									<span>Open the file Browser</span>
+
+									<input type="hidden" id="proyek_id" name="proyek_id" value="<?php echo $b['proyek_id']; ?>">
+									<input type="hidden"  id="jenis" name="jenis" value="file" class="form-control">
+									<input type="file" id="fileat" name="fileat" title='Click to add Files' />
+								</div>
+							</div>
+
+						</div>
+						<div class="col-md-6 col-sm-12">
+							<div class="card h-100">
+								<div class="card-header">
+									File List
+								</div>
+
+								<ul class="list-unstyled p-2 d-flex flex-column col" id="files">
+									<li class="text-muted text-center empty">No files uploaded.</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+
+
+					<div class="row">
+						<div class="col-12">
+							<div class="card h-100">
+								<div class="card-header">
+									Debug Messages
+								</div>
+
+								<ul class="list-group list-group-flush" id="debug">
+									<li class="list-group-item text-muted empty">Loading plugin....</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+				</main>
+
+
+				<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+				<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+
+				<script src="<?php echo base_url()?>assets/uploadcss/file/dist/js/jquery.dm-uploader.min.js"></script>
+				<script src="<?php echo base_url()?>assets/uploadcss/file/demo/demo-ui.js"></script>
+
+			
+				<script type="text/html" id="files-template">
+					<li class="media">
+						<div class="media-body mb-1">
+							<p class="mb-2">
+								<strong>%%filename%%</strong> - Status: <span class="text-muted">Waiting</span>
+							</p>
+							<div class="progress mb-2">
+								<div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" 
+								role="progressbar"
+								style="width: 0%" 
+								aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+							</div>
+						</div>
+						<hr class="mt-1 mb-1" />
+					</div>
+				</li>
+			</script>
+
+			
+			<script type="text/html" id="debug-template">
+				<li class="list-group-item text-%%color%%"><strong>%%date%%</strong>: %%message%%</li>
+			</script>
+
+
+			<script type="text/javascript">
+				$(function(){
+  /*
+   * For the sake keeping the code clean and the examples simple this file
+   * contains only the plugin configuration & callbacks.
+   * 
+   * UI functions ui_* can be located in: demo-ui.js
+   */
+  $('#drag-and-drop-zone').dmUploader({ //
+  	url: '<?php echo base_url()?>assets/uploadcss/file/demo/backend/upload.php',
+    maxFileSize: 3000000, // 3 Megs 
+    onDragEnter: function(){
+      // Happens when dragging something over the DnD area
+      this.addClass('active');
+  },
+  onDragLeave: function(){
+      // Happens when dragging something OUT of the DnD area
+      this.removeClass('active');
+  },
+  onInit: function(){
+      // Plugin is ready to use
+      ui_add_log('Penguin initialized :)', 'info');
+  },
+  onComplete: function(){
+      // All files in the queue are processed (success or error)
+      ui_add_log('All pending tranfers finished');
+  },
+  onNewFile: function(id, file,proyek_id,jenis){
+      // When a new file is added using the file selector or the DnD area
+      var proyek_id = document.getElementById('proyek_id').value;
+      var jenis = document.getElementById('jenis').value;
+      var fileat = document.getElementById('fileat').value;
+      var newname = fileat.replace(/^C:\\fakepath\\/, "");
+      ui_add_log('New file added #' + id + newname + proyek_id + jenis);
+      ui_multi_add_file(id, file,proyek_id,jenis);
+  },
+  onBeforeUpload: function(id){
+      // about tho start uploading a file
+      ui_add_log('Starting the upload of #' + id);
+      ui_multi_update_file_status(id, 'uploading', 'Uploading...');
+      ui_multi_update_file_progress(id, 0, '', true);
+  },
+  onUploadCanceled: function(id) {
+      // Happens when a file is directly canceled by the user.
+      ui_multi_update_file_status(id, 'warning', 'Canceled by User');
+      ui_multi_update_file_progress(id, 0, 'warning', false);
+  },
+  onUploadProgress: function(id, percent){
+      // Updating file progress
+      ui_multi_update_file_progress(id, percent);
+  },
+  onUploadSuccess: function(id, data){
+      // A file was successfully uploaded
+      ui_add_log('Server Response for file #' + id + ': ' + JSON.stringify(data));
+      ui_add_log('Upload of file #' + id + ' COMPLETED', 'success');
+      ui_multi_update_file_status(id, 'success', 'Upload Complete');
+      ui_multi_update_file_progress(id, 100, 'success', false);
+  },
+  onUploadError: function(id, xhr, status, message){
+  	ui_multi_update_file_status(id, 'danger', message);
+  	ui_multi_update_file_progress(id, 0, 'danger', false);  
+  },
+  onFallbackMode: function(){
+      // When the browser doesn't support this plugin :(
+      ui_add_log('Plugin cant be used here, running Fallback callback', 'danger');
+  },
+  onFileSizeError: function(file){
+  	ui_add_log('File \'' + file.name + '\' cannot be added: size excess limit', 'danger');
+  }
+});
+});
+
+</script>
+-->

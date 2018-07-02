@@ -20,7 +20,7 @@ class Padmin extends CI_Controller{
 			$x['diffdateplus']=$this->m_padmin->diffdateplus();
 			$x['diffdatemin']=$this->m_padmin->diffdatemin();
 			$x['countselesai']=$this->m_padmin->countselesai();
-            $x['data']=$this->m_padmin->get_all_proyek();
+			$x['data']=$this->m_padmin->get_all_proyek();
 		}
 		else {
 			$bagian=$_SESSION['bagian'];
@@ -33,7 +33,7 @@ class Padmin extends CI_Controller{
 			$x['diffdateplus']=$this->m_padmin->diffdateplus_by_kode($bagian);
 			$x['diffdatemin']=$this->m_padmin->diffdatemin_by_kode($bagian);
 			$x['countselesai']=$this->m_padmin->countselesai_by_kode($bagian);
-            $x['data']=$this->m_padmin->get_all_proyek_by_bagian($bagian);
+			$x['data']=$this->m_padmin->get_all_proyek_by_bagian($bagian);
 		}
 		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');
@@ -71,6 +71,15 @@ class Padmin extends CI_Controller{
 		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');
 		$this->load->view('padmin/proyek/proyek_bidang',$x);
+		$this->load->view('padmin/footer');
+	}
+	public function gallery(){
+		$y['title']='Gallery';
+		$kode=$this->uri->segment(2);
+		$x['data']=$this->m_padmin->get_all_gallery($kode);
+		$this->load->view('padmin/header',$y);
+		$this->load->view('padmin/sidebar');
+		$this->load->view('padmin/proyek/gallery',$x);
 		$this->load->view('padmin/footer');
 	}
 
@@ -126,12 +135,18 @@ class Padmin extends CI_Controller{
 
 	public function uplampiran(){
 		$y['title']='Data User';
+		$z['xc']='cc';
 		$kode=$this->uri->segment(3);
 		$x['data']=$this->m_padmin->get_proyek_bidang_by_kode($kode);
 		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');
 		$this->load->view('padmin/proyek/uplampiran',$x);
-		$this->load->view('padmin/footer');
+		$this->load->view('padmin/footer',$z);
+	}
+
+
+	public function tes(){
+		$this->load->view('padmin/proyek/tes');
 	}
 
 	public function download(){

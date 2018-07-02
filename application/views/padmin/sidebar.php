@@ -34,7 +34,7 @@
             <li class="active"><a href="<?php echo base_url() ?>padmin/proyek/"><i class="fa fa-circle-o"></i> Proyek</a></li>
 
             <?php if($_SESSION['level']=='bidang' ){ ?>
-              <li class="active"><a href="<?php echo base_url() ?>padmin/penanggung_jawab/"><i class="fa fa-circle-o"></i> Penanggung Jawab</a></li>
+              <li class="active"><a href="<?php echo base_url() ?>padmin/penanggung_jawab/"><i class="fa fa-circle-o"></i> Pelaksana</a></li>
             <?php } else {} ?>
           </ul>
         </li>

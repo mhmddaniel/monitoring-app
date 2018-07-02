@@ -15,6 +15,10 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("SELECT * FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id inner join penanggung_jawab on proyek.proyek_id=penanggung_jawab.proyek_id inner join koordinat on proyek.proyek_koordinat_id=koordinat.koordinat_id where proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
 		return $hsl;
 	}
+	function get_all_gallery($kode){
+		$hsl=$this->db->query("SELECT * FROM file where file_jenis='foto' && proyek_id='$kode'");
+		return $hsl;
+	}
 	function get_all_proyek_by_bagian($bagian){
 		$hsl=$this->db->query("SELECT * FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id inner join penanggung_jawab on proyek.proyek_id=penanggung_jawab.proyek_id inner join koordinat on proyek.proyek_koordinat_id=koordinat.koordinat_id  where proyek.proyek_bidang='$bagian' AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
 		return $hsl;
@@ -356,7 +360,6 @@ class M_padmin extends CI_Model{
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
 		$this->db->join('penanggung_jawab d','a.proyek_id=d.proyek_id','inner');
 		$this->db->where('a.proyek_id',$kode);
-		$this->db->order_by('b.pb_last_update', 'DESC');
 		$hsl=$this->db->get();
 		return $hsl;
 	}
@@ -376,7 +379,7 @@ class M_padmin extends CI_Model{
 	}
 
 	function get_data_foto($kode){
-		$hsl=$this->db->query("SELECT * from file where proyek_id='$kode' && file_jenis='foto'");
+		$hsl=$this->db->query("SELECT * from file where proyek_id='$kode' && file_jenis='foto' limit 6");
 		return $hsl;
 	}
 
@@ -392,7 +395,6 @@ class M_padmin extends CI_Model{
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
 		$this->db->join('penanggung_jawab d','a.proyek_id=d.proyek_id','inner');
 		$this->db->where('a.proyek_id',$kode);
-		$this->db->order_by('b.pb_last_update', 'DESC');
 		$hsl=$this->db->get();
 		return $hsl;
 	}

@@ -210,6 +210,12 @@ $b=$data->row_array() ;
         <a class="btn" data-toggle="modal" data-target="#ModalView<?php echo $i['proyek_id'];?>"><img class="img-responsive" src="<?php echo base_url().'assets/images/'.$i['file_data'];?>" alt="Photo"></a>
       </div>
     <?php endforeach; ?>
+    <div class="row">
+
+      <div class="col-md-6 col-md-offset-3">
+        <a href="<?php echo base_url() ?>gallery/<?php echo $b['proyek_id'];?>" class="btn btn-primary text-center form-control" >View More</a>
+      </div>
+    </div>
   </div>
 </div>
 </div>
