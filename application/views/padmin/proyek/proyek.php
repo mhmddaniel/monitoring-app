@@ -231,7 +231,7 @@
                     </div>
                     <div class="tab-pane" id="tab_2">
                         <div id="test" class="gmap3" ></div>
-                        <div id="legend"><h4>Legend</h4></div>
+                        <div id="legend" c><h4>Legend</h4></div>
                     </div>
                 </div>
             </div>
@@ -276,51 +276,6 @@
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyAogXD-AHrsmnWinZIyhRORJ84bgLwDPpg"></script>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-        <?php
-        $num = 0;
-        foreach ($data->result_array() as $var) :
-        ?>
-        var data = google.visualization.arrayToDataTable([
-            ['Tanggal', 'Real', 'Target'],
-            [null, 0, 0],
-            ['<?php echo $var['tanggal']; ?>',  <?php echo $var['pb_real']; ?>, <?php echo $var['pb_target']?>]
-        ]);
-
-        var options = {
-            title: 'Real Target',
-            curveType: 'function',
-            legend: { position: 'bottom' },
-            hAxis: {
-                title: 'Tanggal',
-            },
-            vAxis: {
-                title: 'Progress (%)',
-                ticks: [0, 10, 20, 30, 40 ,50 ,60 ,70 ,80 ,90 ,100]
-            } ,
-            pointSize: 4,
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('realtarget'+<?php echo $num; ?>));
-
-        chart.draw(data, options);
-        ]);
-
-
-        <?php
-        $num++;
-        endforeach; ?>
-    }
-
-    alert("masuk cuy");
-
-</script>
-
 <script type="text/javascript" src="<?php echo base_url() ?>assets/gmaps/assets/js/gmap3.js"></script>
 <script type="text/javascript">
     $(function () {
@@ -458,6 +413,7 @@
                         '<div class="box-body">'+
                         '<table  class="table table-hover" style="font-size:14px;">'+
                         '<tr>'+
+                        '<input type="hidden" id="markerindex" name="markerindex" value="<?php echo $proyek_id?>">'+
                         '<td><span class="direct-chat-name pull-left"><?php echo $proyek_nama;?></span></td>'+
                         '<td><span class="direct-chat-timestamp pull-right"></span></td>'+
                         '</tr>'+
@@ -541,8 +497,8 @@
                         '<div class="col-md-12">'+
                         '<div class="row margin-bottom">'+
                         '<div id="realtarget'+
-                        '<?php echo ($no-1);?>'+
-                        '" style="width: 500px"></div>'+
+                        '" style="width: 550px">'+
+                        '</div>'+
                         '</div>'+
                         '</div>'+
                         '</div>'+
@@ -611,7 +567,13 @@
                             }
                             ?>'+
                         '</section>',
-                        icon: "<?php
+                        label:{
+                                fontFamily:'Open Sans',
+                            color:'white',
+                            text: '<?php echo $proyek_nama;?>',
+                        } ,
+                        icon:{labelOrigin: new google.maps.Point(80, 25),
+                                url: "<?php
                             if($pb_real==0){
                                 echo base_url('assets/gmaps/images/grey.png');
                             }
@@ -655,7 +617,7 @@
                                     echo "";
                                 }
                             }
-                            ?>"},
+                            ?>"}},
                     <?php
                     endforeach;
                     ?>
@@ -691,6 +653,8 @@
                 if (marker) {
                     infowindow.setContent(marker.info);
                     infowindow.open(marker.getMap(), marker);
+                    drawChart(document.getElementById("markerindex").value);
+
                 }
             })
 
@@ -844,3 +808,50 @@
 <?php else:?>
 
 <?php endif;?>
+
+<script>
+        google.charts.load('current', {'packages': ['corechart']});
+        function drawChart(index) {
+
+
+            <?php
+            $result = $chartrt->result_array(); ?>
+
+            var chart_array = <?php echo json_encode($result);?>;
+
+            var items = [['Tanggal', 'Real', 'Target'],
+                [null, 0, 0]];
+
+            var i;
+            for (i = 0; i < chart_array.length; i++) {
+
+                if(chart_array[i]['pb_proyek_id'] == index)
+                {
+                    items.push([chart_array[i]['tanggal'],chart_array[i]['pb_real'],chart_array[i]['pb_target']])
+                }
+            }
+            var data = google.visualization.arrayToDataTable(items);
+
+           var options = {
+              curveType: 'none',
+               fontName: 'Open Sans',
+              legend: { position: 'top' },series: {
+                  0: { color: '#04A9F5' },
+                  1: { color: '#A389D4' },
+              },
+              hAxis: {
+                  title: 'Tanggal',
+              },
+              vAxis: {
+                  title: 'Progress (%)',
+                  ticks: [0, 10, 20, 30, 40 ,50 ,60 ,70 ,80 ,90 ,100]
+              } ,
+              pointSize: 4,
+           };
+
+           var target = document.getElementById('realtarget');
+
+           var chart = new google.visualization.LineChart(target);
+           chart.draw(data, options);
+        }
+</script>

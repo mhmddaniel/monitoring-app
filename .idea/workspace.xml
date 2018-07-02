@@ -2,15 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab1672ae-b72f-49a2-b228-19fc4b80026b" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/application/views/padmin/proyek/script.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/config/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/config/config.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/config/database.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/padmin/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/padmin/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/padmin/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/padmin/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Padmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Padmin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/M_padmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/M_padmin.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/views/padmin/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/padmin/login.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/views/padmin/proyek/proyek.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/padmin/proyek/proyek.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/padmin/sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/padmin/sidebar.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/gmaps/images/yellow.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/gmaps/images/yellow.png" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,17 +26,56 @@
       <file leaf-file-name="Padmin.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/Padmin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="35" column="74" selection-start-line="35" selection-start-column="74" selection-end-line="35" selection-end-column="74" />
+            <state relative-caret-position="615">
+              <caret line="41" column="5" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="proyek.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="proyek.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/padmin/proyek/proyek.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="574" column="39" selection-start-line="574" selection-start-column="39" selection-end-line="574" selection-end-column="39" />
+            <state relative-caret-position="249">
+              <caret line="571" column="40" selection-start-line="571" selection-start-column="40" selection-end-line="571" selection-end-column="40" />
+              <folding>
+                <element signature="n#style#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="M_padmin.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/models/M_padmin.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-5633">
+              <caret line="34" column="189" lean-forward="true" selection-start-line="34" selection-start-column="189" selection-end-line="34" selection-end-column="189" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="detail_proyek.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/padmin/proyek/detail_proyek.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="298">
+              <caret line="561" column="18" lean-forward="true" selection-start-line="560" selection-start-column="6" selection-end-line="561" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="script.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/padmin/proyek/script.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
             </state>
           </provider>
         </entry>
@@ -70,8 +108,8 @@
       <file leaf-file-name="login.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/padmin/login.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="18" column="144" lean-forward="true" selection-start-line="18" selection-start-column="101" selection-end-line="18" selection-end-column="144" />
+            <state relative-caret-position="406">
+              <caret line="32" column="38" lean-forward="true" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
               <folding>
                 <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -85,7 +123,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/padmin/index.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="708">
@@ -119,6 +157,12 @@
       <find>alert</find>
       <find>$pb_devisi</find>
       <find>yellow</find>
+      <find>legend</find>
+      <find>anda yakin ingin keluar</find>
+      <find>onload</find>
+      <find>proyek</find>
+      <find>get_chart</find>
+      <find>proyek()</find>
     </findStrings>
     <replaceStrings>
       <replace>$i['pb_devisi']</replace>
@@ -131,13 +175,15 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/application/views/padmin/proyek/detail_proyek.php" />
-        <option value="$PROJECT_DIR$/application/controllers/Padmin.php" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.php" />
-        <option value="$PROJECT_DIR$/application/views/padmin/proyek/proyek.php" />
         <option value="$PROJECT_DIR$/application/views/padmin/sidebar.php" />
-        <option value="$PROJECT_DIR$/application/views/padmin/login.php" />
         <option value="$PROJECT_DIR$/application/views/padmin/header.php" />
         <option value="$PROJECT_DIR$/application/views/padmin/index.php" />
+        <option value="$PROJECT_DIR$/application/views/padmin/login.php" />
+        <option value="$PROJECT_DIR$/application/views/padmin/proyek/script.php" />
+        <option value="$PROJECT_DIR$/application/controllers/Padmin.php" />
+        <option value="$PROJECT_DIR$/application/models/M_padmin.php" />
+        <option value="$PROJECT_DIR$/application/views/padmin/proyek/proyek.php" />
       </list>
     </option>
   </component>
@@ -175,8 +221,8 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="418" />
-    <option name="y" value="82" />
+    <option name="x" value="770" />
+    <option name="y" value="37" />
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
@@ -222,6 +268,14 @@
               <item name="application" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="padmin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ppp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ppp" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="padmin" type="462c0819:PsiDirectoryNode" />
+              <item name="proyek" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ppp" type="b2602c69:ProjectViewProjectNode" />
@@ -285,15 +339,15 @@
       <workItem from="1530427498238" duration="1034000" />
       <workItem from="1530454371146" duration="383000" />
       <workItem from="1530496461542" duration="543000" />
-      <workItem from="1530497071629" duration="6023000" />
+      <workItem from="1530497071629" duration="23507000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21645000" />
+    <option name="totallyTimeSpent" value="39129000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="418" y="82" width="1400" height="1000" extended-state="0" />
+    <frame x="770" y="37" width="1400" height="1000" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
@@ -324,9 +378,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/assets/gmaps/images/grey.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/gmaps/images/red.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -471,13 +522,6 @@
     <entry file="file://$PROJECT_DIR$/application/controllers/Welcome.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/M_padmin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="100" lean-forward="true" selection-start-line="100" selection-end-line="100" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Loginadmin.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -510,13 +554,6 @@
     <entry file="file://$PROJECT_DIR$/assets/gmaps/images/red.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/padmin/proyek/detail_proyek.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="548" column="5" selection-start-line="548" selection-start-column="5" selection-end-line="548" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/pages/layout/collapsed-sidebar.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="585">
@@ -548,24 +585,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/padmin/proyek/proyek.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="574" column="39" selection-start-line="574" selection-start-column="39" selection-end-line="574" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Padmin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="74" selection-start-line="35" selection-start-column="74" selection-end-line="35" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/padmin/login.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="18" column="144" lean-forward="true" selection-start-line="18" selection-start-column="101" selection-end-line="18" selection-end-column="144" />
+        <state relative-caret-position="406">
+          <caret line="32" column="38" lean-forward="true" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
           <folding>
             <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -575,6 +598,27 @@
             <element signature="n#style#0;n#button#0;n#div#0;n#div#3;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#h5#0;n#button#0;n#div#0;n#div#3;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/padmin/proyek/script.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/M_padmin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5633">
+          <caret line="34" column="189" lean-forward="true" selection-start-line="34" selection-start-column="189" selection-end-line="34" selection-end-column="189" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/padmin/proyek/detail_proyek.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="561" column="18" lean-forward="true" selection-start-line="560" selection-start-column="6" selection-end-line="561" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -598,6 +642,32 @@
             <element signature="n#style#0;n#span#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#1;n#section#1;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#span#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#1;n#section#1;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#1;n#section#1;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Padmin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="41" column="5" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/padmin/proyek/proyek.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="571" column="40" selection-start-line="571" selection-start-column="40" selection-end-line="571" selection-end-column="40" />
+          <folding>
+            <element signature="n#style#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

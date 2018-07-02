@@ -23,6 +23,14 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("SELECT proyek_bagian.*,DATE_FORMAT(pb_last_update,'%d %M %Y') AS tanggal FROM proyek_bagian where pb_proyek_id='$kode' ORDER BY tanggal asc");
 		return $hsl;
 	}
+    function get_chart_rt_all(){
+        $hsl=$this->db->query("SELECT proyek_bagian.*,DATE_FORMAT(pb_last_update,'%d %M %Y') AS tanggal FROM proyek_bagian ORDER BY tanggal asc");
+        return $hsl;
+    }
+    function get_chart_rt_all_by_bagian($bagian){
+        $hsl=$this->db->query("SELECT *,DATE_FORMAT(proyek_bagian.pb_last_update,'%d %M %Y') AS tanggal FROM proyek_bagian left join proyek on proyek_bagian.pb_proyek_id=proyek.proyek_id where proyek.proyek_bidang ='$bagian' ORDER BY tanggal asc");
+        return $hsl;
+    }
 	function get_chart_tdk($kode){
 		$hsl=$this->db->query("SELECT DISTINCT proyek_bagian.*,DATE_FORMAT(pb_last_update,'%d %M %Y') AS tanggal FROM proyek_bagian,proyek where pb_proyek_id='$kode' ORDER BY tanggal asc");
 		return $hsl;

@@ -16,7 +16,7 @@
   <!-- iCheck -->
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/plugins/iCheck/square/green.css">
 </head>
-<body class="hold-transition" style="background: linear-gradient(to bottom right, #1CE5BE, #A389D4); font-family:Open Sans; font-weight:lighter;">
+<body class="hold-transition" style="background: linear-gradient(to bottom right, #1CE5BE, #A389D4); margin:0px; height: 100%; background-repeat: no-repeat; background-attachment: fixed; font-family:Open Sans; font-weight:lighter;">
   <div class="login-box">
 
     <!-- /.login-logo -->

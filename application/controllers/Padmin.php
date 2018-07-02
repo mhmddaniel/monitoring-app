@@ -43,10 +43,12 @@ class Padmin extends CI_Controller{
 	public function proyek(){
 		if($_SESSION['level']=='admin'){
 			$x['data']=$this->m_padmin->get_all_proyek();
+            $x['chartrt']=$this->m_padmin->get_chart_rt_all();
 		}
 		else{
 			$bagian=$_SESSION['bagian'];
 			$x['data']=$this->m_padmin->get_all_proyek_by_bagian($bagian);
+            $x['chartrt']=$this->m_padmin->get_chart_rt_all_by_bagian($bagian);
 		}
 		
 		$g['xc']='cc';
