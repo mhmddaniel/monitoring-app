@@ -41,13 +41,13 @@
 <!-- Google Font -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-blue-light sidebar-collapse sidebar-mini">
+<body class="hold-transition skin-black-light sidebar-collapse sidebar-mini" style="font-family:Open Sans; font-weight:lighter;">
   <div class="wrapper">
     <header class="main-header">
       <!-- Logo -->
       <a href="<?php echo base_url() ?>padmin/" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>PK</b>-IT</span>
+        <span class="logo-mini"><img src="<?php echo base_url().'images/logo.png';?>" class="user-image" style="width:22px;"></span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg"><b>Perdana</b> Karya</span>
       </a>

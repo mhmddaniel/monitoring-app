@@ -34,6 +34,17 @@
         width: 66px;
         height: 65px;
     }
+    #legend {
+        font-family: Arial, sans-serif;
+        padding: 10px;
+        margin: 10px;
+    }
+    #legend h3 {
+        margin-top: 0;
+    }
+    #legend img {
+        vertical-align: middle;
+    }
 </style>
 
 
@@ -220,17 +231,12 @@
                     </div>
                     <div class="tab-pane" id="tab_2">
                         <div id="test" class="gmap3" ></div>
+                        <div id="legend"><h4>Legend</h4></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <?php
-    $num = 0;
-    foreach ($data->result_array() as $var) :
-            print_r($var['proyek_id']);
-        $num++;
-    endforeach; ?>
 </div>
 
 <?php foreach ($data->result_array() as $i) :
@@ -318,6 +324,43 @@
 <script type="text/javascript" src="<?php echo base_url() ?>assets/gmaps/assets/js/gmap3.js"></script>
 <script type="text/javascript">
     $(function () {
+
+
+
+        var icons = {
+
+            belummulai: {
+                name: 'Belum Mulai',
+                icon: "<?php echo base_url('assets/gmaps/images/grey.png'); ?>"
+            },
+            baik: {
+                name: 'Baik',
+                icon: "<?php echo base_url('assets/gmaps/images/blue.png'); ?>"
+            },
+            wajar: {
+                name: 'Wajar',
+                icon: "<?php echo base_url('assets/gmaps/images/green.png'); ?>"
+            },
+            terlambat: {
+                name: 'Terlambat',
+                icon: "<?php echo base_url('assets/gmaps/images/yellow.png'); ?>"
+            },
+            kritis: {
+                name: 'Kritis',
+                icon: "<?php echo base_url('assets/gmaps/images/red.png'); ?>"
+            }
+        };
+
+        var legend = document.getElementById('legend');
+        for (var key in icons) {
+            var type = icons[key];
+            var name = type.name;
+            var icon = type.icon;
+            var div = document.createElement('div');
+            div.innerHTML = '<img src="' + icon + '"> ' + name;
+            legend.appendChild(div);
+        }
+
         $('#test')
             .gmap3({
                 center: [-1.7333385,102.7458134],
@@ -650,9 +693,10 @@
                     infowindow.open(marker.getMap(), marker);
                 }
             })
-        ;
 
     });
+
+
 </script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">

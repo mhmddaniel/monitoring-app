@@ -16,18 +16,18 @@
   <!-- iCheck -->
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/plugins/iCheck/square/green.css">
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition" style="background: linear-gradient(to bottom right, #1CE5BE, #A389D4); font-family:Open Sans; font-weight:lighter;">
   <div class="login-box">
 
     <!-- /.login-logo -->
-    <div class="login-box-body">
+    <div class="login-box-body" style="border-radius: 10px; box-shadow: 2px 2px 5px grey;">
 
       <div class="row">
         <div class="col-sm-12 text-center">
-        <p class="login-box-msg"><h2 class="text-center" style="font-family:Open Sans; font-weight:lighter;">Selamat Datang</h2></p>
+        <p class="login-box-msg"><h3 class="text-center" style="font-family:Open Sans; font-weight:lighter;">Selamat Datang</h3></p>
       </div>
       </div>
-
+<br>
       <div class="row">
          <div class="col-sm-12 text-center">
           <div class="col-sm-4"></div>
@@ -35,24 +35,25 @@
           <div class="col-sm-4"></div>
       </div>
       </div>
-      <hr/>
 
+        <br>
+        <br>
       <form action="<?php echo base_url().'loginadmin/auth'?>" method="post">
 
         <div class="row">
 
           <div class="col-sm-12">
            <div class="form-group has-feedback">
-             <input type="text" name="username" class="form-control" placeholder="Username" required>
-             <span class="glyphicon glyphicon-user form-control-feedback"></span>
+             <input type="text" name="username" class="form-control" style="font-family:Open Sans; font-weight:lighter; border: none; border-color: transparent;" placeholder="Username" required>
            </div>
          </div>
+        <hr/>
          <div class="col-sm-12">
           <div class="form-group has-feedback">
-            <input type="password" name="password" class="form-control" placeholder="Password" required>
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            <input type="password" name="password" class="form-control" style="font-family:Open Sans; font-weight:lighter; border: none; border-color: transparent;" placeholder="Password" required>
           </div>
-        </div>
+         </div>
+        <hr/>
 
       </div>
       <div class="row">
@@ -72,21 +73,20 @@
      </div>
      <div class="row">
       <div class="col-sm-12 text-center">
-        <button type="submit" class="btn btn-primary btn-block bg-blue-gradient"><h5 style="font-family:Open Sans; font-weight:lighter;">LOGIN</h5></button>
+        <button type="submit" class="btn btn-primary btn-flat col-sm-12" style="background: linear-gradient(to bottom right, #72C5FF, #A389D4); border-radius: 40px; box-shadow: 5px 5px 20px grey;"><h5 style="font-family:Open Sans; font-weight:lighter;">LOGIN</h5></button>
       </div>
       <!-- /.col -->
     </div>
+
+          <br>
+
+          <br>
     <div class="row">
       <div class="col-sm-12 text-center">
-        <p><center>Lupa Password ?</center></p>
+        <p>Lupa Password ?</p>
       </div>
     </div>
   </form>
-
-
-  <!-- /.social-auth-links -->
-  <hr/>
-  <p><center>&copy; Copyright <br/> All Right Reserved</center></p>
 </div>
 <!-- /.login-box-body -->
 </div>

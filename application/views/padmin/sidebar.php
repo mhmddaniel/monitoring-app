@@ -2,7 +2,7 @@
     <section class="sidebar">
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo base_url().'assets/images/'.$_SESSION['foto'];?>" class="img-circle user-image" style="width:45px;height:45px;" alt="User Image">
+          <img src="<?php echo base_url().'assets/images/'.$_SESSION['foto'];?>" class="img-circle user-image" style="width:25px;height:25px;" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $_SESSION['nama']; ?></p>

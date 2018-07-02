@@ -6,14 +6,6 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    <h1>
-      Dashboard
-      <small>Control panel</small>
-    </h1>
-    <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">Dashboard</li>
-    </ol>
   </section>
 
 
@@ -37,11 +29,7 @@
     <div class="col-md-12">
       <div class="col-md-4">
         <div class="col-md-12">
-          <div class="box box-solid bg-green-gradient">
-            <div class="box-header">
-              <i class="fa fa-calendar"></i>
-              <h3 class="box-title">Kalender</h3>
-            </div>
+          <div class="box box-solid" style="background: linear-gradient(to bottom right, #1DE9B6, #04A9F5); color: white">
             <div class="box-body no-padding">
 
               <script type="text/javascript" src="https://raw.githubusercontent.com/kylestetz/CLNDR/master/clndr.min.js"></script>
@@ -72,26 +60,26 @@
 
         </div>
         <div class="col-md-12">
-          <div class="box box-widget widget-user-2 bg-purple-gradient">
-            <div class="box-footer bg-purple-gradient">
+          <div class="box box-widget widget-user-2">
+            <div class="box-footer" style="background: linear-gradient(to right, #5524B3, #A082D9); color: white">
               <ul class="nav nav-stacked">
                 <li>
                   <h5 style="font-family:Open Sans; font-weight:lighter;">Total Proyek<span class="pull-right"><?php echo $a['jumproyek']; ?></span></h5></li>
                 </ul>
               </div>
-              <div class="box-footer bg-purple-gradient">
+              <div class="box-footer"  style="background: linear-gradient(to right, #5524B3, #A082D9); color: white">
                 <ul class="nav nav-stacked">
                   <li>
                     <h5 style="font-family:Open Sans; font-weight:lighter;">Proyek Sedang Dikerjakan<span class="pull-right"><?php echo $f['countkerja']; ?></span></h5></li>
                   </ul>
                 </div>
-                <div class="box-footer bg-purple-gradient">
+                <div class="box-footer" style="background: linear-gradient(to right, #5524B3, #A082D9); color: white">
                   <ul class="nav nav-stacked">
                     <li>
                       <h5 style="font-family:Open Sans; font-weight:lighter;">Proyek Selesai<span class="pull-right"><?php echo $h['countselesai']; ?></span></h5></li>
                     </ul>
                   </div>
-                  <div class="box-footer bg-purple-gradient">
+                  <div class="box-footer" style="background: linear-gradient(to right, #5524B3, #A082D9); color: white">
                     <ul class="nav nav-stacked">
                       <li>
                         <h5 style="font-family:Open Sans; font-weight:lighter;">Proyek Belum Mulai<span class="pull-right"><?php echo $g['countkerja']; ?></span></h5></li>
@@ -142,11 +130,12 @@
               <div class="col-md-4">
                 
                 <div class="col-md-12">
-                  <div class="info-box bg-aqua-gradient">
-                    <span class="info-box-icon"><i class="fa fa-credit-card"></i></span>
+                  <div class="info-box">
+                    <span class="info-box-icon" style="background: white";><img src="<?php echo base_url().'images/iconpagu.png';?>" class="img-responsive" style="padding: 20px;"></span>
 
                     <div class="info-box-content">
-                      <span class="info-box-number"><?php echo "Rp ".number_format($b['sumpagu']); ?></span>
+                        <br>
+                      <span class="info-box-number" style="color: #04A9F5"><?php echo "Rp ".number_format($b['sumpagu']); ?></span>
                       <span class="info-box-text">Total Pagu</span>
                     </div>
                     <!-- /.info-box-content -->
@@ -155,11 +144,12 @@
                 </div>
 
                 <div class="col-md-12">
-                  <div class="info-box bg-red-gradient">
-                    <span class="info-box-icon"><i class="fa fa-shopping-cart"></i></span>
+                  <div class="info-box">
+                    <span class="info-box-icon" style="background: white";><img src="<?php echo base_url().'images/iconuangkeluar.png';?>" class="img-responsive" style="padding: 20px;"></span>
 
                     <div class="info-box-content">
-                      <span class="info-box-number"><?php echo "Rp ".number_format($c['suma']+$c['sumb']); ?></span>
+                        <br>
+                      <span class="info-box-number" style="color: #FF4D4D"><?php echo "Rp ".number_format($c['suma']+$c['sumb']); ?></span>
                       <span class="info-box-text">Total Uang Keluar</span>
                     </div>
                     <!-- /.info-box-content -->
@@ -168,11 +158,12 @@
                 </div>
 
                 <div class="col-md-12">
-                  <div class="info-box bg-green-gradient">
-                    <span class="info-box-icon"><i class="fa fa-money"></i></span>
+                  <div class="info-box">
+                    <span class="info-box-icon" style="background: white";><img src="<?php echo base_url().'images/iconsisa.png';?>" class="img-responsive" style="padding: 20px;"></span>
 
                     <div class="info-box-content">
-                      <span class="info-box-number"><?php echo "Rp ".number_format($e['sumsisa']); ?></span>
+                        <br>
+                      <span class="info-box-number" style="color: #1DE9B6"><?php echo "Rp ".number_format($e['sumsisa']); ?></span>
                       <span class="info-box-text">Total Uang Masuk</span>
                     </div>
                     <!-- /.info-box-content -->
