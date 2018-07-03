@@ -12,13 +12,6 @@
 
 	<div class="row" style="margin-top: 50px;">
 		<div class="col-md-12">
-
-
-
-
-
-
-
 			<?php
 			$no=0;
 			foreach ($data->result_array() as $i) :
@@ -44,7 +37,7 @@
 								<!-- /.col -->
 								<div class="col-md-9">
 									<div class="col-md-8">
-										<h4><?php echo $pekerja_nama_direktur;?></h4>
+										<h4><?php echo $pekerja_nama_perusahaan;?></h4>
 									</div>
 									<div class="col-md-4">
 										<div class="box-tools pull-right">
@@ -65,7 +58,7 @@
 									</div>
 									<div class="col-md-8">
 
-										<?php echo $pekerja_tel_direktur;?>
+										<?php echo $pekerja_tel_kantor;?>
 									</div>
 									<div class="col-md-4">
 
@@ -84,7 +77,7 @@
 							<div class="row">
 								<div class="col-md-9 pull-right">
 									<div class="col-md-9">
-										<span class="description-percentage text-green"><?php echo $pekerja_nama_perusahaan;?> - <?php echo $pekerja_tel_kantor;?></span>
+										<span class="description-percentage text-bold"><?php echo $pekerja_nama_direktur;?> - <?php echo $pekerja_tel_direktur;?></span>
 									</div>
 								</div>
 							</div>

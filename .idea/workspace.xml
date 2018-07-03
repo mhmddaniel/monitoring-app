@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab1672ae-b72f-49a2-b228-19fc4b80026b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/padmin/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/padmin/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/padmin/proyek/detail_proyek.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/padmin/proyek/detail_proyek.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/padmin/proyek/proyek.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/padmin/proyek/proyek.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/padmin/proyek/tambah_proyek.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/padmin/proyek/tambah_proyek.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/padmin/sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/padmin/sidebar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/padmin/proyek/penanggung_jawab.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/padmin/proyek/penanggung_jawab.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,11 +25,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="M_padmin.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="M_padmin.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/M_padmin.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15">
               <caret line="49" selection-start-line="49" selection-end-line="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="penanggung_jawab.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/views/padmin/proyek/penanggung_jawab.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="235">
+              <caret line="60" column="71" selection-start-line="60" selection-start-column="71" selection-end-line="60" selection-end-column="71" />
             </state>
           </provider>
         </entry>
@@ -151,6 +155,7 @@
       <find>stepwizard</find>
       <find>Tambah Pro</find>
       <find>detail</find>
+      <find>proyek_awal</find>
     </findStrings>
     <replaceStrings>
       <replace>$i['pb_devisi']</replace>
@@ -174,6 +179,7 @@
         <option value="$PROJECT_DIR$/application/views/padmin/proyek/tambah_proyek.php" />
         <option value="$PROJECT_DIR$/application/views/padmin/proyek/proyek.php" />
         <option value="$PROJECT_DIR$/application/views/padmin/proyek/detail_proyek.php" />
+        <option value="$PROJECT_DIR$/application/views/padmin/proyek/penanggung_jawab.php" />
       </list>
     </option>
   </component>
@@ -900,7 +906,7 @@
       <path value="$PROJECT_DIR$/../../bin/php/php7.2.1/bin" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="478" />
     <option name="y" value="23" />
     <option name="width" value="1400" />
@@ -1033,15 +1039,15 @@
       <workItem from="1530497071629" duration="24542000" />
       <workItem from="1530539829292" duration="2602000" />
       <workItem from="1530579632586" duration="1510000" />
-      <workItem from="1530584833019" duration="15903000" />
+      <workItem from="1530584833019" duration="16071000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60179000" />
+    <option name="totallyTimeSpent" value="60347000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="478" y="23" width="1400" height="1000" extended-state="1" />
+    <frame x="478" y="23" width="1400" height="1000" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
@@ -1072,9 +1078,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/assets/gmaps/images/grey.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/gmaps/images/red.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -1360,6 +1363,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="49" selection-start-line="49" selection-end-line="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/padmin/proyek/penanggung_jawab.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="60" column="71" selection-start-line="60" selection-start-column="71" selection-end-line="60" selection-end-column="71" />
         </state>
       </provider>
     </entry>
