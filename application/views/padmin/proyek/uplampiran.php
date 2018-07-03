@@ -280,7 +280,7 @@ body {
 						</div>
 
 						<div class="row">
-							<div class="col-md-6 col-md-offset-3">
+							<div class="col-md-6 col-md-offset-3 col-xs-6 col-xs-offset-3">
 								<input type="submit" class="form-control btn btn-round btn-success padbtn" value="Simpan">
 							</div>
 						</div>
@@ -313,7 +313,7 @@ body {
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-6 col-md-offset-3">
+							<div class="col-md-6 col-md-offset-3 col-xs-6 col-xs-offset-3">
 								<input type="submit" class="form-control btn btn-round btn-success padbtn" value="Simpan">
 							</div>
 						</div>

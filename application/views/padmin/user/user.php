@@ -26,6 +26,7 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
+                    <div class="table-responsive">
             <table id="example1" class="table table-striped" style="font-size:13px;">
               <thead>
                 <tr>
@@ -99,15 +100,11 @@
             </tbody>
           </table>
         </div>
-        <!-- /.box-body -->
       </div>
-      <!-- /.box -->
+      </div>
     </div>
-    <!-- /.col -->
   </section>
-  <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
 
 
 
@@ -115,7 +112,6 @@
   $user_id=$i['user_id'];
   $user_username=$i['user_username'];
   ?>
-  <!--Modal Hapus Pengguna-->
   <div class="modal fade" id="ModalHapus<?php echo $user_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">

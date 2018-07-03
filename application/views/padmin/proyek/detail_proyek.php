@@ -207,7 +207,7 @@ $b=$data->row_array() ;
    <div class="box-body box-profile">
      <?php foreach ($foto->result_array() as $i) : ?>
       <div class="col-sm-4">
-        <a class="btn" data-toggle="modal" data-target="#ModalView<?php echo $i['proyek_id'];?>"><img class="img-responsive" src="<?php echo base_url().'assets/images/'.$i['file_data'];?>" alt="Photo"></a>
+        <a class="btn" data-toggle="modal" data-target="#ModalView<?php echo $i['file_id'];?>"><img class="img-responsive" src="<?php echo base_url().'assets/images/'.$i['file_data'];?>" alt="Photo"></a>
       </div>
     <?php endforeach; ?>
     <div class="row">
@@ -225,30 +225,32 @@ $b=$data->row_array() ;
     <h4 class="text-primary">Berkas Proyek</h4>
   </div>
   <div class="box-body box-profile">
-    <table class="table table-responsive table-hovered">
-      <tr>
-        <th>No</th>
-        <th>File</th>
-        <th>Aksi</th>
-      </tr>
-      <?php 
-      $no=0;
-      foreach ($file->result_array() as $i) : 
-        $no++;
-        ?>
+    <div class="table-responsive">
+      <table class="table  table-hovered">
         <tr>
-          <td><?php echo $no; ?></td>
-          <td><?php echo $i['file_data']; ?></td>
-          <td>
-            <a href="<?php echo base_url()?>padmin/download/<?php echo $i['file_id'];?>">
-              <i class="fa fa-download"></i>
-            </a>
-            &nbsp;&nbsp;
-            <a class="btn" data-toggle="modal" data-target="#EditFile<?php echo $i['file_id'];?>"><i class="fa fa-edit"></i></a>
-          </td>
+          <th>No</th>
+          <th>File</th>
+          <th>Aksi</th>
         </tr>
-      <?php endforeach;  ?>
-    </table>
+        <?php 
+        $no=0;
+        foreach ($file->result_array() as $i) : 
+          $no++;
+          ?>
+          <tr>
+            <td><?php echo $no; ?></td>
+            <td><?php echo $i['file_data']; ?></td>
+            <td>
+              <a href="<?php echo base_url()?>padmin/download/<?php echo $i['file_id'];?>">
+                <i class="fa fa-download"></i>
+              </a>
+              &nbsp;&nbsp;
+              <a class="btn" data-toggle="modal" data-target="#EditFile<?php echo $i['file_id'];?>"><i class="fa fa-edit"></i></a>
+            </td>
+          </tr>
+        <?php endforeach;  ?>
+      </table>
+    </div>
   </div>
 </div>
 </div>
@@ -329,7 +331,7 @@ $b=$data->row_array() ;
         </tr>
       </table> 
 
-      <div id="test" class="gmap3" style="width:500px;height: 300px;max-width: 500px;"></div>
+      <div id="test" class="gmap3" style="width:500px;height: 300px;max-width: 100%;"></div>
       <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
         <span><b><?php echo $b['koordinat_nama']; ?></b></span><br>
         <?php echo $b['koordinat_alamat']; ?><br>
@@ -415,7 +417,7 @@ $b=$data->row_array() ;
 
 <?php foreach ($foto->result_array() as $i) : ?>
   <!--Modal Hapus Pengguna-->
-  <div class="modal fade" id="ModalView<?php echo $i['proyek_id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal fade" id="ModalView<?php echo $i['file_id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg" role="document">
       <div class="col-md-12">  
         <div class="modal-content">
@@ -573,12 +575,12 @@ $b=$data->row_array() ;
 
     var options = {
       title: 'Real Target',
-        curveType: 'none',
-        fontName: 'Open Sans',
-        legend: { position: 'top' },series: {
-            0: { color: '#04A9F5' },
-            1: { color: '#A389D4' },
-        },
+      curveType: 'none',
+      fontName: 'Open Sans',
+      legend: { position: 'top' },series: {
+        0: { color: '#04A9F5' },
+        1: { color: '#A389D4' },
+      },
       hAxis: {
         title: 'Tanggal',
       },
@@ -612,12 +614,12 @@ $b=$data->row_array() ;
 
     var options = {
       title: 'Real Target',
-        curveType: 'none',
-        fontName: 'Open Sans',
-        legend: { position: 'top' },series: {
-            0: { color: '#04A9F5' },
-            1: { color: '#A389D4' },
-        },
+      curveType: 'none',
+      fontName: 'Open Sans',
+      legend: { position: 'top' },series: {
+        0: { color: '#04A9F5' },
+        1: { color: '#A389D4' },
+      },
       hAxis: {
         title: 'Tanggal',
       },

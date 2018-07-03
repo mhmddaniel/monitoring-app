@@ -650,7 +650,7 @@ class Padmin extends CI_Controller{
 				$config['maintain_ratio']= FALSE;
 				$config['quality']= '60%';
 				$config['width']= 840;
-				$config['height']= 450;
+				$config['height']= 840;
 				$config['new_image']= './assets/images/'.$gbr['file_name'];
 				$this->load->library('image_lib', $config);
 				$this->image_lib->resize();
