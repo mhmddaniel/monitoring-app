@@ -29,10 +29,10 @@
       </div>
 <br>
       <div class="row">
-         <div class="col-sm-12 text-center">
-          <div class="col-sm-4"></div>
-        <img class="col-sm-4" src="<?php echo base_url() ?>images/logo.png">
-          <div class="col-sm-4"></div>
+         <div class="col-md-12 text-center">
+          <div class="col-xs-4"></div>
+        <img class="col-xs-4" src="<?php echo base_url() ?>images/logo.png">
+          <div class="col-xs-4"></div>
       </div>
       </div>
 

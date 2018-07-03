@@ -231,6 +231,7 @@
                         </div>
                     </div>
                     <div class="tab-pane" id="tab_2">
+                        <div class="col-md-2"></div>
                         <div id="test" class="gmap3 col-md-6" ></div>
                         <div id="legend" class="col-md-2"></div>
                         <div class="col-md-2"></div>
