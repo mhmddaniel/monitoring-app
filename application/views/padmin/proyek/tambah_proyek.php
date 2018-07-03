@@ -113,7 +113,7 @@ body {
 								<div class="form-group">
 									<label><h5 style="font-family:Open Sans; font-weight:lighter;">NAMA PROYEK</h5></label>
 									<input type="hidden" name="numproyek" value="<?php echo $numproyek; ?>">
-									<input type="text" class="form-control" name="xnama" style="font-family:Open Sans; font-weight:lighter;">
+									<input type="text" class="form-control" name="xnama" required style="font-family:Open Sans; font-weight:lighter;">
 								</div>
 							</div>
 							<div class="col-md-2">
@@ -236,19 +236,19 @@ body {
 					<div class="panel-body">
 						<div class="form-group">
 							<label>Nama</label>
-							<input type="text" class="form-control"  name="pn_nama" >
+							<input type="text" class="form-control"  name="pn_nama" required="required">
 						</div>
 						<div class="form-group">
 							<label>Email</label>
-							<input type="text" class="form-control"  name="pn_email" >
+							<input type="text" class="form-control"  name="pn_email" required="required">
 						</div>
 						<div class="form-group">
 							<label>Telepon</label>
-							<input type="text" class="form-control"  name="pn_tel" >
+							<input type="text" class="form-control"  name="pn_tel"   required="required">
 						</div>
 						<div class="form-group">
 							<label>Bidang</label>
-							<select class="form-control"  name="pn_bagian" >
+							<select class="form-control"  name="pn_bagian"  required="required">
 								<option value="sda">Sumber Daya Air</option>
 								<option value="bm">Bina Marga</option>
 								<option value="ciptakarya">Cipta Karya</option>
@@ -263,7 +263,7 @@ body {
 
 						<div class="form-group">
 							<label>Foto</label>
-							<input type="file" class="form-control"  name="filefoto" >
+							<input type="file" class="form-control"  name="filefoto" required="required">
 						</div>
 						<button class="btn btn-success pull-right  bg-green-gradient" type="submit">Finish!</button>
 					</div>
