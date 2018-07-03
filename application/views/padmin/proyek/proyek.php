@@ -230,8 +230,10 @@
                         </div>
                     </div>
                     <div class="tab-pane" id="tab_2">
-                        <div id="test" class="gmap3" ></div>
-                        <div id="legend" c><h4>Legend</h4></div>
+                        <div class="col-md-2"></div>
+                        <div id="test" class="gmap3 col-md-6" ></div>
+                        <div id="legend" class="col-md-2"></div>
+                        <div class="col-md-2"></div>
                     </div>
                 </div>
             </div>
@@ -256,14 +258,17 @@
                             <h3 class="text-center"><?php echo $proyek_nama; ?></h3>
                         </div>
                         <div class="col-md-12">
-                            <i class="fa fa-warning" style="font-size:96px;color:red"></i>
+
+                            <div class="iconcolor">
+                            <i class="fa fa-warning" style="font-size:200px;"></i>
+                            </div>
                         </div>
                         <div class="col-md-12">
                             <br>
                             Apakah Anda yakin ingin menghapus proyek ini ?
                         </div>
                         <div class="col-md-6 col-md-offset-3"><br>
-                            <button type="submit" class="btn btn-primary btn-round col-md-12" id="simpan">Hapus</button>
+                            <button type="submit" class="btn btn-danger btn-round col-md-12" id="simpan">Hapus</button>
                         </div>
                     </div>
                 </form>
@@ -277,6 +282,7 @@
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="<?php echo base_url() ?>assets/gmaps/assets/js/gmap3.js"></script>
+<script src="https://cdn.sobekrepository.org/includes/gmaps-markerwithlabel/1.9.1/gmaps-markerwithlabel-1.9.1.min.js"></script>
 <script type="text/javascript">
     $(function () {
 
@@ -312,7 +318,7 @@
             var name = type.name;
             var icon = type.icon;
             var div = document.createElement('div');
-            div.innerHTML = '<img src="' + icon + '"> ' + name;
+            div.innerHTML = '<img style="width:20px;" src="' + icon + '"> ' +name+ '<br/><br/>';
             legend.appendChild(div);
         }
 
@@ -499,6 +505,20 @@
                         '<div id="realtarget'+
                         '" style="width: 550px">'+
                         '</div>'+
+
+                        '<div class="box-body box-profile">'+
+                        '<?php
+                            $counter=0;
+                            foreach ($foto->result_array() as $i) : ?>'+
+                        '<?php if($i['proyek_id']==$proyek_id){?>'+
+                        '<div class="col-sm-4">'+
+                        '<a class="btn" data-toggle="modal" data-target="#ModalView<?php echo $i['proyek_id'];?>"><img style="height:150px; width:150px;object-fit:cover;" src="<?php echo base_url().'assets/images/'.$i['file_data'];?>" alt="Photo"></a>'+
+                        '</div>'+
+                        '<?php $counter++; if($counter>=6){ break;}} ?>'+
+                        '<?php endforeach; ?>'+
+
+                        '</div>'+
+
                         '</div>'+
                         '</div>'+
                         '</div>'+
@@ -568,8 +588,8 @@
                             ?>'+
                         '</section>',
                         label:{
-                                fontFamily:'Open Sans',
-                            color:'white',
+                                fontFamily:'Arial',
+                            color:'#FFFFFF',
                             text: '<?php echo $proyek_nama;?>',
                         } ,
                         icon:{labelOrigin: new google.maps.Point(80, 25),
@@ -656,7 +676,7 @@
                     drawChart(document.getElementById("markerindex").value);
 
                 }
-            })
+            }).controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
 
     });
 

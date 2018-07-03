@@ -44,11 +44,14 @@ class Padmin extends CI_Controller{
 		if($_SESSION['level']=='admin'){
 			$x['data']=$this->m_padmin->get_all_proyek();
             $x['chartrt']=$this->m_padmin->get_chart_rt_all();
+            $x['foto']=$this->m_padmin->get_data_foto_all();
 		}
 		else{
 			$bagian=$_SESSION['bagian'];
 			$x['data']=$this->m_padmin->get_all_proyek_by_bagian($bagian);
             $x['chartrt']=$this->m_padmin->get_chart_rt_all_by_bagian($bagian);
+
+            $x['foto']=$this->m_padmin->get_data_foto_all();
 		}
 		
 		$g['xc']='cc';
@@ -168,7 +171,7 @@ class Padmin extends CI_Controller{
 			$x['data']=$this->m_padmin->get_detail_proyek_bag_by_kode($kode);
 		}
 		else {
-			$x['data']=$this->m_padmin->get_detail_proyek_by_kode($kode);
+            $x['data']=$this->m_padmin->get_detail_proyek_by_kode($kode);
 		}
 		$x['file']=$this->m_padmin->get_data_file($kode);
 		$x['foto']=$this->m_padmin->get_data_foto($kode);

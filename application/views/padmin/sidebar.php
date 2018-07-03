@@ -2,7 +2,7 @@
     <section class="sidebar">
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo base_url().'assets/images/'.$_SESSION['foto'];?>" class="img-circle user-image" style="width:25px;height:25px;" alt="User Image">
+          <img src="<?php echo base_url().'assets/images/'.$_SESSION['foto'];?>" class="img-circle user-image" style="width:30px;height:30px;" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $_SESSION['nama']; ?></p>
@@ -22,10 +22,10 @@
       
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li><a href="<?php echo base_url() ?>padmin/"><i class="fa fa-home"></i> <span>Home</span></a></li>
+        <li><a href="<?php echo base_url() ?>padmin/"><i class="fa fa-home" style="font-size: 25px;color: #1DE9B6"></i> <span>Home</span></a></li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-folder"></i> <span>Proyek</span>
+            <i class="fa fa-folder" style="font-size: 25px;color: #1DE9B6"></i> <span>Proyek</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -51,9 +51,9 @@
           </ul>
         </li> -->
         <?php if($_SESSION['level']=='admin'){ ?>
-          <li><a href="<?php echo base_url() ?>padmin/user/"><i class="fa fa-user"></i> <span>User</span></a></li>
+          <li><a href="<?php echo base_url() ?>padmin/user/"><i class="fa fa-user" style="font-size: 25px;color: #1DE9B6"></i> <span>User</span></a></li>
         <?php } else {} ?>
-        <li><a href="<?php echo base_url() ?>padmin/setting/"><i class="fa fa-gear"></i> <span>Setting</span></a></li>
+        <li><a href="<?php echo base_url() ?>padmin/setting/"><i class="fa fa-gear" style="font-size: 25px;color: #1DE9B6"></i> <span>Setting</span></a></li>
       </ul>
     </section>
   </aside>

@@ -1,5 +1,5 @@
 <?php 
-$b=$data->row_array() ; 
+$b=$data->row_array() ;
 ?>
 
 <style type="text/css">
@@ -46,14 +46,14 @@ $b=$data->row_array() ;
   </ol>
 </section>
 
-<div class="row">
+<div class="row" style="font-family:Open Sans; font-weight:lighter;">
   <div class="col-md-6">
 
     <div class="col-md-12">
       <div class="box box-primary">
         <div class="box-header">
-         <h4> 
-          <i class="fa fa-chevron-left text-primary"> Proyek Jalan Tol</i>
+         <h4 style="font-family:Open Sans; font-weight:lighter;" class="text-primary">
+          <i class="fa fa-chevron-left text-primary"></i> <?php echo $b['proyek_nama']; ?>
         </h4>
       </div>
 

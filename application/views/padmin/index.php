@@ -99,17 +99,17 @@
 
                       function drawChart() {
                         var data = google.visualization.arrayToDataTable([
-                          ['Month', 'Rencana Awal Kontrak', 'Awal Kontrak'],
-                          <?php foreach ($countjum->result_array() as $i) : ?>
-                            ['<?php echo $i['proyek_bulan']; ?>', <?php echo $i['countsech']; ?>, <?php echo $i['countawal']; ?>],
-
-                          <?php endforeach; ?>
+                          ['Month', 'Rencana Awal Kontrak', 'Awal Kontrak', { "role": "style" }],
+                            <?php foreach ($countjum->result_array() as $i) :
+                            if ($i['proyek_bulan']!=null){?>
+                            ['<?php echo $i['proyek_bulan']; ?>', <?php echo $i['countsech']; ?>, <?php echo $i['countawal']; ?>, 'color: #76A7FA'],
+                            <?php }endforeach; ?>
                           ]);
 
-                        var options = {
+                        var options = {width: 600,
+                            legend: { position: 'top', maxLines: 3 },
                           chart: {
-                            title: 'Kontrak',
-                            subtitle: 'Jumlah Kontrak Proyek',
+                            title: 'Kontrak'
                           }
                         };
 
@@ -118,7 +118,7 @@
                         chart.draw(data, google.charts.Bar.convertOptions(options));
                       }
                     </script>
-                    <div id="columnchart_material" style="width: 500px; height: 500px;"></div>
+                    <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
                   </div>
                 </div>
               </div>
@@ -194,7 +194,7 @@
                             if($i>0){
                             ?>
                             <tr>
-                                <td><?php echo $i['proyek_nama']; ?></td>
+                                <td><a href="<?php echo base_url().'padmin/detail_proyek/'.$i['proyek_id'];?>"><?php echo $i['proyek_nama']; ?></a></td>
                                 <td><?php echo $i['proyek_tahun']; ?></td>
                                 <td><?php echo $i['proyek_pagu']; ?></td>
                                 <td><?php
