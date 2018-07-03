@@ -416,7 +416,7 @@
                             ?>'+
                         '<div class="box-header with-border"><h5 class="text-center">Detail Proyek</h5></div>'+
                         '<div class="box-body">'+
-                        '<table  class="table table-hover" style="font-size:11px;">'+
+                        '<table  class="table table-hover" style="font-size:10px;">'+
                         '<tr>'+
                         '<input type="hidden" id="markerindex" name="markerindex" value="<?php echo $proyek_id?>">'+
                         '<td><span class="direct-chat-name pull-left"><?php echo $proyek_nama;?></span></td>'+
@@ -849,6 +849,7 @@
            var options = {
               curveType: 'none',
                fontName: 'Open Sans',
+               fontSize: '10px',
               legend: { position: 'top' },series: {
                   0: { color: '#04A9F5' },
                   1: { color: '#A389D4' },
