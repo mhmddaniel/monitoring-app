@@ -238,8 +238,8 @@
                     </div>
                     <div class="tab-pane" id="tab_2">
 
-                        <div id="test" class="gmap3 col-md-6" style="max-width:100%;"></div>
-
+                        <div id="test" class="gmap3 col-md-8" style="max-width:100%;"></div>
+                        <div id="right-panel" class="col-md-2"></div>
                         <div id="legend" class="col-md-2"></div>
                         <div class="col-md-2"></div>
                     </div>
@@ -329,6 +329,13 @@
             div.innerHTML = '<img style="width:20px;" src="' + icon + '"> ' +name+ '<br/><br/>';
             legend.appendChild(div);
         }
+
+        var panel = document.getElementById('right-panel');
+
+        var directionsDisplay = new google.maps.DirectionsRenderer;
+        var directionsService = new google.maps.DirectionsService;
+        directionsDisplay.setPanel(panel);
+
 
         $('#test')
         .gmap3({
@@ -681,9 +688,9 @@
         drawChart(document.getElementById("markerindex").value);
 
     }
-}).controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
+})
 
-});
+}).controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
 
 
 </script>

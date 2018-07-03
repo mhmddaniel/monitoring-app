@@ -73,7 +73,7 @@ $b=$data->row_array() ;
           </tr>
           <tr>
             <th>Rencana Kontrak</th>
-            <td class="text-right"><?php $b['proyek_sech_awal']; ?></td>
+            <td class="text-right"><?php echo dateformat('d-m-Y',$b['proyek_sech_awal']); ?></td>
           </tr>
           <tr>
             <th>Awal Kontrak</th>
