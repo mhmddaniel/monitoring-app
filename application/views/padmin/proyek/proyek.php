@@ -374,7 +374,8 @@
                 $up2=date('d-m-Y h:i:s', strtotime($i['pb_last_update']));
                 ?>
 
-                {position: [<?php echo $lat;?>, <?php echo $lng;?>],
+                {
+                    position: [<?php echo $lat;?>, <?php echo $lng;?>],
                     info:
                     '<div class="col-md-12">'+
                     '<?php
@@ -459,23 +460,23 @@
                     '<td span class="direct-chat-timestamp pull-right">'+
                     '<?php
                     if($pb_real==0){ ?>'+
-                        '<label class="label text-navy" style="font-family:Open Sans; font-weight:bold;">Belum Mulai</label>'+
+                        '<label class="label text-navy" style="font-family:Arial; font-weight:bold;">Belum Mulai</label>'+
                     '<?php }
                     else {
                         if($pb_target==0 || $pb_target<=70){
 
                             if($pb_devisi>0){ ?>'+
-                                '<label class="label text-blue" style="font-family:Open Sans; font-weight:bold;"><?php echo $pb_real ?> % (Baik)</label>'+
+                                '<label class="label text-blue" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Baik)</label>'+
                             ' <?php }
                             else {
                                 if($pb_devisi==0 || $pb_devisi>=(-7)){ ?>'+
-                                    '<label class="label text-green" style="font-family:Open Sans; font-weight:bold;"><?php echo $pb_real ?> % (Wajar)</label>'+
+                                    '<label class="label text-green" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Wajar)</label>'+
                                 '<?php }
                                 else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){ ?>'+
-                                    '<label class="label text-yellow" style="font-family:Open Sans; font-weight:bold;"><?php echo $pb_real ?> % (Terlambat)</label>'+
+                                    '<label class="label text-yellow" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Terlambat)</label>'+
                                 '<?php }
                                 else { ?>'+
-                                    '<label class="label text-red" style="font-family:Open Sans; font-weight:bold;"><?php echo $pb_real ?> % (Kritis)</label>'+
+                                    '<label class="label text-red" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Kritis)</label>'+
                                 '<?php }
 
                             }
@@ -483,17 +484,17 @@
                         else if ($pb_target>70 && $pb_target<=100){
 
                             if($pb_devisi>0){ ?>'+
-                                '<label class="label text-blue" style="font-family:Open Sans; font-weight:bold;"><?php echo $pb_real ?> % (Baik)</label>'+
+                                '<label class="label text-blue" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Baik)</label>'+
                             '<?php }
                             else {
                                 if($pb_devisi==0 || $pb_devisi>=(-4)){ ?>'+
-                                    '<label class="label text-green" style="font-family:Open Sans; font-weight:bold;" ><?php echo $pb_real ?> % (Wajar)</label>'+
+                                    '<label class="label text-green" style="font-family:Arial; font-weight:bold;" ><?php echo $pb_real ?> % (Wajar)</label>'+
                                 '<?php }
                                 else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){ ?>'+
-                                    '<label class="label text-yellow" style="font-family:Open Sans; font-weight:bold;"><?php echo $pb_real ?> % (Terlambat)</label>'+
+                                    '<label class="label text-yellow" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Terlambat)</label>'+
                                 '<?php }
                                 else { ?>'+
-                                    '<label class="label text-red" style="font-family:Open Sans; font-weight:bold;"><?php echo $pb_real ?> % (Kritis)</label>'+
+                                    '<label class="label text-red" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Kritis)</label>'+
                                 '<?php }
                             }
                         }
@@ -510,7 +511,7 @@
                     '<div class="col-md-12">'+
                     '<div class="row margin-bottom">'+
                     '<div id="realtarget'+
-                    '" style="width: 500px">'+
+                    '" style="width: 450px">'+
                     '</div>'+
 
                     '<div class="box-body box-profile">'+
@@ -526,8 +527,6 @@
 
                     '</div>'+
 
-                    '</div>'+
-                    '</div>'+
                     '</div>'+
                     '<?php
                     if($pb_real==0){ ?>'+
@@ -860,7 +859,7 @@
 
                             var options = {
                               curveType: 'none',
-                              fontName: 'Open Sans',
+                              fontName: 'Arial',
                               fontSize: '10px',
                               legend: { position: 'top' },series: {
                                   0: { color: '#04A9F5' },
