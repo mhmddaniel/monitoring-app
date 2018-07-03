@@ -5,7 +5,7 @@
     .gmap3{
         margin: 20px auto;
         border: 1px solid #C0C0C0;
-        width: 1000px;
+        width: 600px;
         height: 500px;
     }
     .cluster{
@@ -369,7 +369,6 @@
 
                     {position: [<?php echo $lat;?>, <?php echo $lng;?>],
                         info:
-                        '<section class="content">'+
                         '<div class="col-md-12">'+
                         '<?php
                             if($pb_real==0){ ?>'+
@@ -586,8 +585,7 @@
                         ''+
                         '<?php }
                             }
-                            ?>'+
-                        '</section>',
+                            ?>',
                         label:{
                                 fontFamily:'Arial',
                             color:'#FFFFFF',
