@@ -114,7 +114,7 @@ class API extends CI_Controller{
         if (isset($_POST['user_bagian'])) {
 
             $bagian = $_POST['user_bagian'];
-            $project=$this->m_padmin->get_all_proyek_by_bagian("ciptakarya");
+            $project=$this->m_padmin->get_all_proyek_by_bagian($bagian);
             if($project->num_rows() > 0){
                 $xcadmin=$project->row_array();
 
