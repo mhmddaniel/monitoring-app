@@ -577,10 +577,7 @@ $b=$data->row_array() ;
       title: 'Real Target',
       curveType: 'none',
       fontName: 'Open Sans',
-      legend: { position: 'top' },series: {
-        0: { color: '#04A9F5' },
-        1: { color: '#A389D4' },
-      },
+      legend: { position: 'top' },
       hAxis: {
         title: 'Tanggal',
       },
@@ -616,10 +613,7 @@ $b=$data->row_array() ;
       title: 'Real Target',
       curveType: 'none',
       fontName: 'Open Sans',
-      legend: { position: 'top' },series: {
-        0: { color: '#04A9F5' },
-        1: { color: '#A389D4' },
-      },
+      legend: { position: 'top' },
       hAxis: {
         title: 'Tanggal',
       },

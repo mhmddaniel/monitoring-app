@@ -868,10 +868,7 @@
                               curveType: 'none',
                               fontName: 'Arial',
                               fontSize: '10px',
-                              legend: { position: 'top' },series: {
-                                  0: { color: '#04A9F5' },
-                                  1: { color: '#A389D4' },
-                              },
+                              legend: { position: 'top' },
                               hAxis: {
                                   title: 'Tanggal',
                               },
