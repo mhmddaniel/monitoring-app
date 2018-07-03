@@ -5,7 +5,7 @@
 .gmap3{
     margin: 20px auto;
     border: 1px solid #C0C0C0;
-    width: 800px;
+    width: 750px;
     height: 500px;
 }
 .cluster{
