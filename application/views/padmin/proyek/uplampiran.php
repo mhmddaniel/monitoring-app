@@ -10,7 +10,7 @@ body {
 	background-color: #ffffff;
 	margin: 0 auto;
 	padding: 20px;
-	height: 500px;
+	height: 530px;
 }
 
 .file-upload-btn {
@@ -91,6 +91,7 @@ body {
 	max-height: 200px;
 	max-width: 200px;
 	margin: auto;
+	padding: -50px;
 	padding: 20px;
 }
 
@@ -256,11 +257,11 @@ body {
 									<h3 class="boxttle">Foto Proyek</h3>
 								</div>
 								<div class="file-upload">
-
+									<input type="text" name="namafile" class="form-control" placeholder="Nama Foto" required="required">
 									<div class="image-upload-wrap">
 										<input type="hidden" name="proyek_id" value="<?php echo $b['proyek_id']; ?>">
 										<input type="hidden"  name="jenis"  value="foto" class="form-control">	
-										<input class="file-upload-input" type='file' id="foto"  name="filefoto" onchange="readURL(this);" accept="image/*" />
+										<input class="file-upload-input" type='file' id="foto"  name="filefoto" onchange="readURL(this);" accept="image/*" required="required" />
 										<div class="drag-text">
 
 											<h3><i class="fa fa-cloud-upload"></i><br>DROP FILES HERE <p>OR CLICK TO <span class="text-primary">BROWSE</span></p></h3>
@@ -269,8 +270,8 @@ body {
 
 									<div class="file-upload-content">
 										<img class="file-upload-image" src="#" alt="your image" />
-										<div class="image-title-wrap">
-											<button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+										<div class="image-title-wrap" >
+											<button type="button" onclick="removeUpload()" class="remove-image" >Remove <span class="image-title">Uploaded Image</span></button>
 										</div>
 
 									</div>
@@ -295,10 +296,11 @@ body {
 									<h3 class="boxttle">Dokumen Proyek</h3>
 								</div>
 								<div class="file-upload">
+									<input type="text" name="namafile" class="form-control" placeholder="Nama File" required="required">
 									<div class="image-upload-wrapss">
 										<input type="hidden" name="proyek_id" value="<?php echo $b['proyek_id']; ?>">
 										<input type="hidden"  name="jenis" value="file" class="form-control">
-										<input class="file-upload-inputss" type='file'  name="fileat" onchange="readFile(this);" accept="application/pdf,application/x-rar-compressed, application/octet-stream,application/zip, application/octet-stream, application/x-zip-compressed, multipart/x-zip" />
+										<input class="file-upload-inputss" type='file'  name="fileat" onchange="readFile(this);" accept="application/pdf,application/x-rar-compressed, application/octet-stream,application/zip, application/octet-stream, application/x-zip-compressed, multipart/x-zip" required="required" />
 										<div class="drag-text">
 
 											<h3><i class="fa fa-cloud-upload"></i><br>DROP FILES HERE <p>OR CLICK TO <span class="text-primary">BROWSE</span></p></h3>
@@ -306,7 +308,7 @@ body {
 									</div>
 									<div class="file-upload-contentss">
 										<div class="image-titless-wrap">
-											<button type="button" onclick="removeUploadss()" class="remove-imagess">Remove <span class="image-titless">Uploaded Image</span></button>
+											<button type="button" onclick="removeUploadss()" class="remove-imagess" style="margin-top:50px">Remove <span class="image-titless">Uploaded Image</span></button>
 										</div>
 									</div>
 								</div>

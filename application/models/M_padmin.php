@@ -125,12 +125,12 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 
-	function save_lampiran_foto($proyek_id,$gambar,$jenis){
-		$hsl=$this->db->query("INSERT into file (proyek_id,file_data,file_jenis) VALUES ('$proyek_id','$gambar','$jenis')");
+	function save_lampiran_foto($proyek_id,$namafile,$gambar,$jenis){
+		$hsl=$this->db->query("INSERT into file (proyek_id,file_nama,file_data,file_jenis) VALUES ('$proyek_id','$namafile','$gambar','$jenis')");
 		return $hsl;
 	}
-	function save_lampiran_file($proyek_id,$gambar,$jenis){
-		$hsl=$this->db->query("INSERT into file (proyek_id,file_data,file_jenis) VALUES ('$proyek_id','$gambar','$jenis')");
+	function save_lampiran_file($proyek_id,$namafile,$gambar,$jenis){
+		$hsl=$this->db->query("INSERT into file (proyek_id,file_nama,file_data,file_jenis) VALUES ('$proyek_id','$namafile','$gambar','$jenis')");
 		return $hsl;
 	}
 

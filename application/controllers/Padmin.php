@@ -657,8 +657,9 @@ class Padmin extends CI_Controller{
 
 				$gambar=$gbr['file_name'];
 				$proyek_id=$this->input->post('proyek_id');
+				$namafile=$this->input->post('namafile');
 				$jenis=$this->input->post('jenis');
-				$ggc=$this->m_padmin->save_lampiran_foto($proyek_id,$gambar,$jenis);
+				$ggc=$this->m_padmin->save_lampiran_foto($proyek_id,$namafile,$gambar,$jenis);
 				echo $this->session->set_flashdata('msg','info');
 				redirect('padmin/proyek');
 			} 
@@ -699,8 +700,9 @@ class Padmin extends CI_Controller{
 
 				$gambar=$gbr['file_name'];
 				$proyek_id=$this->input->post('proyek_id');
+				$namafile=$this->input->post('namafile');
 				$jenis=$this->input->post('jenis');
-				$ggc=$this->m_padmin->save_lampiran_file($proyek_id,$gambar,$jenis);
+				$ggc=$this->m_padmin->save_lampiran_file($proyek_id,$namafile,$gambar,$jenis);
 				echo $this->session->set_flashdata('msg','info');
 				redirect('padmin/proyek');
 			} 

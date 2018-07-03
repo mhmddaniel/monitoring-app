@@ -239,7 +239,7 @@ $b=$data->row_array() ;
           ?>
           <tr>
             <td><?php echo $no; ?></td>
-            <td><?php echo $i['file_data']; ?></td>
+            <td><?php echo $i['file_nama']; ?></td>
             <td>
               <a href="<?php echo base_url()?>padmin/download/<?php echo $i['file_id'];?>">
                 <i class="fa fa-download"></i>
