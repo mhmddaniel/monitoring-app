@@ -5,7 +5,7 @@
 .gmap3{
     margin: 20px auto;
     border: 1px solid #C0C0C0;
-    width: 600px;
+    width: 800px;
     height: 500px;
 }
 .cluster{
@@ -237,7 +237,6 @@
                         </div>
                     </div>
                     <div class="tab-pane" id="tab_2">
-                        <div class="col-md-2"></div>
 
                         <div id="test" class="gmap3 col-md-6" style="max-width:100%;"></div>
 
@@ -423,9 +422,9 @@
                         '<?php }
                     }
                     ?>'+
-                    '<div class="box-header with-border"><h3 class="text-center">Detail Proyek</h3></div>'+
+                    '<div class="box-header with-border"><hh5 class="text-center">Detail Proyek</h5></div>'+
                     '<div class="box-body">'+
-                    '<table  class="table table-hover" style="font-size:14px;">'+
+                    '<table  class="table table-hover" style="font-size:10px;">'+
                     '<tr>'+
                     '<input type="hidden" id="markerindex" name="markerindex" value="<?php echo $proyek_id?>">'+
                     '<td><span class="direct-chat-name pull-left"><?php echo $proyek_nama;?></span></td>'+
@@ -511,7 +510,7 @@
                     '<div class="col-md-12">'+
                     '<div class="row margin-bottom">'+
                     '<div id="realtarget'+
-                    '" style="width: 550px">'+
+                    '" style="width: 500px">'+
                     '</div>'+
 
                     '<div class="box-body box-profile">'+
@@ -520,9 +519,9 @@
                     foreach ($foto->result_array() as $i) : ?>'+
                     '<?php if($i['proyek_id']==$proyek_id){?>'+
                     '<div class="col-sm-4">'+
-                    '<a class="btn" data-toggle="modal" data-target="#ModalView<?php echo $i['proyek_id'];?>"><img style="height:150px; width:150px;object-fit:cover;" src="<?php echo base_url().'assets/images/'.$i['file_data'];?>" alt="Photo"></a>'+
+                    '<a class="btn" data-toggle="modal" data-target="#ModalView<?php echo $i['proyek_id'];?>"><img style="height:100px; width:100px;object-fit:cover;" src="<?php echo base_url().'assets/images/'.$i['file_data'];?>" alt="Photo"></a>'+
                     '</div>'+
-                    '<?php $counter++; if($counter>=6){ break;}} ?>'+
+                    '<?php $counter++; if($counter>=3){ break;}} ?>'+
                     '<?php endforeach; ?>'+
 
                     '</div>'+
