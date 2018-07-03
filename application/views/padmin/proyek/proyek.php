@@ -861,6 +861,7 @@
                             var options = {
                               curveType: 'none',
                               fontName: 'Open Sans',
+                              fontSize: '10px',
                               legend: { position: 'top' },series: {
                                   0: { color: '#04A9F5' },
                                   1: { color: '#A389D4' },
