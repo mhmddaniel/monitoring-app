@@ -573,8 +573,12 @@ $b=$data->row_array() ;
 
     var options = {
       title: 'Real Target',
-      curveType: 'function',
-      legend: { position: 'bottom' },
+        curveType: 'none',
+        fontName: 'Open Sans',
+        legend: { position: 'top' },series: {
+            0: { color: '#04A9F5' },
+            1: { color: '#A389D4' },
+        },
       hAxis: {
         title: 'Tanggal',
       },
@@ -608,8 +612,12 @@ $b=$data->row_array() ;
 
     var options = {
       title: 'Real Target',
-      curveType: 'function',
-      legend: { position: 'bottom' },
+        curveType: 'none',
+        fontName: 'Open Sans',
+        legend: { position: 'top' },series: {
+            0: { color: '#04A9F5' },
+            1: { color: '#A389D4' },
+        },
       hAxis: {
         title: 'Tanggal',
       },

@@ -89,7 +89,7 @@ body {
 				<div class="stepwizard">
 					<div class="stepwizard-row setup-panel">
 						<div class="stepwizard-step col-xs-4"> 
-							<a href="#step-1" type="button" class="btn btn-success btn-circle"></a>
+							<a href="#step-1" type="button" class="btn btn-success btn-circle" ></a>
 							<p><small>Proyek</small></p>
 						</div>
 						<div class="stepwizard-step col-xs-4"> 
@@ -140,7 +140,7 @@ body {
 										<option value="ttdp" style="font-family:Open Sans; font-weight:lighter;">Tata Ruang dan Pertanahan</option>
 										<option value="ubp" style="font-family:Open Sans; font-weight:lighter;">UPTD Balai Pengujian</option>
 										<option value="ubpdp" style="font-family:Open Sans; font-weight:lighter;">UPTD Balai Peralatan dan Perbekalan</option>
-										<option value="bkdp style="font-family:Open Sans; font-weight:lighter;"">Bina Kontruksi dan Pengendalian</option>
+										<option value="bkdp" style="font-family:Open Sans; font-weight:lighter;">Bina Kontruksi dan Pengendalian</option>
 									</select>
 								</div>
 							</div>
@@ -189,7 +189,7 @@ body {
 							</div>
 
 						</div>
-						<button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+						<button class="btn btn-primary nextBtn pull-right" type="button"  style="background: linear-gradient(to right, #04A9F5,#1DE9B6); color: white;">Berikutnya</button>
 					</div>
 				</div>
 
@@ -224,7 +224,7 @@ body {
 							</div>
 						</div>
 						<div class="col-md-12">
-							<button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+							<button class="btn btn-primary nextBtn pull-right"  style="background: linear-gradient(to right, #04A9F5,#1DE9B6); color: white;" type="button">Berikutnya</button>
 						</div>
 					</div>
 				</div>

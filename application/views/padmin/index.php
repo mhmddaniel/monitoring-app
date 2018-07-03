@@ -94,19 +94,21 @@
                   <div class="box-body">
                     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
                     <script type="text/javascript">
-                      google.charts.load('current', {'packages':['bar']});
-                      google.charts.setOnLoadCallback(drawChart);
+                        google.charts.load('current', {packages: ['corechart', 'bar']});
+                        google.charts.setOnLoadCallback(drawChart);
 
                       function drawChart() {
                         var data = google.visualization.arrayToDataTable([
-                          ['Month', 'Rencana Awal Kontrak', 'Awal Kontrak', { "role": "style" }],
+                          ['Month', 'Rencana Awal Kontrak', 'Awal Kontrak'],
                             <?php foreach ($countjum->result_array() as $i) :
                             if ($i['proyek_bulan']!=null){?>
-                            ['<?php echo $i['proyek_bulan']; ?>', <?php echo $i['countsech']; ?>, <?php echo $i['countawal']; ?>, 'color: #76A7FA'],
+                            ['<?php echo $i['proyek_bulan']; ?>', <?php echo $i['countsech']; ?>, <?php echo $i['countawal']; ?>],
                             <?php }endforeach; ?>
                           ]);
 
-                        var options = {width: 600,
+                        var options = {
+                            colors: ['#1DC4E9', '#9265E6'],
+                            width: 600,
                             legend: { position: 'top', maxLines: 3 },
                           chart: {
                             title: 'Kontrak'

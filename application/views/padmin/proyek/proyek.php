@@ -72,7 +72,7 @@
                     <li><a href="#tab_2" data-toggle="tab">Lokasi</a></li>
 
                     <?php if($_SESSION['level']=='admin'){ ?>
-                        <li class="pull-right"><a class="btn btn-success btn-flat bg-olive" href="<?php echo base_url().'padmin/tambah_proyek'?>"><span class="fa fa-plus"></span> Tambah Proyek Baru</a></li>
+                        <li class="pull-right"><a class="btn btn-success btn-flat" style="background: linear-gradient(to right, #04A9F5,#1DE9B6); color: white;" href="<?php echo base_url().'padmin/tambah_proyek'?>">Tambah Proyek Baru <span class="fa fa-plus"></span> </a></li>
 
                     <?php } else {} ?>
                 </ul>
@@ -156,6 +156,7 @@
                                                     <div class="col-md-4">
 
                                                         <div class="box-tools pull-right">
+                                                            Progress :
 
                                                             <?php
                                                             if($pb_real==0){
@@ -217,7 +218,7 @@
                                             <div class="row">
                                                 <div class="col-md-9 pull-right">
                                                     <div class="col-md-9">
-                                                        <span class="description-percentage text-green">Penanggung Jawab : <?php echo $i['pn_nama']; ?></span>
+                                                        <span class="description-percentage text-bold">Penanggung Jawab : <?php echo $i['pn_nama']; ?></span>
                                                     </div>
                                                 </div>
                                             </div>
