@@ -176,7 +176,7 @@
                               <tr>
                                 <td><a href="<?php echo base_url().'padmin/detail_proyek/'.$i['proyek_id'];?>"><?php echo $i['proyek_nama']; ?></a></td>
                                 <td><?php echo $i['proyek_tahun']; ?></td>
-                                <td><?php echo $i['proyek_pagu']; ?></td>
+                                <td><?php echo "Rp. ".number_format($i['proyek_pagu']); ?></td>
                                 <td><?php
                                 $up1=date('d-m-Y h:i:s', strtotime($i['last_update']));
                                 $up2=date('d-m-Y h:i:s', strtotime($i['pb_last_update']));
