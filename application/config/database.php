@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => 'root',
-	'database' => 'ppp',
+    'hostname' => 'mysql.hostinger.co.id',
+    'username' => 'u164602079_ppp',
+    'password' => 'karyaplg',
+    'database' => 'u164602079_ppp',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
