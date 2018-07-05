@@ -48,7 +48,7 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 	function diffdateplus(){
-		$hsl=$this->db->query("SELECT count(DISTINCT proyek_awal_kontrak) as countkerja FROM  proyek,proyek_bagian where proyek_awal_kontrak<now() AND pb_real!=100");
+		$hsl=$this->db->query("SELECT count(DISTINCT proyek_id) as countkerja FROM  proyek,proyek_bagian where proyek_awal_kontrak<now() AND pb_real!=100");
 		return $hsl;
 	}
 	function diffdatemin(){
