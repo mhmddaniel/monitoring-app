@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab1672ae-b72f-49a2-b228-19fc4b80026b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/config/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/config/config.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/config/database.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/views/padmin/proyek/proyek.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/padmin/proyek/proyek.php" afterDir="false" />
@@ -22,8 +21,8 @@
       <file leaf-file-name="proyek.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/padmin/proyek/proyek.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="655" column="29" lean-forward="true" selection-start-line="655" selection-start-column="29" selection-end-line="655" selection-end-column="29" />
+            <state relative-caret-position="373">
+              <caret line="671" column="8" selection-start-line="671" selection-start-column="8" selection-end-line="671" selection-end-column="8" />
               <folding>
                 <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#section#1;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#0;n#section#1;n#div#0;n#!!top" expanded="true" />
@@ -217,7 +216,7 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="492" />
+    <option name="x" value="397" />
     <option name="y" value="25" />
     <option name="width" value="1400" />
     <option name="height" value="1061" />
@@ -346,15 +345,15 @@
       <workItem from="1530785082914" duration="711000" />
       <workItem from="1530849959146" duration="2409000" />
       <workItem from="1531049964067" duration="2682000" />
-      <workItem from="1531100917172" duration="5346000" />
+      <workItem from="1531100917172" duration="7304000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85700000" />
+    <option name="totallyTimeSpent" value="87658000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="492" y="25" width="1400" height="1061" extended-state="0" />
+    <frame x="397" y="25" width="1400" height="1061" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
@@ -641,8 +640,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/padmin/proyek/proyek.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="655" column="29" lean-forward="true" selection-start-line="655" selection-start-column="29" selection-end-line="655" selection-end-column="29" />
+        <state relative-caret-position="373">
+          <caret line="671" column="8" selection-start-line="671" selection-start-column="8" selection-end-line="671" selection-end-column="8" />
           <folding>
             <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#section#1;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#0;n#section#1;n#div#0;n#!!top" expanded="true" />

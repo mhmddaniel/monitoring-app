@@ -5,7 +5,7 @@
 .gmap3{
     margin: 20px auto;
     border: 1px solid #C0C0C0;
-    width: 750px;
+    width: 80%;
     height: 500px;
 }
 .cluster{
@@ -241,8 +241,7 @@
 
                         <div id="legend" class="col-md-2"></div>
                         <div id="test" class="gmap3 col-md-7" style="max-width:100%;"></div>
-
-                        <div id="right-panel" class="col-md-3" style="width: 500px">
+                        <div id="right-panel" class="col-md-3" style="width: 100%;">
                             <div class="col-md-12" id="panel-content">
                             </div>
                         </div>
@@ -422,9 +421,9 @@
         '<?php }
             }
             ?>'+
-        '<div class="box-header with-border"><hh5 class="text-center">Detail Proyek</h5></div>'+
+        '<div class="box-header with-border"><h5 class="text-center">Detail Proyek</h5></div>'+
         '<div class="box-body">'+
-        '<table  class="table table-hover" style="font-size:10px;">'+
+        '<table  class="table table-hover" style="font-size:12px;">'+
         '<tr>'+
         '<input type="hidden" id="markerindex" name="markerindex" value="<?php echo $proyek_id?>">'+
         '<td><span class="direct-chat-name pull-left"><?php echo $proyek_nama;?></span></td>'+
@@ -506,7 +505,7 @@
         '<div class="col-md-12">'+
         '<div class="row margin-bottom">'+
         '<div id="realtarget'+
-        '" style="width: 450px">'+
+        '" style="width: 100%;">'+
         '</div>'+
         '<div class="box-body box-profile">'+
         '<?php
@@ -670,8 +669,7 @@
         var div = document.createElement('div');
         div.setAttribute("id", "panel-content");
         div.innerHTML = marker.info;
-
-
+        
         var content = document.getElementById("panel-content");
         panel.replaceChild(div,content);
         drawChart(document.getElementById("markerindex").value);
