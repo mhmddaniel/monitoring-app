@@ -310,13 +310,12 @@ $up2=date('d-m-Y h:i:s', strtotime($i['pb_last_update']));
      aria-labelledby="myModalLabel">
 
 
-    <div class="modal-dialog modal-sm"  role="document">
+    <div class="modal-dialog modal-lg"  role="document">
         <div class="modal-content" >
         <div class="modal-body container-fluid text-center" >
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
                     <div class="col-md-12">
                         <input type="hidden" name="kode" value="<?php echo $proyek_id;?>"/>
-                        <h3 class="text-center"><?php echo $proyek_nama; ?></h3>
                         <table  class="table table-hover" style="font-size:12px;">
                             <tr>
                                 <input type="hidden" id="markerindex" name="markerindex" value="<?php echo $proyek_id?>">
@@ -846,8 +845,7 @@ $up2=date('d-m-Y h:i:s', strtotime($i['pb_last_update']));
 
                           var target = document.getElementById('realtarget');
 
-                          var chart = new google.visualization.LineChart($('#ModalDetail'+index).getElementById('realtarget'));
-                            alert("masuk");
+                          var chart = new google.visualization.LineChart(target);
                           chart.draw(data, options);
                       }
                   </script>
