@@ -49,6 +49,7 @@
 
 
 <div class="content-wrapper">
+    <?php $var = $data->result_array();?>
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
@@ -237,13 +238,14 @@
                         </div>
                     </div>
                     <div class="tab-pane" id="tab_2">
+
+                        <div id="legend" class="col-md-2"></div>
+                        <div id="test" class="gmap3 col-md-7" style="max-width:100%;"></div>
+
                         <div id="right-panel" class="col-md-3" style="width: 500px">
                             <div class="col-md-12" id="panel-content">
                             </div>
                         </div>
-                        <div id="test" class="gmap3 col-md-7" style="max-width:100%;"></div>
-                        <div id="legend" class="col-md-2"></div>
-                        <div class="col-md-2"></div>
                     </div>
                 </div>
             </div>
@@ -344,23 +346,13 @@
             center: [-1.7333385,102.7458134],
             zoom: 8,
             mapTypeId: 'hybrid',
-        })
-
-        .infowindow({
-            content: ''
-        })
-
-        .then(function (iw) {
-            infowindow = iw;
-        })
-
-        .cluster({
+        }).cluster({
             size: 200,
 
 
             markers: [
             <?php
-            $no=0;
+            $no=-1;
             foreach ($data->result_array() as $i) :
                 $no++;
                 $koordinat_id=$i['koordinat_id'];
@@ -384,7 +376,210 @@
                 ?>
 
                 {
+                    id : <?php echo $no;?>,
                     position: [<?php echo $lat;?>, <?php echo $lng;?>],
+                    info:
+        '<div class="col-md-12">'+
+        '<?php
+            if($pb_real==0){ ?>'+
+        '<div class="box box-solid box-default">'+
+        '<?php }
+            else {
+            if($pb_target==0 || $pb_target<=70){
+            if($pb_devisi>0){ ?>'+
+        '<div class="box box-solid box-primary">'+
+        ' <?php }
+            else {
+            if($pb_devisi==0 || $pb_devisi>=(-7)){ ?>'+
+        '<div class="box box-solid box-success">'+
+        '<?php }
+            else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){ ?>'+
+        '<div class="box box-solid box-warning">'+
+        '<?php }
+            else { ?>'+
+        '<div class="box box-solid box-danger">'+
+        '<?php }
+            }
+            }
+            else if ($pb_target>70 && $pb_target<=100){
+            if($pb_devisi>0){ ?>'+
+        '<div class="box box-solid box-primary">'+
+        '<?php }
+            else {
+            if($pb_devisi==0 || $pb_devisi>=(-4)){ ?>'+
+        '<div class="box box-solid box-success">'+
+        '<?php }
+            else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){ ?>'+
+        '<div class="box box-solid box-warning">'+
+        '<?php }
+            else { ?>'+
+        '<div class="box box-solid box-danger">'+
+        '<?php }
+            }
+            }
+            else { ?>'+
+        ''+
+        '<?php }
+            }
+            ?>'+
+        '<div class="box-header with-border"><hh5 class="text-center">Detail Proyek</h5></div>'+
+        '<div class="box-body">'+
+        '<table  class="table table-hover" style="font-size:10px;">'+
+        '<tr>'+
+        '<input type="hidden" id="markerindex" name="markerindex" value="<?php echo $proyek_id?>">'+
+        '<td><span class="direct-chat-name pull-left"><?php echo $proyek_nama;?></span></td>'+
+        '<td><span class="direct-chat-timestamp pull-right"></span></td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td><span class="direct-chat-name pull-left">Tahun</span></td>'+
+        '<td><span class="direct-chat-timestamp pull-right"><?php echo $proyek_tahun;?></span></td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td><span class="direct-chat-name pull-left">Nilai Kontrak</span></td>'+
+        '<td><span class="direct-chat-timestamp pull-right"><?php echo number_format($proyek_keuangan);?></span></td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td><span class="direct-chat-name pull-left">Pagu</span></td>'+
+        '<td><span class="direct-chat-timestamp pull-right"><?php echo number_format($proyek_pagu);?></span></td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td><span class="direct-chat-name pull-left">Rencana Kontrak</span></td>'+
+        '<td><span class="direct-chat-timestamp pull-right"><?php echo date('d-m-Y', strtotime($proyek_sech_awal));?></span></td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td><span class="direct-chat-name pull-left">Awal Kontrak</span></td>'+
+        '<td><span class="direct-chat-timestamp pull-right"><?php echo date('d-m-Y', strtotime($proyek_awal_kontrak));?></span></td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td><span class="direct-chat-name pull-left">Akhir Kontrak</span></td>'+
+        '<td><span class="direct-chat-timestamp pull-right"><?php echo date('d-m-Y', strtotime($proyek_akhir_kontrak));?></span></td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td><span class="direct-chat-name pull-left">Progress Proyek</span></td>'+
+        '<td span class="direct-chat-timestamp pull-right">'+
+        '<?php
+            if($pb_real==0){ ?>'+
+        '<label class="label text-navy" style="font-family:Arial; font-weight:bold;">Belum Mulai</label>'+
+        '<?php }
+            else {
+            if($pb_target==0 || $pb_target<=70){
+            if($pb_devisi>0){ ?>'+
+        '<label class="label text-blue" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Baik)</label>'+
+        ' <?php }
+            else {
+            if($pb_devisi==0 || $pb_devisi>=(-7)){ ?>'+
+        '<label class="label text-green" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Wajar)</label>'+
+        '<?php }
+            else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){ ?>'+
+        '<label class="label text-yellow" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Terlambat)</label>'+
+        '<?php }
+            else { ?>'+
+        '<label class="label text-red" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Kritis)</label>'+
+        '<?php }
+            }
+            }
+            else if ($pb_target>70 && $pb_target<=100){
+            if($pb_devisi>0){ ?>'+
+        '<label class="label text-blue" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Baik)</label>'+
+        '<?php }
+            else {
+            if($pb_devisi==0 || $pb_devisi>=(-4)){ ?>'+
+        '<label class="label text-green" style="font-family:Arial; font-weight:bold;" ><?php echo $pb_real ?> % (Wajar)</label>'+
+        '<?php }
+            else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){ ?>'+
+        '<label class="label text-yellow" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Terlambat)</label>'+
+        '<?php }
+            else { ?>'+
+        '<label class="label text-red" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Kritis)</label>'+
+        '<?php }
+            }
+            }
+            else { ?>'+
+        ''+
+        '<?php }
+            }
+            ?>'+
+        '</td>'+
+        '</tr>'+
+        '</table>'+
+        '<div class="col-md-12 table-responsive" >'+
+        '<div class="col-md-12">'+
+        '<div class="row margin-bottom">'+
+        '<div id="realtarget'+
+        '" style="width: 450px">'+
+        '</div>'+
+        '<div class="box-body box-profile">'+
+        '<?php
+            $counter=0;
+            foreach ($foto->result_array() as $i) : ?>'+
+        '<?php if($i['proyek_id']==$proyek_id){?>'+
+        '<div class="col-sm-4">'+
+        '<a class="btn" data-toggle="modal" data-target="#ModalView<?php echo $i['proyek_id'];?>"><img style="height:100px; width:100px;object-fit:cover;" src="<?php echo base_url().'assets/images/'.$i['file_data'];?>" alt="Photo"></a>'+
+        '</div>'+
+        '<?php $counter++; if($counter>=3){ break;}} ?>'+
+        '<?php endforeach; ?>'+
+        '</div>'+
+        '</div>'+
+        '<?php
+            if($pb_real==0){ ?>'+
+        '<div class="text-center">'+
+        '<a class="btn btn-flat bg-gray" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
+        '</div>'+
+        '<?php }
+            else {
+            if($pb_target==0 || $pb_target<=70){
+            if($pb_devisi>0){ ?>'+
+        '<div class="text-center">'+
+        '<a class="btn btn-flat bg-blue" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
+        '</div>'+
+        ' <?php }
+            else {
+            if($pb_devisi==0 || $pb_devisi>=(-7)){ ?>'+
+        '<div class="text-center">'+
+        '<a class="btn btn-flat bg-green" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
+        '</div>'+
+        '<?php }
+            else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){ ?>'+
+        '<div class="text-center">'+
+        '<a class="btn btn-flat bg-yellow" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
+        '</div>'+
+        '<?php }
+            else { ?>'+
+        '<div class="text-center">'+
+        '<a class="btn btn-flat bg-red" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
+        '</div>'+
+        '<?php }
+            }
+            }
+            else if ($pb_target>70 && $pb_target<=100){
+            if($pb_devisi>0){ ?>'+
+        '<div class="text-center">'+
+        '<a class="btn btn-flat bg-blue" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
+        '</div>'+
+        '<?php }
+            else {
+            if($pb_devisi==0 || $pb_devisi>=(-4)){ ?>'+
+        '<div class="text-center">'+
+        '<a class="btn btn-flat bg-green" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
+        '</div>'+
+        '<?php }
+            else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){ ?>'+
+        '<div class="text-center">'+
+        '<a class="btn btn-flat bg-yellow" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
+        '</div>'+
+        '<?php }
+            else { ?>'+
+        '<div class="text-center">'+
+        '<a class="btn btn-flat bg-red" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
+        '</div>'+
+        '<?php }
+            }
+            }
+            else { ?>'+
+        ''+
+        '<?php }
+            }
+            ?>',
                     label:{
                         fontFamily:'Arial',
                         color:'#FFFFFF',
@@ -467,235 +662,23 @@
                         }
                     }
                 })
-.on('click', function (marker, clusterOverlay, cluster, event) {
+            .on('click', function (marker, clusterOverlay, cluster, event) {
     if (marker) {
+        var index = (marker.id);
         var panel = document.getElementById('right-panel');
 
         var div = document.createElement('div');
-        div.innerHTML = '<div class="col-md-12" id="panel-content">'+
-            '<?php
-                if($pb_real==0){ ?>'+
-            '<div class="box box-solid box-default">'+
-            '<?php }
-                else {
-                if($pb_target==0 || $pb_target<=70){
+        div.setAttribute("id", "panel-content");
+        div.innerHTML = marker.info;
 
-                if($pb_devisi>0){ ?>'+
-            '<div class="box box-solid box-primary">'+
-            ' <?php }
-                else {
-                if($pb_devisi==0 || $pb_devisi>=(-7)){ ?>'+
-            '<div class="box box-solid box-success">'+
-            '<?php }
-                else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){ ?>'+
-            '<div class="box box-solid box-warning">'+
-            '<?php }
-                else { ?>'+
-            '<div class="box box-solid box-danger">'+
-            '<?php }
 
-                }
-                }
-                else if ($pb_target>70 && $pb_target<=100){
-
-                if($pb_devisi>0){ ?>'+
-            '<div class="box box-solid box-primary">'+
-            '<?php }
-                else {
-                if($pb_devisi==0 || $pb_devisi>=(-4)){ ?>'+
-            '<div class="box box-solid box-success">'+
-            '<?php }
-                else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){ ?>'+
-            '<div class="box box-solid box-warning">'+
-            '<?php }
-                else { ?>'+
-            '<div class="box box-solid box-danger">'+
-            '<?php }
-                }
-                }
-                else { ?>'+
-            ''+
-            '<?php }
-                }
-                ?>'+'<div class="box-header with-border"><hh5 class="text-center">Detail Proyek</h5></div>'+
-            '<div class="box-body">'+
-            '<table  class="table table-hover" style="font-size:12x;">'+
-            '<tr>'+
-            '<input type="hidden" id="markerindex" name="markerindex" value="<?php echo $proyek_id?>">'+
-            '<td><span class="direct-chat-name pull-left"><?php echo $proyek_nama;?></span></td>'+
-            '<td><span class="direct-chat-timestamp pull-right"></span></td>'+
-            '</tr>'+
-            '<tr>'+
-            '<td><span class="direct-chat-name pull-left">Tahun</span></td>'+
-            '<td><span class="direct-chat-timestamp pull-right"><?php echo $proyek_tahun;?></span></td>'+
-            '</tr>'+
-            '<tr>'+
-            '<td><span class="direct-chat-name pull-left">Nilai Kontrak</span></td>'+
-            '<td><span class="direct-chat-timestamp pull-right"><?php echo number_format($proyek_keuangan);?></span></td>'+
-            '</tr>'+
-            '<tr>'+
-            '<td><span class="direct-chat-name pull-left">Pagu</span></td>'+
-            '<td><span class="direct-chat-timestamp pull-right"><?php echo number_format($proyek_pagu);?></span></td>'+
-            '</tr>'+
-            '<tr>'+
-            '<td><span class="direct-chat-name pull-left">Rencana Kontrak</span></td>'+
-            '<td><span class="direct-chat-timestamp pull-right"><?php echo date('d-m-Y', strtotime($proyek_sech_awal));?></span></td>'+
-            '</tr>'+
-            '<tr>'+
-            '<td><span class="direct-chat-name pull-left">Awal Kontrak</span></td>'+
-            '<td><span class="direct-chat-timestamp pull-right"><?php echo date('d-m-Y', strtotime($proyek_awal_kontrak));?></span></td>'+
-            '</tr>'+
-            '<tr>'+
-            '<td><span class="direct-chat-name pull-left">Akhir Kontrak</span></td>'+
-            '<td><span class="direct-chat-timestamp pull-right"><?php echo date('d-m-Y', strtotime($proyek_akhir_kontrak));?></span></td>'+
-            '</tr>'+
-            '<tr>'+
-            '<td><span class="direct-chat-name pull-left">Progress Proyek</span></td>'+
-            '<td span class="direct-chat-timestamp pull-right">'+
-            '<?php
-                if($pb_real==0){ ?>'+
-            '<label class="label text-navy" style="font-family:Arial; font-weight:bold;">Belum Mulai</label>'+
-            '<?php }
-                else {
-                if($pb_target==0 || $pb_target<=70){
-
-                if($pb_devisi>0){ ?>'+
-            '<label class="label text-blue" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Baik)</label>'+
-            ' <?php }
-                else {
-                if($pb_devisi==0 || $pb_devisi>=(-7)){ ?>'+
-            '<label class="label text-green" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Wajar)</label>'+
-            '<?php }
-                else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){ ?>'+
-            '<label class="label text-yellow" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Terlambat)</label>'+
-            '<?php }
-                else { ?>'+
-            '<label class="label text-red" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Kritis)</label>'+
-            '<?php }
-
-                }
-                }
-                else if ($pb_target>70 && $pb_target<=100){
-
-                if($pb_devisi>0){ ?>'+
-            '<label class="label text-blue" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Baik)</label>'+
-            '<?php }
-                else {
-                if($pb_devisi==0 || $pb_devisi>=(-4)){ ?>'+
-            '<label class="label text-green" style="font-family:Arial; font-weight:bold;" ><?php echo $pb_real ?> % (Wajar)</label>'+
-            '<?php }
-                else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){ ?>'+
-            '<label class="label text-yellow" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Terlambat)</label>'+
-            '<?php }
-                else { ?>'+
-            '<label class="label text-red" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Kritis)</label>'+
-            '<?php }
-                }
-                }
-                else { ?>'+
-            ''+
-            '<?php }
-                }
-                ?>'+
-
-            '</td>'+
-            '</tr>'+
-            '</table>'+
-            '<div class="col-md-12 table-responsive" >'+
-            '<div class="col-md-12">'+
-            '<div class="row margin-bottom">'+
-            '<div id="realtarget'+
-            '" style="width: 450px">'+
-            '</div>'+
-
-            '<div class="box-body box-profile">'+
-            '<?php
-                $counter=0;
-                foreach ($foto->result_array() as $i) : ?>'+
-            '<?php if($i['proyek_id']==$proyek_id){?>'+
-            '<div class="col-sm-4">'+
-            '<a class="btn" data-toggle="modal" data-target="#ModalView<?php echo $i['proyek_id'];?>"><img style="height:100px; width:100px;object-fit:cover;" src="<?php echo base_url().'assets/images/'.$i['file_data'];?>" alt="Photo"></a>'+
-            '</div>'+
-            '<?php $counter++; if($counter>=3){ break;}} ?>'+
-            '<?php endforeach; ?>'+
-
-            '</div>'+
-
-            '</div>'+
-            '<?php
-                if($pb_real==0){ ?>'+
-
-            '<div class="text-center">'+
-            '<a class="btn btn-flat bg-gray" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
-            '</div>'+
-            '<?php }
-                else {
-                if($pb_target==0 || $pb_target<=70){
-
-                if($pb_devisi>0){ ?>'+
-            '<div class="text-center">'+
-            '<a class="btn btn-flat bg-blue" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
-            '</div>'+
-            ' <?php }
-                else {
-                if($pb_devisi==0 || $pb_devisi>=(-7)){ ?>'+
-            '<div class="text-center">'+
-            '<a class="btn btn-flat bg-green" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
-            '</div>'+
-            '<?php }
-                else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){ ?>'+
-            '<div class="text-center">'+
-            '<a class="btn btn-flat bg-yellow" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
-            '</div>'+
-            '<?php }
-                else { ?>'+
-            '<div class="text-center">'+
-            '<a class="btn btn-flat bg-red" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
-            '</div>'+
-            '<?php }
-
-                }
-                }
-                else if ($pb_target>70 && $pb_target<=100){
-
-                if($pb_devisi>0){ ?>'+
-            '<div class="text-center">'+
-            '<a class="btn btn-flat bg-blue" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
-            '</div>'+
-            '<?php }
-                else {
-                if($pb_devisi==0 || $pb_devisi>=(-4)){ ?>'+
-            '<div class="text-center">'+
-            '<a class="btn btn-flat bg-green" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
-            '</div>'+
-            '<?php }
-                else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){ ?>'+
-            '<div class="text-center">'+
-            '<a class="btn btn-flat bg-yellow" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
-            '</div>'+
-            '<?php }
-                else { ?>'+
-            '<div class="text-center">'+
-            '<a class="btn btn-flat bg-red" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>'+
-            '</div>'+
-            '<?php }
-                }
-                }
-                else { ?>'+
-            ''+
-            '<?php }
-                }
-                ?>';
         var content = document.getElementById("panel-content");
         panel.replaceChild(div,content);
         drawChart(document.getElementById("markerindex").value);
 
     }
-})
-
-}).controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
-
-
+});
+});
 </script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">

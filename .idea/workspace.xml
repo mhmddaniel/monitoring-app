@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab1672ae-b72f-49a2-b228-19fc4b80026b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/config/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/config/config.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/config/database.php" afterDir="false" />
@@ -23,11 +22,11 @@
       <file leaf-file-name="proyek.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/padmin/proyek/proyek.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="365">
-              <caret line="474" column="48" selection-start-line="474" selection-start-column="48" selection-end-line="474" selection-end-column="66" />
+            <state relative-caret-position="152">
+              <caret line="655" column="29" lean-forward="true" selection-start-line="655" selection-start-column="29" selection-end-line="655" selection-end-column="29" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#section#1;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#section#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#section#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#0;n#section#1;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
               </folding>
             </state>
@@ -37,8 +36,17 @@
       <file leaf-file-name="M_padmin.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/M_padmin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="145" selection-start-line="30" selection-start-column="145" selection-end-line="30" selection-end-column="145" />
+            <state relative-caret-position="105">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Padmin.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/Padmin.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="630">
+              <caret line="42" column="28" selection-start-line="42" selection-start-column="20" selection-end-line="42" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -110,15 +118,10 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>sum_prog</find>
-      <find>alert</find>
-      <find>$pb_devisi</find>
-      <find>yellow</find>
       <find>legend</find>
       <find>anda yakin ingin keluar</find>
       <find>onload</find>
       <find>get_chart</find>
-      <find>proyek()</find>
       <find>script</find>
       <find>Gallery</find>
       <find>detail_proyek</find>
@@ -140,6 +143,11 @@
       <find>Rencanawa</find>
       <find>morris</find>
       <find>chart</find>
+      <find>pr</find>
+      <find>get_all_proyek</find>
+      <find>get_all_proyek()</find>
+      <find>proyek()</find>
+      <find>markerindex</find>
     </findStrings>
     <replaceStrings>
       <replace>$i['pb_devisi']</replace>
@@ -209,8 +217,8 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="903" />
-    <option name="y" value="141" />
+    <option name="x" value="492" />
+    <option name="y" value="25" />
     <option name="width" value="1400" />
     <option name="height" value="1061" />
   </component>
@@ -220,7 +228,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -286,6 +293,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -335,14 +343,18 @@
       <workItem from="1530579632586" duration="1510000" />
       <workItem from="1530584833019" duration="26491000" />
       <workItem from="1530690541322" duration="3785000" />
+      <workItem from="1530785082914" duration="711000" />
+      <workItem from="1530849959146" duration="2409000" />
+      <workItem from="1531049964067" duration="2682000" />
+      <workItem from="1531100917172" duration="5346000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="74552000" />
+    <option name="totallyTimeSpent" value="85700000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="903" y="141" width="1400" height="1061" extended-state="0" />
+    <frame x="492" y="25" width="1400" height="1061" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
@@ -564,13 +576,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Padmin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4039">
-          <caret line="173" column="65" selection-start-line="173" selection-start-column="65" selection-end-line="173" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/padmin/login.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
@@ -592,13 +597,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/padmin/proyek/detail_proyek.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8685">
-          <caret line="579" column="33" selection-start-line="579" selection-start-column="33" selection-end-line="579" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/padmin/header.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -613,13 +611,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/M_padmin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="145" selection-start-line="30" selection-start-column="145" selection-end-line="30" selection-end-column="145" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/API.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1740">
@@ -627,13 +618,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/M_padmin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Padmin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" column="28" selection-start-line="42" selection-start-column="20" selection-end-line="42" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/padmin/proyek/detail_proyek.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8685">
+          <caret line="579" column="33" selection-start-line="579" selection-start-column="33" selection-end-line="579" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/padmin/proyek/proyek.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="474" column="48" selection-start-line="474" selection-start-column="48" selection-end-line="474" selection-end-column="66" />
+        <state relative-caret-position="152">
+          <caret line="655" column="29" lean-forward="true" selection-start-line="655" selection-start-column="29" selection-end-line="655" selection-end-column="29" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#section#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#section#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#section#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#0;n#section#1;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
           </folding>
         </state>
