@@ -399,8 +399,7 @@ $up2=date('d-m-Y h:i:s', strtotime($i['pb_last_update']));
             <div class="col-md-12 table-responsive" >
                 <div class="col-md-12">
                     <div class="row margin-bottom">
-                        <div id="realtarget
-        " style="width: 100%;">
+                        <div id="realtarget" style="width: 100%;">
                         </div>
                         <div class="box-body box-profile">
                             <?php
@@ -410,7 +409,7 @@ $up2=date('d-m-Y h:i:s', strtotime($i['pb_last_update']));
                                     <div class="col-sm-4">
                                         <a class="btn" data-toggle="modal" data-target="#ModalView<?php echo $i['proyek_id'];?>"><img style="height:100px; width:100px;object-fit:cover;" src="<?php echo base_url().'assets/images/'.$i['file_data'];?>" alt="Photo"></a>
                                     </div>
-                                    <?php $counter; if($counter>=3){ break;}} ?>
+                                    <?php $counter++; if($counter>=3){ break;}} ?>
                             <?php endforeach; ?>
                         </div>
                     </div>
