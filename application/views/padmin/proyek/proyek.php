@@ -406,9 +406,9 @@ $up2=date('d-m-Y h:i:s', strtotime($i['pb_last_update']));
                             <?php
                             $counter=0;
                             foreach ($foto->result_array() as $i) : ?>
-                                <?php if($i[proyek_id]==$proyek_id){?>
+                                <?php if($i['proyek_id']==$proyek_id){?>
                                     <div class="col-sm-4">
-                                        <a class="btn" data-toggle="modal" data-target="#ModalView<?php echo $i[proyek_id];?>"><img style="height:100px; width:100px;object-fit:cover;" src="<?php echo base_url().'assets/images/'.$i[file_data];?>" alt="Photo"></a>
+                                        <a class="btn" data-toggle="modal" data-target="#ModalView<?php echo $i['proyek_id'];?>"><img style="height:100px; width:100px;object-fit:cover;" src="<?php echo base_url().'assets/images/'.$i[file_data];?>" alt="Photo"></a>
                                     </div>
                                     <?php $counter; if($counter>=3){ break;}} ?>
                             <?php endforeach; ?>
@@ -655,9 +655,9 @@ $up2=date('d-m-Y h:i:s', strtotime($i['pb_last_update']));
             .on('click', function (marker, clusterOverlay, cluster, event) {
     if (marker) {
         var index = (marker.id);
-        $('#ModalDetail'+index).modal('show');
-        drawChart(document.getElementById("markerindex").value);
-
+        $('#ModalDetail'+index).modal('show').on('shown.bs.modal', function (e) {
+            drawChart(document.getElementById("markerindex").value);
+        });
     }
 });
 });
@@ -813,7 +813,7 @@ $up2=date('d-m-Y h:i:s', strtotime($i['pb_last_update']));
                         google.charts.load('current', {'packages': ['corechart']});
                         function drawChart(index) {
 
-
+                            alert("masuk");
                             <?php
                             $result = $chartrt->result_array(); ?>
 
