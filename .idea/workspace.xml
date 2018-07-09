@@ -21,8 +21,8 @@
       <file leaf-file-name="proyek.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/padmin/proyek/proyek.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="845" column="77" selection-start-line="845" selection-start-column="77" selection-end-line="845" selection-end-column="77" />
+            <state relative-caret-position="173">
+              <caret line="654" column="32" selection-start-line="654" selection-start-column="32" selection-end-line="654" selection-end-column="32" />
               <folding>
                 <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#section#1;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#0;n#section#1;n#div#0;n#!!top" expanded="true" />
@@ -129,9 +129,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>get_chart</find>
-      <find>script</find>
-      <find>Gallery</find>
       <find>detail_proyek</find>
       <find>get_all_gal</find>
       <find>Galler</find>
@@ -155,10 +152,13 @@
       <find>get_all_proyek</find>
       <find>get_all_proyek()</find>
       <find>proyek()</find>
-      <find>markerindex</find>
       <find>realtarget</find>
       <find>masuk</find>
       <find>$i[</find>
+      <find>markerindex</find>
+      <find>drawChart(</find>
+      <find>index</find>
+      <find>alert</find>
     </findStrings>
     <replaceStrings>
       <replace>$i['pb_devisi']</replace>
@@ -357,12 +357,12 @@
       <workItem from="1530785082914" duration="711000" />
       <workItem from="1530849959146" duration="2409000" />
       <workItem from="1531049964067" duration="2682000" />
-      <workItem from="1531100917172" duration="11983000" />
+      <workItem from="1531100917172" duration="12937000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92337000" />
+    <option name="totallyTimeSpent" value="93291000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="638" y="38" width="1400" height="1061" extended-state="0" />
@@ -652,8 +652,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/padmin/proyek/proyek.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="845" column="77" selection-start-line="845" selection-start-column="77" selection-end-line="845" selection-end-column="77" />
+        <state relative-caret-position="173">
+          <caret line="654" column="32" selection-start-line="654" selection-start-column="32" selection-end-line="654" selection-end-column="32" />
           <folding>
             <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#section#1;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#0;n#section#1;n#div#0;n#!!top" expanded="true" />

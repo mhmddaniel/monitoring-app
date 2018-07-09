@@ -398,7 +398,7 @@ $up2=date('d-m-Y h:i:s', strtotime($i['pb_last_update']));
             <div class="col-md-12 table-responsive" >
                 <div class="col-md-12">
                     <div class="row margin-bottom">
-                        <div id="realtarget" style="width: 100%;">
+                        <div id="realtarget<?php echo $proyek_id; ?>" style="width: 100%;">
                         </div>
                         <div class="box-body box-profile">
                             <?php
@@ -654,7 +654,7 @@ $up2=date('d-m-Y h:i:s', strtotime($i['pb_last_update']));
     if (marker) {
         var index = (marker.id);
         $('#ModalDetail'+index).modal('show').on('shown.bs.modal', function (e) {
-            drawChart(document.getElementById("markerindex").value);
+            drawChart(index);
         });
     }
 });
@@ -843,8 +843,7 @@ $up2=date('d-m-Y h:i:s', strtotime($i['pb_last_update']));
                               pointSize: 4,
                           };
 
-                          var target = document.getElementById('realtarget');
-
+                          var target = document.getElementById('realtarget'+index);
                           var chart = new google.visualization.LineChart(target);
                           chart.draw(data, options);
                       }
