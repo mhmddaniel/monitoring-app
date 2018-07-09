@@ -253,6 +253,24 @@
 </div>
 
 <?php foreach ($data->result_array() as $i) :
+$koordinat_id=$i['koordinat_id'];
+$lat=$i['koordinat_lat'];
+$lng=$i['koordinat_lng'];
+$value=$i['koordinat_value'];
+$proyek_id=$i['proyek_id'];
+$proyek_nama=$i['proyek_nama'];
+$proyek_tahun=$i['proyek_tahun'];
+$proyek_keuangan=$i['proyek_keuangan'];
+$proyek_pagu=$i['proyek_pagu'];
+$proyek_sech_awal=$i['proyek_sech_awal'];
+$proyek_awal_kontrak=$i['proyek_awal_kontrak'];
+$proyek_akhir_kontrak=$i['proyek_akhir_kontrak'];
+$koordinat_nama=$i['koordinat_nama'];
+$pb_target=$i['pb_target'];
+$pb_real=$i['pb_real'];
+$pb_devisi=$i['pb_devisi'];
+$up1=date('d-m-Y h:i:s', strtotime($i['last_update']));
+$up2=date('d-m-Y h:i:s', strtotime($i['pb_last_update']));
     $proyek_id=$i['proyek_id'];
     $proyek_nama=$i['proyek_nama'];
     $proyek_pagu=$i['proyek_pagu'];
@@ -288,48 +306,8 @@
     </div>
 
 
-<?php
-if($pb_real==0){ ?>
-<div class="modal fade" id="ModalDetail<?php echo $proyek_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <?php }
-    else {
-    if($pb_target==0 || $pb_target<=70){
-    if($pb_devisi>0){ ?>
-    <div class="modal modal-primary fade" id="ModalDetail<?php echo $proyek_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <?php }
-        else {
-        if($pb_devisi==0 || $pb_devisi>=(-7)){ ?>
-        <div class="modal modal-success fade" id="ModalDetail<?php echo $proyek_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <?php }
-            else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){ ?>
-            <div class="modal modal-warning fade" id="ModalDetail<?php echo $proyek_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <?php }
-                else { ?>
-                <div class="modal modal-danger fade" id="ModalDetail<?php echo $proyek_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <?php }
-                    }
-                    }
-                    else if ($pb_target>70 && $pb_target<=100){
-                    if($pb_devisi>0){ ?>
-                    <div class="modal modal-primary fade" id="ModalDetail<?php echo $proyek_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                        <?php }
-                        else {
-                        if($pb_devisi==0 || $pb_devisi>=(-4)){ ?>
-                        <div class="modal modal-success fade" id="ModalDetail<?php echo $proyek_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                            <?php }
-                            else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){ ?>
-                            <div class="modal modal-warning fade" id="ModalDetail<?php echo $proyek_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                <?php }
-                                else { ?>
-                                <div class="modal modal-danger fade" id="ModalDetail<?php echo $proyek_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                    <?php }
-                                    }
-                                    }
-                                    else { ?>
-
-                                    <?php }
-                                    }
-                                    ?>
+<div class="modal fade" id="ModalDetail<?php echo $proyek_id; ?>" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
 
 
     <div class="modal-dialog modal-sm"  role="document">
@@ -339,20 +317,165 @@ if($pb_real==0){ ?>
                     <div class="col-md-12">
                         <input type="hidden" name="kode" value="<?php echo $proyek_id;?>"/>
                         <h3 class="text-center"><?php echo $proyek_nama; ?></h3>
-                    </div>
-                    <div class="col-md-12">
+                        <table  class="table table-hover" style="font-size:12px;">
+                            <tr>
+                                <input type="hidden" id="markerindex" name="markerindex" value="<?php echo $proyek_id?>">
+                                <td><span class="direct-chat-name pull-left"><?php echo $proyek_nama;?></span></td>
+                                <td><span class="direct-chat-timestamp pull-right"></span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="direct-chat-name pull-left">Tahun</span></td>
+                                <td><span class="direct-chat-timestamp pull-right"><?php echo $proyek_tahun;?></span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="direct-chat-name pull-left">Nilai Kontrak</span></td>
+                                <td><span class="direct-chat-timestamp pull-right"><?php echo number_format($proyek_keuangan);?></span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="direct-chat-name pull-left">Pagu</span></td>
+                                <td><span class="direct-chat-timestamp pull-right"><?php echo number_format($proyek_pagu);?></span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="direct-chat-name pull-left">Rencana Kontrak</span></td>
+                                <td><span class="direct-chat-timestamp pull-right"><?php echo date('d-m-Y', strtotime($proyek_sech_awal));?></span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="direct-chat-name pull-left">Awal Kontrak</span></td>
+                                <td><span class="direct-chat-timestamp pull-right"><?php echo date('d-m-Y', strtotime($proyek_awal_kontrak));?></span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="direct-chat-name pull-left">Akhir Kontrak</span></td>
+                                <td><span class="direct-chat-timestamp pull-right"><?php echo date('d-m-Y', strtotime($proyek_akhir_kontrak));?></span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="direct-chat-name pull-left">Progress Proyek</span></td>
+                                <td span class="direct-chat-timestamp pull-right">
+                                    <?php
+                                    if($pb_real==0){ ?>
+                                        <label class="label text-navy" style="font-family:Arial; font-weight:bold;">Belum Mulai</label>
+                                    <?php }
+                                    else {
+                                        if($pb_target==0 || $pb_target<=70){
+                                            if($pb_devisi>0){ ?>
+                                                <label class="label text-blue" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Baik)</label>
+                                            <?php }
+                                            else {
+                                                if($pb_devisi==0 || $pb_devisi>=(-7)){ ?>
+                                                    <label class="label text-green" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Wajar)</label>
+                                                <?php }
+                                                else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){ ?>
+                                                    <label class="label text-yellow" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Terlambat)</label>
+                                                <?php }
+                                                else { ?>
+                                                    <label class="label text-red" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Kritis)</label>
+                                                <?php }
+                                            }
+                                        }
+                                        else if ($pb_target>70 && $pb_target<=100){
+                                            if($pb_devisi>0){ ?>
+                                                <label class="label text-blue" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Baik)</label>
+                                            <?php }
+                                            else {
+                                                if($pb_devisi==0 || $pb_devisi>=(-4)){ ?>
+                                                    <label class="label text-green" style="font-family:Arial; font-weight:bold;" ><?php echo $pb_real ?> % (Wajar)</label>
+                                                <?php }
+                                                else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){ ?>
+                                                    <label class="label text-yellow" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Terlambat)</label>
+                                                <?php }
+                                                else { ?>
+                                                    <label class="label text-red" style="font-family:Arial; font-weight:bold;"><?php echo $pb_real ?> % (Kritis)</label>
+                                                <?php }
+                                            }
+                                        }
+                                        else { ?>
 
-                        <div class="iconcolor">
-                            <i class="fa fa-warning" style="font-size:200px;"></i>
+                                        <?php }
+                                    }
+                                    ?>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+            <div class="col-md-12 table-responsive" >
+                <div class="col-md-12">
+                    <div class="row margin-bottom">
+                        <div id="realtarget
+        " style="width: 100%;">
+                        </div>
+                        <div class="box-body box-profile">
+                            <?php
+                            $counter=0;
+                            foreach ($foto->result_array() as $i) : ?>
+                                <?php if($i[proyek_id]==$proyek_id){?>
+                                    <div class="col-sm-4">
+                                        <a class="btn" data-toggle="modal" data-target="#ModalView<?php echo $i[proyek_id];?>"><img style="height:100px; width:100px;object-fit:cover;" src="<?php echo base_url().'assets/images/'.$i[file_data];?>" alt="Photo"></a>
+                                    </div>
+                                    <?php $counter; if($counter>=3){ break;}} ?>
+                            <?php endforeach; ?>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <br>
-                        Apakah Anda yakin ingin menghapus proyek ini ?
-                    </div>
-                    <div class="col-md-6 col-md-offset-3"><br>
-                        <button type="submit" class="btn btn-danger btn-round col-md-12" id="simpan">Hapus</button>
-                    </div>
+                    <?php
+                    if($pb_real==0){ ?>
+                        <div class="text-center">
+                            <a class="btn btn-flat bg-gray" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>
+                        </div>
+                    <?php }
+                    else {
+                        if($pb_target==0 || $pb_target<=70){
+                            if($pb_devisi>0){ ?>
+                                <div class="text-center">
+                                    <a class="btn btn-flat bg-blue" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>
+                                </div>
+                            <?php }
+                            else {
+                                if($pb_devisi==0 || $pb_devisi>=(-7)){ ?>
+                                    <div class="text-center">
+                                        <a class="btn btn-flat bg-green" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>
+                                    </div>
+                                <?php }
+                                else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){ ?>
+                                    <div class="text-center">
+                                        <a class="btn btn-flat bg-yellow" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>
+                                    </div>
+                                <?php }
+                                else { ?>
+                                    <div class="text-center">
+                                        <a class="btn btn-flat bg-red" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>
+                                    </div>
+                                <?php }
+                            }
+                        }
+                        else if ($pb_target>70 && $pb_target<=100){
+                            if($pb_devisi>0){ ?>
+                                <div class="text-center">
+                                    <a class="btn btn-flat bg-blue" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>
+                                </div>
+                            <?php }
+                            else {
+                                if($pb_devisi==0 || $pb_devisi>=(-4)){ ?>
+                                    <div class="text-center">
+                                        <a class="btn btn-flat bg-green" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>
+                                    </div>
+                                <?php }
+                                else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){ ?>
+                                    <div class="text-center">
+                                        <a class="btn btn-flat bg-yellow" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>
+                                    </div>
+                                <?php }
+                                else { ?>
+                                    <div class="text-center">
+                                        <a class="btn btn-flat bg-red" href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Lebih Lanjut</a>
+                                    </div>
+                                <?php }
+                            }
+                        }
+                        else { ?>
+
+                        <?php }
+                    }
+                    ?>
+                </div></div>
+
         </div>
         </div>
     </div>
@@ -532,13 +655,7 @@ if($pb_real==0){ ?>
             .on('click', function (marker, clusterOverlay, cluster, event) {
     if (marker) {
         var index = (marker.id);
-        var panel = document.getElementById('right-panel');
-
-        var div = document.createElement('div');
-        div.setAttribute("id", "panel-content");
-
         $('#ModalDetail'+index).modal('show');
-
         drawChart(document.getElementById("markerindex").value);
 
     }
