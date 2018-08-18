@@ -129,7 +129,7 @@
                     <div class="info-box-content">
                       <br>
                       <span class="info-box-number" style="color: #FF4D4D"><?php echo "Rp ".number_format($c['suma']+$c['sumb']); ?></span>
-                      <span class="info-box-text">Total Uang Keluar</span>
+                      <span class="info-box-text">Total Realisasi</span>
                     </div>
                     <!-- /.info-box-content -->
                   </div>
@@ -142,8 +142,8 @@
 
                     <div class="info-box-content">
                       <br>
-                      <span class="info-box-number" style="color: #1DE9B6"><?php echo "Rp ".number_format($e['sumsisa']); ?></span>
-                      <span class="info-box-text">Total Uang Masuk</span>
+                      <span class="info-box-number" style="color: #1DE9B6"><?php echo "Rp ".number_format($b['sumpagu']-($c['suma']+$c['sumb'])); ?></span>
+                      <span class="info-box-text">Total Sisa Anggaran</span>
                     </div>
                     <!-- /.info-box-content -->
                   </div>

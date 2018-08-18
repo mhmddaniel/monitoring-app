@@ -113,6 +113,7 @@ body {
 								<div class="form-group">
 									<label><h5 style="font-family:Open Sans; font-weight:lighter;">NAMA PROYEK</h5></label>
 									<input type="hidden" name="numproyek" value="<?php echo $numproyek; ?>">
+									<input type="hidden" name="phid" value="<?php echo $this->uri->segment(3); ?>">
 									<input type="text" class="form-control" name="xnama" required style="font-family:Open Sans; font-weight:lighter;">
 								</div>
 							</div>

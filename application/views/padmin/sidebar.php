@@ -16,21 +16,28 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li><a href="<?php echo base_url() ?>padmin/"><i class="fa fa-tasks" style="font-size: 20px;color: #1DE9B6;"></i> <span style="color: #1DE9B6;">Home</span></a></li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-file-text" style="font-size: 20px;color: #1DE9B6;"></i> <span style="color: #1DE9B6;">Proyek</span>
-            <span class="pull-right-container" style="color: #1DE9B6;">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="active"><a style="color: #1DE9B6;" href="<?php echo base_url() ?>padmin/proyek/"><i class="fa fa-circle-o"></i> Proyek</a></li>
 
-            <?php if($_SESSION['level']=='bidang' ){ ?>
-              <li class="active"><a  style="color: #1DE9B6;" href="<?php echo base_url() ?>padmin/penanggung_jawab/"><i class="fa fa-circle-o"></i> Pelaksana</a></li>
-            <?php } else {} ?>
-          </ul>
-        </li>
+
+
+
+        <?php if($_SESSION['level']=='admin'){  ?>
+          <li><a href="<?php echo base_url() ?>padmin/proyek/"><i class="fa fa-file-text" style="font-size: 20px;color: #1DE9B6"></i> <span style="color: #1DE9B6;">Proyek</span></a></li>
+        <?php } else {?>
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-file-text" style="font-size: 20px;color: #1DE9B6;"></i> <span style="color: #1DE9B6;">Proyek</span>
+              <span class="pull-right-container" style="color: #1DE9B6;">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="active"><a style="color: #1DE9B6;" href="<?php echo base_url() ?>padmin/proyek/"><i class="fa fa-circle-o"></i> Proyek</a></li>
+              <?php if($_SESSION['level']=='bidang' ){ ?>
+                <li class="active"><a  style="color: #1DE9B6;" href="<?php echo base_url() ?>padmin/penanggung_jawab/"><i class="fa fa-circle-o"></i> Pelaksana</a></li>
+              <?php } else {} ?>
+            </ul>
+          </li>
+        <?php } ?>
 <!--         <li class="treeview">
           <a href="#">
             <i class="fa fa-folder"></i> <span>Petugas</span>

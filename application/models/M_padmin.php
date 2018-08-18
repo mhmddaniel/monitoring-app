@@ -11,6 +11,31 @@ class M_padmin extends CI_Model{
 		return $hasil;
 	}
 
+	function get_all_ph(){
+		$hsl=$this->db->query("SELECT * FROM proyek_head");
+		return $hsl;
+	}
+	function sumpagu($kdph){
+		$hsl=$this->db->query("SELECT sum(proyek_pagu) as sumpagu from proyek where ph_id='$kdph'");
+		return $hsl;
+	}
+
+	function sumpagu_bidang($kdph,$bagian){
+		$hsl=$this->db->query("SELECT sum(proyek_pagu) as sumpagu from proyek where ph_id='$kdph' && proyek_bidang='$bagian'");
+		return $hsl;
+	}
+
+
+	function get_anggaran_by_kode_id($kode){
+		$hsl=$this->db->query("SELECT * from anggaran where anggaran_id='$kode'");
+		return $hsl;
+	}
+
+	function get_anggaran_by_kode_bagian($kode){
+		$hsl=$this->db->query("SELECT * from anggaran where ph_id='$kode'");
+		return $hsl;
+	}
+
 	function get_all_proyek(){
 		$hsl=$this->db->query("SELECT * FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id inner join penanggung_jawab on proyek.proyek_id=penanggung_jawab.proyek_id inner join koordinat on proyek.proyek_koordinat_id=koordinat.koordinat_id where proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
 		return $hsl;
@@ -21,6 +46,15 @@ class M_padmin extends CI_Model{
 	}
 	function get_all_proyek_by_bagian($bagian){
 		$hsl=$this->db->query("SELECT * FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id inner join penanggung_jawab on proyek.proyek_id=penanggung_jawab.proyek_id inner join koordinat on proyek.proyek_koordinat_id=koordinat.koordinat_id  where proyek.proyek_bidang='$bagian' AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
+		return $hsl;
+	}
+
+	function get_all_proyek_ph($kode){
+		$hsl=$this->db->query("SELECT * FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id inner join penanggung_jawab on proyek.proyek_id=penanggung_jawab.proyek_id inner join koordinat on proyek.proyek_koordinat_id=koordinat.koordinat_id inner join proyek_head on proyek.ph_id=proyek_head.ph_id where proyek_head.ph_id='$kode' AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
+		return $hsl;
+	}
+	function get_all_proyek_ph_bag($kode,$bagian){
+		$hsl=$this->db->query("SELECT * FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id inner join penanggung_jawab on proyek.proyek_id=penanggung_jawab.proyek_id inner join koordinat on proyek.proyek_koordinat_id=koordinat.koordinat_id inner join proyek_head on proyek.ph_id=proyek_head.ph_id where proyek_head.ph_id='$kode' AND proyek.proyek_bidang='$bagian' AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
 		return $hsl;
 	}
 	function get_chart_rt($kode){
@@ -134,6 +168,10 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 
+	function save_lampiran_anggaran($anggaran_id,$namafile,$gambar){
+		$hsl=$this->db->query("INSERT into file_anggaran (anggaran_id,file_nama,file_data) VALUES ('$anggaran_id','$namafile','$gambar')");
+		return $hsl;
+	}
 	function get_all_proyek_by_user($user_id){
 		$this->db->select('*');
 		$this->db->from('proyek a');
@@ -282,10 +320,38 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("UPDATE koordinat set koordinat_nama='$namkor',koordinat_lat='$latitude',koordinat_lng='$longitude',koordinat_alamat='$inputAddress' where koordinat_id='$numkor'");
 		return $hsl;
 	}
-	function save_proyek($numproyek,$numkor,$xnama,$year,$keuangan,$pagu,$sechawal,$xbidang,$xjenis,$xvolume,$xsatuan){
-		$hsl=$this->db->query("INSERT INTO proyek (proyek_id,proyek_koordinat_id,proyek_nama,proyek_tahun,proyek_keuangan,proyek_pagu,proyek_sech_awal,proyek_bidang,proyek_jenis,proyek_volume,proyek_satuan) VALUES ('$numproyek','$numkor','$xnama','$year','$keuangan','$pagu','$sechawal','$xbidang','$xjenis','$xvolume','$xsatuan')");
+	function save_proyek($numproyek,$numkor,$xnama,$year,$keuangan,$pagu,$sechawal,$xbidang,$xjenis,$xvolume,$xsatuan,$phid){
+		$hsl=$this->db->query("INSERT INTO proyek (proyek_id,ph_id,proyek_koordinat_id,proyek_nama,proyek_tahun,proyek_keuangan,proyek_pagu,proyek_sech_awal,proyek_bidang,proyek_jenis,proyek_volume,proyek_satuan) VALUES ('$numproyek','$phid','$numkor','$xnama','$year','$keuangan','$pagu','$sechawal','$xbidang','$xjenis','$xvolume','$xsatuan')");
 		return $hsl;
 	}
+	function save_ph($judulph){
+		$hsl=$this->db->query("INSERT INTO proyek_head (ph_judul) VALUES ('$judulph')");
+		return $hsl;
+	}
+	function update_ph($phid,$judulph){
+		$hsl=$this->db->query("UPDATE proyek_head set ph_judul='$judulph' where ph_id='$phid'");
+		return $hsl;
+	}
+
+
+	function get_ph_by_kode($phid){
+		$hsl=$this->db->query("SELECT * from proyek_head where ph_id='$phid'");
+		return $hsl;
+	}
+
+	function save_anggaran($phid,$anggaran,$tahun,$pagu){
+		$hsl=$this->db->query("INSERT INTO anggaran VALUES(null,'$phid','$anggaran','$tahun','$pagu')");
+		return $hsl;
+	}
+	function update_anggaran_ph($phid,$newanggaran){
+		$hsl=$this->db->query("UPDATE proyek_head set ph_anggaran='$newanggaran' where ph_id='$phid'");
+		return $hsl;
+	}
+	function update_anggaran($anggaran_id,$newanggaran){
+		$hsl=$this->db->query("UPDATE anggaran set anggaran_pagu='$newanggaran' where anggaran_id='$anggaran_id'");
+		return $hsl;
+	}
+
 
 	function update_proyek($proyek_id,$numkor,$xnama,$year,$keuangan,$pagu,$sech_awal,$xbidang,$xjenis,$xvolume,$xsatuan){
 		$hsl=$this->db->query("UPDATE proyek set proyek_koordinat_id='$numkor',proyek_nama='$xnama',proyek_tahun='$year',proyek_keuangan='$keuangan',proyek_pagu='$pagu',proyek_sech_awal='$sech_awal',proyek_bidang='$xbidang',proyek_jenis='$xjenis',proyek_volume='$xvolume',proyek_satuan='$xsatuan',last_update=NOW() where proyek_id='$proyek_id'");
@@ -434,6 +500,10 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 
+	function delete_ph($kode){
+		$hsl=$this->db->query("DELETE from proyek_head where ph_id='$kode'");
+		return $hsl;
+	}
 	function delete_proyek($kode){
 		$hsl=$this->db->query("DELETE from proyek where proyek_id='$kode'");
 		return $hsl;

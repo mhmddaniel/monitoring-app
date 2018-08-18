@@ -26,63 +26,28 @@
 
 		<div class="row">
 			<div class="col-md-12">
-				<form name='autoSumForm'  action="<?php echo base_url()?>padmin/save_proyek_bidang" method="POST" enctype="multipart/form-data" >
+				<form name='autoSumForm'  action="<?php echo base_url()?>padmin/update_anggaran" method="POST" enctype="multipart/form-data" >
 					<div class="box box-warning">
 						<div class="box-header with-border">
-							<h3 class="box-title">Data Bagian</h3>
+							<h3 class="box-title">Administrasi Proyek</h3>
 						</div>
 						<div class="box-body">
-							<div class="row">
-								<div class="col-md-4">
-									<div class="form-group">
-										<label>Target</label>
-										<input type='text' name='pbtarget' class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_target']; ?>" onBlur="stopCalc();" />
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<label>Real</label>
-										<input type='text' name='pbreal' class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_real']; ?>" onBlur="stopCalc();" />
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<label>Devisi</label>
-										<input type='text' name='pbdevisi' class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_devisi']; ?>" onBlur="stopCalc();" />
-									</div>
-								</div>
-							</div>
-
+				
 							<div class="form-group">
 								<label>Daya Serap Kontrak</label>
-								<input type="hidden" name="proyek_id" value="<?php echo $b['proyek_id']; ?>">
-								<input type='number' name='dskontrak' class="form-control currency" onFocus="startCalc();" value="<?php echo $b['pb_ds_kontrak']; ?>" onBlur="stopCalc();" />
-								<input type='hidden' name='nondskontrak' class="form-control currency" onFocus="startCalc();" value="<?php echo $b['pb_ds_kontrak']; ?>" onBlur="stopCalc();" />
+								<input type="hidden" name="anggaran_id" value="<?php echo $b['anggaran_id']; ?>">
+								<input type='number' name='dayaserap' class="form-control currency" onFocus="startCalc();"  onBlur="stopCalc();" />
+								<input type='hidden' name='nondayaserap' class="form-control" onFocus="startCalc();"  onBlur="stopCalc();" />
 							</div>
-
-							<?php /*
-							<div class="form-group">
-							<label>	Daya Serap Administrasi Proyek</label>
-							<input type='number' name='dsadmproyek' class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_ds_ap']; ?>" onBlur="stopCalc();" />
-							<input type='hidden' name='nondsadmproyek' class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_ds_ap']; ?>" onBlur="stopCalc();" />
-							</div>
-							<div class="form-group">
-							<label>Total Daya Serap Keuangan</label>
-							<input type='text' name="totalds" class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_ds_keuangan']; ?>" onBlur="stopCalc();"  />
-							<input type='hidden' name="nonfortotalads" class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_ds_keuangan']; ?>" onBlur="stopCalc();"  />
-
-
-							</div>
-							*/ ?>
 							<div class="form-group">
 								<label>Pagu</label>
-								<input type="number"  name="pagu" class="form-control" value="<?php echo $b['proyek_pagu']; ?>"  readonly>
-								<input type="hidden"  name="nonformatpagu" class="form-control" value="<?php echo $b['proyek_pagu']; ?>"  readonly>
+								<input type="number"  name="pagu" class="form-control" value="<?php echo $b['anggaran_pagu']; ?>"  readonly>
+								<input type="hidden"  name="nonformatpagu" class="form-control" value="<?php echo $b['anggaran_pagu']; ?>"  readonly>
 							</div>
 							<div class="form-group">
 								<label>Sisa Anggaran</label>
-								<input type="text" value="<?php echo $b['pb_sisa_anggaran']; ?>" name="sisaanggran" class="form-control"  readonly>
-								<input type="hidden" value="<?php echo $b['pb_sisa_anggaran']; ?>" name="nonformatsisaanggran" class="form-control"  readonly>
+								<input type="text" value="<?php echo $b['anggaran_pagu']; ?>" name="formatanggaran" class="form-control currency"  readonly>
+								<input type="hidden" value="<?php echo $b['anggaran_pagu']; ?>" name="anggaran" class="form-control"  readonly>
 							</div>
 							<div class="form-group pull-right">
 								<button type="submit" class="btn btn-primary btn-flat pull-right"><span class="fa fa-pencil"></span> Publish</button>
@@ -148,15 +113,12 @@
 		interval = setInterval("calc()",1);}
 		function calc(){
 
-			pbtarget = document.autoSumForm.pbtarget.value;
-			pbreal = document.autoSumForm.pbreal.value;
-			document.autoSumForm.pbdevisi.value = (pbreal*1) - (pbtarget*1)  ;
 
-			one = document.autoSumForm.dskontrak.value;
-			document.autoSumForm.nondskontrak.value = (one) ;
+			one = document.autoSumForm.dayaserap.value;
+			document.autoSumForm.nondayaserap.value = (one) ;
 			four = document.autoSumForm.nonformatpagu.value;
-			document.autoSumForm.sisaanggran.value = FormatDuit((four*1) - (one*1))   ;
-			document.autoSumForm.nonformatsisaanggran.value = (four*1) - (one*1)   ;
+			document.autoSumForm.formatanggaran.value = FormatDuit((four*1) - (one*1))   ;
+			document.autoSumForm.anggaran.value = (four*1) - (one*1)   ;
 
 		}
 		function stopCalc(){
