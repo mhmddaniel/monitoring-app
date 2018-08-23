@@ -378,7 +378,7 @@ class M_padmin extends CI_Model{
 	}
 
 	
-	
+
 
 	function get_proyek_by_slug($slug){
 		$hsl=$this->db->query("select proyek.*,user.*,DATE_FORMAT(proyek_tanggal,'%d %M %Y - %H:%i') AS proyek_tanggal from proyek inner join user on proyek.proyek_user_id=user.user_id  where proyek_slug='$slug'");
@@ -451,6 +451,36 @@ class M_padmin extends CI_Model{
 			$file_name = $row->file_data;
 		}
 		force_download($file_name, $nfile);
+	}
+	
+	function getDownImage($kode)
+	{
+
+
+		$query=$this->db->query("SELECT * from file where proyek_id='$kode' And file_jenis='foto'");
+		foreach($query->result_array() as $row){
+			$files[] = $row['file_data'];
+			$c++;
+		}
+
+		$zip = new ZipArchive();
+
+		$tmp_file = tempnam('.', '');
+		$zip->open($tmp_file, ZipArchive::CREATE);
+
+		foreach ($files as $file) {
+			$download_file = file_get_contents($file);
+
+			$zip->addFromString(basename($file), $download_file);
+		}
+
+		$zip->close();
+
+		header('Content-disposition: attachment; filename="my file.zip"');
+		header('Content-type: application/zip');
+		readfile($tmp_file);
+		unlink($tmp_file);
+
 	}
 
 	function get_data_foto($kode){

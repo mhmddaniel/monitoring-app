@@ -201,7 +201,7 @@ $b=$data->row_array() ;
 <div class="col-md-12">
   <div class="box box-primary">
     <div class="box-header">
-     <h4 class="text-primary">Gallery</h4>
+     <h4 class="text-primary">Gallery <a href="<?php echo base_url()?>padmin/downloadImage/<?php echo $b['proyek_id'];?>" class="pull-right"> <i class="fa fa-download"></i></a></h4>
    </div>
 
    <div class="box-body box-profile">

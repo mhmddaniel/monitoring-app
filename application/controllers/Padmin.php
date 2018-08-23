@@ -184,6 +184,11 @@ class Padmin extends CI_Controller{
 	}
 
 
+	public function downloadImage(){
+		$kode = $this->uri->segment(3);
+		$this->m_padmin->getDownImage($kode);
+	}
+
 	public function detail_proyek(){
 		$g['xc']='cc';
 		$kode=$this->uri->segment(3);
