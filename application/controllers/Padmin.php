@@ -43,6 +43,7 @@ class Padmin extends CI_Controller{
 	public function proyek(){
 		if($_SESSION['level']=='admin'){
 			$x['data']=$this->m_padmin->get_all_proyek();
+			$x['anggaran']=$this->m_padmin->get_all_anggaran();
 			$x['ph']=$this->m_padmin->get_all_ph();
 			$x['chartrt']=$this->m_padmin->get_chart_rt_all();
 			$x['foto']=$this->m_padmin->get_data_foto_all();
@@ -292,6 +293,17 @@ class Padmin extends CI_Controller{
 		redirect('padmin/proyek');
 	}
 
+	function update_anggaran_detail(){
+		$kode=$this->input->post('kode');
+		$anggaran=$this->input->post('anggaran');
+		$tahun=$this->input->post('tahun');
+		$pagu=$this->input->post('pagu');
+		$this->m_padmin->update_anggaran_detail($kode,$anggaran,$tahun,$pagu);		
+		echo $this->session->set_flashdata('msg','success');
+		redirect('padmin/proyek');
+	}
+
+	
 	
 	function update_anggaran_ph(){
 		$phid=$this->input->post('phid');
@@ -924,6 +936,13 @@ class Padmin extends CI_Controller{
 		echo $this->session->set_flashdata('msg','success-hapus');
 		redirect('padmin/proyek');
 	}
+	function delete_anggaran_detail(){
+		$kode=$this->input->post('kode');
+		$this->m_padmin->delete_anggaran_detail($kode);
+		echo $this->session->set_flashdata('msg','success-hapus');
+		redirect('padmin/proyek');
+	}
+
 	function delete_ph(){
 		$kode=$this->input->post('kode');
 		$this->m_padmin->delete_ph($kode);

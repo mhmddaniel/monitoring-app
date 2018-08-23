@@ -71,18 +71,18 @@
                     <li class="active"><a href="#tab_1" data-toggle="tab">Proyek</a></li>
                     <li><a href="#tab_2" data-toggle="tab">Lokasi</a></li>
                     <li class="pull-right">
-                     <?php if($_SESSION['level']=='admin'){ ?>
-                         <li class="pull-right"><a class="btn btn-success btn-flat" style="background: linear-gradient(to right, #04A9F5,#1DE9B6); color: white;" data-toggle="modal" data-target="#ModalTambahph">Tambah Proyek Baru <span class="fa fa-plus"></span> </a></li>
+                       <?php if($_SESSION['level']=='admin'){ ?>
+                           <li class="pull-right"><a class="btn btn-success btn-flat" style="background: linear-gradient(to right, #04A9F5,#1DE9B6); color: white;" data-toggle="modal" data-target="#ModalTambahph">Tambah Proyek Baru <span class="fa fa-plus"></span> </a></li>
 
-                    <?php } else {} ?>
+                       <?php } else {} ?>
 
-                </li>
+                   </li>
 
 
-                
-            </ul>
 
-            <div class="tab-content">
+               </ul>
+
+               <div class="tab-content">
                 <div class="tab-pane active" id="tab_1">
                     <div class="box-body">
 
@@ -105,12 +105,12 @@
 
                                                     <div class="col-md-6">
                                                         <span class="text-primary">
-                                                           <h4 style="font-size:24px;padding-top: 10px"><a data-toggle="collapse" data-parent="#accordion" href="#collapsea<?php echo $i['ph_id']; ?>"><?php echo $i['ph_judul'];?></a></h4>
+                                                         <h4 style="font-size:24px;padding-top: 10px"><a data-toggle="collapse" data-parent="#accordion" href="#collapsea<?php echo $i['ph_id']; ?>"><?php echo $i['ph_judul'];?></a></h4>
 
-                                                       </span>
-                                                   </div>
+                                                     </span>
+                                                 </div>
 
-                                                   <div class="col-md-4  <?php if($_SESSION['level']=='admin'){} else { echo "pull-right";} ?> ">
+                                                 <div class="col-md-4  <?php if($_SESSION['level']=='admin'){} else { echo "pull-right";} ?> ">
                                                     <span class="text-success">
                                                         <h4  style="font-size:20px;padding-top: 10px;">
                                                             <?php if($_SESSION['level']=='admin'){ 
@@ -137,7 +137,7 @@
                                                                 <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
                                                                     <i class="fa fa-plus text-primary"></i></button>
                                                                     <ul class="dropdown-menu" role="menu">
-                                                                       <li>
+                                                                     <li>
                                                                         <a href="<?php echo base_url().'padmin/tambah_proyek/'.$i['ph_id']; ?>">Tambah Proyek</a>
                                                                     </li>
                                                                     <li class="divider"></li>
@@ -172,7 +172,7 @@
                                                             <div class='panel box box-info'>
 
                                                                 <div class="box-header with-border">
-                                                                 <div class="col-md-9">
+                                                                   <div class="col-md-9">
                                                                     <h4 class="box-title">
                                                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><?php echo $j['anggaran_nama']; ?></a>
                                                                         <br>
@@ -181,7 +181,7 @@
                                                                     </h4>
                                                                 </div>
                                                                 <div class="col-md-3">
-                                                                   <div class="box-tools pull-right">
+                                                                 <div class="box-tools pull-right">
 
 
                                                                     <?php
@@ -195,227 +195,233 @@
                                                                                     <li><a href="<?php echo base_url().'padmin/upanggaran/'.$j['anggaran_id'];?>"><span class="fa fa-plus"></span>Upload</a></li>
                                                                                 </ul>
                                                                             </div>
-                                                                        <?php } else {}  ?>
+                                                                        <?php } else {?>
+                                                                          <a data-toggle="modal" data-target="#ModalEditAng<?php echo $j['anggaran_id'];?>" class="btn btn-box-tool" ><i class="fa fa-pencil text-info"></i>
+                                                                          </a>
+                                                                          <a data-toggle="modal" data-target="#ModalHapusAng<?php echo $j['anggaran_id'];?>" class="btn btn-box-tool" ><i class="fa fa-times text-danger"></i>
+                                                                          </a>
+
+                                                                     <?php }  ?>
 
 
 
 
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            <?php endforeach; ?>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                   <?php
-                                                   $kode=$i['ph_id'];
-                                                   if($_SESSION['level']=='admin'){
-                                                    $gph=$this->m_padmin->get_all_proyek_ph($kode); 
-                                                } else {
-                                                    $bagian=$_SESSION['bagian'];
-                                                    $gph=$this->m_padmin->get_all_proyek_ph_bag($kode,$bagian); 
-                                                }
-                                                foreach ($gph->result_array() as $j) : 
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          <?php endforeach; ?>
+                                          <div class="row">
+                                            <div class="col-md-12">
+                                             <?php
+                                             $kode=$i['ph_id'];
+                                             if($_SESSION['level']=='admin'){
+                                                $gph=$this->m_padmin->get_all_proyek_ph($kode); 
+                                            } else {
+                                                $bagian=$_SESSION['bagian'];
+                                                $gph=$this->m_padmin->get_all_proyek_ph_bag($kode,$bagian); 
+                                            }
+                                            foreach ($gph->result_array() as $j) : 
 
-                                                   $proyek_id=$j['proyek_id'];
-                                                   $pb_id=$j['pb_id'];
-                                                   $proyek_nama=$j['proyek_nama'];
-                                                   $proyek_tahun=$j['proyek_tahun'];
-                                                   $proyek_keuangan=$j['proyek_keuangan'];
-                                                   $proyek_pagu=$j['proyek_pagu'];
-                                                   $proyek_sech_awal=$j['proyek_sech_awal'];
-                                                   $proyek_awal_kontrak=$j['proyek_awal_kontrak'];
-                                                   $proyek_akhir_kontrak=$j['proyek_akhir_kontrak'];
-                                                   $koordinat_nama=$j['koordinat_nama'];
-                                                   $pb_target=$j['pb_target'];
-                                                   $pb_real=$j['pb_real'];
-                                                   $pb_devisi=$j['pb_devisi'];
-                                                   $up1=date('d-m-Y h:i:s', strtotime($j['last_update']));
-                                                   $up2=date('d-m-Y h:i:s', strtotime($j['pb_last_update']));
-                                                   ?>
+                                             $proyek_id=$j['proyek_id'];
+                                             $pb_id=$j['pb_id'];
+                                             $proyek_nama=$j['proyek_nama'];
+                                             $proyek_tahun=$j['proyek_tahun'];
+                                             $proyek_keuangan=$j['proyek_keuangan'];
+                                             $proyek_pagu=$j['proyek_pagu'];
+                                             $proyek_sech_awal=$j['proyek_sech_awal'];
+                                             $proyek_awal_kontrak=$j['proyek_awal_kontrak'];
+                                             $proyek_akhir_kontrak=$j['proyek_akhir_kontrak'];
+                                             $koordinat_nama=$j['koordinat_nama'];
+                                             $pb_target=$j['pb_target'];
+                                             $pb_real=$j['pb_real'];
+                                             $pb_devisi=$j['pb_devisi'];
+                                             $up1=date('d-m-Y h:i:s', strtotime($j['last_update']));
+                                             $up2=date('d-m-Y h:i:s', strtotime($j['pb_last_update']));
+                                             ?>
 
-                                                   <?php
-                                                   if($pb_real==0){
-                                                    echo "<div class='panel box box-defult'>";
-                                                }
-                                                else {
-                                                    if($pb_target==0 || $pb_target<=70){
+                                             <?php
+                                             if($pb_real==0){
+                                                echo "<div class='panel box box-defult'>";
+                                            }
+                                            else {
+                                                if($pb_target==0 || $pb_target<=70){
 
-                                                        if($pb_devisi>0){
-                                                            echo "<div class='panel box box-primary'>";
-                                                        }
-                                                        else {
-                                                            if($pb_devisi==0 || $pb_devisi>=(-7)){
-                                                                echo "<div class='panel box box-success'>";
-                                                            }
-                                                            else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
-
-                                                                echo "<div class='panel box box-warning'>";
-                                                            }
-                                                            else {
-                                                                echo "<div class='panel box box-danger'>";
-                                                            }
-
-                                                        }
-                                                    }
-                                                    else if ($pb_target>70 && $pb_target<=100){
-
-                                                        if($pb_devisi>0){
-                                                            echo "<div class='panel box box-primary'>";
-                                                        }
-                                                        else {
-                                                            if($pb_devisi==0 || $pb_devisi>=(-4)){
-                                                                echo "<div class='panel box box-success'>";
-                                                            }
-                                                            else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
-
-                                                                echo "<div class='panel box box-warning'>";
-                                                            }
-                                                            else {
-
-                                                                echo "<div class='panel box box-danger'>";
-                                                            }
-                                                        }
+                                                    if($pb_devisi>0){
+                                                        echo "<div class='panel box box-primary'>";
                                                     }
                                                     else {
-                                                        echo "";
+                                                        if($pb_devisi==0 || $pb_devisi>=(-7)){
+                                                            echo "<div class='panel box box-success'>";
+                                                        }
+                                                        else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
+
+                                                            echo "<div class='panel box box-warning'>";
+                                                        }
+                                                        else {
+                                                            echo "<div class='panel box box-danger'>";
+                                                        }
+
                                                     }
                                                 }
-                                                ?>
+                                                else if ($pb_target>70 && $pb_target<=100){
+
+                                                    if($pb_devisi>0){
+                                                        echo "<div class='panel box box-primary'>";
+                                                    }
+                                                    else {
+                                                        if($pb_devisi==0 || $pb_devisi>=(-4)){
+                                                            echo "<div class='panel box box-success'>";
+                                                        }
+                                                        else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
+
+                                                            echo "<div class='panel box box-warning'>";
+                                                        }
+                                                        else {
+
+                                                            echo "<div class='panel box box-danger'>";
+                                                        }
+                                                    }
+                                                }
+                                                else {
+                                                    echo "";
+                                                }
+                                            }
+                                            ?>
 
 
 
-                                                <div class="box-header with-border">
-                                                    <div class="col-md-9">
-                                                        <h4 class="box-title">
-                                                          <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree<?php echo $proyek_id;?>"><?php echo $proyek_nama; ?></a>
-                                                          <br>
-                                                          <span class="text-success"><?php echo "Rp ".number_format($proyek_pagu); ?></span>
+                                            <div class="box-header with-border">
+                                                <div class="col-md-9">
+                                                    <h4 class="box-title">
+                                                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree<?php echo $proyek_id;?>"><?php echo $proyek_nama; ?></a>
+                                                      <br>
+                                                      <span class="text-success"><?php echo "Rp ".number_format($proyek_pagu); ?></span>
 
-                                                      </h4>
-                                                  </div>
+                                                  </h4>
+                                              </div>
 
-                                                  <div class="col-md-3">
+                                              <div class="col-md-3">
 
-                                                      <div class="box-tools pull-right">
+                                                  <div class="box-tools pull-right">
 
-                                                        <div class="btn-group">
-                                                            <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
-                                                                <i class="fa fa-plus text-primary"></i></button>
-                                                                <ul class="dropdown-menu" role="menu">
-                                                                    <li><a href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Detail</a></li>
-                                                                    <?php
-                                                                    if ($_SESSION['level']=='bidang'){
-                                                                        ?>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
+                                                            <i class="fa fa-plus text-primary"></i></button>
+                                                            <ul class="dropdown-menu" role="menu">
+                                                                <li><a href="<?php echo base_url().'padmin/detail_proyek/'.$proyek_id;?>">Lihat Detail</a></li>
+                                                                <?php
+                                                                if ($_SESSION['level']=='bidang'){
+                                                                    ?>
 
-                                                                        <li class="divider"></li>
-                                                                        <li><a href="<?php echo base_url().'padmin/edit_proyek_jadwal/'.$proyek_id;?>"><span class="fa fa-pencil"></span>Edit Jadwal</a></li>
-                                                                        <li><a href="<?php echo base_url().'padmin/get_proyek_bidang/'.$pb_id;?>"><span class="fa fa-edit"></span>Progress</a></li>
-                                                                        <li><a href="<?php echo base_url().'padmin/uplampiran/'.$pb_id;?>"><span class="fa fa-plus"></span>Upload</a></li>
-                                                                    <?php } else {}  ?>
-                                                                </ul>
-                                                            </div>
-                                                            <?php if($_SESSION['level']=='admin'){ ?>
-                                                                <a href="<?php echo base_url().'padmin/get_edit_proyek/'.$proyek_id;?>" class="btn btn-box-tool" ><i class="fa fa-pencil text-info"></i>
-                                                                </a>
-                                                                <a data-toggle="modal" data-target="#ModalHapus<?php echo $proyek_id;?>" class="btn btn-box-tool"><i class="fa fa-times text-danger"></i></a>
-                                                            <?php } else {} ?>
+                                                                    <li class="divider"></li>
+                                                                    <li><a href="<?php echo base_url().'padmin/edit_proyek_jadwal/'.$proyek_id;?>"><span class="fa fa-pencil"></span>Edit Jadwal</a></li>
+                                                                    <li><a href="<?php echo base_url().'padmin/get_proyek_bidang/'.$pb_id;?>"><span class="fa fa-edit"></span>Progress</a></li>
+                                                                    <li><a href="<?php echo base_url().'padmin/uplampiran/'.$pb_id;?>"><span class="fa fa-plus"></span>Upload</a></li>
+                                                                <?php } else {}  ?>
+                                                            </ul>
                                                         </div>
+                                                        <?php if($_SESSION['level']=='admin'){ ?>
+                                                            <a href="<?php echo base_url().'padmin/get_edit_proyek/'.$proyek_id;?>" class="btn btn-box-tool" ><i class="fa fa-pencil text-info"></i>
+                                                            </a>
+                                                            <a data-toggle="modal" data-target="#ModalHapus<?php echo $proyek_id;?>" class="btn btn-box-tool"><i class="fa fa-times text-danger"></i></a>
+                                                        <?php } else {} ?>
                                                     </div>
                                                 </div>
-                                                <div id="collapseThree<?php echo $proyek_id;?>" class="panel-collapse collapse">
-                                                    <div class="box-body">
-                                                        <div class="col-md-12">
-                                                            Lokasi : <?php echo $j['koordinat_nama']; ?>
-                                                        </div>
-                                                        <div class="col-md-8">
+                                            </div>
+                                            <div id="collapseThree<?php echo $proyek_id;?>" class="panel-collapse collapse">
+                                                <div class="box-body">
+                                                    <div class="col-md-12">
+                                                        Lokasi : <?php echo $j['koordinat_nama']; ?>
+                                                    </div>
+                                                    <div class="col-md-8">
 
-                                                            <?php echo $proyek_tahun;?>
-                                                        </div>
-                                                        <div class="col-md-4">
+                                                        <?php echo $proyek_tahun;?>
+                                                    </div>
+                                                    <div class="col-md-4">
 
-                                                            <div class="box-tools pull-right">
-                                                                Progress :
+                                                        <div class="box-tools pull-right">
+                                                            Progress :
 
-                                                                <?php
-                                                                if($pb_real==0){
-                                                                    echo "<label class='label bg-gray'>Belum Mulai</label>";
-                                                                }
-                                                                else if($pb_real==100){
-                                                                }
-                                                                else {
-                                                                    if($pb_target==0 || $pb_target<=70){
+                                                            <?php
+                                                            if($pb_real==0){
+                                                                echo "<label class='label bg-gray'>Belum Mulai</label>";
+                                                            }
+                                                            else if($pb_real==100){
+                                                            }
+                                                            else {
+                                                                if($pb_target==0 || $pb_target<=70){
 
-                                                                        if($pb_devisi>0){
-                                                                            echo "<label class='label bg-blue'>".$pb_real."% (Baik)</label>";
-                                                                        }
-                                                                        else {
-                                                                            if($pb_devisi==0 || $pb_devisi>=(-7)){
-                                                                                echo "<label class='label bg-green'>".$pb_real."% (Wajar)</label>";
-                                                                            }
-                                                                            else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
-
-                                                                                echo "<label class='label bg-yellow'>".$pb_real."% (Terlambat)</label>";
-                                                                            }
-                                                                            else {
-                                                                                echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
-                                                                            }
-
-                                                                        }
-                                                                    }
-                                                                    else if ($pb_target>70 && $pb_target<=100){
-
-                                                                        if($pb_devisi>0){
-                                                                            echo "<label class='label bg-blue'>".$pb_real."% (Baik)</label>";
-                                                                        }
-                                                                        else {
-                                                                            if($pb_devisi==0 || $pb_devisi>=(-4)){
-                                                                                echo "<label class='label bg-green'>".$pb_real."% (Wajar)</label>";
-                                                                            }
-                                                                            else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
-
-                                                                                echo "<label class='label bg-yellow'>".$pb_real."% (Terlambat)</label>";
-                                                                            }
-                                                                            else {
-
-                                                                                echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
-                                                                            }
-                                                                        }
+                                                                    if($pb_devisi>0){
+                                                                        echo "<label class='label bg-blue'>".$pb_real."% (Baik)</label>";
                                                                     }
                                                                     else {
-                                                                        echo "";
+                                                                        if($pb_devisi==0 || $pb_devisi>=(-7)){
+                                                                            echo "<label class='label bg-green'>".$pb_real."% (Wajar)</label>";
+                                                                        }
+                                                                        else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
+
+                                                                            echo "<label class='label bg-yellow'>".$pb_real."% (Terlambat)</label>";
+                                                                        }
+                                                                        else {
+                                                                            echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+                                                                        }
+
                                                                     }
                                                                 }
-                                                                ?>
+                                                                else if ($pb_target>70 && $pb_target<=100){
 
-                                                            </div>
+                                                                    if($pb_devisi>0){
+                                                                        echo "<label class='label bg-blue'>".$pb_real."% (Baik)</label>";
+                                                                    }
+                                                                    else {
+                                                                        if($pb_devisi==0 || $pb_devisi>=(-4)){
+                                                                            echo "<label class='label bg-green'>".$pb_real."% (Wajar)</label>";
+                                                                        }
+                                                                        else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
+
+                                                                            echo "<label class='label bg-yellow'>".$pb_real."% (Terlambat)</label>";
+                                                                        }
+                                                                        else {
+
+                                                                            echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+                                                                        }
+                                                                    }
+                                                                }
+                                                                else {
+                                                                    echo "";
+                                                                }
+                                                            }
+                                                            ?>
+
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        <?php endforeach; ?>
-                                    </div>
+                                        </div>
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
-
-
-
-
-
-
-
                         </div>
 
 
 
-                    </div>
-                </div>
 
+
+
+
+                    </div>
+
+
+
+                </div>
             </div>
+
+        </div>
     </div>
-        <?php endforeach;?>
+<?php endforeach;?>
 </div>
 </div>
 <div class="tab-pane" id="tab_2">
@@ -470,6 +476,41 @@
         </div>
     </div>
 <?php endforeach;?>
+
+<?php foreach ($anggaran->result_array() as $i) :
+    $anggaran_id=$i['anggaran_id'];
+    ?>
+    <div class="modal fade" id="ModalHapusAng<?php echo $anggaran_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm"  role="document">
+            <div class="modal-content" >
+
+                <form class="form-horizontal" action="<?php echo base_url().'padmin/delete_anggaran_detail'?>" method="post" enctype="multipart/form-data">
+                    <div class="modal-body container-fluid text-center" >
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
+                        <div class="col-md-12">
+                            <input type="hidden" name="kode" value="<?php echo $anggaran_id;?>"/>
+                            <h3 class="text-center"><?php echo $i['anggaran_nama']; ?></h3>
+                        </div>
+                        <div class="col-md-12">
+
+                            <div class="iconcolor">
+                                <i class="fa fa-warning" style="font-size:200px;"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <br>
+                            Apakah Anda yakin ingin menghapus Anggaran ini ?
+                        </div>
+                        <div class="col-md-6 col-md-offset-3"><br>
+                            <button type="submit" class="btn btn-danger btn-round col-md-12" id="simpan">Hapus</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach;?>
+
 
 
 <?php foreach ($ph->result_array() as $i) :
@@ -532,10 +573,10 @@
 
 
     <div class="modal fade" id="ModalDetail<?php echo $proyek_id; ?>" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel">
+       aria-labelledby="myModalLabel">
 
 
-     <div class="modal-dialog modal-lg"  role="document">
+       <div class="modal-dialog modal-lg"  role="document">
         <div class="modal-content" >
             <div class="modal-body container-fluid text-center" >
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
@@ -708,47 +749,47 @@
 
 
 
-<?php foreach ($ph->result_array() as $i) :
-    $ph_id=$i['ph_id'];
-    ?>
+    <?php foreach ($ph->result_array() as $i) :
+        $ph_id=$i['ph_id'];
+        ?>
 
-    <div class="modal fade" id="ModalEditPh<?php echo $ph_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog modal-sm"  role="document">
-            <div class="modal-content" >
+        <div class="modal fade" id="ModalEditPh<?php echo $ph_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-sm"  role="document">
+                <div class="modal-content" >
 
-                <form class="form-horizontal" action="<?php echo base_url().'padmin/update_ph'?>" method="post" enctype="multipart/form-data">
-                    <div class="modal-body container-fluid text-center" >
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
-                        <div class="col-md-12">
-                            <h5 class="text-center">Judul Proyek</h5>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <input type="hidden" name="phid" value="<?php echo $ph_id; ?>" class="form-control">
-                                <input type="text" name="judulph" value="<?php echo $i['ph_judul']; ?>" class="form-control">
+                    <form class="form-horizontal" action="<?php echo base_url().'padmin/update_ph'?>" method="post" enctype="multipart/form-data">
+                        <div class="modal-body container-fluid text-center" >
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
+                            <div class="col-md-12">
+                                <h5 class="text-center">Judul Proyek</h5>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="hidden" name="phid" value="<?php echo $ph_id; ?>" class="form-control">
+                                    <input type="text" name="judulph" value="<?php echo $i['ph_judul']; ?>" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-md-offset-3"><br>
+                                <button type="submit" class="btn btn-success btn-round col-md-12" id="simpan">Save</button>
                             </div>
                         </div>
-
-                        <div class="col-md-6 col-md-offset-3"><br>
-                            <button type="submit" class="btn btn-success btn-round col-md-12" id="simpan">Save</button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
 
-<?php endforeach;?>
+    <?php endforeach;?>
 
 
-<?php foreach ($ph->result_array() as $i) :
-    $ph_id=$i['ph_id'];
+<?php foreach ($anggaran->result_array() as $i) :
+    $anggaran_id=$i['anggaran_id'];
     ?>
-    <div class="modal fade" id="ModalEditAnggaran<?php echo $ph_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="ModalEditAng<?php echo $anggaran_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog modal-md"  role="document">
             <div class="modal-content" >
 
-                <form class="form-horizontal" name='autoSumForm' action="<?php echo base_url().'padmin/save_anggaran'?>" method="post" enctype="multipart/form-data">
+                <form class="form-horizontal" name='autoSumForm' action="<?php echo base_url().'padmin/update_anggaran_detail'?>" method="post" enctype="multipart/form-data">
                     <div class="modal-body container-fluid" >
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
                         <div class="col-md-12">
@@ -757,21 +798,21 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <input type="hidden" name="phid" value="<?php echo $ph_id; ?>" class="form-control">
+                                <input type="hidden" name="kode" value="<?php echo $anggaran_id; ?>" class="form-control">
                                 <label>Nama Anggaran</label>
-                                <input type="text" name="anggaran"  class="form-control" style="width: 39em">
+                                <input type="text" name="anggaran" value="<?php echo $i['anggaran_nama']; ?>" class="form-control" style="width: 39em">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Tahun Anggaran</label>
-                                <input type="text" name="tahun"  class="form-control" style="width: 39em">
+                                <input type="text" name="tahun" value="<?php echo $i['anggaran_tahun']; ?>" class="form-control" style="width: 39em">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-12">
                                 <label>Pagu</label><br>
-                                <input type="number" class="form-control" name="pagu" style="width: 39em">
+                                <input type="number" class="form-control" value="<?php echo $i['anggaran_pagu']; ?>" name="pagu" style="width: 39em">
                             </div>
                         </div>
 
@@ -785,31 +826,75 @@
     </div>
 <?php endforeach;?>
 
+    <?php foreach ($ph->result_array() as $i) :
+        $ph_id=$i['ph_id'];
+        ?>
+        <div class="modal fade" id="ModalEditAnggaran<?php echo $ph_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-md"  role="document">
+                <div class="modal-content" >
 
-<div class="modal fade" id="ModalTambahph" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-sm"  role="document">
-        <div class="modal-content" >
+                    <form class="form-horizontal" name='autoSumForm' action="<?php echo base_url().'padmin/save_anggaran'?>" method="post" enctype="multipart/form-data">
+                        <div class="modal-body container-fluid" >
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
+                            <div class="col-md-12">
+                                <h3 class="text-center">Anggaran Administrasi Proyek</h3>
+                                <hr>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="hidden" name="phid" value="<?php echo $ph_id; ?>" class="form-control">
+                                    <label>Nama Anggaran</label>
+                                    <input type="text" name="anggaran"  class="form-control" style="width: 39em">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Tahun Anggaran</label>
+                                    <input type="text" name="tahun"  class="form-control" style="width: 39em">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Pagu</label><br>
+                                    <input type="number" class="form-control" name="pagu" style="width: 39em">
+                                </div>
+                            </div>
 
-            <form class="form-horizontal" action="<?php echo base_url().'padmin/save_ph'?>" method="post" enctype="multipart/form-data">
-                <div class="modal-body container-fluid text-center" >
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
-                    <div class="col-md-12">
-                        <h5 class="text-center">Judul Proyek</h5>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <input type="text" name="judulph" class="form-control">
+                            <div class="col-md-6 col-md-offset-3"><br>
+                                <button type="submit" class="btn btn-success btn-round col-md-12" id="simpan">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <?php endforeach;?>
+
+
+    <div class="modal fade" id="ModalTambahph" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm"  role="document">
+            <div class="modal-content" >
+
+                <form class="form-horizontal" action="<?php echo base_url().'padmin/save_ph'?>" method="post" enctype="multipart/form-data">
+                    <div class="modal-body container-fluid text-center" >
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
+                        <div class="col-md-12">
+                            <h5 class="text-center">Judul Proyek</h5>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" name="judulph" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-md-offset-3"><br>
+                            <button type="submit" class="btn btn-success btn-round col-md-12" id="simpan">Save</button>
                         </div>
                     </div>
-
-                    <div class="col-md-6 col-md-offset-3"><br>
-                        <button type="submit" class="btn btn-success btn-round col-md-12" id="simpan">Save</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -818,15 +903,15 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="<?php echo base_url() ?>assets/gmaps/assets/js/gmap3.js"></script>
     <script src="https://cdn.sobekrepository.org/includes/gmaps-markerwithlabel/1.9.1/gmaps-markerwithlabel-1.9.1.min.js"></script>
-  <script src="http://afarkas.github.io/webshim/js-webshim/minified/polyfiller.js"></script>
+    <script src="http://afarkas.github.io/webshim/js-webshim/minified/polyfiller.js"></script>
 
-<script type="text/javascript">
-    webshims.setOptions('forms-ext', {
-        replaceUI: 'auto',
-        types: 'number'
-    });
-    webshims.polyfill('forms forms-ext');
-</script>
+    <script type="text/javascript">
+        webshims.setOptions('forms-ext', {
+            replaceUI: 'auto',
+            types: 'number'
+        });
+        webshims.polyfill('forms forms-ext');
+    </script>
 
     <script type="text/javascript">
         $(function () {

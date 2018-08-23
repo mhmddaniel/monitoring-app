@@ -15,6 +15,11 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("SELECT * FROM proyek_head");
 		return $hsl;
 	}
+	function get_all_anggaran(){
+		$hsl=$this->db->query("SELECT * FROM anggaran");
+		return $hsl;
+	}
+
 	function sumpagu($kdph){
 		$hsl=$this->db->query("SELECT sum(proyek_pagu) as sumpagu from proyek where ph_id='$kdph'");
 		return $hsl;
@@ -351,6 +356,10 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("UPDATE anggaran set anggaran_pagu='$newanggaran' where anggaran_id='$anggaran_id'");
 		return $hsl;
 	}
+	function update_anggaran_detail($kode,$anggaran,$tahun,$pagu) {
+		$hsl=$this->db->query("UPDATE anggaran set anggaran_nama='$anggaran',anggaran_tahun='$tahun',anggaran_pagu='$pagu' where anggaran_id='$kode'");
+		return $hsl;	
+	}
 
 
 	function update_proyek($proyek_id,$numkor,$xnama,$year,$keuangan,$pagu,$sech_awal,$xbidang,$xjenis,$xvolume,$xsatuan){
@@ -460,7 +469,6 @@ class M_padmin extends CI_Model{
 		$query=$this->db->query("SELECT * from file where proyek_id='$kode' And file_jenis='foto'");
 		foreach($query->result_array() as $row){
 			$files[] = $row['file_data'];
-			$c++;
 		}
 
 		$zip = new ZipArchive();
@@ -527,6 +535,11 @@ class M_padmin extends CI_Model{
 	}
 	function delete_user($kode){
 		$hsl=$this->db->query("DELETE from user where user_id='$kode'");
+		return $hsl;
+	}
+
+	function delete_anggaran_detail($kode){
+		$hsl=$this->db->query("DELETE from anggaran where anggaran_id='$kode'");
 		return $hsl;
 	}
 
