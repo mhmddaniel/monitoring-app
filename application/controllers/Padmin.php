@@ -50,6 +50,7 @@ class Padmin extends CI_Controller{
 		}
 		else{
 			$bagian=$_SESSION['bagian'];
+			$x['anggaran']=$this->m_padmin->get_all_anggaran();
 			$x['ph']=$this->m_padmin->get_all_ph();
 			$x['data']=$this->m_padmin->get_all_proyek_by_bagian($bagian);
 			$x['chartrt']=$this->m_padmin->get_chart_rt_all_by_bagian($bagian);
