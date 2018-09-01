@@ -53,13 +53,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            proyek List
+            Daftar Kegiatan
             <small></small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="<?php echo base_url()?>padmin"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="<?php echo base_url() ?>padmin/proyek">proyek</a></li>
-            <li class="active">List</li>
+            <li><a href="<?php echo base_url() ?>padmin/proyek">Pekerjaan</a></li>
+            <li class="active">Kegiatan</li>
         </ol>
     </section>
 
@@ -68,11 +68,11 @@
             <div class="col-md-12 col-xs-12">
 
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#tab_1" data-toggle="tab">Proyek</a></li>
+                    <li class="active"><a href="#tab_1" data-toggle="tab">Pekerjaan</a></li>
                     <li><a href="#tab_2" data-toggle="tab">Lokasi</a></li>
                     <li class="pull-right">
                        <?php if($_SESSION['level']=='admin'){ ?>
-                           <li class="pull-right"><a class="btn btn-success btn-flat" style="background: linear-gradient(to right, #04A9F5,#1DE9B6); color: white;" data-toggle="modal" data-target="#ModalTambahph">Tambah Proyek Baru <span class="fa fa-plus"></span> </a></li>
+                           <li class="pull-right"><a class="btn btn-success btn-flat" style="background: linear-gradient(to right, #04A9F5,#1DE9B6); color: white;" data-toggle="modal" data-target="#ModalTambahph">Tambah Kegiatan <span class="fa fa-plus"></span> </a></li>
 
                        <?php } else {} ?>
 
@@ -138,11 +138,11 @@
                                                                     <i class="fa fa-plus text-primary"></i></button>
                                                                     <ul class="dropdown-menu" role="menu">
                                                                      <li>
-                                                                        <a href="<?php echo base_url().'padmin/tambah_proyek/'.$i['ph_id']; ?>">Tambah Proyek</a>
+                                                                        <a href="<?php echo base_url().'padmin/tambah_proyek/'.$i['ph_id']; ?>">Tambah Paket</a>
                                                                     </li>
                                                                     <li class="divider"></li>
                                                                     <li>
-                                                                        <a data-toggle="modal" data-target="#ModalEditAnggaran<?php echo $i['ph_id'];?>">Anggaran Administation</a>
+                                                                        <a data-toggle="modal" data-target="#ModalEditAnggaran<?php echo $i['ph_id'];?>">Anggaran Administrasi</a>
                                                                     </li>
 
                                                                 </ul>
@@ -613,7 +613,7 @@
                             <td><span class="direct-chat-timestamp pull-right"><?php echo date('d-m-Y', strtotime($proyek_akhir_kontrak));?></span></td>
                         </tr>
                         <tr>
-                            <td><span class="direct-chat-name pull-left">Progress Proyek</span></td>
+                            <td><span class="direct-chat-name pull-left">Progress Pekerjaan</span></td>
                             <td span class="direct-chat-timestamp pull-right">
                                 <?php
                                 if($pb_real==0){ ?>
@@ -761,7 +761,7 @@
                         <div class="modal-body container-fluid text-center" >
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
                             <div class="col-md-12">
-                                <h5 class="text-center">Judul Proyek</h5>
+                                <h5 class="text-center">Judul Kegiatan</h5>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -793,7 +793,7 @@
                     <div class="modal-body container-fluid" >
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
                         <div class="col-md-12">
-                            <h3 class="text-center">Anggaran Administrasi Proyek</h3>
+                            <h3 class="text-center">Anggaran Administrasi Pekerjaan</h3>
                             <hr>
                         </div>
                         <div class="col-md-12">
@@ -837,7 +837,7 @@
                         <div class="modal-body container-fluid" >
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
                             <div class="col-md-12">
-                                <h3 class="text-center">Anggaran Administrasi Proyek</h3>
+                                <h3 class="text-center">Anggaran Administrasi Pekerjaan</h3>
                                 <hr>
                             </div>
                             <div class="col-md-12">
@@ -879,7 +879,7 @@
                     <div class="modal-body container-fluid text-center" >
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
                         <div class="col-md-12">
-                            <h5 class="text-center">Judul Proyek</h5>
+                            <h5 class="text-center">Judul Kegiatan</h5>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
@@ -1175,7 +1175,7 @@
     <script type="text/javascript">
         $.dialog({
             title: '',
-            content: "Proyek berhasil ditambahkan <br><a href='<?php echo base_url()?>padmin/proyek' class='btn btn-round btn-primary'>Lihat Proyek</a>",
+            content: "Pekerjaan berhasil ditambahkan <br><a href='<?php echo base_url()?>padmin/proyek' class='btn btn-round btn-primary'>Lihat Pekerjaan</a>",
             icon: 'fa fa-check-circle',
             theme: 'my-theme'
         });
@@ -1212,7 +1212,7 @@
                 <script type="text/javascript">
                     $.toast({
                         heading: 'Info',
-                        text: "Proyek berhasil di update",
+                        text: "Pekerjaan berhasil di update",
                         showHideTransition: 'slide',
                         icon: 'info',
                         hideAfter: false,
@@ -1224,7 +1224,7 @@
                     <script type="text/javascript">
                         $.toast({
                             heading: 'Success',
-                            text: "Proyek Berhasil dihapus.",
+                            text: "Pekerjaan Berhasil dihapus.",
                             showHideTransition: 'slide',
                             icon: 'success',
                             hideAfter: false,

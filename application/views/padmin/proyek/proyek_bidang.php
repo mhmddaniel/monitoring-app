@@ -13,12 +13,12 @@
 <div class="content-wrapper">
 	<section class="content-header">
 		<h1>
-			Proyek
+			Pekerjaan
 			<small></small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?php echo base_url()?>padmin"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="<?php echo base_url()?>padmin/proyek">Proyek</a></li>
+			<li><a href="<?php echo base_url()?>padmin/proyek">Pekerjaan</a></li>
 			<li class="active">Data Bagian</li>
 		</ol>
 	</section>
@@ -62,7 +62,7 @@
 
 							<?php /*
 							<div class="form-group">
-							<label>	Daya Serap Administrasi Proyek</label>
+							<label>	Daya Serap Administrasi Pekerjaan</label>
 							<input type='number' name='dsadmproyek' class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_ds_ap']; ?>" onBlur="stopCalc();" />
 							<input type='hidden' name='nondsadmproyek' class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_ds_ap']; ?>" onBlur="stopCalc();" />
 							</div>

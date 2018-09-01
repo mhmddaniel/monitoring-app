@@ -241,7 +241,7 @@ body {
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?php echo base_url()?>padmin"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="<?php echo base_url()?>padmin/proyek">Proyek</a></li>
+			<li><a href="<?php echo base_url()?>padmin/proyek">Pekerjaan</a></li>
 			<li class="active">Tambah Berkas</li>
 		</ol>
 	</section>
@@ -254,7 +254,7 @@ body {
 						<div class="col-md-12">
 							<div class="box">
 								<div class="boxhead">
-									<h3 class="boxttle">Foto Proyek</h3>
+									<h3 class="boxttle">Foto Pekerjaan</h3>
 								</div>
 								<div class="file-upload">
 									<input type="text" name="namafile" class="form-control" placeholder="Nama Foto" required="required">
@@ -293,7 +293,7 @@ body {
 						<div class="col-md-12">
 							<div class="box">
 								<div class="boxhead2">
-									<h3 class="boxttle">Dokumen Proyek</h3>
+									<h3 class="boxttle">Dokumen Pekerjaan</h3>
 								</div>
 								<div class="file-upload">
 									<input type="text" name="namafile" class="form-control" placeholder="Nama File" required="required">

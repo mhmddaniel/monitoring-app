@@ -409,8 +409,8 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("INSERT INTO proyek_bagian (pb_proyek_id) values ('$numproyek')");
 		return $hsl;
 	}	
-	function save_pn($numproyek,$pn_nama,$pn_email,$pn_tel,$pn_bagian,$gambar){
-		$hsl=$this->db->query("INSERT INTO penanggung_jawab (proyek_id,pn_nama,pn_email,pn_tel,pn_bagian,pn_foto) VALUES ('$numproyek','$pn_nama','$pn_email','$pn_tel','$pn_bagian','$gambar')");
+	function save_pn($numproyek,$pn_nama,$pn_email,$pn_tel,$pn_bagian){
+		$hsl=$this->db->query("INSERT INTO penanggung_jawab (proyek_id,pn_nama,pn_email,pn_tel,pn_bagian) VALUES ('$numproyek','$pn_nama','$pn_email','$pn_tel','$pn_bagian')");
 		return $hsl;
 	}
 

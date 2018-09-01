@@ -53,7 +53,7 @@
         <?php if($_SESSION['level']=='admin'){ ?>
           <li><a href="<?php echo base_url() ?>padmin/user/"><i class="fa fa-user" style="font-size: 20px;color: #1DE9B6"></i> <span style="color: #1DE9B6;">User</span></a></li>
         <?php } else {} ?>
-        <li><a href="<?php echo base_url() ?>padmin/setting/"><i class="fa fa-gear" style="font-size: 20px;color: #1DE9B6"></i> <span style="color: #1DE9B6;">Setting</span></a></li>
+        <li><a href="#"><i class="fa fa-gear" style="font-size: 20px;color: #1DE9B6"></i> <span style="color: #1DE9B6;">Setting</span></a></li>
       </ul>
     </section>
   </aside>

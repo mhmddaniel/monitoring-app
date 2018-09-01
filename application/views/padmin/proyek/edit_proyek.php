@@ -30,14 +30,14 @@
         <div class="col-md-12">
           <div class="box box-default">
             <div class="box-header with-border">
-              <h3 class="box-title">Nama Proyek</h3>
+              <h3 class="box-title">Nama Pekerjaan</h3>
             </div>
 
             <div class="box-body">
               <div class="row">
                 <div class="col-md-10">
                   <input type="hidden" name="xproyek_id" class="form-control" value="<?php echo $b['proyek_id']; ?>" required/>
-                  <input type="text" name="xnama" class="form-control" placeholder="Nama Proyek" value="<?php echo $b['proyek_nama']; ?>" required/>
+                  <input type="text" name="xnama" class="form-control" placeholder="Nama Pekerjaan" value="<?php echo $b['proyek_nama']; ?>" required/>
                 </div>
                 <div class="col-md-2">
                   <div class="form-group">
@@ -56,8 +56,8 @@
           <!-- Custom Tabs -->
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#tab_1" data-toggle="tab">Data Proyek</a></li>
-              <li><a href="#tab_2" data-toggle="tab">Lokasi Proyek</a></li>
+              <li class="active"><a href="#tab_1" data-toggle="tab">Data Pekerjaan</a></li>
+              <li><a href="#tab_2" data-toggle="tab">Lokasi Pekerjaan</a></li>
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="tab_1">
@@ -82,7 +82,7 @@
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label>Rencana Awal Kontrak</label>
+                      <label>Rencana Kontrak</label>
                       <input type="date" class="form-control" name="sech_awal" value="<?php echo $b['proyek_sech_awal']; ?>">
                     </div>
                   </div>

@@ -41,8 +41,8 @@ $b=$data->row_array() ;
  <section class="content-header">
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li><a href="#">Examples</a></li>
-    <li class="active">Invoice</li>
+    <li><a href="#">Pekerjaan</a></li>
+    <li class="active">Detail Pekerjaan</li>
   </ol>
 </section>
 
@@ -84,7 +84,7 @@ $b=$data->row_array() ;
             <td class="text-right"><?php echo dateformat('d-m-Y',$b['proyek_akhir_kontrak']) ?></td>
           </tr>
           <tr>
-            <th>Proyek Progress</th>
+            <th>Pekerjaan Progress</th>
             <td class="text-right">
               <?php
 
@@ -222,7 +222,7 @@ $b=$data->row_array() ;
 <div class="col-md-12">
   <div class="box box-primary">
    <div class="box-header">
-    <h4 class="text-primary">Berkas Proyek</h4>
+    <h4 class="text-primary">Berkas Pekerjaan</h4>
   </div>
   <div class="box-body box-profile">
     <div class="table-responsive">
@@ -296,7 +296,7 @@ $b=$data->row_array() ;
 <div class="col-md-12">
   <div class="box box-primary">
     <div class="box-header">
-      <small class="pull-right">Jadwal Proyek : <b><?php echo dateFormat('d-m-Y',$b['proyek_sech_awal']) ?></b></small>
+      <small class="pull-right">Jadwal Pekerjaan : <b><?php echo dateFormat('d-m-Y',$b['proyek_sech_awal']) ?></b></small>
     </div>
     <div class="box-body box-profile">
       <table class="table table-responsive">
@@ -318,7 +318,7 @@ $b=$data->row_array() ;
           <td><?php echo "Rp ".number_format($b['pb_ds_kontrak']); ?></td>
         </tr>
         <tr>
-          <th>Daya Serap Administrasi Proyek</th>
+          <th>Daya Serap Administrasi Pekerjaan</th>
           <td><?php echo "Rp ".number_format($b['pb_ds_ap']); ?></td>
         </tr>
         <tr>
@@ -440,7 +440,7 @@ $b=$data->row_array() ;
           <div class="modal-body">
             <div class="box box-warning">
               <div class="box-header with-border">
-                <h3 class="box-title">Lampiran Proyek</h3>
+                <h3 class="box-title">Lampiran Pekerjaan</h3>
               </div>
               <div class="box-body">
                 <div class="row">

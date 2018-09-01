@@ -14,12 +14,12 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      proyek List
+      Daftar Kegiatan
       <small></small>
     </h1>
     <ol class="breadcrumb">
       <li><a href="<?php echo base_url()?>padmin"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="<?php echo base_url() ?>padmin/proyek">proyek</a></li>
+      <li><a href="<?php echo base_url() ?>padmin/proyek">Pekerjaan</a></li>
       <li class="active">List</li>
     </ol>
   </section>
@@ -30,7 +30,7 @@
         <div class="col-md-12">
           <div class="box box-default">
             <div class="box-header with-border">
-              <h3 class="box-title">Nama Proyek</h3>
+              <h3 class="box-title">Nama Pekerjaan</h3>
             </div>
 
             <div class="box-body">

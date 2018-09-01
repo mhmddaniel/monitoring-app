@@ -45,7 +45,7 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
               <div class="form-group">
-                <label>Proyek</label>
+                <label>Pekerjaan</label>
                 <select name="proyek" class="form-control">
                   <?php 
                   foreach ($data->result_array() as $i) :

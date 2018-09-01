@@ -74,14 +74,14 @@
       <div class="col-xs-12">
         <h2 class="page-header">
           <i class="fa fa-briefcase"></i> <?php echo $b['proyek_nama']; ?>
-          <small class="pull-right">Jadwal Proyek : <b><?php echo dateFormat('d-m-Y',$b['proyek_sech_awal']) ?></b></small>
+          <small class="pull-right">Jadwal Pekerjaan : <b><?php echo dateFormat('d-m-Y',$b['proyek_sech_awal']) ?></b></small>
         </h2>
       </div>
     </div>
 
     <div class="row invoice-info">
       <div class="col-sm-4 invoice-col">
-        <strong>Proyek</strong>
+        <strong>Pekerjaan</strong>
         <address>
           <table class="table">
             <tr>
@@ -105,7 +105,7 @@
               <td><?php echo $b['kategori_nama']; ?></td>
             </tr>
             <tr>
-              <th>Proyek Progress</th>
+              <th>Pekerjaan Progress</th>
               <td><?php echo $b['koordinat_value']; ?>%</td>
             </tr>
           </table> 

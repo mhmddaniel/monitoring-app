@@ -67,25 +67,25 @@
             <div class="box-footer" style="background: linear-gradient(to right, #5524B3, #A082D9); color: white">
               <ul class="nav nav-stacked">
                 <li>
-                  <h5 style="font-family:Open Sans; font-weight:lighter;">Total Proyek<span class="pull-right"><?php echo $a['jumproyek']; ?></span></h5></li>
+                  <h5 style="font-family:Open Sans; font-weight:lighter;">Total Pekerjaan<span class="pull-right"><?php echo $a['jumproyek']; ?></span></h5></li>
                 </ul>
               </div>
               <div class="box-footer"  style="background: linear-gradient(to right, #5524B3, #A082D9); color: white">
                 <ul class="nav nav-stacked">
                   <li>
-                    <h5 style="font-family:Open Sans; font-weight:lighter;">Proyek Sedang Dikerjakan<span class="pull-right"><?php echo $f['countkerja']; ?></span></h5></li>
+                    <h5 style="font-family:Open Sans; font-weight:lighter;">Pekerjaan Sedang Dikerjakan<span class="pull-right"><?php echo $f['countkerja']; ?></span></h5></li>
                   </ul>
                 </div>
                 <div class="box-footer" style="background: linear-gradient(to right, #5524B3, #A082D9); color: white">
                   <ul class="nav nav-stacked">
                     <li>
-                      <h5 style="font-family:Open Sans; font-weight:lighter;">Proyek Selesai<span class="pull-right"><?php echo $h['countselesai']; ?></span></h5></li>
+                      <h5 style="font-family:Open Sans; font-weight:lighter;">Pekerjaan Selesai<span class="pull-right"><?php echo $h['countselesai']; ?></span></h5></li>
                     </ul>
                   </div>
                   <div class="box-footer" style="background: linear-gradient(to right, #5524B3, #A082D9); color: white">
                     <ul class="nav nav-stacked">
                       <li>
-                        <h5 style="font-family:Open Sans; font-weight:lighter;">Proyek Belum Mulai<span class="pull-right"><?php echo $g['countkerja']; ?></span></h5></li>
+                        <h5 style="font-family:Open Sans; font-weight:lighter;">Pekerjaan Belum Mulai<span class="pull-right"><?php echo $g['countkerja']; ?></span></h5></li>
                       </ul>
                     </div>
                   </div>
@@ -154,14 +154,14 @@
               <div class="col-md-8" style="font-family:Open Sans; font-weight:lighter;">
                 <div class="box box-widget widget-user-2">
                   <div class="box-header bg-white">
-                    <h3 class="box-title">Progress Proyek</h3>
+                    <h3 class="box-title">Progress Pekerjaan</h3>
                   </div>
                   <div class="box-body">
                     <div class="table-responsive">
                       <table id="example1" class="table table-striped" style="font-size:13px; font-family:Open Sans; font-weight:lighter;">
                         <thead>
                           <tr>
-                            <th>PROYEK</th>
+                            <th>PEKERJAAN</th>
                             <th>TAHUN</th>
                             <th>PAGU</th>
                             <th>UPDATE</th>
@@ -283,7 +283,7 @@
 
             function drawChart() {
               var data = google.visualization.arrayToDataTable([
-                ['Month', 'Rencana Awal Kontrak', 'Awal Kontrak'],
+                ['Month', 'Rencana Kontrak', 'Awal Kontrak'],
                 <?php foreach ($countjum->result_array() as $i) :
                   if ($i['proyek_bulan']!=null){?>
                     ['<?php echo $i['proyek_bulan']; ?>', <?php echo $i['countsech']; ?>, <?php echo $i['countawal']; ?>],

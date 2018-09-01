@@ -68,13 +68,13 @@ body {
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			Tambah Proyek
+			Tambah Pekerjaan
 			<small></small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?php echo base_url()?>padmin"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="<?php echo base_url() ?>padmin/proyek">Proyek</a></li>
-			<li class="active">Tambah Proyek</li>
+			<li><a href="<?php echo base_url() ?>padmin/proyek">Pekerjaan</a></li>
+			<li class="active">Tambah Pekerjaan</li>
 		</ol>
 	</section>
 
@@ -90,7 +90,7 @@ body {
 					<div class="stepwizard-row setup-panel">
 						<div class="stepwizard-step col-xs-4"> 
 							<a href="#step-1" type="button" class="btn btn-success btn-circle" ></a>
-							<p><small>Proyek</small></p>
+							<p><small>Pekerjaan</small></p>
 						</div>
 						<div class="stepwizard-step col-xs-4"> 
 							<a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled"></a>
@@ -98,20 +98,20 @@ body {
 						</div>
 						<div class="stepwizard-step col-xs-4"> 
 							<a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled"></a>
-							<p><small>Penanggung Jawab</small></p>
+							<p><small>PPTK</small></p>
 						</div>
 					</div>
 				</div>
 
 				<div class="panel panel-primary setup-content" id="step-1">
 					<div class="panel-heading">
-						<h3 class="panel-title">Proyek</h3>
+						<h3 class="panel-title">Pekerjaan</h3>
 					</div>
 					<div class="panel-body">
 						<div class="box-body">
 							<div class="col-md-10">
 								<div class="form-group">
-									<label><h5 style="font-family:Open Sans; font-weight:lighter;">NAMA PROYEK</h5></label>
+									<label><h5 style="font-family:Open Sans; font-weight:lighter;">NAMA PEKERJAAN</h5></label>
 									<input type="hidden" name="numproyek" value="<?php echo $numproyek; ?>">
 									<input type="hidden" name="phid" value="<?php echo $this->uri->segment(3); ?>">
 									<input type="text" class="form-control" name="xnama" required style="font-family:Open Sans; font-weight:lighter;">
@@ -125,7 +125,7 @@ body {
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<label><h5 style="font-family:Open Sans; font-weight:lighter;">RENCANA AWAL KONTRAK</h5></label>
+									<label><h5 style="font-family:Open Sans; font-weight:lighter;">RENCANA KONTRAK</h5></label>
 									<input type="date" class="form-control" name="sechawal" value="<?php echo date("d/m/Y"); ?>" style="font-family:Open Sans; font-weight:lighter;">
 								</div>
 							</div>
@@ -232,7 +232,7 @@ body {
 
 				<div class="panel panel-primary setup-content" id="step-3">
 					<div class="panel-heading">
-						<h3 class="panel-title">Penanggung Jawab</h3>
+						<h3 class="panel-title">PPTK</h3>
 					</div>
 					<div class="panel-body">
 						<div class="form-group">
@@ -261,11 +261,14 @@ body {
 								<option value="bkdp">Bina Kontruksi dan Pengendalian</option>
 							</select>
 						</div>
-
+						<?php 
+/*
 						<div class="form-group">
 							<label>Foto</label>
 							<input type="file" class="form-control"  name="filefoto" required="required">
 						</div>
+*/ 
+						?>
 						<button class="btn btn-success pull-right  bg-green-gradient" type="submit">Finish!</button>
 					</div>
 				</div>
