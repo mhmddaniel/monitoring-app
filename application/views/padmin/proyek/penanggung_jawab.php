@@ -4,7 +4,7 @@
 		<div class="row">
 			<?php if($_SESSION['level']=='bidang'){ ?>
 				<div class="col-md-12 ">
-					<a class="btn btn-success btn-flat pull-right" href="<?php echo base_url().'padmin/tambah_penanggung_jawab'?>"><span class="fa fa-plus"></span> Tambah Pelaksana</a>
+					<a class="btn btn-success btn-flat pull-right" href="<?php echo base_url().'padmin/tambah_penanggung_jawab'?>"><span class="fa fa-plus"></span> Tambah Penyedia Jasa</a>
 				</div>
 			<?php } else {} ?>
 		</div>
@@ -32,7 +32,7 @@
 						<div class="box-body">
 							<div class="row">
 								<div class="col-md-3">
-									<img class="img-responsive" src="<?php echo base_url().'assets/images/'.$i['pn_foto'];?>" alt="Photo" style="border:1px solid; border-radius:90px;height:100px;width:100px;margin:0 auto;">
+									<img class="img-responsive" src="<?php echo base_url().'assets/images/user_blank.png';?>" alt="Photo" style="border:1px solid; border-radius:90px;height:100px;width:100px;margin:0 auto;">
 								</div>
 								<!-- /.col -->
 								<div class="col-md-9">

@@ -79,11 +79,26 @@
 								<input type="number"  name="pagu" class="form-control" value="<?php echo $b['proyek_pagu']; ?>"  readonly>
 								<input type="hidden"  name="nonformatpagu" class="form-control" value="<?php echo $b['proyek_pagu']; ?>"  readonly>
 							</div>
+							
+							<div class="form-group">
+								<label>Nilai Kontrak</label>
+								<input type="number"  name="nilaikontrak" class="form-control" value="<?php echo $b['proyek_keuangan']; ?>"  readonly>
+								<input type="hidden"  name="nonformatnilaikontrak" class="form-control" value="<?php echo $b['proyek_keuangan']; ?>"  readonly>
+							</div>
+
+
+							<div class="form-group">
+								<label>Sisa Kontrak</label>
+								<input type="text" value="<?php echo $b['pb_sisa_anggaran']; ?>" name="sisakontrak" class="form-control"  readonly>
+								<input type="hidden" value="<?php echo $b['pb_sisa_anggaran']; ?>" name="nonformatsisakontrak" class="form-control"  readonly>
+							</div>
+
 							<div class="form-group">
 								<label>Sisa Anggaran</label>
 								<input type="text" value="<?php echo $b['pb_sisa_anggaran']; ?>" name="sisaanggran" class="form-control"  readonly>
 								<input type="hidden" value="<?php echo $b['pb_sisa_anggaran']; ?>" name="nonformatsisaanggran" class="form-control"  readonly>
 							</div>
+
 							<div class="form-group pull-right">
 								<button type="submit" class="btn btn-primary btn-flat pull-right"><span class="fa fa-pencil"></span> Publish</button>
 							</div>
@@ -157,6 +172,13 @@
 			four = document.autoSumForm.nonformatpagu.value;
 			document.autoSumForm.sisaanggran.value = FormatDuit((four*1) - (one*1))   ;
 			document.autoSumForm.nonformatsisaanggran.value = (four*1) - (one*1)   ;
+
+
+			xone = document.autoSumForm.dskontrak.value;
+			document.autoSumForm.nondskontrak.value = (xone) ;
+			xfour = document.autoSumForm.nonformatnilaikontrak.value;
+			document.autoSumForm.sisakontrak.value = FormatDuit((xfour*1) - (xone*1))   ;
+			document.autoSumForm.nonformatsisakontrak.value = (xfour*1) - (xone*1)   ;
 
 		}
 		function stopCalc(){

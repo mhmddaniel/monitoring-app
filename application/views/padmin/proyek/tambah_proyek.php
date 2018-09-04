@@ -123,12 +123,15 @@ body {
 									<input type="number" class="form-control" name="year" value="<?php echo date("Y"); ?>" style="font-family:Open Sans; font-weight:lighter;">
 								</div>
 							</div>
+							<?php 
+							/* 
 							<div class="col-md-12">
 								<div class="form-group">
 									<label><h5 style="font-family:Open Sans; font-weight:lighter;">RENCANA KONTRAK</h5></label>
 									<input type="date" class="form-control" name="sechawal" value="<?php echo date("d/m/Y"); ?>" style="font-family:Open Sans; font-weight:lighter;">
 								</div>
 							</div>
+							 
 							<div class="col-md-12">
 								<div class="form-group">
 									<label><h5 style="font-family:Open Sans; font-weight:lighter;">BIDANG</h5></label>
@@ -145,6 +148,8 @@ body {
 									</select>
 								</div>
 							</div>
+							*/ 
+							?>
 							<div class="col-md-12">
 								<div class="form-group">
 									<label><h5 style="font-family:Open Sans; font-weight:lighter;">JENIS PENGADAAN</h5></label>
@@ -176,12 +181,16 @@ body {
 									<input type="text" name="xsatuan" class="form-control" style="font-family:Open Sans; font-weight:lighter;">
 								</div>
 							</div>
+							<?php 
+							/* 
 							<div class="col-md-12">
 								<div class="form-group">
 									<label><h5 style="font-family:Open Sans; font-weight:lighter;">NILAI KONTRAK</h5></label>
 									<input type="text" class="form-control" id="keuangan" name="keuangan" style="font-family:Open Sans; font-weight:lighter;">
 								</div>
 							</div>
+								*/ 
+							?>
 							<div class="col-md-12">
 								<div class="form-group">
 									<label><h5 style="font-family:Open Sans; font-weight:lighter;">PAGU</h5></label>
@@ -202,7 +211,7 @@ body {
 
 						<div class="col-md-6">
 
-							
+
 							<div class="form-group">
 								<label>Alamat</label>
 								<input type="hidden" name="numkor" value="<?php echo $numkor; ?>">
@@ -246,20 +255,6 @@ body {
 						<div class="form-group">
 							<label>Telepon</label>
 							<input type="text" class="form-control"  name="pn_tel"   required="required">
-						</div>
-						<div class="form-group">
-							<label>Bidang</label>
-							<select class="form-control"  name="pn_bagian"  required="required">
-								<option value="sda">Sumber Daya Air</option>
-								<option value="bm">Bina Marga</option>
-								<option value="ciptakarya">Cipta Karya</option>
-								<option value="pr">Perumahan Rakyat</option>
-								<option value="sekretariat">Sekretariat</option>
-								<option value="ttdp">Tata Ruang dan Pertanahan</option>
-								<option value="ubp">UPTD Balai Pengujian</option>
-								<option value="ubpdp">UPTD Balai Peralatan dan Perbekalan</option>
-								<option value="bkdp">Bina Kontruksi dan Pengendalian</option>
-							</select>
 						</div>
 						<?php 
 /*

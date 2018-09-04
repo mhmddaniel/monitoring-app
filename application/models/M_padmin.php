@@ -24,9 +24,13 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("SELECT sum(proyek_pagu) as sumpagu from proyek where ph_id='$kdph'");
 		return $hsl;
 	}
+	function get_proyek_by_bag($phid){
+		$hsl=$this->db->query("SELECT * FROM proyek where ph_id='$phid'");
+		return $hsl;
+	}
 
 	function sumpagu_bidang($kdph,$bagian){
-		$hsl=$this->db->query("SELECT sum(proyek_pagu) as sumpagu from proyek where ph_id='$kdph' && proyek_bidang='$bagian'");
+		$hsl=$this->db->query("SELECT sum(proyek_pagu) as sumpagu from proyek inner join proyek_head on proyek.ph_id=proyek_head.ph_id where proyek.ph_id='$kdph' && proyek_head.ph_bidang='$bagian'");
 		return $hsl;
 	}
 
@@ -49,8 +53,8 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("SELECT * FROM file where file_jenis='foto' && proyek_id='$kode'");
 		return $hsl;
 	}
-	function get_all_proyek_by_bagian($bagian){
-		$hsl=$this->db->query("SELECT * FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id inner join penanggung_jawab on proyek.proyek_id=penanggung_jawab.proyek_id inner join koordinat on proyek.proyek_koordinat_id=koordinat.koordinat_id  where proyek.proyek_bidang='$bagian' AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
+	function get_all_proyek_by_bagian($phid){
+		$hsl=$this->db->query("SELECT * FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id inner join penanggung_jawab on proyek.proyek_id=penanggung_jawab.proyek_id inner join koordinat on proyek.proyek_koordinat_id=koordinat.koordinat_id  where proyek.ph_id='$phid' AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
 		return $hsl;
 	}
 
@@ -58,22 +62,22 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("SELECT * FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id inner join penanggung_jawab on proyek.proyek_id=penanggung_jawab.proyek_id inner join koordinat on proyek.proyek_koordinat_id=koordinat.koordinat_id inner join proyek_head on proyek.ph_id=proyek_head.ph_id where proyek_head.ph_id='$kode' AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
 		return $hsl;
 	}
-	function get_all_proyek_ph_bag($kode,$bagian){
-		$hsl=$this->db->query("SELECT * FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id inner join penanggung_jawab on proyek.proyek_id=penanggung_jawab.proyek_id inner join koordinat on proyek.proyek_koordinat_id=koordinat.koordinat_id inner join proyek_head on proyek.ph_id=proyek_head.ph_id where proyek_head.ph_id='$kode' AND proyek.proyek_bidang='$bagian' AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
+	function get_all_proyek_ph_bag($kode){
+		$hsl=$this->db->query("SELECT * FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id inner join penanggung_jawab on proyek.proyek_id=penanggung_jawab.proyek_id inner join koordinat on proyek.proyek_koordinat_id=koordinat.koordinat_id inner join proyek_head on proyek.ph_id=proyek_head.ph_id where proyek_head.ph_id='$kode'  AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
 		return $hsl;
 	}
 	function get_chart_rt($kode){
 		$hsl=$this->db->query("SELECT proyek_bagian.*,DATE_FORMAT(pb_last_update,'%d %M %Y') AS tanggal FROM proyek_bagian where pb_proyek_id='$kode' ORDER BY proyek_bagian.pb_id asc");
 		return $hsl;
 	}
-    function get_chart_rt_all(){
-        $hsl=$this->db->query("SELECT proyek_bagian.*,DATE_FORMAT(pb_last_update,'%d %M %Y') AS tanggal FROM proyek_bagian ORDER BY proyek_bagian.pb_id asc");
-        return $hsl;
-    }
-    function get_chart_rt_all_by_bagian($bagian){
-        $hsl=$this->db->query("SELECT *,DATE_FORMAT(proyek_bagian.pb_last_update,'%d %M %Y') AS tanggal FROM proyek_bagian left join proyek on proyek_bagian.pb_proyek_id=proyek.proyek_id where proyek.proyek_bidang ='$bagian' ORDER BY proyek_bagian.pb_id asc");
-        return $hsl;
-    }
+	function get_chart_rt_all(){
+		$hsl=$this->db->query("SELECT proyek_bagian.*,DATE_FORMAT(pb_last_update,'%d %M %Y') AS tanggal FROM proyek_bagian ORDER BY proyek_bagian.pb_id asc");
+		return $hsl;
+	}
+	function get_chart_rt_all_by_bagian($bagian){
+		$hsl=$this->db->query("SELECT *,DATE_FORMAT(proyek_bagian.pb_last_update,'%d %M %Y') AS tanggal FROM proyek_bagian left join proyek on proyek_bagian.pb_proyek_id=proyek.proyek_id where proyek.proyek_bidang ='$bagian' ORDER BY proyek_bagian.pb_id asc");
+		return $hsl;
+	}
 	function get_chart_tdk($kode){
 		$hsl=$this->db->query("SELECT DISTINCT proyek_bagian.*,DATE_FORMAT(pb_last_update,'%d %M %Y') AS tanggal FROM proyek_bagian,proyek where pb_proyek_id='$kode' ORDER BY tanggal asc");
 		return $hsl;
@@ -95,16 +99,16 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 
-	function countselesai_by_kode($bagian){
-		$hsl=$this->db->query("SELECT count(*) as countselesai FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id where proyek_bagian.pb_real=100 AND proyek.proyek_bidang='$bagian' AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
+	function countselesai_by_kode($phid){
+		$hsl=$this->db->query("SELECT count(*) as countselesai FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id where proyek_bagian.pb_real=100 AND proyek.ph_id='$phid' AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
 		return $hsl;
 	}
-	function diffdateplus_by_kode($bagian){
-		$hsl=$this->db->query("SELECT count(DISTINCT proyek.proyek_id) as countkerja FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id where  proyek_bagian.pb_real!=100 AND proyek.proyek_bidang='$bagian'  AND proyek_awal_kontrak<now()  AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
+	function diffdateplus_by_kode($phid){
+		$hsl=$this->db->query("SELECT count(DISTINCT proyek.proyek_id) as countkerja FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id where  proyek_bagian.pb_real!=100 AND proyek.ph_id='$phid'  AND proyek_awal_kontrak<now()  AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
 		return $hsl;
 	}
-	function diffdatemin_by_kode($bagian){
-		$hsl=$this->db->query("SELECT count(DISTINCT proyek.proyek_id) as countkerja FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id where proyek.proyek_awal_kontrak is null AND proyek.proyek_bidang='$bagian' OR proyek_bagian.pb_real!=100 AND proyek.proyek_bidang='$bagian'  AND proyek_awal_kontrak>now()  AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
+	function diffdatemin_by_kode($phid){
+		$hsl=$this->db->query("SELECT count(DISTINCT proyek.proyek_id) as countkerja FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id where proyek.proyek_awal_kontrak is null AND proyek.ph_id='$phid' OR proyek_bagian.pb_real!=100 AND proyek.ph_id='$phid'  AND proyek_awal_kontrak>now()  AND proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
 		return $hsl;
 	}
 
@@ -112,12 +116,12 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("select monthname(proyek_bulan) as proyek_bulan, sum(countsech) as countsech , sum(countawal) as countawal from ((select `proyek_sech_awal` as proyek_bulan, 1 as countsech, 0 as countawal from proyek) union all (select `proyek_awal_kontrak`, 0, 1 from proyek ) ) dd group by monthname(proyek_bulan), month(proyek_bulan) order by month(proyek_bulan)");
 		return $hsl;
 	}
-	function countjum_by_kode($bagian){
-		$hsl=$this->db->query("select monthname(proyek_bulan) as proyek_bulan, sum(countsech) as countsech , sum(countawal) as countawal from ((select `proyek_sech_awal` as proyek_bulan, 1 as countsech, 0 as countawal from proyek) union all (select `proyek_awal_kontrak`, 0, 1 from proyek where proyek_bidang='$bagian' ) ) dd group by monthname(proyek_bulan), month(proyek_bulan)  order by month(proyek_bulan)");
+	function countjum_by_kode($phid){
+		$hsl=$this->db->query("select monthname(proyek_bulan) as proyek_bulan, sum(countsech) as countsech , sum(countawal) as countawal from ((select `proyek_sech_awal` as proyek_bulan, 1 as countsech, 0 as countawal from proyek) union all (select `proyek_awal_kontrak`, 0, 1 from proyek where ph_id='$phid' ) ) dd group by monthname(proyek_bulan), month(proyek_bulan)  order by month(proyek_bulan)");
 		return $hsl;
 	}
-	function sum_sisa_by_kode($bagian){
-		$hsl=$this->db->query("SELECT distinct sum(pb_sisa_anggaran) AS sumsisa,proyek_bidang FROM proyek_bagian,proyek where proyek.proyek_bidang='$bagian' && proyek_bagian.pb_proyek_id=proyek.proyek_id ");
+	function sum_sisa_by_kode($phid){
+		$hsl=$this->db->query("SELECT distinct sum(pb_sisa_anggaran) AS sumsisa,proyek_bidang FROM proyek_bagian,proyek where proyek.ph_id='$phid' && proyek_bagian.pb_proyek_id=proyek.proyek_id ");
 		return $hsl;
 	}
 	function sum_proyek(){
@@ -132,13 +136,13 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("INSERT INTO file (proyek_id,file_data) values ('$proyek_id','$nfile')");
 		return $hsl;
 	}
-	function sum_pagu_by_kode($bagian){
-		$hsl=$this->db->query("SELECT sum(proyek_pagu) AS sumpagu from proyek where proyek_bidang='$bagian' ");
+	function sum_pagu_by_kode($phid){
+		$hsl=$this->db->query("SELECT sum(proyek_pagu) AS sumpagu from proyek where ph_id='$phid' ");
 		return $hsl;
 	}
 
-	function sum_keluar_by_kode($bagian){
-		$hsl=$this->db->query("SELECT sum(pb_ds_kontrak) as suma, sum(pb_ds_ap) as sumb FROM proyek_bagian,proyek where proyek.proyek_bidang='$bagian' && proyek_bagian.pb_proyek_id=proyek.proyek_id ");
+	function sum_keluar_by_kode($phid){
+		$hsl=$this->db->query("SELECT sum(pb_ds_kontrak) as suma, sum(pb_ds_ap) as sumb FROM proyek_bagian,proyek where proyek.ph_id='$phid' && proyek_bagian.pb_proyek_id=proyek.proyek_id ");
 		return $hsl;
 	}
 	function sum_keluar(){
@@ -150,16 +154,16 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 
-	function sum_proyek_by_kode($bagian){
-		$hsl=$this->db->query("SELECT COUNT(proyek_id) AS jumproyek,proyek_bidang FROM proyek where proyek_bidang='$bagian' ");
+	function sum_proyek_by_kode($phid){
+		$hsl=$this->db->query("SELECT COUNT(proyek_id) AS jumproyek,proyek_bidang FROM proyek where ph_id='$phid' ");
 		return $hsl;
 	}
-	function sum_prog_by_kode($bagian){
+	function sum_prog_by_kode($phid){
 		$hsl=$this->db->query("SELECT proyek_bagian.pb_proyek_id, proyek_bagian.pb_stat_proyek,
 			COUNT(distinct proyek_bagian.pb_stat_proyek) as sumprog
 			FROM proyek_bagian
 			inner JOIN proyek ON proyek_bagian.pb_proyek_id = proyek.proyek_id 
-			where proyek.proyek_bidang='$bagian'
+			where proyek.ph_id='$phid'
 			GROUP BY proyek_bagian.pb_stat_proyek");
 		return $hsl;
 	}
@@ -200,7 +204,10 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}*/
 
-
+	function get_ph_by_bagian($bagian){
+		$hsl=$this->db->query("SELECT * from proyek_head where ph_bidang='$bagian'");
+		return $hsl;
+	}
 
 	function get_proyek_bidang_by_kode($kode){
 		$this->db->select('*');
@@ -237,6 +244,11 @@ class M_padmin extends CI_Model{
 		$this->db->join('proyek b','a.proyek_id=b.proyek_id','inner');
 		$this->db->where('pekerja_id',$kode);
 		$hsl=$this->db->get();
+		return $hsl;
+	}
+
+	function get_pekerja_bagian($phid){
+		$hsl=$this->db->query("SELECT * FROM pekerja inner join proyek on pekerja.proyek_id=proyek.proyek_id where proyek.ph_id='$phid'");
 		return $hsl;
 	}
 
@@ -325,16 +337,16 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("UPDATE koordinat set koordinat_nama='$namkor',koordinat_lat='$latitude',koordinat_lng='$longitude',koordinat_alamat='$inputAddress' where koordinat_id='$numkor'");
 		return $hsl;
 	}
-	function save_proyek($numproyek,$numkor,$xnama,$year,$keuangan,$pagu,$sechawal,$xbidang,$xjenis,$xvolume,$xsatuan,$phid){
-		$hsl=$this->db->query("INSERT INTO proyek (proyek_id,ph_id,proyek_koordinat_id,proyek_nama,proyek_tahun,proyek_keuangan,proyek_pagu,proyek_sech_awal,proyek_bidang,proyek_jenis,proyek_volume,proyek_satuan) VALUES ('$numproyek','$phid','$numkor','$xnama','$year','$keuangan','$pagu','$sechawal','$xbidang','$xjenis','$xvolume','$xsatuan')");
+	function save_proyek($numproyek,$numkor,$xnama,$year,$pagu,$xjenis,$xvolume,$xsatuan,$phid){
+		$hsl=$this->db->query("INSERT INTO proyek (proyek_id,ph_id,proyek_koordinat_id,proyek_nama,proyek_tahun,proyek_pagu,proyek_jenis,proyek_volume,proyek_satuan) VALUES ('$numproyek','$phid','$numkor','$xnama','$year','$pagu','$xjenis','$xvolume','$xsatuan')");
 		return $hsl;
 	}
-	function save_ph($judulph){
-		$hsl=$this->db->query("INSERT INTO proyek_head (ph_judul) VALUES ('$judulph')");
+	function save_ph($judulph,$ph_bidang){
+		$hsl=$this->db->query("INSERT INTO proyek_head (ph_judul,ph_bidang) VALUES ('$judulph','$ph_bidang')");
 		return $hsl;
 	}
-	function update_ph($phid,$judulph){
-		$hsl=$this->db->query("UPDATE proyek_head set ph_judul='$judulph' where ph_id='$phid'");
+	function update_ph($phid,$judulph,$ph_bidang){
+		$hsl=$this->db->query("UPDATE proyek_head set ph_judul='$judulph',ph_bidang='$ph_bidang' where ph_id='$phid'");
 		return $hsl;
 	}
 
@@ -362,13 +374,13 @@ class M_padmin extends CI_Model{
 	}
 
 
-	function update_proyek($proyek_id,$numkor,$xnama,$year,$keuangan,$pagu,$sech_awal,$xbidang,$xjenis,$xvolume,$xsatuan){
-		$hsl=$this->db->query("UPDATE proyek set proyek_koordinat_id='$numkor',proyek_nama='$xnama',proyek_tahun='$year',proyek_keuangan='$keuangan',proyek_pagu='$pagu',proyek_sech_awal='$sech_awal',proyek_bidang='$xbidang',proyek_jenis='$xjenis',proyek_volume='$xvolume',proyek_satuan='$xsatuan',last_update=NOW() where proyek_id='$proyek_id'");
+	function update_proyek($proyek_id,$numkor,$xnama,$year,$pagu,$xjenis,$xvolume,$xsatuan){
+		$hsl=$this->db->query("UPDATE proyek set proyek_koordinat_id='$numkor',proyek_nama='$xnama',proyek_tahun='$year',proyek_pagu='$pagu',proyek_jenis='$xjenis',proyek_volume='$xvolume',proyek_satuan='$xsatuan',last_update=NOW() where proyek_id='$proyek_id'");
 		return $hsl;
 	}
 
-	function update_proyek_jadwal($proyek_id,$awalkontrak,$akhirkontrak){
-		$hsl=$this->db->query("UPDATE proyek set proyek_awal_kontrak='$awalkontrak',proyek_akhir_kontrak='$akhirkontrak',last_update=NOW() where proyek_id='$proyek_id'");
+	function update_proyek_jadwal($proyek_id,$nilaikontrak,$rencanakontrak,$awalkontrak,$akhirkontrak){
+		$hsl=$this->db->query("UPDATE proyek set proyek_keuangan='$nilaikontrak',proyek_sech_awal='$rencanakontrak',proyek_awal_kontrak='$awalkontrak',proyek_akhir_kontrak='$akhirkontrak',last_update=NOW() where proyek_id='$proyek_id'");
 		return $hsl;
 	}
 	function save_pekerja($proyek_id,$xpekjenis,$xnamdirek,$xteldirek,$xnamaperus,$xalaperus,$xtelkant){
@@ -495,10 +507,10 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("SELECT * from file where proyek_id='$kode' && file_jenis='foto' limit 6");
 		return $hsl;
 	}
-    function get_data_foto_all(){
-        $hsl=$this->db->query("SELECT * from file where file_jenis='foto'");
-        return $hsl;
-    }
+	function get_data_foto_all(){
+		$hsl=$this->db->query("SELECT * from file where file_jenis='foto'");
+		return $hsl;
+	}
 
 	function get_data_file($kode){
 		$hsl=$this->db->query("SELECT * from file where proyek_id='$kode' && file_jenis='file'");
@@ -512,7 +524,7 @@ class M_padmin extends CI_Model{
 		$this->db->join('koordinat c','a.proyek_koordinat_id=c.koordinat_id','inner');
 		$this->db->join('penanggung_jawab d','a.proyek_id=d.proyek_id','inner');
 		$this->db->where('a.proyek_id',$kode);
-        $this->db->order_by('b.pb_last_update','desc');
+		$this->db->order_by('b.pb_last_update','desc');
 		$hsl=$this->db->get();
 		return $hsl;
 	}

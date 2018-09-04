@@ -33,7 +33,7 @@
             <ul class="treeview-menu">
               <li class="active"><a style="color: #1DE9B6;" href="<?php echo base_url() ?>padmin/proyek/"><i class="fa fa-circle-o"></i> Proyek</a></li>
               <?php if($_SESSION['level']=='bidang' ){ ?>
-                <li class="active"><a  style="color: #1DE9B6;" href="<?php echo base_url() ?>padmin/penanggung_jawab/"><i class="fa fa-circle-o"></i> Pelaksana</a></li>
+                <li class="active"><a  style="color: #1DE9B6;" href="<?php echo base_url() ?>padmin/penanggung_jawab/"><i class="fa fa-circle-o"></i> Penyedia Jasa</a></li>
               <?php } else {} ?>
             </ul>
           </li>

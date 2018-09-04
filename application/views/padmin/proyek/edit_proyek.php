@@ -70,36 +70,8 @@
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label>Nilai Kontrak</label>
-                      <input type="text" class="form-control" name="keuangan" id="keuangan" value="<?php echo number_format($b['proyek_keuangan'],0,",","."); ?>">
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
                       <label>Pagu</label>
                       <input type="text" class="form-control" name="pagu" id="pagu" value="<?php echo number_format($b['proyek_pagu'],0,",","."); ?>">
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label>Rencana Kontrak</label>
-                      <input type="date" class="form-control" name="sech_awal" value="<?php echo $b['proyek_sech_awal']; ?>">
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label>Bidang</label>
-                      <select class="form-control"  name="xbidang" >
-                        <option value="sda" <?php if($b['proyek_bidang']=='sda') {echo "selected"; } else {}?>>Sumber Daya Air</option>
-                        <option value="bm" <?php if($b['proyek_bidang']=='bm') {echo "selected"; } else {}?>>Bina Marga</option>
-                        <option value="ciptakarya" <?php if($b['proyek_bidang']=='ciptakarya') {echo "selected"; } else {}?>>Cipta Karya</option>
-                        <option value="pr" <?php if($b['proyek_bidang']=='proyek_bidang') {echo "selected"; } else {}?>>Perumahan Rakyat</option>
-                        <option value="sekretariat" <?php if($b['proyek_bidang']=='sekretariat') {echo "selected"; } else {}?>>Sekretariat</option>
-                        <option value="ttdp" <?php if($b['proyek_bidang']=='ttdp') {echo "selected"; } else {}?>>Tata Ruang dan Pertanahan</option>
-                        <option value="ubp" <?php if($b['proyek_bidang']=='ubp') {echo "selected"; } else {}?>>UPTD Balai Pengujian</option>
-                        <option value="ubpdp" <?php if($b['proyek_bidang']=='ubpdp') {echo "selected"; } else {}?>>UPTD Balai Peralatan dan Perbekalan</option>
-                        <option value="bkdp" <?php if($b['proyek_bidang']=='bkdp') {echo "selected"; } else {}?>>Bina Kontruksi dan Pengendalian</option>
-                      </select>
                     </div>
                   </div>
                   <div class="col-md-12">

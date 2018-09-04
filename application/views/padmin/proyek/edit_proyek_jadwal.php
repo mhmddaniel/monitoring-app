@@ -14,13 +14,13 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Daftar Kegiatan
+      Edit Kontrak
       <small></small>
     </h1>
     <ol class="breadcrumb">
       <li><a href="<?php echo base_url()?>padmin"><i class="fa fa-dashboard"></i> Home</a></li>
       <li><a href="<?php echo base_url() ?>padmin/proyek">Pekerjaan</a></li>
-      <li class="active">List</li>
+      <li class="active">Kontrak</li>
     </ol>
   </section>
 
@@ -30,13 +30,25 @@
         <div class="col-md-12">
           <div class="box box-default">
             <div class="box-header with-border">
-              <h3 class="box-title">Nama Pekerjaan</h3>
+              <h3 class="box-title">Kontrak</h3>
             </div>
 
             <div class="box-body">
               <div class="row">
                 <div class="col-md-12">
                   <input type="hidden" name="xproyek_id" class="form-control" value="<?php echo $b['proyek_id']; ?>" required/>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Nilai Kontrak</label>
+                    <input type="number" class="form-control" name="nilaikontrak" value="<?php echo $b['proyek_awal_kontrak']; ?>">
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Rencana Kontrak</label>
+                    <input type="date" class="form-control" name="rencanakontrak" value="<?php echo $b['proyek_awal_kontrak']; ?>">
+                  </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">

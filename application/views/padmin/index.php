@@ -284,11 +284,22 @@
             function drawChart() {
               var data = google.visualization.arrayToDataTable([
                 ['Month', 'Rencana Kontrak', 'Awal Kontrak'],
-                <?php foreach ($countjum->result_array() as $i) :
-                  if ($i['proyek_bulan']!=null){?>
+                <?php 
+                  $max=0;
+                foreach ($countjum->result_array() as $i) :
+                  if ($i['proyek_bulan']!=null){
+                    ?>
                     ['<?php echo $i['proyek_bulan']; ?>', <?php echo $i['countsech']; ?>, <?php echo $i['countawal']; ?>],
-                  <?php }endforeach; ?>
-                  ]);
+                  <?php }
+                  if($i['countsech']>$i['countawal']){
+                    $max=$i['countsech'];
+                  }else {
+                    $max=$i['countawal'];
+                  }
+                endforeach; 
+                ?>
+
+                ]);
 
               var options = {
                 colors: ['#1DC4E9', '#9265E6'],
@@ -296,7 +307,17 @@
                 legend: { position: 'top', maxLines: 3 },
                 chart: {
                   title: 'Kontrak'
-                }
+                },
+                vAxis: {
+                  viewWindow: {
+                    max: <?php if($max<=5) {echo "5";} else { echo $max;} ?>,
+                    min: 0,
+                  },
+                  gridlines: {
+                    count: 1,
+                  },
+                },
+                pointSize: 4,
               };
 
               var chart = new google.charts.Bar(document.getElementById('columnchart_material'));

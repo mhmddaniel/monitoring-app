@@ -24,16 +24,19 @@ class Padmin extends CI_Controller{
 		}
 		else {
 			$bagian=$_SESSION['bagian'];
-			$x['countproyek']=$this->m_padmin->sum_proyek_by_kode($bagian);
-			$x['sumprog']=$this->m_padmin->sum_prog_by_kode($bagian);
-			$x['sum_sisa']=$this->m_padmin->sum_sisa_by_kode($bagian);
-			$x['sumpagu']=$this->m_padmin->sum_pagu_by_kode($bagian);
-			$x['sumkeluar']=$this->m_padmin->sum_keluar_by_kode($bagian);
-			$x['countjum']=$this->m_padmin->countjum_by_kode($bagian);
-			$x['diffdateplus']=$this->m_padmin->diffdateplus_by_kode($bagian);
-			$x['diffdatemin']=$this->m_padmin->diffdatemin_by_kode($bagian);
-			$x['countselesai']=$this->m_padmin->countselesai_by_kode($bagian);
-			$x['data']=$this->m_padmin->get_all_proyek_by_bagian($bagian);
+			$x['ph']=$this->m_padmin->get_ph_by_bagian($bagian);
+			$cc=$x['ph']->row_array();
+			$phid=$cc['ph_id'];
+			$x['countproyek']=$this->m_padmin->sum_proyek_by_kode($phid);
+			$x['sumprog']=$this->m_padmin->sum_prog_by_kode($phid);
+			$x['sum_sisa']=$this->m_padmin->sum_sisa_by_kode($phid);
+			$x['sumpagu']=$this->m_padmin->sum_pagu_by_kode($phid);
+			$x['sumkeluar']=$this->m_padmin->sum_keluar_by_kode($phid);
+			$x['countjum']=$this->m_padmin->countjum_by_kode($phid);
+			$x['diffdateplus']=$this->m_padmin->diffdateplus_by_kode($phid);
+			$x['diffdatemin']=$this->m_padmin->diffdatemin_by_kode($phid);
+			$x['countselesai']=$this->m_padmin->countselesai_by_kode($phid);
+			$x['data']=$this->m_padmin->get_all_proyek_by_bagian($phid);
 		}
 		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');
@@ -51,13 +54,14 @@ class Padmin extends CI_Controller{
 		else{
 			$bagian=$_SESSION['bagian'];
 			$x['anggaran']=$this->m_padmin->get_all_anggaran();
-			$x['ph']=$this->m_padmin->get_all_ph();
-			$x['data']=$this->m_padmin->get_all_proyek_by_bagian($bagian);
+			$x['ph']=$this->m_padmin->get_ph_by_bagian($bagian);
+			$cc=$x['ph']->row_array();
+			$phid=$cc['ph_id'];
+			$x['data']=$this->m_padmin->get_all_proyek_by_bagian($phid);
 			$x['chartrt']=$this->m_padmin->get_chart_rt_all_by_bagian($bagian);
-
 			$x['foto']=$this->m_padmin->get_data_foto_all();
 		}
-		
+
 		$g['xc']='cc';
 		$y['title']='DATA PROYEK';
 		$this->load->view('padmin/header',$y);
@@ -65,6 +69,7 @@ class Padmin extends CI_Controller{
 		$this->load->view('padmin/proyek/proyek',$x);
 		$this->load->view('padmin/footer',$g);
 	}
+
 	public function dinaspu(){
 		$x['data']=$this->m_padmin->get_all_dinaspu();
 		$y['title']='Data User';
@@ -120,7 +125,11 @@ class Padmin extends CI_Controller{
 	public function penanggung_jawab(){
 		if ($_SESSION['level']=='bidang'){
 			$bagian=$_SESSION['bagian'];
-			$x['data']=$this->m_padmin->get_pn_by_bagian($bagian);	
+			$x['ph']=$this->m_padmin->get_ph_by_bagian($bagian);
+			$cc=$x['ph']->row_array();
+			$phid=$cc['ph_id'];
+			$x['data']=$this->m_padmin->get_pekerja_bagian($phid);	
+		//	$x['data']=$this->m_padmin->get_pn_by_bagian($bagian);	
 		}
 		else {
 
@@ -138,11 +147,16 @@ class Padmin extends CI_Controller{
 	}
 
 	public function tambah_penanggung_jawab(){
-		$x['data']=$this->m_padmin->get_proyek();
 		$y['title']='Tambah Penanggung Jawab';
 		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');
 		if ($_SESSION['level']=='bidang'){
+			$bagian=$_SESSION['bagian'];
+			$x['ph']=$this->m_padmin->get_ph_by_bagian($bagian);
+			$cc=$x['ph']->row_array();
+			$phid=$cc['ph_id'];
+			$x['data']=$this->m_padmin->get_proyek_by_bag($phid);
+
 			$this->load->view('padmin/proyek/tambah_penanggung_jawab',$x);
 		}
 		else {
@@ -254,9 +268,9 @@ class Padmin extends CI_Controller{
 
 	
 	function save_ph(){
-
 		$judulph=$this->input->post('judulph');
-		$this->m_padmin->save_ph($judulph);
+		$ph_bidang=$this->input->post('ph_bidang');
+		$this->m_padmin->save_ph($judulph,$ph_bidang);
 		echo $this->session->set_flashdata('msg','success');
 		redirect('padmin/proyek');
 	}
@@ -334,12 +348,12 @@ class Padmin extends CI_Controller{
 		$numproyek=$this->input->post('numproyek');
 		$xnama=$this->input->post('xnama');
 		$year=$this->input->post('year');
-		$keuangan=str_replace(".", "", $this->input->post('keuangan'));
+		//$keuangan=str_replace(".", "", $this->input->post('keuangan'));
 		$pagu=str_replace(".", "", $this->input->post('pagu'));
-		$sechawal=$this->input->post('sechawal');
-		$awalkontrak=$this->input->post('awalkontrak');
-		$akhirkontrak=$this->input->post('akhirkontrak');
-		$xbidang=$this->input->post('xbidang');
+		//$sechawal=$this->input->post('sechawal');
+		//$awalkontrak=$this->input->post('awalkontrak');
+		//$akhirkontrak=$this->input->post('akhirkontrak');
+		//$xbidang=$this->input->post('xbidang');
 		$xjenis=$this->input->post('xjenis');
 		$xvolume=$this->input->post('xvolume');
 		$xsatuan=$this->input->post('xsatuan');
@@ -358,7 +372,7 @@ class Padmin extends CI_Controller{
 
 		$svkoor=$this->m_padmin->save_koordinat($numkor,$namkor,$latitude,$longitude,$inputAddress);
 		if ($svkoor){
-			$svpro=$this->m_padmin->save_proyek($numproyek,$numkor,$xnama,$year,$keuangan,$pagu,$sechawal,$xbidang,$xjenis,$xvolume,$xsatuan,$phid);
+			$svpro=$this->m_padmin->save_proyek($numproyek,$numkor,$xnama,$year,$pagu,$xjenis,$xvolume,$xsatuan,$phid);
 			if($svpro){
 				$svpp=$this->m_padmin->save_pn($numproyek,$pn_nama,$pn_email,$pn_tel,$pn_bagian);
 				if($svpp){
@@ -495,7 +509,12 @@ class Padmin extends CI_Controller{
 	function get_edit_pn(){
 		$kode=$this->uri->segment(3);
 		$x['data']=$this->m_padmin->get_all_pn_by_kode($kode);
-		$x['datak']=$this->m_padmin->get_all_proyek();
+		$bagian=$_SESSION['bagian'];
+		$x['ph']=$this->m_padmin->get_ph_by_bagian($bagian);
+		$cc=$x['ph']->row_array();
+		$phid=$cc['ph_id'];
+		$x['datak']=$this->m_padmin->get_pekerja_bagian($phid);	
+
 		$this->load->view('padmin/header');
 		$this->load->view('padmin/sidebar');		
 		$this->load->view('padmin/proyek/edit_pn',$x);
@@ -522,7 +541,8 @@ class Padmin extends CI_Controller{
 	function update_ph(){
 		$phid=$this->input->post('phid');
 		$judulph=$this->input->post('judulph');
-		$this->m_padmin->update_ph($phid,$judulph);
+		$ph_bidang=$this->input->post('ph_bidang');
+		$this->m_padmin->update_ph($phid,$judulph,$ph_bidang);
 		echo $this->session->set_flashdata('msg','success');
 		redirect('padmin/proyek');
 
@@ -533,10 +553,10 @@ class Padmin extends CI_Controller{
 		$proyek_id=$this->input->post('xproyek_id');
 		$xnama=$this->input->post('xnama');
 		$year=$this->input->post('year');
-		$keuangan=str_replace(".", "", $this->input->post('keuangan'));
+		//$keuangan=str_replace(".", "", $this->input->post('keuangan'));
 		$pagu=str_replace(".", "", $this->input->post('pagu'));
-		$sech_awal=$this->input->post('sech_awal');
-		$xbidang=$this->input->post('xbidang');
+		//$sech_awal=$this->input->post('sech_awal');
+		//$xbidang=$this->input->post('xbidang');
 		$xjenis=$this->input->post('xjenis');
 		$xvolume=$this->input->post('xvolume');
 		$xsatuan=$this->input->post('xsatuan');
@@ -552,7 +572,7 @@ class Padmin extends CI_Controller{
 
 		if ($svkoor){
 
-			$this->m_padmin->update_proyek($proyek_id,$numkor,$xnama,$year,$keuangan,$pagu,$sech_awal,$xbidang,$xjenis,$xvolume,$xsatuan);
+			$this->m_padmin->update_proyek($proyek_id,$numkor,$xnama,$year,$pagu,$xjenis,$xvolume,$xsatuan);
 			echo $this->session->set_flashdata('msg','success');
 			redirect('padmin/proyek');
 		}
@@ -568,9 +588,11 @@ class Padmin extends CI_Controller{
 
 	function update_proyek_jadwal(){
 		$proyek_id=$this->input->post('xproyek_id');
+		$nilaikontrak=$this->input->post('nilaikontrak');
+		$rencanakontrak=$this->input->post('rencanakontrak');
 		$awalkontrak=$this->input->post('awalkontrak');
 		$akhirkontrak=$this->input->post('akhirkontrak');
-		$svkoor=$this->m_padmin->update_proyek_jadwal($proyek_id,$awalkontrak,$akhirkontrak);
+		$svkoor=$this->m_padmin->update_proyek_jadwal($proyek_id,$nilaikontrak,$rencanakontrak,$awalkontrak,$akhirkontrak);
 		echo $this->session->set_flashdata('msg','success');
 		redirect('padmin/proyek');
 
