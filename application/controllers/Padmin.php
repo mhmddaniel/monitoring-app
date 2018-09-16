@@ -222,6 +222,7 @@ class Padmin extends CI_Controller{
 		$x['chartrt']=$this->m_padmin->get_chart_rt($kode);
 		$x['charttdk']=$this->m_padmin->get_chart_tdk($kode);
 		$x['bbc']=$this->m_padmin->get_penannggung_jawab($kode);
+		$x['catatan']=$this->m_padmin->get_catatan_by_kode($kode);
 		$y['title']='Detail Pekerjaan';
 		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');		
@@ -238,6 +239,7 @@ class Padmin extends CI_Controller{
 	public function tambah_proyek(){
 		$x['numkor']=$this->m_padmin->get_num_koor();
 		$x['numproyek']=$this->m_padmin->get_num_proyek();
+		$x['user']=$this->m_padmin->get_user_by_id_ppjk();
 		$y['title']='Tambah Pekerjaan';
 		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');
@@ -318,7 +320,13 @@ class Padmin extends CI_Controller{
 		redirect('padmin/proyek');
 	}
 
-	
+	function save_catatan(){
+		$proyek_id=$this->input->post('proyek_id');
+		$catatan_isi=$this->input->post('catatan_isi');
+		$this->m_padmin->save_catatan($proyek_id,$catatan_isi);
+		echo $this->session->set_flashdata('msg','success');
+		redirect('padmin/proyek');
+	}
 	
 	function update_anggaran_ph(){
 		$phid=$this->input->post('phid');
@@ -369,30 +377,93 @@ class Padmin extends CI_Controller{
 		$pn_email=$this->input->post('pn_email');
 		$pn_tel=$this->input->post('pn_tel');
 		$pn_bagian=$this->input->post('pn_bagian');
+		$username=$this->input->post('username');
+		$password=$this->input->post('password');
+		$repassword=$this->input->post('repassword');
+		$group1=$this->input->post('group1');
+		$user_id=$this->input->post('user');
+		$level='ppjk';
+		$cuser=$this->m_padmin->cek_user($username);
 
-		$svkoor=$this->m_padmin->save_koordinat($numkor,$namkor,$latitude,$longitude,$inputAddress);
-		if ($svkoor){
-			$svpro=$this->m_padmin->save_proyek($numproyek,$numkor,$xnama,$year,$pagu,$xjenis,$xvolume,$xsatuan,$phid);
-			if($svpro){
-				$svpp=$this->m_padmin->save_pn($numproyek,$pn_nama,$pn_email,$pn_tel,$pn_bagian);
-				if($svpp){
-					$this->m_padmin->save_proyek_bagian($numproyek);
-					echo $this->session->set_flashdata('msg','success');
-					redirect('padmin/proyek');
-				} else{
+		if($group1=='new')
+		{
+			if($cuser->num_rows() > 0){
+				echo $this->session->set_flashdata('msg','warning');
+				redirect('padmin/tambah_proyek');
+
+			} else {
+
+				if($password==$repassword){
+					$pw=$this->m_padmin->save_user_n($username,$password,$pn_tel,$pn_email,$pn_bagian,$level);
+					if($pw){
+						$svkoor=$this->m_padmin->save_koordinat($numkor,$namkor,$latitude,$longitude,$inputAddress);
+						if ($svkoor){
+							$svpro=$this->m_padmin->save_proyek($numproyek,$numkor,$xnama,$year,$pagu,$xjenis,$xvolume,$xsatuan,$phid);
+							if($svpro){
+								$svpp=$this->m_padmin->save_pn($numproyek,$pn_nama,$pn_email,$pn_tel,$pn_bagian);
+								if($svpp){
+									$this->m_padmin->save_proyek_bagian($numproyek);
+									echo $this->session->set_flashdata('msg','success');
+									redirect('padmin/proyek');
+								} else{
+									echo $this->session->set_flashdata('msg','warning');
+									redirect('padmin/tambah_proyek');
+								}
+							}
+							else {
+								echo $this->session->set_flashdata('msg','warning');
+								redirect('padmin/tambah_proyek');
+							}
+						}
+						else{
+							echo $this->session->set_flashdata('msg','warning');
+							redirect('padmin/tambah_proyek');
+						}
+					}
+					else {
+						echo $this->session->set_flashdata('msg','warning');
+						redirect('padmin/tambah_proyek');
+					}
+				}
+				else {
 					echo $this->session->set_flashdata('msg','warning');
 					redirect('padmin/tambah_proyek');
 				}
 			}
-			else {
+
+		}
+		else {
+			$cekuser=$this->m_padmin->cek_user_id($user_id);
+			$guser=$cekuser->row_array();
+			$pn_nama=$this->input->post('pn_namax');
+			$pn_tel=$guser['user_tel'];
+			$pn_email=$guser['user_email'];
+			$pn_bagian=$guser['user_bagian'];
+			$svkoor=$this->m_padmin->save_koordinat($numkor,$namkor,$latitude,$longitude,$inputAddress);
+			if ($svkoor){
+				$svpro=$this->m_padmin->save_proyek($numproyek,$numkor,$xnama,$year,$pagu,$xjenis,$xvolume,$xsatuan,$phid);
+				if($svpro){
+					$svpp=$this->m_padmin->save_pn($numproyek,$pn_nama,$pn_email,$pn_tel,$pn_bagian);
+					if($svpp){
+						$this->m_padmin->save_proyek_bagian($numproyek);
+						echo $this->session->set_flashdata('msg','success');
+						redirect('padmin/proyek');
+					} else{
+						echo $this->session->set_flashdata('msg','warning');
+						redirect('padmin/tambah_proyek');
+					}
+				}
+				else {
+					echo $this->session->set_flashdata('msg','warning');
+					redirect('padmin/tambah_proyek');
+				}
+			}
+			else{
 				echo $this->session->set_flashdata('msg','warning');
 				redirect('padmin/tambah_proyek');
 			}
-		}else{
-			echo $this->session->set_flashdata('msg','warning');
-			redirect('padmin/tambah_proyek');
-		}
 
+		}
 	}
 
 

@@ -51,6 +51,10 @@ body {
 	line-height: 1.428571429;
 	border-radius: 15px;
 }
+.ncontent
+{
+	display: none;
+}
 </style>
 
 <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -81,7 +85,7 @@ body {
 
 
 
-	<form action="<?php echo base_url()?>padmin/save_proyek" method="POST" enctype="multipart/form-data" >
+	<form action="<?php echo base_url()?>padmin/save_proyek" method="POST" enctype="multipart/form-data" id='group'>
 		<section class="content">
 			
 
@@ -244,17 +248,75 @@ body {
 						<h3 class="panel-title">PPTK</h3>
 					</div>
 					<div class="panel-body">
-						<div class="form-group">
-							<label>Nama</label>
-							<input type="text" class="form-control"  name="pn_nama" required="required">
+						<div>
+							<label>
+								<input type="radio" name="group1" value="old" class="trigger" data-rel="abc" checked /> Pilih dari daftar
+							</label>
+							<span class="abc ncontent">
+								<br>
+								<select class="form-control" name="user">
+									<?php foreach ($user->result_array() as $i) : ?>
+										<option value="<?php echo $i['user_id']; ?>"><?php echo $i['user_username']; ?></option>
+									<?php endforeach; ?>
+								</select>
+								<br>
+									<div class="form-group">
+									<label>Nama PPJK</label>
+									<input type="text" class="form-control"  name="pn_namax" >
+								</div>
+							</span>
 						</div>
-						<div class="form-group">
-							<label>Email</label>
-							<input type="text" class="form-control"  name="pn_email" required="required">
-						</div>
-						<div class="form-group">
-							<label>Telepon</label>
-							<input type="text" class="form-control"  name="pn_tel"   required="required">
+
+						<br>
+						<div>
+							<label>
+								<input type="radio" name="group1" value="new" class="trigger" data-rel="xyz"/> Buat baru
+							</label>
+
+							<span class="xyz ncontent">
+								<div class="form-group">
+									<label>Nama PPJK</label>
+									<input type="text" class="form-control"  name="pn_nama" >
+								</div>
+								<div class="form-group">
+									<label>Username</label>
+									<input type="text" class="form-control"  name="username">
+								</div>
+								<div class="form-group">
+									<label>Email</label>
+									<input type="text" class="form-control"  name="pn_email">
+								</div>
+								<div class="form-group">
+									<label>Password</label>
+									<input type="password" class="form-control"  name="password">
+								</div>
+
+								<div class="form-group">
+									<label>Re-Password</label>
+									<input type="password" class="form-control"  name="repassword">
+								</div>
+
+								<div class="form-group">
+									<label>Telepon</label>
+									<input type="text" class="form-control"  name="pn_tel"   >
+								</div>
+								<div class="form-group">  
+									<label>Bagian</label>
+									<select class="form-control"  name="pn_bagian" >
+										<option value="sda">Sumber Daya Air</option>
+										<option value="bm">Bina Marga</option>
+										<option value="ciptakarya">Cipta Karya</option>
+										<option value="pr">Perumahan Rakyat</option>
+										<option value="sekretariat">Sekretariat</option>
+										<option value="ttdp">Tata Ruang dan Pertanahan</option>
+										<option value="ubp">UPTD Balai Pengujian</option>
+										<option value="ubpdp">UPTD Balai Peralatan dan Perbekalan</option>
+										<option value="bkdp">Bina Kontruksi dan Pengendalian</option>
+									</select>
+								</div>
+
+							</span>
+
 						</div>
 						<?php 
 /*
@@ -372,5 +434,15 @@ body {
 		});
 
 		$('div.setup-panel div a.btn-success').trigger('click');
+	});
+</script>
+
+
+<script type="text/javascript">
+	$('.' + $('.trigger:checked').data('rel')).show();
+	$('.trigger').change(function() 
+	{
+		$('.ncontent').hide();
+		$('.' + $(this).data('rel')).show();
 	});
 </script>

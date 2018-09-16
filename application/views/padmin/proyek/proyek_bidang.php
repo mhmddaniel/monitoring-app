@@ -25,7 +25,7 @@
 	<section class="content">
 
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-3">
 				<form name='autoSumForm'  action="<?php echo base_url()?>padmin/save_proyek_bidang" method="POST" enctype="multipart/form-data" >
 					<div class="box box-warning">
 						<div class="box-header with-border">
@@ -106,9 +106,73 @@
 					</div>
 				</form>
 			</div>
+
+			<div class="col-md-9">
+				<div class="box box-warning">
+					<div class="box-header with-border">
+						<h3 class="box-title">Recent Update </h3>
+						<a href="" class="pull-right btn btn-primary" data-toggle="modal" data-target="#ModalTambahph">Tambah Catatan</a>
+					</div>
+					<div class="box-body">
+						<div class="row">
+							<div class="col-md-12">
+								<table id="example1" class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>Target</th>
+											<th>Real</th>
+											<th>Devisi</th>
+											<th>Tanggal</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php
+										$id=$this->uri->segment(3);
+										$cek=$this->m_padmin->cek_data($id);
+										$proyek_id=$cek['pb_proyek_id'];
+										$getdata=$this->m_padmin->get_all_data_by_id($proyek_id);
+										foreach ($getdata->result_array() as $key) :
+											?>
+											<tr>
+												<th><?php echo $key['pb_target']; ?></th>
+												<th><?php echo $key['pb_real']; ?></th>
+												<th><?php echo $key['pb_devisi']; ?></th>
+												<th><?php echo date('d-m-Y H:i:s',strtotime($key['pb_last_update'])); ?></th>
+											</tr>
+										<?php endforeach; ?>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</section>
 </div>
+
+  <div class="modal fade" id="ModalTambahph" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-md"  role="document">
+      <div class="modal-content" >
+
+        <form class="form-horizontal" action="<?php echo base_url().'padmin/save_catatan'?>" method="post" enctype="multipart/form-data">
+          <div class="modal-body container-fluid text-center" >
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Tambah Catatan</label>
+                <input type="hidden" name="proyek_id" value="<?php echo $proyek_id;?>">
+                <textarea class="form-control" name="catatan_isi"></textarea>
+              </div>
+            </div>
+            <div class="col-md-6 col-md-offset-3"><br>
+              <button type="submit" class="btn btn-success btn-round col-md-12" id="simpan">Save</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
 <script src="<?php echo base_url() ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="<?php echo base_url() ?>assets/bower_components/ckeditor/ckeditor.js"></script>
@@ -138,6 +202,7 @@
 </script>
 </body>
 </html>
+
 
 
 

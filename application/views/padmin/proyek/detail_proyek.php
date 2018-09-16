@@ -255,6 +255,34 @@ $b=$data->row_array() ;
 </div>
 </div>
 
+<div class="col-md-12">
+  <div class="box box-primary">
+   <div class="box-header">
+    <h4 class="text-primary">Catatan</h4>
+  </div>
+  <div class="box-body box-profile">
+    <div class="table-responsive">
+      <table class="table  table-hovered">
+        <tr>
+          <th>No</th>
+          <th>Catatan</th>
+        </tr>
+        <?php 
+        $no=0;
+        foreach ($catatan->result_array() as $i) : 
+          $no++;
+          ?>
+          <tr>
+            <td><?php echo $no; ?></td>
+            <td><?php echo $i['catatan_isi']; ?></td>
+          </tr>
+        <?php endforeach;  ?>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
 
 </div>
 

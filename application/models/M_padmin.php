@@ -44,7 +44,14 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("SELECT * from anggaran where ph_id='$kode'");
 		return $hsl;
 	}
-
+	function save_catatan($proyek_id,$catatan_isi){
+		$hsl=$this->db->query("INSERT INTO catatan values(null,'$proyek_id','$catatan_isi')");
+		return $hsl;
+	}
+	function get_catatan_by_kode($kode){
+		$hsl=$this->db->query("SELECT * FROM catatan where proyek_id='$kode'");
+		return $hsl;
+	}
 	function get_all_proyek(){
 		$hsl=$this->db->query("SELECT * FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id inner join penanggung_jawab on proyek.proyek_id=penanggung_jawab.proyek_id inner join koordinat on proyek.proyek_koordinat_id=koordinat.koordinat_id where proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
 		return $hsl;
@@ -293,10 +300,24 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("SELECT * FROM user where user_username='$username'");
 		return $hsl;
 	}
+	function cek_user_id($user_id){
+		$hsl=$this->db->query("SELECT * FROM user where user_id='$user_id'");
+		return $hsl;
+	}
 	function save_user($username,$password,$tel,$email,$bagian,$gambar,$level){
 		$hsl=$this->db->query("INSERT INTO user (user_username,user_password,user_email,user_telp,user_bagian,user_photo,user_level) VALUES ('$username',md5('$password'),'$email','$tel','$bagian','$gambar','$level')");
 		return $hsl;
 	}
+	function get_user_by_id_ppjk(){
+		$hsl=$this->db->query("SELECT * from user where user_level='ppjk'");
+		return $hsl;
+	}
+
+	function save_user_n($username,$password,$pn_tel,$pn_email,$pn_bagian,$level){
+		$hsl=$this->db->query("INSERT INTO user (user_username,user_password,user_email,user_telp,user_bagian,user_level) VALUES ('$username',md5('$password'),'$pn_email','$pn_tel','$pn_bagian','$level')");
+		return $hsl;
+	}
+
 	function save_user_proyek($user_id,$namauser,$emailuser,$telpuser){
 		$hsl=$this->db->query("INSERT INTO user (user_id,user_nama,user_email,user_telp,user_bagian) VALUES ('$user_id','$namauser','$emailuser','$telpuser','ppk')");
 		return $hsl;
@@ -423,6 +444,14 @@ class M_padmin extends CI_Model{
 	}	
 	function save_pn($numproyek,$pn_nama,$pn_email,$pn_tel,$pn_bagian){
 		$hsl=$this->db->query("INSERT INTO penanggung_jawab (proyek_id,pn_nama,pn_email,pn_tel,pn_bagian) VALUES ('$numproyek','$pn_nama','$pn_email','$pn_tel','$pn_bagian')");
+		return $hsl;
+	}
+	function cek_data($id){
+		$hsl=$this->db->query("SELECT * FROM proyek_bagian where pb_id='$id'");
+		return $hsl->row_array();
+	}
+	function get_all_data_by_id($proyek_id){
+		$hsl=$this->db->query("SELECT * from proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id where proyek.proyek_id='1' order by proyek_bagian.pb_id ASC");
 		return $hsl;
 	}
 

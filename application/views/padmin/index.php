@@ -172,12 +172,20 @@
                           <?php
                           foreach ($data->result_array() as $i) :
                             if($i>0){
+                              $tanggal1 = new DateTime($i['proyek_awal_kontrak']);
+                              $tanggal2 = new DateTime();
+                              $perbedaan = $tanggal2->diff($tanggal1)->format("%a");
+
+
                               ?>
                               <tr>
-                                <td><a href="<?php echo base_url().'padmin/detail_proyek/'.$i['proyek_id'];?>"><?php echo $i['proyek_nama']; ?></a></td>
-                                <td><?php echo $i['proyek_tahun']; ?></td>
-                                <td><?php echo "Rp. ".number_format($i['proyek_pagu']); ?></td>
-                                <td><?php
+                                <td class="<?php if($perbedaan>6 && $perbedaan<14){  echo 'bg-warning'; } else if($perbedaan>13){ echo "bg-danger"; } else {} ?>">
+                                    <a href="<?php echo base_url().'padmin/detail_proyek/'.$i['proyek_id'];?>"><?php echo $i['proyek_nama']; ?></a>
+                                  </td>
+                                  <td class="<?php if($perbedaan>6 && $perbedaan<14){  echo 'bg-warning'; } else if($perbedaan>13){ echo "bg-danger"; } else {} ?>"><?php echo $i['proyek_tahun']; ?></td>
+                                  <td class="<?php if($perbedaan>6 && $perbedaan<14){  echo 'bg-warning'; } else if($perbedaan>13){ echo "bg-danger"; } else {} ?>"><?php echo "Rp. ".number_format($i['proyek_pagu']); ?></td>
+                                </td>
+                                <td class="<?php if($perbedaan>6 && $perbedaan<14){  echo 'bg-warning'; } else if($perbedaan>13){ echo "bg-danger"; } else {} ?>"><?php
                                 $up1=date('d-m-Y h:i:s', strtotime($i['last_update']));
                                 $up2=date('d-m-Y h:i:s', strtotime($i['pb_last_update']));
                                 if($up1 > $up2)
@@ -189,7 +197,7 @@
                                 }
 
                                 ?></td>
-                                <td>
+                                <td class="<?php if($perbedaan>6 && $perbedaan<14){  echo 'bg-warning'; } else if($perbedaan>13){ echo "bg-danger"; } else {} ?>">
                                   <?php
                                   if($i['pb_real']==0){
                                     echo "<label class='label text-gray'>Belum Mulai</label>";
@@ -285,7 +293,7 @@
               var data = google.visualization.arrayToDataTable([
                 ['Month', 'Rencana Kontrak', 'Awal Kontrak'],
                 <?php 
-                  $max=0;
+                $max=0;
                 foreach ($countjum->result_array() as $i) :
                   if ($i['proyek_bulan']!=null){
                     ?>
