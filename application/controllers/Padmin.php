@@ -82,6 +82,7 @@ class Padmin extends CI_Controller{
 		$y['title']='Data Bagian';
 		$kode=$this->uri->segment(3);
 		$x['data']=$this->m_padmin->get_proyek_bidang_by_kode($kode);
+		$x['charttdk']=$this->m_padmin->get_chart_tdk($kode);
 		$this->load->view('padmin/header',$y);
 		$this->load->view('padmin/sidebar');
 		$this->load->view('padmin/proyek/proyek_bidang',$x);
@@ -469,61 +470,32 @@ class Padmin extends CI_Controller{
 
 
 	function save_user(){
-		$config['upload_path'] = './assets/images/';
-		$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
-		$config['encrypt_name'] = TRUE;
+		$username=$this->input->post('xusername');
+		$password=$this->input->post('xpassword');
+		$repassword=$this->input->post('xrepassword');
+		$tel=$this->input->post('xtel');
+		$email=$this->input->post('xemail');
+		$bagian=$this->input->post('xbagian');
+		$level=$this->input->post('xlevel');
+		$cuser=$this->m_padmin->cek_user($username);
+		if($cuser->num_rows() > 0){
+			echo $this->session->set_flashdata('msg','warning');
+			redirect('padmin/tambah_user');
 
-		$this->upload->initialize($config);
-		if(!empty($_FILES['filefoto']['name']))
-		{
-			if ($this->upload->do_upload('filefoto'))
-			{
-				$gbr = $this->upload->data();
-
-				$config['image_library']='gd2';
-				$config['source_image']='./assets/images/'.$gbr['file_name'];
-				$config['create_thumb']= FALSE;
-				$config['maintain_ratio']= FALSE;
-				$config['quality']= '60%';
-				$config['width']= 840;
-				$config['height']= 450;
-				$config['new_image']= './assets/images/'.$gbr['file_name'];
-				$this->load->library('image_lib', $config);
-				$this->image_lib->resize();
-
-				$gambar=$gbr['file_name'];
-				$username=$this->input->post('xusername');
-				$password=$this->input->post('xpassword');
-				$repassword=$this->input->post('xrepassword');
-				$tel=$this->input->post('xtel');
-				$email=$this->input->post('xemail');
-				$bagian=$this->input->post('xbagian');
-				$level=$this->input->post('xlevel');
-				$cuser=$this->m_padmin->cek_user($username);
-				if($cuser->num_rows() > 0){
-					echo $this->session->set_flashdata('msg','warning');
-					redirect('padmin/tambah_user');
-
-				} else {
-					if($password==$repassword){
-						$this->m_padmin->save_user($username,$password,$tel,$email,$bagian,$gambar,$level);
-						echo $this->session->set_flashdata('msg','success');
-						redirect('padmin/user');	
-					}
-					else {
-						echo $this->session->set_flashdata('msg','warning');
-						redirect('padmin/tambah_user');
-					}
-				}
-
-			}else{
+		} else {
+			if($password==$repassword){
+				$this->m_padmin->save_user($username,$password,$tel,$email,$bagian,$level);
+				echo $this->session->set_flashdata('msg','success');
+				redirect('padmin/user');	
+			}
+			else {
 				echo $this->session->set_flashdata('msg','warning');
 				redirect('padmin/tambah_user');
 			}
-
-		}else{
-			redirect('padmin/tambah_user');
 		}
+
+
+
 
 	}
 	function save_dinaspu(){
@@ -788,7 +760,9 @@ class Padmin extends CI_Controller{
 		$dsadmproyek=$this->input->post('dsadmproyek');
 		$totalds=$this->input->post('totalds');
 		$sisaanggran=$this->input->post('sisaanggran');
-		$ggc=$this->m_padmin->tambah_proyek_bidang($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran,$statproyek);
+		$tanggal_prog=$this->input->post('tanggal_prog');
+
+		$ggc=$this->m_padmin->tambah_proyek_bidang($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran,$tanggal_prog,$statproyek);
 		echo $this->session->set_flashdata('msg','info');
 		redirect('padmin/proyek');
 

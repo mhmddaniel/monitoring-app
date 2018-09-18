@@ -155,7 +155,7 @@ $b=$data->row_array() ;
       <div class="box box-primary">
        <div class="box-header">
          <h4> 
-          <p class="text-primary"><?php if($i['pekerja_jenis']=='kontraktor') {echo "Kontraktor"; } else {echo "Konsultan";} ?></p> 
+          <p class="text-primary">Penyedia Jasa</p> 
         </h4>
       </div>
 
@@ -163,7 +163,11 @@ $b=$data->row_array() ;
         <table class="table">
 
           <tr>
-            <th>Bagian</th>
+            <th>Nama Perusahaan</th>
+            <td class="text-right"><?php echo $i['pekerja_nama_perusahaan']; ?></td>
+          </tr>
+          <tr>
+            <th>Jenis</th>
             <td class="text-right"><?php echo $i['pekerja_jenis']; ?></td>
           </tr>
           <tr>
@@ -173,10 +177,6 @@ $b=$data->row_array() ;
           <tr>
             <th>Telepon Direktur</th>
             <td class="text-right"><?php echo $i['pekerja_tel_direktur']; ?></td>
-          </tr>
-          <tr>
-            <th>Nama Perusahaan</th>
-            <td class="text-right"><?php echo $i['pekerja_nama_perusahaan']; ?></td>
           </tr>
 
           <tr>
@@ -264,8 +264,9 @@ $b=$data->row_array() ;
     <div class="table-responsive">
       <table class="table  table-hovered">
         <tr>
-          <th>No</th>
-          <th>Catatan</th>
+          <th class="col-md-1">No</th>
+          <th class="col-md-8">Catatan</th>
+          <th class="col-md-3">Tanggal</th>
         </tr>
         <?php 
         $no=0;
@@ -273,8 +274,9 @@ $b=$data->row_array() ;
           $no++;
           ?>
           <tr>
-            <td><?php echo $no; ?></td>
-            <td><?php echo $i['catatan_isi']; ?></td>
+            <td class="col-md-1"><?php echo $no; ?></td>
+            <td class="col-md-8"><?php echo $i['catatan_isi']; ?></td>
+            <td class="col-md-3"><?php echo date('d-m-Y H:i:s',strtotime($i['catatan_tanggal'])); ?></td>
           </tr>
         <?php endforeach;  ?>
       </table>
@@ -297,7 +299,7 @@ $b=$data->row_array() ;
       <table class="table">
 
         <tr>
-          <th>Nama Penanggung Jawab</th>
+          <th>Nama</th>
           <td class="text-right"><?php echo $b['pn_nama'];  ?></td>
         </tr>
         <tr>
@@ -309,7 +311,7 @@ $b=$data->row_array() ;
           <td class="text-right"><?php echo $b['pn_tel'];  ?></td>
         </tr>
         <tr>
-          <th>Nama Perusahaan</th>
+          <th>Bidang</th>
           <td class="text-right"><?php  echo strtoupper($b['pn_bagian']); ?></td>
         </tr>
 
@@ -346,16 +348,12 @@ $b=$data->row_array() ;
           <td><?php echo "Rp ".number_format($b['pb_ds_kontrak']); ?></td>
         </tr>
         <tr>
-          <th>Daya Serap Administrasi Pekerjaan</th>
-          <td><?php echo "Rp ".number_format($b['pb_ds_ap']); ?></td>
-        </tr>
-        <tr>
-          <th>Total Biaya Serap Keuangan</th>
-          <td><?php echo "Rp ".number_format($b['pb_ds_keuangan']); ?></td>
+          <th>Sisa Kontrak</th>
+          <td><?php echo  "Rp ".number_format($b['proyek_keuangan']-$b['pb_ds_kontrak']); ?></td>
         </tr>
         <tr>
           <th>Sisa Anggaran</th>
-          <td><?php echo "Rp ".number_format($b['pb_sisa_anggaran']); ?></td>
+          <td><?php echo "Rp ".number_format($b['proyek_pagu']-$b['pb_ds_kontrak']); ?></td>
         </tr>
       </table> 
 

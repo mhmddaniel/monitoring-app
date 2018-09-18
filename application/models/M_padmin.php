@@ -45,7 +45,7 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 	function save_catatan($proyek_id,$catatan_isi){
-		$hsl=$this->db->query("INSERT INTO catatan values(null,'$proyek_id','$catatan_isi')");
+		$hsl=$this->db->query("INSERT INTO catatan values(null,'$proyek_id','$catatan_isi',NOW())");
 		return $hsl;
 	}
 	function get_catatan_by_kode($kode){
@@ -304,8 +304,8 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("SELECT * FROM user where user_id='$user_id'");
 		return $hsl;
 	}
-	function save_user($username,$password,$tel,$email,$bagian,$gambar,$level){
-		$hsl=$this->db->query("INSERT INTO user (user_username,user_password,user_email,user_telp,user_bagian,user_photo,user_level) VALUES ('$username',md5('$password'),'$email','$tel','$bagian','$gambar','$level')");
+	function save_user($username,$password,$tel,$email,$bagian,$level){
+		$hsl=$this->db->query("INSERT INTO user (user_username,user_password,user_email,user_telp,user_bagian,user_level) VALUES ('$username',md5('$password'),'$email','$tel','$bagian','$level')");
 		return $hsl;
 	}
 	function get_user_by_id_ppjk(){
@@ -332,8 +332,8 @@ class M_padmin extends CI_Model{
 		return $hsl;
 	}
 
-	function tambah_proyek_bidang($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran,$statproyek){
-		$hsl=$this->db->query("INSERT INTO proyek_bagian (pb_proyek_id,pb_target,pb_real,pb_devisi,pb_ds_kontrak,pb_ds_ap,pb_ds_keuangan,pb_sisa_anggaran,pb_last_update,pb_stat_proyek) VALUES ('$proyek_id','$pbtarget','$pbreal','$pbdevisi','$dskontrak','$dsadmproyek','$totalds','$sisaanggran',NOW(),'$statproyek')");
+	function tambah_proyek_bidang($proyek_id,$pbtarget,$pbreal,$pbdevisi,$dskontrak,$dsadmproyek,$totalds,$sisaanggran,$tanggal_prog,$statproyek){
+		$hsl=$this->db->query("INSERT INTO proyek_bagian (pb_proyek_id,pb_target,pb_real,pb_devisi,pb_ds_kontrak,pb_ds_ap,pb_ds_keuangan,pb_sisa_anggaran,pb_tanggal_prog,pb_last_update,pb_stat_proyek) VALUES ('$proyek_id','$pbtarget','$pbreal','$pbdevisi','$dskontrak','$dsadmproyek','$totalds','$sisaanggran','$tanggal_prog',NOW(),'$statproyek')");
 		return $hsl;
 	}
 	/*

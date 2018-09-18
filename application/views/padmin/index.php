@@ -172,166 +172,177 @@
                           <?php
                           foreach ($data->result_array() as $i) :
                             if($i>0){
+
+                              $up1=date('d-m-Y h:i:s', strtotime($i['last_update']));
+                              $up2=date('d-m-Y h:i:s', strtotime($i['pb_last_update']));
                               $tanggal1 = new DateTime($i['proyek_awal_kontrak']);
-                              $tanggal2 = new DateTime();
+                              if($up1 > $up2)
+                              {
+                                $tanggal2 = new DateTime($up1);
+                              }
+                              else{
+                                $tanggal2 = new DateTime($up2);
+                              }
+
+
+
                               $perbedaan = $tanggal2->diff($tanggal1)->format("%a");
 
 
                               ?>
                               <tr>
-                                <td class="<?php if($perbedaan>6 && $perbedaan<14){  echo 'bg-warning'; } else if($perbedaan>13){ echo "bg-danger"; } else {} ?>">
-                                    <a href="<?php echo base_url().'padmin/detail_proyek/'.$i['proyek_id'];?>"><?php echo $i['proyek_nama']; ?></a>
-                                  </td>
-                                  <td class="<?php if($perbedaan>6 && $perbedaan<14){  echo 'bg-warning'; } else if($perbedaan>13){ echo "bg-danger"; } else {} ?>"><?php echo $i['proyek_tahun']; ?></td>
-                                  <td class="<?php if($perbedaan>6 && $perbedaan<14){  echo 'bg-warning'; } else if($perbedaan>13){ echo "bg-danger"; } else {} ?>"><?php echo "Rp. ".number_format($i['proyek_pagu']); ?></td>
+                                <td>
+                                  <a href="<?php echo base_url().'padmin/detail_proyek/'.$i['proyek_id'];?>"><?php echo $i['proyek_nama']; ?></a>
                                 </td>
-                                <td class="<?php if($perbedaan>6 && $perbedaan<14){  echo 'bg-warning'; } else if($perbedaan>13){ echo "bg-danger"; } else {} ?>"><?php
-                                $up1=date('d-m-Y h:i:s', strtotime($i['last_update']));
-                                $up2=date('d-m-Y h:i:s', strtotime($i['pb_last_update']));
-                                if($up1 > $up2)
-                                {
-                                  echo $up1;
+                                <td><?php echo $i['proyek_tahun']; ?></td>
+                                <td><?php echo "Rp. ".number_format($i['proyek_pagu']); ?></td>
+                              </td>
+                              <td <?php if($perbedaan>6 && $perbedaan<14){  echo 'class=bg-red'; } else if($perbedaan>13){ echo "style=background:#FFFF00;"; } else {} ?>><?php
+
+                              if($up1 > $up2)
+                              {
+                                echo $up1;
+                              }
+                              else{
+                                echo $up2;
+                              }
+
+                              ?></td>
+                              <td>
+                                <?php
+                                if($i['pb_real']==0){
+                                  echo "<label class='label text-gray'>Belum Mulai</label>";
                                 }
-                                else{
-                                  echo $up2;
-                                }
+                                else {
+                                  if($i['pb_target']==0 || $i['pb_target']<=70){
 
-                                ?></td>
-                                <td class="<?php if($perbedaan>6 && $perbedaan<14){  echo 'bg-warning'; } else if($perbedaan>13){ echo "bg-danger"; } else {} ?>">
-                                  <?php
-                                  if($i['pb_real']==0){
-                                    echo "<label class='label text-gray'>Belum Mulai</label>";
-                                  }
-                                  else {
-                                    if($i['pb_target']==0 || $i['pb_target']<=70){
-
-                                      if($i['pb_devisi']>0){
-                                        echo "<label class='label text-blue'>".$i['pb_real']."% (Baik)</label>";
-                                      }
-                                      else {
-                                        if($i['pb_devisi']==0 || $i['pb_devisi']>=(-7)){
-                                          echo "<label class='label text-green'>".$i['pb_real']."% (Wajar)</label>";
-                                        }
-                                        else if ($i['pb_devisi']<(-7) && $i['pb_devisi']>=(-10)){
-
-                                          echo "<label class='label text-yellow'>".$i['pb_real']."% (Terlambat)</label>";
-                                        }
-                                        else {
-                                          echo "<label class='label text-red'>".$i['pb_real']."% (Kritis)</label>";
-                                        }
-
-                                      }
-                                    }
-                                    else if ($i['pb_target']>70 && $i['pb_target']<=100){
-
-                                      if($i['pb_devisi']>0){
-                                        echo "<label class='label text-blue'>".$i['pb_real']."% (Baik)</label>";
-                                      }
-                                      else {
-                                        if($i['pb_devisi']==0 || $i['pb_devisi']>=(-4)){
-                                          echo "<label class='label text-green'>".$i['pb_real']."% (Wajar)</label>";
-                                        }
-                                        else if ($i['pb_devisi']<(-4) && $i['pb_devisi']>=(-5)){
-
-                                          echo "<label class='label text-yellow'>".$i['pb_real']."% (Terlambat)</label>";
-                                        }
-                                        else {
-
-                                          echo "<label class='label text-red'>".$i['pb_real']."% (Kritis)</label>";
-                                        }
-                                      }
+                                    if($i['pb_devisi']>0){
+                                      echo "<label class='label text-blue'>".$i['pb_real']."% (Baik)</label>";
                                     }
                                     else {
-                                      echo "";
+                                      if($i['pb_devisi']==0 || $i['pb_devisi']>=(-7)){
+                                        echo "<label class='label text-green'>".$i['pb_real']."% (Wajar)</label>";
+                                      }
+                                      else if ($i['pb_devisi']<(-7) && $i['pb_devisi']>=(-10)){
+
+                                        echo "<label class='label text-yellow'>".$i['pb_real']."% (Terlambat)</label>";
+                                      }
+                                      else {
+                                        echo "<label class='label text-red'>".$i['pb_real']."% (Kritis)</label>";
+                                      }
+
                                     }
                                   }
-                                  ?></td>
-                                </tr>
-                              <?php } else {?>
+                                  else if ($i['pb_target']>70 && $i['pb_target']<=100){
 
-                              <?php } endforeach; ?>
-                            </tbody>
-                          </table>
+                                    if($i['pb_devisi']>0){
+                                      echo "<label class='label text-blue'>".$i['pb_real']."% (Baik)</label>";
+                                    }
+                                    else {
+                                      if($i['pb_devisi']==0 || $i['pb_devisi']>=(-4)){
+                                        echo "<label class='label text-green'>".$i['pb_real']."% (Wajar)</label>";
+                                      }
+                                      else if ($i['pb_devisi']<(-4) && $i['pb_devisi']>=(-5)){
 
-                        </div>
-                      </div>
-                      <div class="box-footer no-padding">
+                                        echo "<label class='label text-yellow'>".$i['pb_real']."% (Terlambat)</label>";
+                                      }
+                                      else {
+
+                                        echo "<label class='label text-red'>".$i['pb_real']."% (Kritis)</label>";
+                                      }
+                                    }
+                                  }
+                                  else {
+                                    echo "";
+                                  }
+                                }
+                                ?></td>
+                              </tr>
+                            <?php } else {?>
+
+                            <?php } endforeach; ?>
+                          </tbody>
+                        </table>
+
                       </div>
                     </div>
+                    <div class="box-footer no-padding">
+                    </div>
                   </div>
-
                 </div>
+
               </div>
+            </div>
 
-              <div class="row">    
-                <div class="col-md-12">
-                </div>
+            <div class="row">    
+              <div class="col-md-12">
               </div>
+            </div>
 
 
 
-            </section>
-          </div>
-          <!-- Sparkline -->
-          <script src="<?php echo base_url().'assets/plugins/sparkline/jquery.sparkline.min.js'?>"></script>
-          <!-- jvectormap -->
-          <script src="<?php echo base_url().'assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'?>"></script>
-          <script src="<?php echo base_url().'assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'?>"></script>
-          <script src="<?php echo base_url()?>assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-          <script src="<?php echo base_url()?>assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+          </section>
+        </div>
+        <!-- Sparkline -->
+        <script src="<?php echo base_url().'assets/plugins/sparkline/jquery.sparkline.min.js'?>"></script>
+        <!-- jvectormap -->
+        <script src="<?php echo base_url().'assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'?>"></script>
+        <script src="<?php echo base_url().'assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'?>"></script>
+        <script src="<?php echo base_url()?>assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="<?php echo base_url()?>assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
 
-          <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-          <script type="text/javascript">
-            google.charts.load('current', {packages: ['corechart', 'bar']});
-            google.charts.setOnLoadCallback(drawChart);
-            $(window).on("throttledresize", function (event) {
-              drawChart();
-            });
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+          google.charts.load('current', {packages: ['corechart', 'bar']});
+          google.charts.setOnLoadCallback(drawChart);
+          $(window).on("throttledresize", function (event) {
+            drawChart();
+          });
 
-            function drawChart() {
-              var data = google.visualization.arrayToDataTable([
-                ['Month', 'Rencana Kontrak', 'Awal Kontrak'],
-                <?php 
-                $max=0;
-                foreach ($countjum->result_array() as $i) :
-                  if ($i['proyek_bulan']!=null){
-                    ?>
-                    ['<?php echo $i['proyek_bulan']; ?>', <?php echo $i['countsech']; ?>, <?php echo $i['countawal']; ?>],
-                  <?php }
-                  if($i['countsech']>$i['countawal']){
-                    $max=$i['countsech'];
-                  }else {
-                    $max=$i['countawal'];
-                  }
-                endforeach; 
-                ?>
+          function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+              ['Month', 'Rencana Kontrak', 'Awal Kontrak'],
+              <?php 
+              $max=0;
+              foreach ($countjum->result_array() as $i) :
+                if ($i['proyek_bulan']!=null){
+                  ?>
+                  ['<?php echo $i['proyek_bulan']; ?>', <?php echo $i['countsech']; ?>, <?php echo $i['countawal']; ?>],
+                <?php }
+                if($i['countsech']>$i['countawal']){
+                  $max=$i['countsech'];
+                }else {
+                  $max=$i['countawal'];
+                }
+              endforeach; 
+              ?>
 
-                ]);
+              ]);
 
-              var options = {
-                colors: ['#1DC4E9', '#9265E6'],
-                width: 600,
-                legend: { position: 'top', maxLines: 3 },
-                chart: {
-                  title: 'Kontrak'
+            var options = {
+              colors: ['#1DC4E9', '#9265E6'],
+              width: 600,
+              legend: { position: 'top', maxLines: 3 },
+              chart: {
+                title: 'Kontrak'
+              },
+              vAxis: {
+                viewWindow: {
+                  max: <?php if($max<=5) {echo "5";} else { echo $max;} ?>,
+                  min: 0,
                 },
-                vAxis: {
-                  viewWindow: {
-                    max: <?php if($max<=5) {echo "5";} else { echo $max;} ?>,
-                    min: 0,
-                  },
-                  gridlines: {
-                    count: 1,
-                  },
+                gridlines: {
+                  count: 1,
                 },
-                pointSize: 4,
-              };
+              },
+              pointSize: 4,
+            };
 
-              var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+            var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
 
-              chart.draw(data, google.charts.Bar.convertOptions(options));
-            }
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+          }
 
 
-          </script>
+        </script>

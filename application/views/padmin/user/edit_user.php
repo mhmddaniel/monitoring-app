@@ -71,10 +71,6 @@
                   <option value="bidang" <?php if($b['user_level']=='bidang'){ echo "selected"; } else {} ?>>Bidang</option>
                 </select>
               </div>
-              <div class="form-group"> 
-                <label>FOTO</label>
-                <input type="file" name="filefoto" class="form-control btn-primary"/>
-              </div>
               <div class="form-group pull-right">
                 <button type="submit" class="btn btn-primary btn-flat pull-right"><span class="fa fa-pencil"></span> Publish</button>
               </div>

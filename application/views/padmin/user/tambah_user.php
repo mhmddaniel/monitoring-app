@@ -95,10 +95,6 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
                     <option value="bidang">BIDANG</option>
                   </select>
                 </div>
-                <div class="form-group"> 
-                  <label>FOTO</label>
-                  <input type="file" name="filefoto" class="form-control" required/>
-                </div>
                 <div class="form-group pull-right">
                   <button type="submit" class="btn btn-primary btn-flat pull-right"><span class="fa fa-pencil"></span> Publish</button>
                   <!-- /.form-group -->
