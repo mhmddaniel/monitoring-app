@@ -1,3 +1,10 @@
+<style type="text/css">
+
+.ncontent
+{
+  display: none;
+}
+</style>
 <?php $b=$data->row_array(); ?>
 <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/font-awesome/css/font-awesome.min.css">
@@ -19,12 +26,12 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="<?php echo base_url()?>padmin"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="<?php echo base_url() ?>padmin/proyek">proyek</a></li>
+      <li><a href="<?php echo base_url() ?>proyek">proyek</a></li>
       <li class="active">List</li>
     </ol>
   </section>
 
-  <form action="<?php echo base_url()?>padmin/update_proyek" method="POST">
+  <form action="<?php echo base_url()?>padmin/update_proyek" method="POST" id='group'>
     <section class="content">
       <div class="row">
         <div class="col-md-12">
@@ -58,6 +65,7 @@
             <ul class="nav nav-tabs">
               <li class="active"><a href="#tab_1" data-toggle="tab">Data Pekerjaan</a></li>
               <li><a href="#tab_2" data-toggle="tab">Lokasi Pekerjaan</a></li>
+              <li><a href="#tab_3" data-toggle="tab">PPTK</a></li>
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="tab_1">
@@ -97,7 +105,7 @@
                   <div class="col-md-6">
                     <label>Volume</label>
                     <div class="form-group">
-                      <input type="number" name="xvolume" value="<?php echo $b['proyek_volume']; ?>" class="form-control">
+                      <input type="text" name="xvolume" id="volume" value="<?php echo $b['proyek_volume']; ?>" class="form-control">
                     </div>
                   </div>
                   <div class="col-md-1">
@@ -108,7 +116,7 @@
                   </div>
                 </div>
               </div>
-              <!-- /.tab-pane -->
+
               <div class="tab-pane" id="tab_2">
                 <div class="box-body">
                   <div class="form-group">
@@ -122,14 +130,89 @@
                   </div>    
                   <div class="form-group">
                     <label>Latitude</label>
-                    <input type="text" class="latitude form-control" value="latitude" name="latitude" readonly="readonly">
+                    <input type="text" class="latitude form-control" value="latitude" name="latitude" >
                   </div>
                   <div class="form-group">
                     <label>Longitude</label>
-                    <input type="text" class="longitude form-control" value="longitude" name="longitude" readonly="readonly">
+                    <input type="text" class="longitude form-control" value="longitude" name="longitude">
                   </div>
                 </div>
               </div>
+
+              <div class="tab-pane" id="tab_3">
+                <div class="box-body">
+                  <div>
+                    <label>
+                      <input type="radio" name="group1" value="old" class="trigger" data-rel="abc" checked /> Pilih dari daftar
+                    </label>
+                    <span class="abc ncontent">
+                      <br>
+                      <select class="form-control" name="user">
+                        <?php foreach ($user->result_array() as $i) : ?>
+                          <option value="<?php echo $i['user_id']; ?>" <?php if($b['user_id']==$i['user_id']){echo "selected";} else {} ?>><?php echo $i['user_username']; ?></option>
+                        <?php endforeach; ?>
+                      </select>
+                    </span>
+                  </div>
+                  <br>
+                  <div>
+                    <label>
+                      <input type="radio" name="group1" value="new" class="trigger" data-rel="xyz"/> Buat baru
+                    </label>
+                    <?php
+                    $gg=$this->m_padmin->cek_last_id_user();
+                    $user_id=$gg['user_id']+1; ?>
+                    <span class="xyz ncontent">
+                      <div class="form-group">
+                        <label>Nama PPTK</label>
+                        <input type="hidden" class="form-control" value="<?php echo $user_id; ?>"  name="user_id" >
+                        <input type="text" class="form-control"  name="user_nama" >
+                      </div>
+                      <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" class="form-control"  name="username">
+                      </div>
+                      <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" class="form-control"  name="user_email">
+                      </div>
+                      <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control"  name="password">
+                      </div>
+
+                      <div class="form-group">
+                        <label>Re-Password</label>
+                        <input type="password" class="form-control"  name="repassword">
+                      </div>
+
+                      <div class="form-group">
+                        <label>Telepon</label>
+                        <input type="text" class="form-control"  name="user_telp">
+                      </div>
+                      <div class="form-group">  
+                        <label>Bagian</label>
+                        <select class="form-control"  name="user_bagian" >
+                          <option value="sda">Sumber Daya Air</option>
+                          <option value="bm">Bina Marga</option>
+                          <option value="ciptakarya">Cipta Karya</option>
+                          <option value="pr">Perumahan Rakyat</option>
+                          <option value="sekretariat">Sekretariat</option>
+                          <option value="ttdp">Tata Ruang dan Pertanahan</option>
+                          <option value="ubp">UPTD Balai Pengujian</option>
+                          <option value="ubpdp">UPTD Balai Peralatan dan Perbekalan</option>
+                          <option value="bkdp">Bina Kontruksi dan Pengendalian</option>
+                        </select>
+                      </div>
+
+                    </span>
+
+                  </div>
+
+
+                </div>
+              </div>
+
 
             </div>
           </div>
@@ -149,7 +232,7 @@
   })
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
+
 <script src="<?php echo base_url() ?>assets/map/jquery-1.9.1.min.js"></script>
 <script src="<?php echo base_url() ?>assets/map/jquery.addressPickerByGiro.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAogXD-AHrsmnWinZIyhRORJ84bgLwDPpg&sensor=false&language=id"></script>
@@ -169,6 +252,12 @@
   pagu.addEventListener('keyup', function(e)
   {
     pagu.value = formatRupiah(this.value);
+  });
+
+  var volume = document.getElementById('volume');
+  volume.addEventListener('keyup', function(e)
+  {
+    volume.value = formatRupiah(this.value);
   });
   var keuangan = document.getElementById('keuangan');
   keuangan.addEventListener('keyup', function(e)
@@ -191,4 +280,61 @@
     rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
     return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
   }
+</script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+
+    var navListItems = $('div.setup-panel div a'),
+    allWells = $('.setup-content'),
+    allNextBtn = $('.nextBtn');
+
+    allWells.hide();
+
+    navListItems.click(function (e) {
+      e.preventDefault();
+      var $target = $($(this).attr('href')),
+      $item = $(this);
+
+      if (!$item.hasClass('disabled')) {
+        navListItems.removeClass('btn-success').addClass('btn-default');
+        $item.addClass('btn-success');
+        allWells.hide();
+        $target.show();
+        $target.find('input:eq(0)').focus();
+      }
+    });
+
+    allNextBtn.click(function () {
+      var curStep = $(this).closest(".setup-content"),
+      curStepBtn = curStep.attr("id"),
+      nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+      curInputs = curStep.find("input[type='text'],input[type='url']"),
+      isValid = true;
+
+      $(".form-group").removeClass("has-error");
+      for (var i = 0; i < curInputs.length; i++) {
+        if (!curInputs[i].validity.valid) {
+          isValid = false;
+          $(curInputs[i]).closest(".form-group").addClass("has-error");
+        }
+      }
+
+      if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
+    });
+
+    $('div.setup-panel div a.btn-success').trigger('click');
+  });
+</script>
+
+
+<script type="text/javascript">
+  $('.' + $('.trigger:checked').data('rel')).show();
+  $('.trigger').change(function() 
+  {
+    $('.ncontent').hide();
+    $('.' + $(this).data('rel')).show();
+  });
 </script>

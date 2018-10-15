@@ -30,7 +30,7 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
     </h1>
     <ol class="breadcrumb">
       <li><a href="<?php echo base_url()?>padmin"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="<?php echo base_url()?>padmin/penanggung_jawab">Penyedia Jasa</a></li>
+      <li><a href="<?php echo base_url()?>PJ">Penyedia Jasa</a></li>
       <li class="active">Edit Penyedia Jasa</li>
     </ol>
   </section>
@@ -44,16 +44,6 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
         <div class="box-body ">
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
-              <div class="form-group">
-                <label>Pekerjaan</label>
-                <select name="proyek" class="form-control">
-                  <?php 
-                  foreach ($datak->result_array() as $i) :
-                    ?>
-                    <option value="<?php echo $i['proyek_id']; ?>" <?php if($i['proyek_id']==$b['proyek_id']){echo "selected";} else {} ?> ><?php echo $i['proyek_nama']; ?></option>
-                  <?php endforeach; ?>
-                </select>
-              </div>
               <div class="form-group">
                 <input type="hidden" class="form-control" value="<?php echo $b['pekerja_id']; ?>"  name="xnip" readonly>
               </div>

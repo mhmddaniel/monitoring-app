@@ -77,7 +77,7 @@ body {
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?php echo base_url()?>padmin"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="<?php echo base_url() ?>padmin/proyek">Pekerjaan</a></li>
+			<li><a href="<?php echo base_url() ?>proyek">Pekerjaan</a></li>
 			<li class="active">Tambah Pekerjaan</li>
 		</ol>
 	</section>
@@ -93,15 +93,15 @@ body {
 				<div class="stepwizard">
 					<div class="stepwizard-row setup-panel">
 						<div class="stepwizard-step col-xs-4"> 
-							<a href="#step-1" type="button" class="btn btn-success btn-circle" ></a>
+							<a href="#step-1" type="button" class="btn btn-success" ><li class="fa fa-building"></li></a>
 							<p><small>Pekerjaan</small></p>
 						</div>
 						<div class="stepwizard-step col-xs-4"> 
-							<a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled"></a>
+							<a href="#step-2" type="button" class="btn btn-default" disabled="disabled"><li class="fa fa-map-marker"></li></a>
 							<p><small>Lokasi</small></p>
 						</div>
 						<div class="stepwizard-step col-xs-4"> 
-							<a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled"></a>
+							<a href="#step-3" type="button" class="btn btn-default" disabled="disabled"><li class="fa fa-user"></li></a>
 							<p><small>PPTK</small></p>
 						</div>
 					</div>
@@ -116,7 +116,10 @@ body {
 							<div class="col-md-10">
 								<div class="form-group">
 									<label><h5 style="font-family:Open Sans; font-weight:lighter;">NAMA PEKERJAAN</h5></label>
-									<input type="hidden" name="numproyek" value="<?php echo $numproyek; ?>">
+									<?php 
+									$cg=$this->m_padmin->get_max_proyek_id();
+									?>
+									<input type="hidden" name="numproyek" value="<?php echo $cg['proyek_id']+1; ?>">
 									<input type="hidden" name="phid" value="<?php echo $this->uri->segment(3); ?>">
 									<input type="text" class="form-control" name="xnama" required style="font-family:Open Sans; font-weight:lighter;">
 								</div>
@@ -127,33 +130,6 @@ body {
 									<input type="number" class="form-control" name="year" value="<?php echo date("Y"); ?>" style="font-family:Open Sans; font-weight:lighter;">
 								</div>
 							</div>
-							<?php 
-							/* 
-							<div class="col-md-12">
-								<div class="form-group">
-									<label><h5 style="font-family:Open Sans; font-weight:lighter;">RENCANA KONTRAK</h5></label>
-									<input type="date" class="form-control" name="sechawal" value="<?php echo date("d/m/Y"); ?>" style="font-family:Open Sans; font-weight:lighter;">
-								</div>
-							</div>
-							 
-							<div class="col-md-12">
-								<div class="form-group">
-									<label><h5 style="font-family:Open Sans; font-weight:lighter;">BIDANG</h5></label>
-									<select class="form-control"  name="xbidang" style="font-family:Open Sans; font-weight:lighter;">
-										<option value="sda" style="font-family:Open Sans; font-weight:lighter;">Sumber Daya Air</option>
-										<option value="bm" style="font-family:Open Sans; font-weight:lighter;">Bina Marga</option>
-										<option value="ciptakarya" style="font-family:Open Sans; font-weight:lighter;">Cipta Karya</option>
-										<option value="pr" style="font-family:Open Sans; font-weight:lighter;">Perumahan Rakyat</option>
-										<option value="sekretariat" style="font-family:Open Sans; font-weight:lighter;">Sekretariat</option>
-										<option value="ttdp" style="font-family:Open Sans; font-weight:lighter;">Tata Ruang dan Pertanahan</option>
-										<option value="ubp" style="font-family:Open Sans; font-weight:lighter;">UPTD Balai Pengujian</option>
-										<option value="ubpdp" style="font-family:Open Sans; font-weight:lighter;">UPTD Balai Peralatan dan Perbekalan</option>
-										<option value="bkdp" style="font-family:Open Sans; font-weight:lighter;">Bina Kontruksi dan Pengendalian</option>
-									</select>
-								</div>
-							</div>
-							*/ 
-							?>
 							<div class="col-md-12">
 								<div class="form-group">
 									<label><h5 style="font-family:Open Sans; font-weight:lighter;">JENIS PENGADAAN</h5></label>
@@ -176,7 +152,7 @@ body {
 							</div><div class="col-md-10">
 								<label><h5 style="font-family:Open Sans; font-weight:lighter;">VOLUME</h5></label>
 								<div class="form-group">
-									<input type="number" name="xvolume" class="form-control" style="font-family:Open Sans; font-weight:lighter;">
+									<input type="text" name="xvolume" id="volume"  class="form-control" style="font-family:Open Sans; font-weight:lighter;">
 								</div>
 							</div>
 							<div class="col-md-2">
@@ -185,16 +161,6 @@ body {
 									<input type="text" name="xsatuan" class="form-control" style="font-family:Open Sans; font-weight:lighter;">
 								</div>
 							</div>
-							<?php 
-							/* 
-							<div class="col-md-12">
-								<div class="form-group">
-									<label><h5 style="font-family:Open Sans; font-weight:lighter;">NILAI KONTRAK</h5></label>
-									<input type="text" class="form-control" id="keuangan" name="keuangan" style="font-family:Open Sans; font-weight:lighter;">
-								</div>
-							</div>
-								*/ 
-							?>
 							<div class="col-md-12">
 								<div class="form-group">
 									<label><h5 style="font-family:Open Sans; font-weight:lighter;">PAGU</h5></label>
@@ -230,11 +196,11 @@ body {
 							</div>
 							<div class="form-group">
 								<label>Latitude</label>
-								<input type="text" class="latitude form-control" value="latitude" name="latitude" readonly="readonly">
+								<input type="text" class="latitude form-control" value="latitude" name="latitude" >
 							</div>
 							<div class="form-group">
 								<label>Longitude</label>
-								<input type="text" class="longitude form-control" value="longitude" name="longitude" readonly="readonly">
+								<input type="text" class="longitude form-control" value="longitude" name="longitude">
 							</div>
 						</div>
 						<div class="col-md-12">
@@ -260,10 +226,6 @@ body {
 									<?php endforeach; ?>
 								</select>
 								<br>
-									<div class="form-group">
-									<label>Nama PPJK</label>
-									<input type="text" class="form-control"  name="pn_namax" >
-								</div>
 							</span>
 						</div>
 
@@ -272,11 +234,14 @@ body {
 							<label>
 								<input type="radio" name="group1" value="new" class="trigger" data-rel="xyz"/> Buat baru
 							</label>
-
+							<?php
+							$gg=$this->m_padmin->cek_last_id_user();
+							$user_id=$gg['user_id']+1; ?>
 							<span class="xyz ncontent">
 								<div class="form-group">
-									<label>Nama PPJK</label>
-									<input type="text" class="form-control"  name="pn_nama" >
+									<label>Nama PPTK</label>
+									<input type="hidden" class="form-control" value="<?php echo $user_id; ?>"  name="user_id" >
+									<input type="text" class="form-control"  name="user_nama" >
 								</div>
 								<div class="form-group">
 									<label>Username</label>
@@ -284,7 +249,7 @@ body {
 								</div>
 								<div class="form-group">
 									<label>Email</label>
-									<input type="text" class="form-control"  name="pn_email">
+									<input type="email" class="form-control"  name="user_email">
 								</div>
 								<div class="form-group">
 									<label>Password</label>
@@ -298,11 +263,11 @@ body {
 
 								<div class="form-group">
 									<label>Telepon</label>
-									<input type="text" class="form-control"  name="pn_tel"   >
+									<input type="tel" class="form-control"  name="user_telp">
 								</div>
 								<div class="form-group">  
 									<label>Bagian</label>
-									<select class="form-control"  name="pn_bagian" >
+									<select class="form-control"  name="user_bagian" >
 										<option value="sda">Sumber Daya Air</option>
 										<option value="bm">Bina Marga</option>
 										<option value="ciptakarya">Cipta Karya</option>
@@ -318,14 +283,6 @@ body {
 							</span>
 
 						</div>
-						<?php 
-/*
-						<div class="form-group">
-							<label>Foto</label>
-							<input type="file" class="form-control"  name="filefoto" required="required">
-						</div>
-*/ 
-						?>
 						<button class="btn btn-success pull-right  bg-green-gradient" type="submit">Finish!</button>
 					</div>
 				</div>
@@ -366,6 +323,12 @@ body {
 	pagu.addEventListener('keyup', function(e)
 	{
 		pagu.value = formatRupiah(this.value);
+	});
+
+	var volume = document.getElementById('volume');
+	volume.addEventListener('keyup', function(e)
+	{
+		volume.value = formatRupiah(this.value);
 	});
 	var keuangan = document.getElementById('keuangan');
 	keuangan.addEventListener('keyup', function(e)

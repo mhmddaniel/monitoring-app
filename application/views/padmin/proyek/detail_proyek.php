@@ -46,14 +46,14 @@ $b=$data->row_array() ;
   </ol>
 </section>
 
-<div class="row" style="font-family:Open Sans; font-weight:lighter;">
+<div class="row"  style="font-family:Open Sans; font-weight:lighter;">
   <div class="col-md-6">
 
     <div class="col-md-12">
       <div class="box box-primary">
         <div class="box-header">
          <h4 style="font-family:Open Sans; font-weight:lighter;" class="text-primary">
-          <i class="fa fa-chevron-left text-primary"></i> <?php echo $b['proyek_nama']; ?>
+          <a href="<?php echo base_url()?>proyek"><i class="fa fa-chevron-left text-primary"></i></a> <?php echo $b['proyek_nama']; ?>
         </h4>
       </div>
 
@@ -87,50 +87,50 @@ $b=$data->row_array() ;
             <th>Pekerjaan Progress</th>
             <td class="text-right">
               <?php
+              $cc=$this->m_padmin->get_detail_by_proyekid($b['proyek_id']);
 
-              $pb_target=$b['pb_target'];
-              $pb_real=$b['pb_real'];
-              $pb_devisi=$b['pb_devisi'];
-              $pb_stat_proyek=$b['pb_stat_proyek'];
-              if($pb_real==0){
+              if($cc['pb_real']==100 && $cc['pb_devisi']==0){
+                echo "<label class='label bg-green'>".$cc['pb_real']."% (Selesai)</label>";
+              }
+              else if($cc['pb_real']==0){
                 echo "<label class='label bg-gray'>Belum Mulai</label>";
               }
               else {
-                if($pb_target==0 || $pb_target<=70){
+                if($cc['pb_target']==0 || $cc['pb_target']<=70){
 
-                  if($pb_devisi>0){
-                    echo "<label class='label bg-blue'>".$pb_real."% (Baik)</label>";
+                  if($cc['pb_devisi']>0){
+                    echo "<label class='label bg-blue'>".$cc['pb_real']."% (Baik)</label>";
                   }
                   else {
-                    if($pb_devisi==0 || $pb_devisi>=(-7)){
-                      echo "<label class='label bg-green'>".$pb_real."% (Wajar)</label>";
+                    if($cc['pb_devisi']==0 || $cc['pb_devisi']>=(-7)){
+                      echo "<label class='label bg-green'>".$cc['pb_real']."% (Wajar)</label>";
                     }
-                    else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
+                    else if ($cc['pb_devisi']<(-7) && $cc['pb_devisi']>=(-10)){
 
-                      echo "<label class='label bg-yellow'>".$pb_real."% (Terlambat)</label>";
+                      echo "<label class='label bg-yellow'>".$cc['pb_real']."% (Terlambat)</label>";
                     }
                     else {
-                      echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+                      echo "<label class='label bg-red'>".$cc['pb_real']."% (Kritis)</label>";
                     }
 
                   }
                 }
-                else if ($pb_target>70 && $pb_target<=100){
+                else if ($cc['pb_target']>70 && $cc['pb_target']<=100){
 
-                  if($pb_devisi>0){
-                    echo "<label class='label bg-blue'>".$pb_real."% (Baik)</label>";
+                  if($cc['pb_devisi']>0){
+                    echo "<label class='label bg-blue'>".$cc['pb_real']."% (Baik)</label>";
                   }
                   else {
-                    if($pb_devisi==0 || $pb_devisi>=(-4)){
-                      echo "<label class='label bg-green'>".$pb_real."% (Wajar)</label>"; 
+                    if($cc['pb_devisi']==0 || $cc['pb_devisi']>=(-4)){
+                      echo "<label class='label bg-green'>".$cc['pb_real']."% (Wajar)</label>"; 
                     }
-                    else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
+                    else if ($cc['pb_devisi']<(-4) && $cc['pb_devisi']>=(-5)){
 
-                      echo "<label class='label bg-yellow'>".$pb_real."% (Terlambat)</label>";                          
+                      echo "<label class='label bg-yellow'>".$cc['pb_real']."% (Terlambat)</label>";                          
                     }
                     else {
 
-                      echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+                      echo "<label class='label bg-red'>".$cc['pb_real']."% (Kritis)</label>";
                     } 
                   } 
                 }
@@ -155,7 +155,7 @@ $b=$data->row_array() ;
       <div class="box box-primary">
        <div class="box-header">
          <h4> 
-          <p class="text-primary">Penyedia Jasa</p> 
+          <p class="text-primary"  style="font-family:Open Sans; font-weight:lighter;">Penyedia Jasa</p> 
         </h4>
       </div>
 
@@ -201,7 +201,7 @@ $b=$data->row_array() ;
 <div class="col-md-12">
   <div class="box box-primary">
     <div class="box-header">
-     <h4 class="text-primary">Gallery <a href="<?php echo base_url()?>padmin/downloadImage/<?php echo $b['proyek_id'];?>" class="pull-right"> <i class="fa fa-download"></i></a></h4>
+     <h4 class="text-primary"  style="font-family:Open Sans; font-weight:lighter;">Gallery <a href="<?php echo base_url()?>padmin/downloadImage/<?php echo $b['proyek_id'];?>" class="pull-right"> <i class="fa fa-download"></i></a></h4>
    </div>
 
    <div class="box-body box-profile">
@@ -213,7 +213,7 @@ $b=$data->row_array() ;
     <div class="row">
 
       <div class="col-md-6 col-md-offset-3">
-        <a href="<?php echo base_url() ?>gallery/<?php echo $b['proyek_id'];?>" class="btn btn-primary text-center form-control" >View More</a>
+        <a href="<?php echo base_url() ?>gallery/<?php echo $this->uri->segment(3);?>" class="btn btn-primary text-center form-control" >View More</a>
       </div>
     </div>
   </div>
@@ -222,7 +222,7 @@ $b=$data->row_array() ;
 <div class="col-md-12">
   <div class="box box-primary">
    <div class="box-header">
-    <h4 class="text-primary">Berkas Pekerjaan</h4>
+    <h4 class="text-primary"  style="font-family:Open Sans; font-weight:lighter;">Berkas Pekerjaan</h4>
   </div>
   <div class="box-body box-profile">
     <div class="table-responsive">
@@ -250,6 +250,13 @@ $b=$data->row_array() ;
           </tr>
         <?php endforeach;  ?>
       </table>
+
+    </div>
+    <div class="row">
+
+      <div class="col-md-6 col-md-offset-3">
+        <a href="<?php echo base_url() ?>lampiran/<?php echo $this->uri->segment(3);?>" class="btn btn-primary text-center form-control" >View More</a>
+      </div>
     </div>
   </div>
 </div>
@@ -258,7 +265,7 @@ $b=$data->row_array() ;
 <div class="col-md-12">
   <div class="box box-primary">
    <div class="box-header">
-    <h4 class="text-primary">Catatan</h4>
+    <h4 class="text-primary"  style="font-family:Open Sans; font-weight:lighter;">Catatan</h4>
   </div>
   <div class="box-body box-profile">
     <div class="table-responsive">
@@ -281,10 +288,33 @@ $b=$data->row_array() ;
         <?php endforeach;  ?>
       </table>
     </div>
+    <div class="row">
+
+      <div class="col-md-6 col-md-offset-3">
+        <a href="<?php echo base_url() ?>catatan/<?php echo $this->uri->segment(3);?>" class="btn btn-primary text-center form-control" >View More</a>
+      </div>
+    </div>
   </div>
 </div>
 </div>
 
+
+<div class="col-md-12">
+  <div class="box box-primary">
+    <div class="box-body box-profile">
+     <div class="row">
+      <div class="col-md-12">
+        <div class="pull-right" style="margin-right: 40px"><a href="<?php echo base_url()?>padmin/print_chart/dataawal/<?php echo $this->uri->segment(3);?>" class="btn btn-primary">Download</a></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div id="data_awal" style="height: 500px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 
 </div>
 
@@ -293,26 +323,26 @@ $b=$data->row_array() ;
   <div class="col-md-12">
     <div class="box box-primary">
      <div class="box-header">
-      <h4 class="text-primary"> Penanggung Jawab </h4>
+      <h4 class="text-primary"  style="font-family:Open Sans; font-weight:lighter;"> Penanggung Jawab </h4>
     </div>
     <div class="box-body box-profile">
       <table class="table">
 
         <tr>
           <th>Nama</th>
-          <td class="text-right"><?php echo $b['pn_nama'];  ?></td>
+          <td class="text-right"><?php echo $b['user_nama'];  ?></td>
         </tr>
         <tr>
           <th>Email</th>
-          <td class="text-right"><?php echo $b['pn_email']; ?></td>
+          <td class="text-right"><?php echo $b['user_email']; ?></td>
         </tr>
         <tr>
           <th>Telepon</th>
-          <td class="text-right"><?php echo $b['pn_tel'];  ?></td>
+          <td class="text-right"><?php echo $b['user_telp'];  ?></td>
         </tr>
         <tr>
           <th>Bidang</th>
-          <td class="text-right"><?php  echo strtoupper($b['pn_bagian']); ?></td>
+          <td class="text-right"><?php  echo strtoupper($b['user_bagian']); ?></td>
         </tr>
 
 
@@ -336,10 +366,11 @@ $b=$data->row_array() ;
           <th>Dev</th>
         </tr>
         <tr>
-          <td><?php echo $b['pb_target']; ?></td>
-          <td><?php echo $b['pb_real']; ?></td>
-          <td><?php echo $b['pb_devisi']; ?></td>
+          <td><?php echo $prd['pb_target']; ?></td>
+          <td><?php echo $prd['pb_real']; ?></td>
+          <td><?php echo $prd['pb_devisi']; ?></td>
         </tr>
+
       </table>
 
       <table class="table">
@@ -363,48 +394,53 @@ $b=$data->row_array() ;
         <?php echo $b['koordinat_alamat']; ?><br>
         Progress proyek saat ini adalah
         <?php
-        $pb_target=$b['pb_target'];
-        $pb_real=$b['pb_real'];
-        $pb_devisi=$b['pb_devisi'];
-        if($pb_real==0){
+        $cc=$this->m_padmin->get_detail_by_proyekid($b['proyek_id']);
+
+
+        if($cc['pb_real']==100 && $cc['pb_devisi']==0){
+          echo "<label class='label bg-green'>".$cc['pb_real']."% (Selesai)</label>";
+        }
+        else if($cc['pb_real']==0){
           echo "<label class='label bg-gray'>Belum Mulai</label>";
         }
         else {
-          if($pb_target==0 || $pb_target<=70){
 
-            if($pb_devisi>0){
-              echo "<label class='label bg-blue'>".$pb_real."% (Baik)</label>";
+
+          if($cc['pb_target']==0 || $cc['pb_target']<=70){
+
+            if($cc['pb_devisi']>0){
+              echo "<label class='label bg-blue'>".$cc['pb_real']."% (Baik)</label>";
             }
             else {
-              if($pb_devisi==0 || $pb_devisi>=(-7)){
-                echo "<label class='label bg-green'>".$pb_real."% (Wajar)</label>";
+              if($cc['pb_devisi']==0 || $cc['pb_devisi']>=(-7)){
+                echo "<label class='label bg-green'>".$cc['pb_real']."% (Wajar)</label>";
               }
-              else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
+              else if ($cc['pb_devisi']<(-7) && $cc['pb_devisi']>=(-10)){
 
-                echo "<label class='label bg-yellow'>".$pb_real."% (Terlambat)</label>";
+                echo "<label class='label bg-yellow'>".$cc['pb_real']."% (Terlambat)</label>";
               }
               else {
-                echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+                echo "<label class='label bg-red'>".$cc['pb_real']."% (Kritis)</label>";
               }
 
             }
           }
-          else if ($pb_target>70 && $pb_target<=100){
+          else if ($cc['pb_target']>70 && $cc['pb_target']<=100){
 
-            if($pb_devisi>0){
-              echo "<label class='label bg-blue'>".$pb_real."% (Baik)</label>";
+            if($cc['pb_devisi']>0){
+              echo "<label class='label bg-blue'>".$cc['pb_real']."% (Baik)</label>";
             }
             else {
-              if($pb_devisi==0 || $pb_devisi>=(-4)){
-                echo "<label class='label bg-green'>".$pb_real."% (Wajar)</label>"; 
+              if($cc['pb_devisi']==0 || $cc['pb_devisi']>=(-4)){
+                echo "<label class='label bg-green'>".$cc['pb_real']."% (Wajar)</label>"; 
               }
-              else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
+              else if ($cc['pb_devisi']<(-4) && $cc['pb_devisi']>=(-5)){
 
-                echo "<label class='label bg-yellow'>".$pb_real."% (Terlambat)</label>";                          
+                echo "<label class='label bg-yellow'>".$cc['pb_real']."% (Terlambat)</label>";                          
               }
               else {
 
-                echo "<label class='label bg-red'>".$pb_real."% (Kritis)</label>";
+                echo "<label class='label bg-red'>".$cc['pb_real']."% (Kritis)</label>";
               } 
             } 
           }
@@ -421,17 +457,37 @@ $b=$data->row_array() ;
 <div class="col-md-12">
   <div class="box box-primary">
     <div class="box-body box-profile">
-     <div id="realtarget" style="height: 500px"></div>
-   </div>
- </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="pull-right" style="margin-right: 40px"><a href="<?php echo base_url()?>padmin/print_chart/realtarget/<?php echo $this->uri->segment(3);?>" class="btn btn-primary">Download</a></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div id="realtarget" style="height: 500px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="col-md-12">
   <div class="box box-primary">
     <div class="box-body box-profile">
-     <div id="curve_chart" style="height: 500px"></div>
-   </div>
- </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="pull-right" style="margin-right: 40px"><a href="<?php echo base_url()?>padmin/print_chart/curve/<?php echo $this->uri->segment(3);?>" class="btn btn-primary">Download</a></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div id="curve_chart" style="height: 500px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>
 </div>
 </div>
@@ -511,20 +567,22 @@ $b=$data->row_array() ;
       size: 200,
       markers: [
       {position: [<?php echo $b['koordinat_lat'];?>, <?php echo $b['koordinat_lng'];?>], icon: "<?php 
-      if($pb_real==0){
+
+      $cc=$this->m_padmin->get_detail_by_proyekid($b['proyek_id']);
+      if($cc['pb_real']==0){
         echo base_url('assets/gmaps/images/grey.png');
       }
       else {
-        if($pb_target==0 || $pb_target<=70){
+        if($cc['pb_target']==0 || $cc['pb_target']<=70){
 
-          if($pb_devisi>0){
+          if($cc['pb_devisi']>0){
             echo base_url('assets/gmaps/images/blue.png');
           }
           else {
-            if($pb_devisi==0 || $pb_devisi>=(-7)){
+            if($cc['pb_devisi']==0 || $cc['pb_devisi']>=(-7)){
               echo base_url('assets/gmaps/images/green.png');
             }
-            else if ($pb_devisi<(-7) && $pb_devisi>=(-10)){
+            else if ($cc['pb_devisi']<(-7) && $cc['pb_devisi']>=(-10)){
               echo base_url('assets/gmaps/images/yellow.png');
             }
             else {
@@ -533,16 +591,16 @@ $b=$data->row_array() ;
 
           }
         }
-        else if ($pb_target>70 && $pb_target<=100){
+        else if ($cc['pb_target']>70 && $cc['pb_target']<=100){
 
-          if($pb_devisi>0){
+          if($cc['pb_devisi']>0){
             echo base_url('assets/gmaps/images/blue.png');
           }
           else {
-            if($pb_devisi==0 || $pb_devisi>=(-4)){
+            if($cc['pb_devisi']==0 || $cc['pb_devisi']>=(-4)){
               echo base_url('assets/gmaps/images/green.png'); 
             }
-            else if ($pb_devisi<(-4) && $pb_devisi>=(-5)){
+            else if ($cc['pb_devisi']<(-4) && $cc['pb_devisi']>=(-5)){
               echo base_url('assets/gmaps/images/yellow.png');                  
             }
             else {
@@ -584,7 +642,7 @@ $b=$data->row_array() ;
   });
 </script>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
   google.charts.load('current', {'packages':['corechart']});
@@ -592,15 +650,15 @@ $b=$data->row_array() ;
 
   function drawChart() {
     var data = google.visualization.arrayToDataTable([
-      ['Tanggal', 'Real', 'Target'],
+      ['Tanggal', 'Realisasi', 'Target'],
       [null, 0, 0],
       <?php foreach ($chartrt->result_array() as $i) : ?>
-        ['<?php echo $i['tanggal']; ?>',  <?php echo $i['pb_real']; ?>, <?php echo $i['pb_target']?>],
+        ['<?php echo $i['tanggal']; ?>',  <?php echo $i['pb_real']; ?>, <?php echo $i['pb_target']; ?>],
       <?php endforeach; ?>
       ]);
 
     var options = {
-      title: 'Real Target',
+      title: 'Kurva S',
       curveType: 'none',
       fontName: 'Open Sans',
       legend: { position: 'top' },
@@ -614,12 +672,14 @@ $b=$data->row_array() ;
       pointSize: 4,
     };
 
-    var chart = new google.visualization.LineChart(document.getElementById('realtarget'));
 
+    var realtarget = document.getElementById('realtarget');
+    var chart = new google.visualization.LineChart(realtarget);
+
+    google.visualization.events.addListener(chart, 'ready', function () {
+    });
     chart.draw(data, options);
   }
-
-
 
 </script>
 
@@ -629,14 +689,15 @@ $b=$data->row_array() ;
 
   function drawChart() {
     var data = google.visualization.arrayToDataTable([
-      ['Tanggal', 'TDK'],
+      ['Tanggal', 'Daya Serap'],
+      [null, 0],
       <?php foreach ($charttdk->result_array() as $i) : ?>
-        ['<?php echo $i['tanggal']; ?>',  <?php echo $i['pb_ds_keuangan'];?>],
+        ['<?php echo $i['tanggal']; ?>',  <?php echo $i['pb_ds_kontrak']; ?>],
       <?php endforeach; ?>
       ]);
 
     var options = {
-      title: 'Real Target',
+      title: 'Keuangan',
       curveType: 'none',
       fontName: 'Open Sans',
       legend: { position: 'top' },
@@ -649,10 +710,62 @@ $b=$data->row_array() ;
       pointSize: 4,
     };
 
-    var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
+    var curve_chart = document.getElementById('curve_chart');
+    var chart = new google.visualization.LineChart(curve_chart);
+
+    google.visualization.events.addListener(chart, 'ready', function () {
+    });
     chart.draw(data, options);
+
+
   }
 
-  
+
+</script>
+
+
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var dataTable = new google.visualization.DataTable();
+    dataTable.addColumn('string', 'Year');
+    dataTable.addColumn('number', 'Progres');
+    dataTable.addRows([
+      <?php foreach($da->result_array() as $i) : ?>
+        ['<?php echo date('d M Y',strtotime($i['da_tanggal'])); ?>',  <?php echo $i['da_progres'];?>],
+      <?php endforeach;  ?>
+
+      ]);
+
+    var options = {
+      title: 'Kurva S Rencana',
+      curveType: 'none',
+      fontName: 'Open Sans',
+      legend: { position: 'top' },
+      hAxis: {
+        title: 'Bulan',
+      },
+      vAxis: { 
+        viewWindowMode: 'explicit',
+        viewWindow: {
+          min: 0,
+        },
+        ticks: [0,10, 20, 30, 40, 50,60,70,80,90,100] ,
+        beginAtZero: true
+      } ,
+      pointSize: 4,
+    };
+
+
+    var data_awal = document.getElementById('data_awal');
+    var chart = new google.visualization.LineChart(data_awal);
+
+    google.visualization.events.addListener(chart, 'ready', function () {
+    });
+    chart.draw(dataTable, options);
+
+  }
 </script>

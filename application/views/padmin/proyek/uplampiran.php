@@ -241,7 +241,7 @@ body {
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?php echo base_url()?>padmin"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="<?php echo base_url()?>padmin/proyek">Pekerjaan</a></li>
+			<li><a href="<?php echo base_url()?>proyek">Pekerjaan</a></li>
 			<li class="active">Tambah Berkas</li>
 		</ol>
 	</section>
@@ -259,7 +259,7 @@ body {
 								<div class="file-upload">
 									<input type="text" name="namafile" class="form-control" placeholder="Nama Foto" required="required">
 									<div class="image-upload-wrap">
-										<input type="hidden" name="proyek_id" value="<?php echo $b['proyek_id']; ?>">
+										<input type="hidden" name="proyek_id" value="<?php echo $this->uri->segment(3); ?>">
 										<input type="hidden"  name="jenis"  value="foto" class="form-control">	
 										<input class="file-upload-input" type='file' id="foto"  name="filefoto" onchange="readURL(this);" accept="image/*" required="required" />
 										<div class="drag-text">
@@ -298,7 +298,7 @@ body {
 								<div class="file-upload">
 									<input type="text" name="namafile" class="form-control" placeholder="Nama File" required="required">
 									<div class="image-upload-wrapss">
-										<input type="hidden" name="proyek_id" value="<?php echo $b['proyek_id']; ?>">
+										<input type="hidden" name="proyek_id" value="<?php echo $this->uri->segment(3); ?>">
 										<input type="hidden"  name="jenis" value="file" class="form-control">
 										<input class="file-upload-inputss" type='file'  name="fileat" onchange="readFile(this);" accept="application/pdf,application/x-rar-compressed, application/octet-stream,application/zip, application/octet-stream, application/x-zip-compressed, multipart/x-zip" required="required" />
 										<div class="drag-text">
@@ -574,3 +574,68 @@ body {
 
 </script>
 -->
+
+<?php if($this->session->flashdata('msg')=='berhasil'):?>
+	<script type="text/javascript">
+		$.dialog({
+			title: '',
+			content: "Sukses menambah data  <br><a href='<?php echo base_url()?>proyek/detail_proyek/$this->uri->segment(3)' class='btn btn-round btn-primary'>Lihat Pekerjaan</a>",
+			icon: 'fa fa-check-circle',
+			theme: 'my-theme'
+		});
+	</script>
+	<?php else:?>
+	<?php endif;?>
+
+	<?php if($this->session->flashdata('msg')=='error'):?>
+		<script type="text/javascript">
+			$.toast({
+				heading: 'Error',
+				text: "Gagal menambah data.",
+				showHideTransition: 'slide',
+				icon: 'error',
+				hideAfter: false,
+				position: 'bottom-right',
+				bgColor: '#FF4859'
+			});
+		</script>
+
+		<?php elseif($this->session->flashdata('msg')=='success'):?>
+			<script type="text/javascript">
+				$.toast({
+					heading: 'Success',
+					text: "Data berhasil disimpan.",
+					showHideTransition: 'slide',
+					icon: 'success',
+					hideAfter: false,
+					position: 'bottom-right',
+					bgColor: '#7EC857'
+				});
+			</script>
+			<?php elseif($this->session->flashdata('msg')=='info'):?>
+				<script type="text/javascript">
+					$.toast({
+						heading: 'Info',
+						text: "data berhasil di update",
+						showHideTransition: 'slide',
+						icon: 'info',
+						hideAfter: false,
+						position: 'bottom-right',
+						bgColor: '#00C9E6'
+					});
+				</script>
+				<?php elseif($this->session->flashdata('msg')=='success-hapus'):?>
+					<script type="text/javascript">
+						$.toast({
+							heading: 'Success',
+							text: "data berhasil dihapus.",
+							showHideTransition: 'slide',
+							icon: 'success',
+							hideAfter: false,
+							position: 'bottom-right',
+							bgColor: '#7EC857'
+						});
+					</script>
+					<?php else:?>
+
+					<?php endif;?>

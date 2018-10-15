@@ -4,7 +4,7 @@
 		<div class="row">
 			<?php if($_SESSION['level']=='bidang'){ ?>
 				<div class="col-md-12 ">
-					<a class="btn btn-success btn-flat pull-right" href="<?php echo base_url().'padmin/tambah_penanggung_jawab'?>"><span class="fa fa-plus"></span> Tambah Penyedia Jasa</a>
+					<a class="btn btn-success btn-flat pull-right" href="<?php echo base_url().'PJ/tambah_pj'?>"><span class="fa fa-plus"></span> Tambah Penyedia Jasa</a>
 				</div>
 			<?php } else {} ?>
 		</div>
@@ -17,12 +17,11 @@
 			foreach ($data->result_array() as $i) :
 				$no++;
 				$pekerja_id=$i['pekerja_id'];
-				$proyek_nama=$i['proyek_nama'];
 				$pekerja_jenis=$i['pekerja_jenis'];
 				$pekerja_nama_direktur=$i['pekerja_nama_direktur'];
 				$pekerja_tel_direktur=$i['pekerja_tel_direktur'];
-				$pekerja_nama_perusahaan=$i['pekerja_nama_perusahaan'];
 				$pekerja_tel_kantor=$i['pekerja_tel_kantor'];
+				$pekerja_nama_perusahaan=$i['pekerja_nama_perusahaan'];
 
 				?>
 
@@ -37,18 +36,20 @@
 								<!-- /.col -->
 								<div class="col-md-9">
 									<div class="col-md-8">
-										<h4><?php echo $pekerja_nama_perusahaan;?></h4>
+										<h4>
+
+											<?php echo $pekerja_nama_perusahaan; ?>
+
+										</h4>
 									</div>
 									<div class="col-md-4">
 										<div class="box-tools pull-right">
 
+											<a  data-toggle="modal" data-target="#ModalTambahProyekPJ"  class="btn btn-box-tool"><i class="fa fa-plus text-info"></i> </a>
 
-											<a href="<?php echo base_url().'padmin/get_edit_pn/'.$pekerja_id;?>" class="btn btn-box-tool" ><i class="fa fa-pencil text-info"></i>
+											<a href="<?php echo base_url().'PJ/edit_pj/'.$pekerja_id;?>" class="btn btn-box-tool" ><i class="fa fa-pencil text-info"></i>
 											</a>
 											<a data-toggle="modal" data-target="#ModalHapus<?php echo $pekerja_id;?>" class="btn btn-box-tool"><i class="fa fa-times text-danger"></i></a>
-
-
-
 
 										</div>
 									</div>
@@ -63,7 +64,14 @@
 									<div class="col-md-4">
 
 										<div class="box-tools pull-right">
-											<?php echo $proyek_nama;?>
+
+											<?php 
+											$dd=$this->m_padmin->get_pekerja_by_pekerja_id($pekerja_id);
+											foreach ($dd->result_array() as $gg) :
+
+												echo $gg['proyek_nama']."<br>";
+											endforeach;
+											?>
 
 
 										</div>
@@ -123,6 +131,42 @@
 		</div>
 	</div>
 <?php endforeach;?>
+
+
+
+
+<div class="modal fade" id="ModalTambahProyekPJ" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-sm"  role="document">
+		<div class="modal-content" >
+
+			<form class="form-horizontal" action="<?php echo base_url().'padmin/pj_proyek'?>" method="post" enctype="multipart/form-data">
+				<div class="modal-body container-fluid text-center" >
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>Tambah Proyek</label>
+							<select name="proyek" class="form-control">
+								<option value="0">Pilih Proyek</option>
+
+								<?php 
+								foreach ($proyek->result_array() as $i) :
+									?>
+									<option value="<?php echo $i['proyek_id']; ?>"><?php echo $i['proyek_nama']; ?></option>
+								<?php endforeach; ?>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-6 col-md-offset-3"><br>
+						<button type="submit" class="btn btn-success btn-round col-md-12" id="simpan">Save</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 

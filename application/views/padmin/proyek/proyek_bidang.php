@@ -18,7 +18,7 @@
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?php echo base_url()?>padmin"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="<?php echo base_url()?>padmin/proyek">Pekerjaan</a></li>
+			<li><a href="<?php echo base_url()?>proyek">Pekerjaan</a></li>
 			<li class="active">Data Bagian</li>
 		</ol>
 	</section>
@@ -26,29 +26,31 @@
 
 		<div class="row">
 			<div class="col-md-3">
-				<form name='autoSumForm'  action="<?php echo base_url()?>padmin/save_proyek_bidang" method="POST" enctype="multipart/form-data" >
-					<div class="box box-warning">
-						<div class="box-header with-border">
-							<h3 class="box-title">Data Fisik</h3>
-						</div>
-						<div class="box-body">
-							<div class="row">
+				<div class="box box-warning">
+					<div class="box-header with-border">
+						<h3 class="box-title">Data Fisik</h3>
+					</div>
+					<div class="box-body">
+						<div class="row">
+							<form name=''  action="<?php echo base_url()?>padmin/save_proyek_bidang" method="POST" enctype="multipart/form-data" >
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>Target</label>
-										<input type='text' name='pbtarget' class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_target']; ?>" onBlur="stopCalc();" />
+										<input type="hidden" name="proyek_id" value="<?php echo $this->uri->segment(3); ?>">
+										<input type='text' name='pbtarget' id="pbtarget" class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_target']; ?>" onBlur="stopCalc();" />
+										<input type="hidden" name="jenis" value="fisik">
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>Real</label>
-										<input type='text' name='pbreal' class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_real']; ?>" onBlur="stopCalc();" />
+										<input type='text' name='pbreal' id="pbreal" class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_real']; ?>" onBlur="stopCalc();" />
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>Devisi</label>
-										<input type='text' name='pbdevisi' class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_devisi']; ?>" onBlur="stopCalc();" />
+										<input type='text' name='pbdevisi' id="pbdevisi" class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_devisi']; ?>" onBlur="stopCalc();" />
 									</div>
 								</div>
 
@@ -58,63 +60,70 @@
 										<input type="date" name="tanggal_prog" class="form-control">
 									</div>
 								</div>
+								<div class="col-md-12">
+									<div class="form-group pull-right">
+										<button type="submit" class="btn btn-primary btn-flat pull-right"><span class="fa fa-pencil"></span> Publish</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
 
-							</div>
-							<div class="box-header with-border">
-								<h3 class="box-title">Data Keuangan</h3>
-							</div><br>
+
+				<div class="box box-warning">
+
+					<div class="box-header with-border">
+						<h3 class="box-title">Data Keuangan</h3>
+					</div><br>
+					<div class="box-body">
+						<form name=''  action="<?php echo base_url()?>padmin/save_proyek_bidang" method="POST" enctype="multipart/form-data" >
+
 							<div class="form-group">
 								<label>Daya Serap Kontrak</label>
 								<input type="hidden" name="proyek_id" value="<?php echo $b['proyek_id']; ?>">
-								<input type='number' name='dskontrak' class="form-control currency" onFocus="startCalc();" value="<?php echo $b['pb_ds_kontrak']; ?>" onBlur="stopCalc();" />
-								<input type='hidden' name='nondskontrak' class="form-control currency" onFocus="startCalc();" value="<?php echo $b['pb_ds_kontrak']; ?>" onBlur="stopCalc();" />
+								<input type='number' id="dskontrak" name='dskontrak' class="form-control currency" onFocus="startCalc();" value="<?php echo $b['pb_ds_kontrak']; ?>" onBlur="stopCalc();" />
+								<input type='hidden' id="nondskontrak" name='nondskontrak' class="form-control currency" onFocus="startCalc();" value="<?php echo $b['pb_ds_kontrak']; ?>" onBlur="stopCalc();" />
+								<input type="hidden" name="jenis" value="keuangan">
 							</div>
 
-							<?php /*
-							<div class="form-group">
-							<label>	Daya Serap Administrasi Pekerjaan</label>
-							<input type='number' name='dsadmproyek' class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_ds_ap']; ?>" onBlur="stopCalc();" />
-							<input type='hidden' name='nondsadmproyek' class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_ds_ap']; ?>" onBlur="stopCalc();" />
-							</div>
-							<div class="form-group">
-							<label>Total Daya Serap Keuangan</label>
-							<input type='text' name="totalds" class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_ds_keuangan']; ?>" onBlur="stopCalc();"  />
-							<input type='hidden' name="nonfortotalads" class="form-control" onFocus="startCalc();" value="<?php echo $b['pb_ds_keuangan']; ?>" onBlur="stopCalc();"  />
-
-
-							</div>
-							*/ ?>
 							<div class="form-group">
 								<label>Pagu</label>
-								<input type="number"  name="pagu" class="form-control" value="<?php echo $b['proyek_pagu']; ?>"  readonly>
-								<input type="hidden"  name="nonformatpagu" class="form-control" value="<?php echo $b['proyek_pagu']; ?>"  readonly>
+								<input type="number" id="pagu"  name="pagu" class="form-control" value="<?php echo $b['proyek_pagu']; ?>"  readonly>
+								<input type="hidden" id="nonformatpagu"  name="nonformatpagu" class="form-control" value="<?php echo $b['proyek_pagu']; ?>"  readonly>
 							</div>
-							
+
 							<div class="form-group">
 								<label>Nilai Kontrak</label>
-								<input type="number"  name="nilaikontrak" class="form-control" value="<?php echo $b['proyek_keuangan']; ?>"  readonly>
-								<input type="hidden"  name="nonformatnilaikontrak" class="form-control" value="<?php echo $b['proyek_keuangan']; ?>"  readonly>
+								<input type="number"  id="nilaikontrak" name="nilaikontrak" class="form-control" value="<?php echo $b['proyek_keuangan']; ?>"  readonly>
+								<input type="hidden"  id="nonformatnilaikontrak" name="nonformatnilaikontrak" class="form-control" value="<?php echo $b['proyek_keuangan']; ?>"  readonly>
 							</div>
 
 
 							<div class="form-group">
 								<label>Sisa Kontrak</label>
-								<input type="text" value="<?php echo $b['pb_sisa_anggaran']; ?>" name="sisakontrak" class="form-control"  readonly>
-								<input type="hidden" value="<?php echo $b['pb_sisa_anggaran']; ?>" name="nonformatsisakontrak" class="form-control"  readonly>
+								<input type="text"  id="sisakontrak" name="sisakontrak" class="form-control"  readonly>
+								<input type="hidden" id="nonformatsisakontrak" name="nonformatsisakontrak" class="form-control"  readonly>
 							</div>
 
 							<div class="form-group">
 								<label>Sisa Anggaran</label>
-								<input type="text" value="<?php echo $b['pb_sisa_anggaran']; ?>" name="sisaanggran" class="form-control"  readonly>
-								<input type="hidden" value="<?php echo $b['pb_sisa_anggaran']; ?>" name="nonformatsisaanggran" class="form-control"  readonly>
+								<input type="text"  id="sisaanggran" name="sisaanggran" class="form-control"  readonly>
+								<input type="hidden"  id="nonformatsisaanggran" name="nonformatsisaanggran" class="form-control"  readonly>
+							</div>
+
+
+							<div class="form-group">
+								<label>Tanggal Progress</label>
+								<input type="date" name="tanggal_prog" class="form-control">
 							</div>
 
 							<div class="form-group pull-right">
 								<button type="submit" class="btn btn-primary btn-flat pull-right"><span class="fa fa-pencil"></span> Publish</button>
 							</div>
-						</div>
+						</form>
 					</div>
-				</form>
+				</div>
 			</div>
 
 			<div class="col-md-9">
@@ -139,9 +148,7 @@
 									<tbody>
 										<?php
 										$id=$this->uri->segment(3);
-										$cek=$this->m_padmin->cek_data($id);
-										$proyek_id=$cek['pb_proyek_id'];
-										$getdata=$this->m_padmin->get_all_data_by_id($proyek_id);
+										$getdata=$this->m_padmin->get_all_data_by_id($id);
 										foreach ($getdata->result_array() as $key) :
 											?>
 											<tr>
@@ -170,19 +177,20 @@
 								<table id="example2" class="table table-bordered table-striped">
 									<thead>
 										<tr>
-											<th>Jumalah</th>
+											<th>Jumlah</th>
 											<th>Tanggal</th>
+											<th>Last Update</th>
 										</tr>
 									</thead>
 									<tbody>
 										<?php
 										$id=$this->uri->segment(3);
-										$proyek_id=$cek['pb_proyek_id'];
 										foreach ($charttdk->result_array() as $key) :
 											?>
 											<tr>
-												<td><?php echo $key['pb_ds_keuangan']; ?></td>
+												<td><?php echo "Rp ".number_format($key['pb_ds_kontrak']); ?></td>
 												<td><?php echo $key['tanggal']; ?></td>
+												<td><?php echo $key['pb_last_update']; ?></td>
 											</tr>
 										<?php endforeach; ?>
 									</tbody>
@@ -207,7 +215,7 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>Tambah Catatan</label>
-							<input type="hidden" name="proyek_id" value="<?php echo $proyek_id;?>">
+							<input type="hidden" name="proyek_id" value="<?php echo $this->uri->segment(3);?>">
 							<textarea class="form-control" name="catatan_isi"></textarea>
 						</div>
 					</div>
@@ -230,9 +238,9 @@
 	})
 </script>
 
-
-<script src="http://afarkas.github.io/webshim/js-webshim/minified/polyfiller.js"></script>
 <script src="<?php echo base_url() ?>assets/map/jquery-1.9.1.min.js"></script>
+<script src="http://afarkas.github.io/webshim/js-webshim/minified/polyfiller.js"></script>
+
 <script src="<?php echo base_url() ?>assets/map/jquery.addressPickerByGiro.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAogXD-AHrsmnWinZIyhRORJ84bgLwDPpg&sensor=false&language=id"></script>
 <link href="<?php echo base_url() ?>assets/map/jquery.addressPickerByGiro.css" rel="stylesheet" media="screen">
@@ -246,9 +254,6 @@
 		}
 	});
 </script>
-</body>
-</html>
-
 
 
 
@@ -274,22 +279,22 @@
 		interval = setInterval("calc()",1);}
 		function calc(){
 
-			pbtarget = document.autoSumForm.pbtarget.value;
-			pbreal = document.autoSumForm.pbreal.value;
-			document.autoSumForm.pbdevisi.value = (pbreal*1) - (pbtarget*1)  ;
+			pbtarget = document.getElementById("pbtarget").value;
+			pbreal = document.getElementById("pbreal").value;
+			document.getElementById("pbdevisi").value = (pbreal*1) - (pbtarget*1)  ;
 
-			one = document.autoSumForm.dskontrak.value;
-			document.autoSumForm.nondskontrak.value = (one) ;
-			four = document.autoSumForm.nonformatpagu.value;
-			document.autoSumForm.sisaanggran.value = FormatDuit((four*1) - (one*1))   ;
-			document.autoSumForm.nonformatsisaanggran.value = (four*1) - (one*1)   ;
+			one = document.getElementById("dskontrak").value;
+			document.getElementById("nondskontrak").value = (one) ;
+			four = document.getElementById("nonformatpagu").value;
+			document.getElementById("sisaanggran").value = FormatDuit((four*1) - (one*1))   ;
+			document.getElementById("nonformatsisaanggran").value = (four*1) - (one*1)   ;
 
 
-			xone = document.autoSumForm.dskontrak.value;
-			document.autoSumForm.nondskontrak.value = (xone) ;
-			xfour = document.autoSumForm.nonformatnilaikontrak.value;
-			document.autoSumForm.sisakontrak.value = FormatDuit((xfour*1) - (xone*1))   ;
-			document.autoSumForm.nonformatsisakontrak.value = (xfour*1) - (xone*1)   ;
+			xone = document.getElementById("dskontrak").value;
+			document.getElementById("nondskontrak").value = (xone) ;
+			xfour = document.getElementById("nonformatnilaikontrak").value;
+			document.getElementById("sisakontrak").value = FormatDuit((xfour*1) - (xone*1))   ;
+			document.getElementById("nonformatsisakontrak").value = (xfour*1) - (xone*1)   ;
 
 		}
 		function stopCalc(){

@@ -10,7 +10,7 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="<?php echo base_url()?>padmin"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="<?php echo base_url()?>padmin/user">user</a></li>
+      <li><a href="<?php echo base_url()?>user">user</a></li>
       <li class="active">List</li>
     </ol>
   </section>
@@ -22,7 +22,7 @@
 
         <div class="box">
           <div class="box-header">
-            <a class="btn btn-success btn-flat " href="<?php echo base_url().'padmin/tambah_user'?>"><span class="fa fa-plus"></span> Tambah user</a>
+            <a class="btn btn-success btn-flat " href="<?php echo base_url().'user/tambah_user'?>"><span class="fa fa-plus"></span> Tambah user</a>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
@@ -92,7 +92,7 @@
                   </td>
                   <td><?php echo $user_level;?></td>
                   <td style="text-align:right;">
-                    <a class="btn" href="<?php echo base_url().'padmin/get_edit_user/'.$user_id;?>"><span class="fa fa-pencil"></span></a>
+                    <a class="btn" href="<?php echo base_url().'user/edit_user/'.$user_id;?>"><span class="fa fa-pencil"></span></a>
                     <a class="btn" data-toggle="modal" data-target="#ModalHapus<?php echo $user_id;?>"><span class="fa fa-trash"></span></a>
                   </td>
                 </tr>

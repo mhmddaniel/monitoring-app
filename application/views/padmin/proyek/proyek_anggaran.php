@@ -18,7 +18,7 @@
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?php echo base_url()?>padmin"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="<?php echo base_url()?>padmin/proyek">Pekerjaan</a></li>
+			<li><a href="<?php echo base_url()?>proyek">Pekerjaan</a></li>
 			<li class="active">Data Bagian</li>
 		</ol>
 	</section>
@@ -32,7 +32,7 @@
 							<h3 class="box-title">Administrasi Pekerjaan</h3>
 						</div>
 						<div class="box-body">
-				
+
 							<div class="form-group">
 								<label>Daya Serap Kontrak</label>
 								<input type="hidden" name="anggaran_id" value="<?php echo $b['anggaran_id']; ?>">
@@ -57,6 +57,42 @@
 				</form>
 			</div>
 		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="box box-warning">
+					<div class="box-header with-border">
+						<h3 class="box-title">Anggaran</h3>
+					</div>
+					<div class="box-body">
+						<div class="row">
+							<div class="col-md-12">
+								<table id="example1a" class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>Daya Serap</th>
+											<th>Sisa</th>
+											<th>Tanggal</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php foreach($datas->result_array() as $j) : ?>
+											<tr>
+												<td><?php echo "Rp. ".number_format($j['al_dayaserap']); ?></td>
+												<td><?php echo "Rp. ".number_format($j['al_sisa']); ?></td>
+												<td><?php echo date('d-m-Y',strtotime($j['al_tanggal'])); ?></td>
+											</tr>
+										<?php endforeach; ?>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
 	</section>
 </div>
 

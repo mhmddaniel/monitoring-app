@@ -32,7 +32,7 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
     </h1>
     <ol class="breadcrumb">
       <li><a href="<?php echo base_url()?>padmin"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="<?php echo base_url()?>padmin/user">user</a></li>
+      <li><a href="<?php echo base_url()?>user">user</a></li>
       <li class="active">Tambah User</li>
     </ol>
   </section>
@@ -54,29 +54,38 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
             <div class="col-md-8 col-md-offset-2">
               <div class="form-group">  
 
+                <?php
+                $gg=$this->m_padmin->cek_last_id_user();
+                $user_id=$gg['user_id']+1; 
+                ?>
+                <div class="form-group"> 
+                  <label>Nama</label>
+                  <input type="hidden" class="form-control" value="<?php echo $user_id; ?>"  name="user_id" >
+                  <input type="text" class="form-control"  name="user_nama" >
+                </div>
                 <div class="form-group"> 
                   <label>USERNAME</label>
-                  <input type="text" name="xusername" class="form-control" required/>
+                  <input type="text" class="form-control"  name="username">
                 </div>
                 <div class="form-group"> 
                   <label>PASSWORD</label>
-                  <input type="password" name="xpassword" class="form-control" required/>
+                  <input type="password" class="form-control"  name="password">
                 </div>
                 <div class="form-group"> 
                   <label>RE-PASSWORD</label>
-                  <input type="password" name="xrepassword" class="form-control" required/>
+                  <input type="password" class="form-control"  name="repassword">
                 </div>
                 <div class="form-group"> 
                   <label>EMAIL</label>
-                  <input type="email" name="xemail" class="form-control" required/>
+                  <input type="text" class="form-control"  name="user_email">
                 </div>
                 <div class="form-group">  
                   <label>TELEPON</label>
-                  <input type="tel" name="xtel" class="form-control" required/>
+                  <input type="text" class="form-control"  name="user_telp">
                 </div>
                 <div class="form-group">  
                   <label>Bagian</label>
-                  <select class="form-control"  name="xbagian" >
+                  <select class="form-control"  name="user_bagian" >
                     <option value="sda">Sumber Daya Air</option>
                     <option value="bm">Bina Marga</option>
                     <option value="ciptakarya">Cipta Karya</option>
@@ -90,9 +99,10 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
                 </div>
                 <div class="form-group">  
                   <label>Role / Level</label>
-                  <select name="xlevel" class="form-control" required>
+                  <select name="user_level" class="form-control" required>
                     <option value="admin">ADMIN</option>
                     <option value="bidang">BIDANG</option>
+                    <option value="pptk">PPTK</option>
                   </select>
                 </div>
                 <div class="form-group pull-right">

@@ -240,7 +240,7 @@ body {
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?php echo base_url()?>padmin"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="<?php echo base_url()?>padmin/proyek">Pekerjaan</a></li>
+			<li><a href="<?php echo base_url()?>proyek">Pekerjaan</a></li>
 			<li class="active">Tambah Berkas</li>
 		</ol>
 	</section>

@@ -24,71 +24,77 @@
 
       <div class="row">
         <div class="col-sm-12 text-center">
-        <p class="login-box-msg"><h3 class="text-center" style="font-family:Open Sans; font-weight:lighter;">Selamat Datang</h3></p>
-      </div>
-      </div>
-<br>
-      <div class="row">
-         <div class="col-md-12 text-center">
-          <div class="col-xs-4"></div>
-        <img class="col-xs-4" src="<?php echo base_url() ?>images/logo.png">
-          <div class="col-xs-4"></div>
-      </div>
-      </div>
-
-        <br>
-        <br>
-      <form action="<?php echo base_url().'loginadmin/auth'?>" method="post">
-
-        <div class="row">
-
-          <div class="col-sm-12">
-           <div class="form-group has-feedback">
-             <input type="text" name="username" class="form-control" style="font-family:Open Sans; font-weight:lighter; border: none; border-color: transparent;" placeholder="Username" required>
-           </div>
-         </div>
-        <hr/>
-         <div class="col-sm-12">
-          <div class="form-group has-feedback">
-            <input type="password" name="password" class="form-control" style="font-family:Open Sans; font-weight:lighter; border: none; border-color: transparent;" placeholder="Password" required>
-          </div>
-         </div>
-        <hr/>
-
-      </div>
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="radio icheck">
-            <label>
-              <input type="radio"> Remember Me
-            </label>
-          </div>
+          <p class="login-box-msg"><h3 class="text-center" style="font-family:Open Sans; font-weight:lighter;">Selamat Datang</h3></p>
         </div>
       </div>
+      <br>
       <div class="row">
-        <div>
-         <p><?php echo $this->session->flashdata('msg');?></p>
+       <div class="col-md-12 text-center">
+        <div class="col-xs-4"></div>
+        <img class="col-xs-4" src="<?php echo base_url() ?>images/logo.png">
+        <div class="col-xs-4"></div>
+      </div>
+    </div>
+
+    <br>
+    <br>
+    <form action="<?php echo base_url().'loginadmin/auth'?>" method="post">
+
+      <div class="row">
+
+        <div class="col-sm-12">
+         <div class="form-group has-feedback">
+           <input type="text" name="username" class="form-control" style="font-family:Open Sans; font-weight:lighter; border: none; border-color: transparent;" placeholder="Username" required>
+         </div>
        </div>
-       <!-- /.col -->
-     </div>
-     <div class="row">
-      <div class="col-sm-12 text-center">
-        <button type="submit" class="btn btn-primary btn-flat col-sm-12" style="background: linear-gradient(to bottom right, #72C5FF, #A389D4); border-radius: 40px; box-shadow: 5px 5px 20px grey;"><h5 style="font-family:Open Sans; font-weight:lighter;">LOGIN</h5></button>
+       <hr/>
+       <div class="col-sm-12">
+        <div class="form-group has-feedback">
+          <input type="password" name="password" class="form-control" style="font-family:Open Sans; font-weight:lighter; border: none; border-color: transparent;" placeholder="Password" required>
+        </div>
       </div>
-      <!-- /.col -->
+      <hr/>
+
     </div>
-
-          <br>
-
-          <br>
     <div class="row">
-      <div class="col-sm-12 text-center">
-        <p>Lupa Password ?</p>
+      <div class="col-sm-12">
+        <div class="radio icheck">
+          <label>
+            <input type="radio"> Remember Me
+          </label>
+        </div>
       </div>
     </div>
-  </form>
+    <div class="row">
+      <div>
+       <p><?php echo $this->session->flashdata('msg');?></p>
+     </div>
+     <!-- /.col -->
+   </div>
+   <div class="row">
+    <div class="col-sm-12 text-center">
+      <button type="submit" class="btn btn-primary btn-flat col-sm-12" style="background: linear-gradient(to bottom right, #72C5FF, #A389D4); border-radius: 40px; box-shadow: 5px 5px 20px grey;"><h5 style="font-family:Open Sans; font-weight:lighter;">LOGIN</h5></button>
+    </div>
+    <!-- /.col -->
+  </div>
+
+  <br>
+
+  <br>
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <p>Lupa Password ?</p>
+    </div>
+  </div>
+</form>
 </div>
 <!-- /.login-box-body -->
+
+<div class="row">
+  <div class="col-sm-12 text-center">
+    <p class="login-box-msg"><h4 class="text-center" style="font-family:Open Sans; font-weight:lighter;">Product By CV. Perdana Karya</h4></p>
+  </div>
+</div>
 </div>
 <!-- /.login-box -->
 

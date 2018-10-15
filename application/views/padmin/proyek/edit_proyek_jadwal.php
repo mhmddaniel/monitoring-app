@@ -19,7 +19,7 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="<?php echo base_url()?>padmin"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="<?php echo base_url() ?>padmin/proyek">Pekerjaan</a></li>
+      <li><a href="<?php echo base_url() ?>proyek">Pekerjaan</a></li>
       <li class="active">Kontrak</li>
     </ol>
   </section>
@@ -40,14 +40,14 @@
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label>Nilai Kontrak</label>
-                    <input type="number" class="form-control" name="nilaikontrak" value="<?php echo $b['proyek_awal_kontrak']; ?>">
+                    <label>Nilai Kontrak</label> 
+                    <input type="number" id="nilai1" class="form-control" name="nilaikontrak" value="<?php echo $b['proyek_keuangan']; ?>">
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
                     <label>Rencana Kontrak</label>
-                    <input type="date" class="form-control" name="rencanakontrak" value="<?php echo $b['proyek_awal_kontrak']; ?>">
+                    <input type="date" class="form-control" name="rencanakontrak" value="<?php echo $b['proyek_sech_awal']; ?>">
                   </div>
                 </div>
                 <div class="col-md-12">
@@ -77,20 +77,13 @@
 </div>
 
 <script src="<?php echo base_url() ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="<?php echo base_url() ?>assets/bower_components/ckeditor/ckeditor.js"></script>
+<script src="<?php echo base_url() ?>assets/map/jquery-1.9.1.min.js"></script>
+<script src="http://afarkas.github.io/webshim/js-webshim/minified/polyfiller.js"></script>
 
 <script>
-  $(function () {
-    CKEDITOR.replace('ckeditor')
-    $('.textarea').wysihtml5()
-  })
-</script>
-
-
-<script src="<?php echo base_url() ?>assets/map/jquery-1.9.1.min.js"></script>
-<script src="<?php echo base_url() ?>assets/map/jquery.addressPickerByGiro.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAogXD-AHrsmnWinZIyhRORJ84bgLwDPpg&sensor=false&language=id"></script>
-<link href="<?php echo base_url() ?>assets/map/jquery.addressPickerByGiro.css" rel="stylesheet" media="screen">
-
-</body>
-</html>
+      webshims.setOptions('forms-ext', {
+        replaceUI: 'auto',
+        types: 'number'
+      });
+      webshims.polyfill('forms forms-ext');
+    </script>

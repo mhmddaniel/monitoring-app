@@ -18,7 +18,7 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="<?php echo base_url()?>padmin"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="<?php echo base_url()?>padmin/user">user</a></li>
+      <li><a href="<?php echo base_url()?>user">user</a></li>
       <li class="active">Edit User</li>
     </ol>
   </section>
@@ -69,6 +69,7 @@
                 <select name="user_level" class="form-control" required>
                   <option value="admin" <?php if($b['user_level']=='admin'){ echo "selected"; } else {} ?>>ADMIN</option>
                   <option value="bidang" <?php if($b['user_level']=='bidang'){ echo "selected"; } else {} ?>>Bidang</option>
+                  <option value="pptk" <?php if($b['user_level']=='pptk'){ echo "selected"; } else {} ?>>PPTK</option>
                 </select>
               </div>
               <div class="form-group pull-right">
