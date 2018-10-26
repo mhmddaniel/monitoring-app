@@ -143,16 +143,37 @@ class Padmin extends CI_Controller{
 				$pt=(($jk['pb_target']/100)*$cgh)/100;
 				$pr=(($jk['pb_real']/100)*$cgh)/100;
 			endforeach;
+
+
+			$totpag=$csumpag['sumpagu']+$sumanggaran['angpagu'];
+
+			$cross_count=$this->m_padmin->cross_count($kdph);
+
+			$temcctar=0;
+			$temccreal=0;
+			foreach ($cross_count->result_array() as $cca) {
+				$temcctar+=$cca['crosptarget']/$totpag;
+				$temccreal+=$cca['crospreal']/$totpag;
+			}
+
+			$angbygrp=$this->m_padmin->get_anggaran_by_group($kdph);
+			$temang=0;
+			foreach ($angbygrp->result_array() as $dde) {
+				$temang+=$dde['persenang'];
+			}
+
+
+
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, $excel_row, $no);
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $i['ph_judul']);
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(2, $excel_row, $i['ph_kredit']);
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(3, $excel_row, "Rp. ".number_format(($csumpag['sumpagu']+$sumanggaran['angpagu'])));
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(4, $excel_row, $i['user_nama']);
-			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(5, $excel_row,  $pt);
-			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(6, $excel_row,  $pr);
-			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(7, $excel_row,  ($pr-$pt));
+			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(5, $excel_row,  number_format($temcctar+$temang,2));
+			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(6, $excel_row,  number_format($temccreal+$temang,2));
+			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(7, $excel_row,  number_format(($temccreal+$temang)-($temcctar+$temang),2));
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(8, $excel_row, "Rp. ".number_format(($xsum)));
-			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(9, $excel_row,  ($xsum/($csumpag['sumpagu']+$sumanggaran['angpagu'])));
+			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(9, $excel_row,  number_format(($xsum/($csumpag['sumpagu']+$sumanggaran['angpagu'])),2));
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(10, $excel_row, "Rp. ".number_format(($csumpag['sumpagu']-($xsum))));
 			$excel_row++;
 //		set_time_limit(20);

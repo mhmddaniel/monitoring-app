@@ -77,6 +77,26 @@ header("Expires: 0");
 			$no=0;
 			foreach ($data->result_array() as $i) : 
 				$no++;
+				$kdph=$i['ph_id'];
+				$sumpag=$this->m_padmin->sumpagu($kdph);
+				$sumanggaran=$this->m_padmin->sumanggaran($kdph);
+				$csumpag=$sumpag->row_array();
+				$totpag=$csumpag['sumpagu']+$sumanggaran['angpagu'];
+
+				$cross_count=$this->m_padmin->cross_count($kdph);
+
+				$temcctar=0;
+				$temccreal=0;
+				foreach ($cross_count->result_array() as $cca) {
+					$temcctar+=$cca['crosptarget']/$totpag;
+					$temccreal+=$cca['crospreal']/$totpag;
+				}
+
+				$angbygrp=$this->m_padmin->get_anggaran_by_group($kdph);
+				$temang=0;
+				foreach ($angbygrp->result_array() as $dde) {
+					$temang+=$dde['persenang'];
+				}
 				?>
 				<tr  style="text-align: left">
 					<td><?php echo $no; ?></td>
@@ -85,11 +105,8 @@ header("Expires: 0");
 					<td><?php echo $i['user_nama']; ?></td>
 					<td>
 						<?php
-						$kdph=$i['ph_id'];
-						$sumpag=$this->m_padmin->sumpagu($kdph);
-						$sumanggaran=$this->m_padmin->sumanggaran($kdph);
-						$csumpag=$sumpag->row_array();
-						echo "Rp ".number_format($csumpag['sumpagu']+$sumanggaran['angpagu'])."<br>";
+
+						echo "Rp ".number_format($totpag)."<br>";
 						?>
 					</td>
 					<td></td>
@@ -99,9 +116,9 @@ header("Expires: 0");
 					<td></td>
 					<td></td>
 					<td></td>
-					<td></td>
-					<td>0</td>
-					<td>0</td>
+					<td><?php echo number_format($temcctar+$temang,2);?></td>
+					<td><?php echo number_format($temccreal+$temang,2);?></td>
+					<td><?php echo number_format(($temccreal+$temang)-($temcctar+$temang),2); ?></td>
 					<td><?php 
 					$greal=$this->m_padmin->sum_realisasi_by_ph($kdph);
 					$xsum=0; 
@@ -118,7 +135,12 @@ header("Expires: 0");
 
 				<?php
 				$anggr=$this->m_padmin->get_anggaran_by_kode_bagian($kdph); 
-				foreach ($anggr->result_array() as $j) :?>
+				foreach ($anggr->result_array() as $j) :
+
+					$nmaxum=$this->m_padmin->get_max_numang($j['anggaran_id']);
+					$gmaxnum=$nmaxum->row_array();
+					$cekmaxum=$nmaxum->num_rows();
+					?>
 					<tr  style="text-align: left">
 						<td></td>
 						<td><?php echo $j['anggaran_nama']; ?></td>
@@ -132,9 +154,9 @@ header("Expires: 0");
 						<td></td>
 						<td></td>
 						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td><?php if($cekmaxum>0) {echo number_format(($gmaxnum['al_sisa']/$gmaxnum['al_pagu'])*100,2);} else {echo "0";}; ?></td>
+						<td><?php if($cekmaxum>0) {echo number_format(($gmaxnum['al_sisa']/$gmaxnum['al_pagu'])*100,2);} else {echo "0";}; ?></td>
+						<td>0</td>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -167,7 +189,7 @@ header("Expires: 0");
 						<td><?php echo $prd['pb_real']; ?></td>
 						<td><?php echo $prd['pb_devisi']; ?></td>
 						<td><?php echo "Rp. ".number_format($sumreal['pb_ds_kontrak']); ?></td>
-						<td><?php echo (($sumreal['pb_ds_kontrak'])/($key['proyek_pagu'])*100)."%"; ?></td>
+						<td><?php echo number_format((($sumreal['pb_ds_kontrak'])/($key['proyek_pagu'])*100),2); ?></td>
 						<td></td>
 						<td><?php echo "Rp. ".number_format(($key['proyek_pagu'])-($sumreal['pb_ds_kontrak'])); ?></td>
 					</tr>

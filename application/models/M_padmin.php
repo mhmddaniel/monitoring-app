@@ -72,6 +72,10 @@ class M_padmin extends CI_Model{
 		return $hsl->row_array();
 	}
 
+	function get_max_numang($kode){
+		$hsl=$this->db->query("SELECT * from anggaran_lap where al_id in (SELECT max(al_id) from anggaran_lap GROUP by anggaran_id) and anggaran_id='$kode'");
+		return $hsl;
+	}
 	function get_anggaran_by_kode_bagian($kode){
 		$hsl=$this->db->query("SELECT * from anggaran where ph_id='$kode'");
 		return $hsl;
@@ -100,6 +104,13 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("SELECT * FROM proyek inner join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id inner join penanggung_jawab on proyek.proyek_id=penanggung_jawab.proyek_id inner join koordinat on proyek.proyek_koordinat_id=koordinat.koordinat_id where proyek_bagian.pb_id in (select max(pb_id) from proyek_bagian group by pb_proyek_id)");
 		return $hsl;
 	}*/
+
+
+	function get_anggaran_by_group($kode){
+		$hsl=$this->db->query("SELECT (anggaran_lap.al_sisa/anggaran_lap.al_pagu)*100 as persenang from anggaran inner join anggaran_lap on anggaran.anggaran_id=anggaran_lap.anggaran_id where anggaran_lap.al_id in(select max(al_id) from anggaran_lap group by anggaran_id) AND anggaran.ph_id='$kode'");
+		return $hsl;
+	}
+
 	function get_all_gallery($kode){
 		$hsl=$this->db->query("SELECT * FROM file where file_jenis='foto' && proyek_id='$kode'");
 		return $hsl;
@@ -129,6 +140,12 @@ class M_padmin extends CI_Model{
 		$hsl=$this->db->query("SELECT * FROM proyek left join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id inner join user on proyek.user_id=user.user_id inner join koordinat on proyek.proyek_koordinat_id=koordinat.koordinat_id inner join proyek_head on proyek.ph_id=proyek_head.ph_id where proyek_head.ph_id='$kode' group by proyek.proyek_id");
 		return $hsl;
 	}
+
+	function cross_count($kode){
+		$hsl=$this->db->query("SELECT (proyek_bagian.pb_target*proyek.proyek_pagu) as crosptarget,(proyek_bagian.pb_real*proyek.proyek_pagu) as crospreal FROM proyek left join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id inner join user on proyek.user_id=user.user_id inner join koordinat on proyek.proyek_koordinat_id=koordinat.koordinat_id inner join proyek_head on proyek.ph_id=proyek_head.ph_id where proyek_head.ph_id='$kode' group by proyek.proyek_id");
+		return $hsl;
+	}
+
 	function get_all_proyek_ph_bag($kode,$bagian){
 		$hsl=$this->db->query("SELECT * FROM proyek left join proyek_bagian on proyek.proyek_id=proyek_bagian.pb_proyek_id inner join user on proyek.user_id=user.user_id inner join koordinat on proyek.proyek_koordinat_id=koordinat.koordinat_id inner join proyek_head on proyek.ph_id=proyek_head.ph_id where proyek_head.ph_id='$kode' and proyek_head.ph_bidang='$bagian'  group by proyek.proyek_id");
 		return $hsl;
