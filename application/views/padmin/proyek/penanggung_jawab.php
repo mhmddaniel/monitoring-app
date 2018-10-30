@@ -152,6 +152,8 @@
 									<option value="0">Pilih Proyek</option>
 
 									<?php 
+
+									
 									foreach ($proyek->result_array() as $i) :
 										?>
 										<option value="<?php echo $i['proyek_id']; ?>"><?php echo $i['proyek_nama']; ?></option>

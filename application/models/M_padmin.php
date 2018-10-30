@@ -7,7 +7,7 @@ class M_padmin extends CI_Model{
 	}
 
 	function cekadminlogin($username,$password){
-	    $pass =  md5($password);
+		$pass =  md5($password);
 		$hasil=$this->db->query("SELECT * FROM user WHERE user_username='$username' AND user_password='$pass' ");
 		return $hasil;
 	}
@@ -526,6 +526,11 @@ class M_padmin extends CI_Model{
 
 	function get_proyek_bagian($phid){
 		$hsl=$this->db->query("SELECT * FROM proyek where ph_id='$phid' and pekerja_id is null");
+		return $hsl;
+	}
+
+	function get_proyek_bagian_bidang($bagian){
+		$hsl=$this->db->query("SELECT * from proyek_head inner join proyek on proyek_head.ph_id=proyek.ph_id where proyek_head.ph_bidang='$bagian' and pekerja_id is null");
 		return $hsl;
 	}
 

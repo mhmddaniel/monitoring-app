@@ -492,7 +492,7 @@ class Padmin extends CI_Controller{
 			$cc=$x['ph']->row_array();
 			$phid=$cc['ph_id'];
 			$x['data']=$this->m_padmin->get_penanggung_jawab();	
-			$x['proyek']=$this->m_padmin->get_proyek_bagian($phid);	
+			$x['proyek']=$this->m_padmin->get_proyek_bagian_bidang($bagian);	
 		//	$x['data']=$this->m_padmin->get_pn_by_bagian($bagian);	
 		}
 		else {
