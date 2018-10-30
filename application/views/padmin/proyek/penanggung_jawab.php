@@ -45,7 +45,7 @@
 									<div class="col-md-4">
 										<div class="box-tools pull-right">
 
-											<a  data-toggle="modal" data-target="#ModalTambahProyekPJ"  class="btn btn-box-tool"><i class="fa fa-plus text-info"></i> </a>
+											<a  data-toggle="modal" data-target="#ModalTambahProyekPJ<?php echo $pekerja_id;?>"  class="btn btn-box-tool"><i class="fa fa-plus text-info"></i> </a>
 
 											<a href="<?php echo base_url().'PJ/edit_pj/'.$pekerja_id;?>" class="btn btn-box-tool" ><i class="fa fa-pencil text-info"></i>
 											</a>
@@ -134,36 +134,40 @@
 
 
 
+<?php foreach ($data->result_array() as $i) :
+	$pekerja_id=$i['pekerja_id'];
+	?>
+	<div class="modal fade" id="ModalTambahProyekPJ<?= $pekerja_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-sm"  role="document">
+			<div class="modal-content" >
 
-<div class="modal fade" id="ModalTambahProyekPJ" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<div class="modal-dialog modal-sm"  role="document">
-		<div class="modal-content" >
+				<form class="form-horizontal" action="<?php echo base_url().'padmin/update_pekerja_proyek'?>" method="post" enctype="multipart/form-data">
+					<div class="modal-body container-fluid text-center" >
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>Tambah Proyek</label>
+								<input type="hidden" name="pekerja_id" value="<?= $pekerja_id;?>">
+								<select name="proyek" class="form-control">
+									<option value="0">Pilih Proyek</option>
 
-			<form class="form-horizontal" action="<?php echo base_url().'padmin/pj_proyek'?>" method="post" enctype="multipart/form-data">
-				<div class="modal-body container-fluid text-center" >
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
-					<div class="col-md-12">
-						<div class="form-group">
-							<label>Tambah Proyek</label>
-							<select name="proyek" class="form-control">
-								<option value="0">Pilih Proyek</option>
-
-								<?php 
-								foreach ($proyek->result_array() as $i) :
-									?>
-									<option value="<?php echo $i['proyek_id']; ?>"><?php echo $i['proyek_nama']; ?></option>
-								<?php endforeach; ?>
-							</select>
+									<?php 
+									foreach ($proyek->result_array() as $i) :
+										?>
+										<option value="<?php echo $i['proyek_id']; ?>"><?php echo $i['proyek_nama']; ?></option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-6 col-md-offset-3"><br>
+							<button type="submit" class="btn btn-success btn-round col-md-12" id="simpan">Save</button>
 						</div>
 					</div>
-					<div class="col-md-6 col-md-offset-3"><br>
-						<button type="submit" class="btn btn-success btn-round col-md-12" id="simpan">Save</button>
-					</div>
-				</div>
-			</form>
+				</form>
+			</div>
 		</div>
 	</div>
-</div>
+<?php endforeach;?>
 
 
 

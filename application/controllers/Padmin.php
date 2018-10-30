@@ -32,17 +32,17 @@ class Padmin extends CI_Controller{
 			$x['ph']=$this->m_padmin->get_ph_by_bagian($bagian);
 			$cc=$x['ph']->row_array();
 			$phid=$cc['ph_id'];
-			$x['countproyek']=$this->m_padmin->sum_proyek_by_kode($phid);
-			$x['sumprog']=$this->m_padmin->sum_prog_by_kode($phid);
+			$x['countproyek']=$this->m_padmin->sum_proyek_by_bagian($bagian);
+			$x['sumprog']=$this->m_padmin->sum_prog_by_bagian($bagian);
 			$x['sum_sisa']=$this->m_padmin->sum_sisa_by_kode($phid);
-			$x['sumpagu']=$this->m_padmin->sum_pagu_by_kode($phid);
+			$x['sumpagu']=$this->m_padmin->sum_pagu_by_bagian($bagian);
 			$x['sumkeluar']=$this->m_padmin->sum_keluar_by_kode($phid);
 			$x['countjum']=$this->m_padmin->countjum_by_kode($phid);
 			$x['serapan']=$this->m_padmin->get_serapan();
 			$x['diffdateplus']=$this->m_padmin->diffdateplus_by_kode($phid);
-			$x['diffdatemin']=$this->m_padmin->diffdatemin_by_kode($phid);
+			$x['diffdatemin']=$this->m_padmin->diffdatemin_by_bagian($bagian);
 			$x['countselesai']=$this->m_padmin->countselesai_by_kode($phid);
-			$x['data']=$this->m_padmin->get_all_proyek_by_bagian($phid);
+			$x['data']=$this->m_padmin->get_all_proyek_by_bagians($bagian);
 			$x['sumreal']=$this->m_padmin->sum_realisasi_by_bagian($phid);
 			$x['cg']=$this->m_padmin->tesdikerjakan_bagian($phid);
 			$x['sum_anggaran']=$this->m_padmin->sum_anggaran();
@@ -1080,6 +1080,21 @@ class Padmin extends CI_Controller{
 	}
 
 
+	function update_pekerja_proyek(){
+		$proyek_id=$this->input->post('proyek');
+		$pekerja_id=$this->input->post('pekerja_id');
+
+		$gg=$this->m_padmin->update_pekerja_proyek($proyek_id,$pekerja_id);
+		if($gg){
+			echo $this->session->set_flashdata('msg','success');
+			redirect('PJ');
+		}
+		else {
+			echo $this->session->set_flashdata('msg','warning');
+			header("Location: {$_SERVER['HTTP_REFERER']}");
+		}
+	}
+
 	function update_proyek_jadwal(){
 		$proyek_id=$this->input->post('xproyek_id');
 		$nilaikontrak=$this->input->post('nilaikontrak');
@@ -1500,3 +1515,5 @@ class Padmin extends CI_Controller{
 
 
 }		
+
+?>
